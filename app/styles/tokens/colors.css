@@ -1,0 +1,8 @@
+:root {
+  --color-accent: oklch(70% 0.16 20);   /* coral CTA / accent */
+  --color-ink: oklch(20% 0.02 30);      /* dark surfaces, headings */
+  --color-text-secondary: oklch(40% 0.02 30);
+  --color-bg: oklch(97% 0.01 95);       /* warm cream page background */
+  --color-surface: #ffffff;             /* card fill */
+  --color-border: oklch(90% 0.02 90);
+}

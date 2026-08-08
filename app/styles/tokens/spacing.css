@@ -1,0 +1,12 @@
+:root {
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 36px;
+  --space-2xl: 56px;
+  --space-3xl: 80px;
+  --radius-pill: 100px;
+  --radius-card: 20px;
+  --radius-panel: 32px;
+}
