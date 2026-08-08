@@ -1,8 +1,17 @@
 :root {
-  --color-accent: oklch(70% 0.16 20);   /* coral CTA / accent */
-  --color-ink: oklch(20% 0.02 30);      /* dark surfaces, headings */
-  --color-text-secondary: oklch(40% 0.02 30);
-  --color-bg: oklch(97% 0.01 95);       /* warm cream page background */
-  --color-surface: #ffffff;             /* card fill */
-  --color-border: oklch(90% 0.02 90);
+  /* Core Semantic Color Tokens */
+  --color-bg: oklch(97% 0.01 95);               /* Page main background (Warm Cream) */
+  --color-surface: #ffffff;                     /* Card / Container fill */
+  --color-surface-hover: oklch(95% 0.01 95);    /* Hover state for containers */
+  
+  --color-ink: oklch(20% 0.02 30);              /* Primary typography (Dark Ink) */
+  --color-text-secondary: oklch(40% 0.02 30);    /* Secondary text / captions */
+  --color-text-muted: oklch(60% 0.02 30);        /* Muted elements / placeholders */
+  
+  --color-accent: oklch(70% 0.16 20);           /* Primary CTA & Brand Accent (Coral) */
+  --color-accent-hover: oklch(65% 0.16 20);     /* Hover state for primary CTAs */
+  --color-accent-light: oklch(94% 0.03 20);     /* Subtle background tints / alerts */
+  
+  --color-border: oklch(90% 0.02 90);           /* Default thin borders / dividers */
+  --color-border-strong: oklch(75% 0.02 90);    /* Stronger borders / interactive focus */
 }
