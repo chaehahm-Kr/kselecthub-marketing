@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://kselecthub.com'),
 };
 
+export async function generateStaticParams() {
+  return [{ locale: 'ko' }];
+}
+
 interface LayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
