@@ -788,3 +788,7 @@ export default async function Home({ params }: PageProps) {
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  return [{ locale: 'ko' }];
+}
