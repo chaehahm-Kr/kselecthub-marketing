@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import React from "react";
 import Image from "next/image";
 import { ko, LocaleDictionary } from "../locales/ko";
@@ -787,8 +789,4 @@ export default async function Home({ params }: PageProps) {
       </footer>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  return [{ locale: 'ko' }];
 }
