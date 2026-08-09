@@ -59,3 +59,80 @@ body {
 .text-eyebrow {
   font: var(--text-eyebrow);
 }
+
+/* Conic gradient representation for product mix donut chart */
+.bg-conic-gradient {
+  background: conic-gradient(
+    var(--color-accent) 0% 62%,
+    #845ec2 62% 80%,
+    #ffc75f 80% 92%,
+    #00c9a7 92% 100%
+  );
+}
+
+/* Keyframe animations for premium B2B tech platform */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 4s ease-in-out infinite;
+}
+
+/* Reduced Motion OS Configuration (A11y Compliance) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-subtle-float,
+  .animate-bounce {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

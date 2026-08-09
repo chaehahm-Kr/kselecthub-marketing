@@ -20,17 +20,17 @@ export default async function Home({ params }: PageProps) {
       
       {/* 0. NAV (Header) - Height 80px, sticky nav with backdrop blur */}
       <header className="sticky top-0 z-50 bg-[#141414]/86 backdrop-blur-md border-b border-[#2A2A2A]">
-        <div className="max-w-[1400px] mx-auto px-[64px] h-20 flex items-center justify-between gap-10">
+        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-20 flex items-center justify-between gap-10">
           <div className="flex items-center gap-[44px]">
-            {/* Logo treatment matching master spec */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-[30px] h-[30px] rounded-[6px] bg-[#ff2b75] flex items-center justify-center color-white font-bold text-base select-none">
+            {/* Logo Click Area expansion - Wraps symbol and text together */}
+            <a href="/ko" className="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
+              <div className="w-[30px] h-[30px] rounded-[6px] bg-[#ff2b75] group-hover:bg-[#e01a5e] transition-colors flex items-center justify-center text-white font-bold text-base select-none">
                 K
               </div>
               <span className="text-lg font-black tracking-tight text-white select-none">
                 K Select Hub
               </span>
-            </div>
+            </a>
             {/* Header navigation bar links */}
             <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-text-secondary">
               <a href="#opportunity" className="hover:text-accent transition-colors">솔루션</a>
@@ -43,25 +43,34 @@ export default async function Home({ params }: PageProps) {
           </div>
 
           <div className="flex items-center gap-[20px]">
+            {/* Language Selector UI (Language -> 로그인 -> 파트너 신청) */}
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary">
+              <span className="text-white font-bold cursor-pointer" aria-label="Korean active selection">KR</span>
+              <span className="text-text-muted select-none">|</span>
+              <span className="hover:text-white cursor-pointer transition-colors" aria-label="English locale selection waiting">EN</span>
+            </div>
+            
             <a
               href="https://portal.kselecthub.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-text-secondary hover:text-white transition-all"
+              className="text-sm font-semibold text-text-secondary hover:text-white transition-all focus:outline-none focus:underline"
             >
               로그인
             </a>
             <div className="w-px h-5 bg-[#2A2A2A]" />
+            
             <a
+              id="btn-header-apply"
+              data-analytics="header-apply"
               href="#apply"
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
             >
               파트너 신청 
-              <img
-                src={assetConfig.icons.arrowUp}
-                alt="arrow"
-                className="w-3.5 h-3.5 transform rotate-90"
-              />
+              {/* Inline SVG arrow instead of broken icons */}
+              <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
           </div>
         </div>
@@ -71,148 +80,153 @@ export default async function Home({ params }: PageProps) {
       <main className="flex-1">
         
         {/* 1. HERO SECTION - desktop matching exactly 1.05fr 0.95fr split layout */}
-        <section className="max-w-[1400px] mx-auto padding-hero px-[64px] py-[96px] grid lg:grid-cols-[1.05fr_0.95fr] gap-[64px] items-center text-left">
+        <section className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[80px] lg:py-[96px] grid lg:grid-cols-[1.05fr_0.95fr] gap-[64px] items-center text-left relative">
           
           {/* Left Hero Narrative */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start animate-fade-in z-10">
             
             {/* Eyebrow Label with pill design */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-7">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-7 transition-all duration-300">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
               <span className="text-[10px] tracking-[0.08em] font-semibold text-[#ff2b75]">
                 K-BEAUTY RETAIL GROWTH PLATFORM
               </span>
             </div>
 
-            <h1 className="margin-0 font-display text-[60px] font-bold leading-[1.12] tracking-tight text-white mb-6 select-none">
+            {/* Headline with exact visual highlights */}
+            <h1 className="margin-0 font-display text-4xl sm:text-5xl lg:text-[56px] font-black leading-[1.12] tracking-tight text-white mb-6 select-none animate-slide-up">
               제품을 파는 게 아니라,<br />
-              <span className="text-[#ff2b75]">매장의 K-Beauty 매출</span>을<br />
-              설계합니다.
+              매장의 <span className="text-[#ff2b75]">K-Beauty 카테고리</span>와 <span className="text-[#ff2b75]">매출</span>을 설계합니다.
             </h1>
 
-            <p className="margin-0 text-base leading-relaxed text-text-secondary mb-9 max-w-[520px]">
-              검증된 제품 큐레이션, 매장 맞춤 디스플레이, 성장 예측 시뮬레이터와 90일 재고 교환 크레딧까지 — K Select Hub는 독립 뷰티 리테일러를 위한 하나의 성장 프로그램입니다.
+            {/* Subcopy with specified constraints */}
+            <p className="margin-0 text-xs sm:text-sm leading-relaxed text-text-secondary mb-9 max-w-[540px]">
+              검증된 제품 큐레이션, 4FT·8FT·12FT 모듈형 디스플레이, 90일 교환 크레딧과 런칭 지원까지 — K Select Hub는 독립 Beauty Supply 매장을 위한 K-Beauty Retail Growth Program입니다.
             </p>
 
-            {/* CTAs */}
-            <div className="flex items-center gap-4 mb-9">
+            {/* CTAs with Click Tracking Attributes */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-9 w-full sm:w-auto">
               <a
+                id="btn-hero-apply"
+                data-analytics="hero-apply"
                 href="#apply"
-                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-7 rounded-[8px] font-semibold text-[15px] transition-colors cursor-pointer"
+                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-semibold text-[15px] transition-all hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,43,117,0.4)] active:translate-y-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414]"
               >
                 파트너 신청하기 →
               </a>
               <a
+                id="btn-hero-simulator"
+                data-analytics="hero-simulator"
                 href="#simulator-section"
-                className="h-14 inline-flex items-center justify-center border border-[#2a2a2a] hover:border-white text-white px-7 rounded-[8px] font-semibold text-[15px] transition-colors cursor-pointer"
+                className="h-14 inline-flex items-center justify-center border border-[#2a2a2a] hover:border-white hover:bg-white/5 text-white px-8 rounded-[8px] font-semibold text-[15px] transition-all active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
               >
                 성장 시뮬레이터 보기
               </a>
             </div>
 
-            {/* Benefits Check Labels */}
-            <div className="flex flex-wrap items-center gap-[28px]">
-              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
-                <img src={assetConfig.icons.circleCheck} alt="check" className="w-4 h-4" />
-                검증된 K-Beauty 제품
+            {/* Benefits Check Labels with Pure Inline SVGs */}
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-x-[28px] gap-y-3 mt-2">
+              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-white transition-colors duration-200">
+                {/* Check Circle SVG */}
+                <svg className="w-4 h-4 text-[#ff2b75] fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                검증된 제품 큐레이션
               </span>
-              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
-                <img src={assetConfig.icons.circleCheck} alt="check" className="w-4 h-4" />
-                매장 맞춤 성장 전략
+              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-white transition-colors duration-200">
+                {/* Grid Layout SVG */}
+                <svg className="w-4 h-4 text-[#ff2b75] fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                모듈형 디스플레이 솔루션
               </span>
-              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary">
-                <img src={assetConfig.icons.circleCheck} alt="check" className="w-4 h-4" />
-                재고 리스크 완화
+              <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-white transition-colors duration-200">
+                {/* Refresh/Shield SVG */}
+                <svg className="w-4 h-4 text-[#ff2b75] fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                90일 재고 교환 크레딧
               </span>
             </div>
 
           </div>
 
           {/* Right Hero Visuals with Layered Floating Cards */}
-          <div className="relative">
+          <div className="relative animate-fade-in delay-200 mt-10 lg:mt-0">
             
-            {/* Base Photography Asset */}
-            <div className="relative w-full h-[560px] rounded-[20px] overflow-hidden border border-[#2a2a2a] bg-[#121214]">
+            {/* Base Photography Asset with priority rendering */}
+            <div className="relative w-full h-[360px] sm:h-[500px] lg:h-[560px] rounded-[20px] overflow-hidden border border-[#2a2a2a] bg-[#121214]">
               <Image
                 src={assetConfig.storeShowcase.heroSection.src}
                 alt={assetConfig.storeShowcase.heroSection.alt}
                 fill
+                priority
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 45vw"
-                priority
               />
-              {/* Complex overlays matching target visual language */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-black/80 via-transparent to-transparent z-0" />
+              {/* Soft Left-to-Right layout fade overlay */}
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#141414] via-[#141414]/40 to-transparent z-0" />
             </div>
 
-            {/* Floating Card 1: Donut Product Mix Card */}
-            <div className="absolute top-6 right-[-28px] w-[260px] bg-[#121214]/72 backdrop-blur-md border border-[#2a2a2a] rounded-[16px] p-5 shadow-2xl z-10 flex flex-col gap-3.5">
-              <span className="text-[11px] text-text-secondary uppercase tracking-wider font-semibold text-left">
-                큐레이션 제품 믹스
+            {/* Simplified Overlay Card: Display Options (Matches 시안) */}
+            <div className="absolute top-6 right-[-10px] sm:right-[-28px] w-[220px] sm:w-[250px] bg-[#121214]/85 backdrop-blur-md border border-[#2a2a2a] rounded-[16px] p-4 sm:p-5 shadow-2xl z-10 flex flex-col gap-3 text-left animate-subtle-float">
+              <span className="text-[10px] text-text-secondary uppercase tracking-wider font-bold">
+                Display Options
               </span>
-              <div className="flex items-center gap-4 text-left">
-                <div className="relative w-[76px] h-[76px] rounded-full bg-conic-gradient flex items-center justify-center flex-shrink-0">
-                  <div className="w-[50px] h-[50px] rounded-full bg-[#121214] flex items-center justify-center text-sm font-bold text-white select-none">
-                    62%
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1 text-[11px] text-text-secondary font-medium">
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-[2px] bg-[#ff2b75]" />스킨케어 62%</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-[2px] bg-[#845ec2]" />메이크업 18%</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-[2px] bg-[#ffc75f]" />바디/툴 12%</span>
-                </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-display text-lg font-black text-white">4FT / 8FT / 12FT</span>
+                <span className="text-[9px] text-[#ff2b75] font-semibold">모듈형 숍인숍 무상 대여 지원</span>
               </div>
             </div>
 
-            {/* Floating Card 2: Growth Sparkline Card */}
-            <div className="absolute top-[200px] right-[-28px] w-[230px] bg-[#121214]/72 backdrop-blur-md border border-[#2a2a2a] rounded-[16px] p-[18px] shadow-2xl z-10 flex flex-col gap-2">
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-text-secondary">성장 시뮬레이션 · 90일 후</span>
-                <span className="font-bold text-[#10b981]">+42%</span>
+            {/* Simplified Overlay Card 2: 90-Day Exchange Credit (Matches 시안) */}
+            <div className="absolute bottom-6 left-[-10px] sm:left-[-28px] w-[210px] sm:w-[230px] bg-[#121214]/85 backdrop-blur-md border border-[#2a2a2a] rounded-[16px] p-4 shadow-2xl z-10 flex flex-col gap-2 text-left animate-subtle-float">
+              <div className="flex justify-between items-center text-[10px] font-bold">
+                <span className="text-text-secondary">Exchange Credit</span>
+                <span className="text-accent text-[9px] border border-[#ff2b75]/30 px-2 py-0.5 rounded-full bg-[#ff2b75]/5">90-Day</span>
               </div>
-              {/* SVG Sparkline Sparking */}
-              <div className="w-full h-[52px]">
-                <svg viewBox="0 0 240 60" width="100%" height="52" className="block">
-                  <polyline
-                    points="0,50 30,44 60,46 90,34 120,36 150,20 180,22 210,10 240,6"
-                    fill="none"
-                    stroke="#ff2b75"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="240" cy="6" r="4" fill="#ff2b75" />
-                </svg>
-              </div>
-              <span className="text-xs text-text-secondary text-left">
-                예상 추가 매출 <b className="text-white">$48,750</b>
-              </span>
+              <p className="text-[10px] text-text-secondary leading-normal">
+                미판매 재고의 100% 가치 교환 크레딧 발급으로 소매점 마진 보호.
+              </p>
             </div>
 
           </div>
+
+          {/* Scroll Down Indicator - Small, subtle anchor */}
+          <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-60 text-center pointer-events-none select-none z-10">
+            <span className="font-display text-[9px] tracking-[0.2em] text-text-secondary">SCROLL</span>
+            <svg className="w-4 h-4 animate-bounce text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </section>
 
-        {/* 2. METRICS BAND - 4-column summary metric boxes */}
-        <section className="border-y border-[#2a2a2a] bg-[#0c0c0c]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-9 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-            <div className="flex flex-col gap-1 pr-6 border-r border-[#2a2a2a]">
-              <span className="font-display text-[32px] font-bold text-white leading-none">600+</span>
-              <span className="text-xs text-text-secondary">미국 파트너 매장</span>
+        {/* 2. EVIDENCE STRIP - 4 columns premium B2B statistics */}
+        <section className="border-y border-[#2a2a2a] bg-[#0c0c0c] relative z-10 mt-10 lg:mt-0">
+          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-9 grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 text-left">
+            <div className="flex flex-col gap-1.5 pr-4 lg:border-r border-[#2a2a2a]/60">
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">3</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Display Formats</span>
+              <p className="text-[11px] text-text-secondary">4FT / 8FT / 12FT 모듈 라인업</p>
             </div>
-            <div className="flex flex-col gap-1 px-6 border-r border-[#2a2a2a]">
-              <span className="font-display text-[32px] font-bold text-white leading-none">2,500+</span>
-              <span className="text-xs text-text-secondary">검증된 K-Beauty 제품</span>
+            <div className="flex flex-col gap-1.5 px-0 lg:px-4 lg:border-r border-[#2a2a2a]/60">
+              <span className="font-display text-3xl sm:text-[38px] font-black text-[#ff2b75] leading-none">90-Day</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Exchange Credit</span>
+              <p className="text-[11px] text-text-secondary">판매 저조 재고 100% 안심 교환</p>
             </div>
-            <div className="flex flex-col gap-1 px-6 border-r border-[#2a2a2a]">
-              <span className="font-display text-[32px] font-bold text-[#ff2b75] leading-none">$120M+</span>
-              <span className="text-xs text-text-secondary">파트너 누적 매출 성장</span>
+            <div className="flex flex-col gap-1.5 px-0 lg:px-4 lg:border-r border-[#2a2a2a]/60">
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">8</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Launch Partner Benefits</span>
+              <p className="text-[11px] text-text-secondary">초기 런칭 파트너를 위한 독점 혜택</p>
             </div>
-            <div className="flex flex-col gap-1 pl-6">
-              <span className="font-display text-[32px] font-bold text-white leading-none">4.9/5</span>
-              <span className="text-xs text-text-secondary">파트너 만족도</span>
+            <div className="flex flex-col gap-1.5 pl-0 lg:pl-4">
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">1</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Integrated Growth Program</span>
+              <p className="text-[11px] text-text-secondary">큐레이션 디스플레이 마케팅 통합 지원</p>
             </div>
           </div>
         </section>
+
 
         {/* 3. 01 OPPORTUNITY - Growth SVG Area line chart and 4 grid columns */}
         <section id="opportunity" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
