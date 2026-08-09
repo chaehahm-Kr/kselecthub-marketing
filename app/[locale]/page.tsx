@@ -105,7 +105,7 @@ export default async function Home({ params }: PageProps) {
 
             {/* Subcopy with specified constraints */}
             <p className="margin-0 text-xs sm:text-sm leading-relaxed text-text-secondary mb-9 max-w-[540px]">
-              검증된 제품 큐레이션, 4FT·8FT·12FT 모듈형 디스플레이, 90일 교환 크레딧과 런칭 지원까지 — K Select Hub는 독립 Beauty Supply 매장을 위한 K-Beauty Retail Growth Program입니다.
+              검증된 제품 큐레이션부터 매장 맞춤 디스플레이, 런칭 이후 상품 최적화까지 — K Select Hub는 독립 Beauty Supply 매장의 K-Beauty 카테고리 성장을 함께 설계합니다.
             </p>
 
             {/* CTAs with Click Tracking Attributes */}
@@ -142,14 +142,14 @@ export default async function Home({ params }: PageProps) {
                 <svg className="w-4 h-4 text-[#ff2b75] fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
-                모듈형 디스플레이 솔루션
+                매장 맞춤 상품 구성
               </span>
               <span className="flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-white transition-colors duration-200">
                 {/* Refresh/Shield SVG */}
                 <svg className="w-4 h-4 text-[#ff2b75] fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                90일 재고 교환 크레딧
+                런칭 후 지속 최적화
               </span>
             </div>
 
@@ -183,14 +183,14 @@ export default async function Home({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Simplified Overlay Card 2: 90-Day Exchange Credit (Matches 시안) */}
+            {/* Simplified Overlay Card 2: Launch Support */}
             <div className="absolute bottom-6 left-[-10px] sm:left-[-28px] w-[210px] sm:w-[230px] bg-[#121214]/85 backdrop-blur-md border border-[#2a2a2a] rounded-[16px] p-4 shadow-2xl z-10 flex flex-col gap-2 text-left animate-subtle-float">
               <div className="flex justify-between items-center text-[10px] font-bold">
-                <span className="text-text-secondary">Exchange Credit</span>
-                <span className="text-accent text-[9px] border border-[#ff2b75]/30 px-2 py-0.5 rounded-full bg-[#ff2b75]/5">90-Day</span>
+                <span className="text-text-secondary uppercase">Launch Support</span>
+                <span className="text-accent text-[9px] border border-[#ff2b75]/30 px-2 py-0.5 rounded-full bg-[#ff2b75]/5">1:1</span>
               </div>
               <p className="text-[10px] text-text-secondary leading-normal">
-                미판매 재고의 100% 가치 교환 크레딧 발급으로 소매점 마진 보호.
+                Assortment · Setup · Merchandising 지원을 제공합니다.
               </p>
             </div>
 
@@ -209,24 +209,24 @@ export default async function Home({ params }: PageProps) {
         <section className="border-y border-[#2a2a2a] bg-[#0c0c0c] relative z-10 mt-10 lg:mt-0">
           <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-9 grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 text-left">
             <div className="flex flex-col gap-1.5 pr-4 lg:border-r border-[#2a2a2a]/60">
-              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">3</span>
-              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Display Formats</span>
-              <p className="text-[11px] text-text-secondary">4FT / 8FT / 12FT 모듈 라인업</p>
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">3 Display Formats</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">4FT / 8FT / 12FT</span>
+              <p className="text-[11px] text-text-secondary">매장 맞춤 모듈 디스플레이 규격</p>
             </div>
             <div className="flex flex-col gap-1.5 px-0 lg:px-4 lg:border-r border-[#2a2a2a]/60">
-              <span className="font-display text-3xl sm:text-[38px] font-black text-[#ff2b75] leading-none">90-Day</span>
-              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Exchange Credit</span>
-              <p className="text-[11px] text-text-secondary">판매 저조 재고 100% 안심 교환</p>
+              <span className="font-display text-3xl sm:text-[38px] font-black text-[#ff2b75] leading-none">90-Day Exchange Credit</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Slow Seller Risk Reduction</span>
+              <p className="text-[11px] text-text-secondary">판매 저조 재고 100% 교환 리스크 방지</p>
             </div>
             <div className="flex flex-col gap-1.5 px-0 lg:px-4 lg:border-r border-[#2a2a2a]/60">
-              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">8</span>
-              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Launch Partner Benefits</span>
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">8 Launch Partner Benefits</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Early Partner Advantages</span>
               <p className="text-[11px] text-text-secondary">초기 런칭 파트너를 위한 독점 혜택</p>
             </div>
             <div className="flex flex-col gap-1.5 pl-0 lg:pl-4">
-              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">1</span>
-              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Integrated Growth Program</span>
-              <p className="text-[11px] text-text-secondary">큐레이션 디스플레이 마케팅 통합 지원</p>
+              <span className="font-display text-3xl sm:text-[38px] font-black text-white leading-none">Ongoing Optimization</span>
+              <span className="text-[10px] text-accent uppercase tracking-widest font-black">Measure · Reorder · Grow</span>
+              <p className="text-[11px] text-text-secondary">실시간 데이터를 통한 지속 매출 성장</p>
             </div>
           </div>
         </section>
