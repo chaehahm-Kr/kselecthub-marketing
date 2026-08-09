@@ -18,20 +18,20 @@ export default async function Home({ params }: PageProps) {
   return (
     <div className="min-h-screen flex flex-col font-body bg-[#141414] text-white overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
       
-      {/* 0. NAV (Header) - Height 80px, sticky nav with backdrop blur */}
+      {/* 0. NAV (Header) - Height 96px, sticky nav with backdrop blur */}
       <header className="sticky top-0 z-50 bg-[#141414]/86 backdrop-blur-md border-b border-[#2A2A2A]">
-        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-20 flex items-center justify-between gap-10">
+        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-24 flex items-center justify-between gap-10">
           <div className="flex items-center gap-[44px]">
             {/* Logo Click Area expansion - Wraps symbol and text together */}
             <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
-              <div className="relative w-[180px] h-[43px] sm:w-[252px] sm:h-[60px]">
+              <div className="relative w-[240px] h-[57px] sm:w-[336px] sm:h-[80px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   priority
                   className="object-contain"
-                  sizes="(max-width: 640px) 180px, 252px"
+                  sizes="(max-width: 640px) 240px, 336px"
                 />
               </div>
             </a>
@@ -985,13 +985,13 @@ export default async function Home({ params }: PageProps) {
           
           <div>
             <div className="flex items-center mb-4">
-              <div className="relative w-[220px] h-[52px]">
+              <div className="relative w-[240px] h-[57px] sm:w-[336px] sm:h-[80px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   className="object-contain"
-                  sizes="220px"
+                  sizes="(max-width: 640px) 240px, 336px"
                 />
               </div>
             </div>
