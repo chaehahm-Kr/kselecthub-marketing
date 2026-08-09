@@ -23,13 +23,17 @@ export default async function Home({ params }: PageProps) {
         <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-20 flex items-center justify-between gap-10">
           <div className="flex items-center gap-[44px]">
             {/* Logo Click Area expansion - Wraps symbol and text together */}
-            <a href="/ko" className="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
-              <div className="w-[30px] h-[30px] rounded-[6px] bg-[#ff2b75] group-hover:bg-[#e01a5e] transition-colors flex items-center justify-center text-white font-bold text-base select-none">
-                K
+            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
+              <div className="relative" style={{ width: assetConfig.logo.width, height: assetConfig.logo.height }}>
+                <Image
+                  src={assetConfig.logo.src}
+                  alt={assetConfig.logo.alt}
+                  fill
+                  priority
+                  className="object-contain"
+                  sizes="210px"
+                />
               </div>
-              <span className="text-lg font-black tracking-tight text-white select-none">
-                K Select Hub
-              </span>
             </a>
             {/* Header navigation bar links */}
             <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-text-secondary">
@@ -980,11 +984,16 @@ export default async function Home({ params }: PageProps) {
         <div className="max-w-[1400px] mx-auto px-[64px] py-16 grid grid-cols-2 md:grid-cols-4 gap-10 text-left">
           
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-[26px] h-[26px] rounded-[6px] bg-[#ff2b75] flex items-center justify-center color-white font-bold text-sm">
-                K
+            <div className="flex items-center mb-4">
+              <div className="relative" style={{ width: assetConfig.logo.width * 0.9, height: assetConfig.logo.height * 0.9 }}>
+                <Image
+                  src={assetConfig.logo.src}
+                  alt={assetConfig.logo.alt}
+                  fill
+                  className="object-contain"
+                  sizes="190px"
+                />
               </div>
-              <span className="text-base font-bold text-white">K Select Hub</span>
             </div>
             <p className="text-xs text-text-secondary leading-relaxed max-w-[280px]">
               미국 독립 뷰티 리테일러를 위한 K-Beauty Retail Growth Platform.
