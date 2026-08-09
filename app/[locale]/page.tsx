@@ -7,6 +7,7 @@ import CtaForm from "./CtaForm";
 import Simulator from "./Simulator";
 import OpportunitySection from "./OpportunitySection";
 import ChallengesSection from "./ChallengesSection";
+import SolutionSection from "./SolutionSection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -241,125 +242,8 @@ export default async function Home({ params }: PageProps) {
         <ChallengesSection />
 
         {/* 5. 03 SOLUTION - 5 core standard chips + 3 feature cards */}
-        <section id="solution" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
-          <div className="text-center max-w-[720px] mx-auto mb-16 flex flex-col gap-3">
-            <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-              03 — K SELECT SOLUTION
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.25] text-white">
-              제품 선정부터 디스플레이, 운영까지<br />
-              하나의 성장 프로그램으로 해결합니다.
-            </h2>
-          </div>
-
-          {/* 5 core mini chip bars */}
-          <div className="flex flex-wrap justify-between gap-4 p-[24px_8px] border-y border-[#2a2a2a] mb-14 text-left">
-            <div className="min-w-[160px]">
-              <span className="text-[10px] font-semibold text-accent uppercase tracking-wider block">01 CURATED</span>
-              <p className="text-xs text-text-secondary mt-1.5">미국 시장에 맞는 제품 엄선</p>
-            </div>
-            <div className="min-w-[160px]">
-              <span className="text-[10px] font-semibold text-accent uppercase tracking-wider block">02 DIFFERENTIATED</span>
-              <p className="text-xs text-text-secondary mt-1.5">가격 경쟁에서 벗어난 assortment</p>
-            </div>
-            <div className="min-w-[160px]">
-              <span className="text-[10px] font-semibold text-accent uppercase tracking-wider block">03 RETAIL-READY</span>
-              <p className="text-xs text-text-secondary mt-1.5">Display·머천다이징·테스터까지 준비</p>
-            </div>
-            <div className="min-w-[160px]">
-              <span className="text-[10px] font-semibold text-accent uppercase tracking-wider block">04 PROFIT-FOCUSED</span>
-              <p className="text-xs text-text-secondary mt-1.5">45–60% target margin</p>
-            </div>
-            <div className="min-w-[160px]">
-              <span className="text-[10px] font-semibold text-accent uppercase tracking-wider block">05 INVENTORY-SMART</span>
-              <p className="text-xs text-text-secondary mt-1.5">데이터 기반 product mix 최적화</p>
-            </div>
-          </div>
-
-          {/* 3 Solutions detail cards */}
-          <div className="grid md:grid-cols-3 gap-6">
-            
-            {/* Card 1 */}
-            <div className="bg-[#0c0c0c] border border-[#2a2a2a] rounded-[20px] overflow-hidden flex flex-col justify-between">
-              <div className="relative h-[200px] w-full">
-                <img
-                  src={assetConfig.storeShowcase.curationSection.src}
-                  alt="Products curation"
-                  className="w-full h-full object-cover block"
-                />
-                <span className="absolute top-3.5 left-3.5 bg-[#ff2b75] text-white text-[9px] font-bold px-2 py-0.5 rounded-full select-none">
-                  NEW
-                </span>
-              </div>
-              <div className="p-7">
-                <span className="text-[10px] font-semibold text-text-secondary tracking-widest uppercase">
-                  01 · CURATED PRODUCT MIX
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2 mb-2.5">Right Products</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  판매 가능성 높은 제품만 선별해 매장 맞춤 상품 믹스를 구성합니다.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-[#0c0c0c] border border-[#2a2a2a] rounded-[20px] overflow-hidden flex flex-col justify-between">
-              <div className="relative h-[200px] w-full bg-white p-[22px_22px_0] flex flex-col justify-end">
-                <div className="flex flex-col gap-2.5 mb-4 text-left">
-                  <div>
-                    <span className="text-[9px] text-[#555555] font-semibold">매장 면적</span>
-                    <div className="h-1 rounded-full bg-[#eeeeee] mt-1 overflow-hidden">
-                      <div className="bg-[#ff2b75] h-full w-[40%]" />
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-[9px] text-[#555555] font-semibold">초기 투자금</span>
-                    <div className="h-1 rounded-full bg-[#eeeeee] mt-1 overflow-hidden">
-                      <div className="bg-[#ff2b75] h-full w-[65%]" />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-baseline justify-between border-t border-[#eeeeee] py-3">
-                  <span className="text-[10px] text-[#555555]">예상 연 매출</span>
-                  <span className="text-[18px] font-bold text-[#ff2b75]">$96,400</span>
-                </div>
-              </div>
-              <div className="p-7">
-                <span className="text-[10px] font-semibold text-text-secondary tracking-widest uppercase">
-                  02 · GROWTH SIMULATOR
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2 mb-2.5">Predict the Result</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  매장 데이터 기반으로 매출, 마진, 재고 회전율까지 예측해봅니다.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-[#0c0c0c] border border-[#ff2b75] rounded-[20px] overflow-hidden flex flex-col justify-between relative">
-              <span className="absolute top-3.5 right-3.5 bg-[#ff2b75] text-white text-[9px] font-bold px-2 py-0.5 rounded-full z-10 select-none">
-                추천 모듈 8FT
-              </span>
-              <div className="relative h-[200px] w-full">
-                <img
-                  src={assetConfig.displayFixtures["8ft"].src}
-                  alt="8ft display module"
-                  className="w-full h-full object-cover block"
-                />
-              </div>
-              <div className="p-7">
-                <span className="text-[10px] font-semibold text-[#ff2b75] tracking-widest uppercase">
-                  03 · DISPLAY SOLUTION
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2 mb-2.5">Right Display</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  매장 규모에 맞는 모듈형 K-Beauty 매대로 전문 카테고리를 완성합니다.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        {/* 5. 03 SOLUTION - K SELECT SOLUTION (Visual Fidelity Reproduction with Client Interaction Orbit) */}
+        <SolutionSection />
 
         {/* 6. 04 PRODUCT CURATION - We don't list everything */}
         <section id="products" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
