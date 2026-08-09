@@ -18,31 +18,31 @@ export default async function Home({ params }: PageProps) {
   return (
     <div className="min-h-screen flex flex-col font-body bg-[#141414] text-white overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
       
-      {/* 0. NAV (Header) - Height 96px, sticky nav with backdrop blur */}
+      {/* 0. NAV (Header) - Height 88px, sticky nav with backdrop blur */}
       <header className="sticky top-0 z-50 bg-[#141414]/86 backdrop-blur-md border-b border-[#2A2A2A]">
-        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-24 flex items-center justify-between gap-10">
-          <div className="flex items-center gap-[44px]">
-            {/* Logo Click Area expansion - Wraps symbol and text together */}
-            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
-              <div className="relative w-[240px] h-[57px] sm:w-[336px] sm:h-[80px]">
+        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-[88px] flex items-center justify-between gap-10">
+          <div className="flex items-center gap-[32px] xl:gap-[44px]">
+            {/* Logo Click Area expansion - Wraps symbol and text together with negative margin to align left */}
+            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card -ml-[12px] sm:-ml-[16px]">
+              <div className="relative w-[210px] h-[50px] sm:w-[294px] sm:h-[70px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   priority
                   className="object-contain"
-                  sizes="(max-width: 640px) 240px, 336px"
+                  sizes="(max-width: 640px) 210px, 294px"
                 />
               </div>
             </a>
-            {/* Header navigation bar links */}
-            <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-text-secondary">
-              <a href="#opportunity" className="hover:text-accent transition-colors">솔루션</a>
-              <a href="#products" className="hover:text-accent transition-colors">제품 큐레이션</a>
-              <a href="#display" className="hover:text-accent transition-colors">디스플레이</a>
-              <a href="#exchange-credit" className="hover:text-accent transition-colors">신용 프로그램</a>
-              <a href="#simulator-section" className="hover:text-accent transition-colors">성장 시뮬레이터</a>
-              <a href="#partnership-timeline" className="hover:text-accent transition-colors">파트너 리소스</a>
+            {/* Header navigation bar links with whitespace-nowrap and optimized gap */}
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-semibold text-text-secondary">
+              <a href="#opportunity" className="hover:text-accent transition-colors whitespace-nowrap">솔루션</a>
+              <a href="#products" className="hover:text-accent transition-colors whitespace-nowrap">제품 큐레이션</a>
+              <a href="#display" className="hover:text-accent transition-colors whitespace-nowrap">디스플레이</a>
+              <a href="#exchange-credit" className="hover:text-accent transition-colors whitespace-nowrap">신용 프로그램</a>
+              <a href="#simulator-section" className="hover:text-accent transition-colors whitespace-nowrap">성장 시뮬레이터</a>
+              <a href="#partnership-timeline" className="hover:text-accent transition-colors whitespace-nowrap">파트너 리소스</a>
             </nav>
           </div>
 
@@ -984,14 +984,14 @@ export default async function Home({ params }: PageProps) {
         <div className="max-w-[1400px] mx-auto px-[64px] py-16 grid grid-cols-2 md:grid-cols-4 gap-10 text-left">
           
           <div>
-            <div className="flex items-center mb-4">
-              <div className="relative w-[240px] h-[57px] sm:w-[336px] sm:h-[80px]">
+            <div className="flex items-center mb-4 -ml-[12px] sm:-ml-[16px]">
+              <div className="relative w-[210px] h-[50px] sm:w-[294px] sm:h-[70px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   className="object-contain"
-                  sizes="(max-width: 640px) 240px, 336px"
+                  sizes="(max-width: 640px) 210px, 294px"
                 />
               </div>
             </div>
