@@ -136,3 +136,19 @@ body {
   }
 }
 
+/* Polyline Chart drawing animation */
+@keyframes polylineDraw {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.chart-polyline-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: polylineDraw 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.5s;
+}
