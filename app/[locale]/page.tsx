@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ko, LocaleDictionary } from "../locales/ko";
 import CtaForm from "./CtaForm";
 import Simulator from "./Simulator";
+import { assetConfig } from "../assets.config";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -21,7 +22,20 @@ export default async function Home({ params }: PageProps) {
       <header className="sticky top-0 z-50 bg-[#090a0f]/90 backdrop-blur-md border-b border-[#202330]">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#" className="font-display text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <span className="text-accent">K</span> Select Hub
+            {assetConfig.logo.mode === "image" ? (
+              <Image
+                src={assetConfig.logo.src}
+                alt={assetConfig.logo.alt}
+                width={assetConfig.logo.width}
+                height={assetConfig.logo.height}
+                className="object-contain"
+              />
+            ) : (
+              <>
+                <span className="text-accent">{assetConfig.logo.text.split(" ")[0]}</span>{" "}
+                {assetConfig.logo.text.split(" ").slice(1).join(" ")}
+              </>
+            )}
           </a>
 
           <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-text-secondary">
@@ -480,9 +494,9 @@ export default async function Home({ params }: PageProps) {
           <div className="grid lg:grid-cols-3 gap-6">
             {t.display.modules.map((mod, i) => {
               const imagePaths = [
-                "/images/display_4ft.png",
-                "/images/display_8ft.png",
-                "/images/display_12ft.jpg",
+                assetConfig.displayFixtures["4ft"].src,
+                assetConfig.displayFixtures["8ft"].src,
+                assetConfig.displayFixtures["12ft"].src,
               ];
               return (
                 <div key={i} className="bg-[#12141c] border border-border rounded-card overflow-hidden flex flex-col justify-between">
@@ -817,7 +831,17 @@ export default async function Home({ params }: PageProps) {
           
           <div className="flex flex-col gap-3 text-left">
             <span className="font-display text-xl font-bold text-white">
-              {t.header.logo}
+              {assetConfig.logo.mode === "image" ? (
+                <Image
+                  src={assetConfig.logo.src}
+                  alt={assetConfig.logo.alt}
+                  width={assetConfig.logo.width}
+                  height={assetConfig.logo.height}
+                  className="object-contain"
+                />
+              ) : (
+                assetConfig.logo.text
+              )}
             </span>
             <p className="text-xs text-text-secondary">
               {t.footer.copyright}

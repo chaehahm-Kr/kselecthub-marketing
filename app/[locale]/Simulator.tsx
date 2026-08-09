@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ko } from "../locales/ko";
+import { assetConfig } from "../assets.config";
 
 export default function Simulator() {
   const t = ko.simulator;
@@ -20,7 +21,7 @@ export default function Simulator() {
       skuRange: "16 – 24 SKUs",
       skuMidpoint: 20,
       displayType: "4' LED Wall Display Feature (1 Module)",
-      imageSrc: "/images/display_4ft.png",
+      imageSrc: assetConfig.displayFixtures["4ft"].src,
     },
     "8ft": {
       name: "8 FT - Growth 모듈 패키지",
@@ -30,7 +31,7 @@ export default function Simulator() {
       skuRange: "32 – 48 SKUs",
       skuMidpoint: 40,
       displayType: "8' LED Wall Display Features (2 Modules)",
-      imageSrc: "/images/display_8ft.png",
+      imageSrc: assetConfig.displayFixtures["8ft"].src,
     },
     "12ft": {
       name: "12 FT - Destination 모듈 패키지",
@@ -40,7 +41,7 @@ export default function Simulator() {
       skuRange: "48 – 70 SKUs",
       skuMidpoint: 59,
       displayType: "12' LED Wall Display Features (3 Modules)",
-      imageSrc: "/images/display_12ft.jpg",
+      imageSrc: assetConfig.displayFixtures["12ft"].src,
     },
   };
 
