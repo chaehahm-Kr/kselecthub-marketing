@@ -6,6 +6,7 @@ import { ko, LocaleDictionary } from "../locales/ko";
 import CtaForm from "./CtaForm";
 import Simulator from "./Simulator";
 import OpportunitySection from "./OpportunitySection";
+import ChallengesSection from "./ChallengesSection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -236,45 +237,8 @@ export default async function Home({ params }: PageProps) {
         {/* 3. 01 OPPORTUNITY - WHY NOW? (Visual Fidelity Reproduction with Client Scroll Animations) */}
         <OpportunitySection />
         
-        {/* 4. 02 PROBLEM - 4 retailer pain point columns */}
-        <section id="problems-section" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
-            <div className="max-w-[640px] mb-14 flex flex-col gap-3">
-              <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-                02 — RETAILER PROBLEM
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.25] tracking-tight text-white">
-                그런데 막상 시작하면, 무엇을 어떻게 운영해야 할지 막막합니다.
-              </h2>
-            </div>
-            
-            <div className="grid md:grid-cols-4 gap-px bg-[#2a2a2a] overflow-hidden rounded-[8px]">
-              <div className="bg-[#0c0c0c] p-8 flex flex-col gap-4">
-                <span className="font-display text-[44px] font-black text-[#222222] leading-none">01</span>
-                <h3 className="text-base font-semibold text-white">Product Selection</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">수천 개 제품 중, 우리 매장에서 실제로 팔릴 제품을 고르기 어렵습니다.</p>
-              </div>
-
-              <div className="bg-[#0c0c0c] p-8 flex flex-col gap-4">
-                <span className="font-display text-[44px] font-black text-[#222222] leading-none">02</span>
-                <h3 className="text-base font-semibold text-white">Price Competition</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">온라인·주변 매장과 같은 제품을 팔면 가격 경쟁에서 벗어나기 어렵습니다.</p>
-              </div>
-
-              <div className="bg-[#0c0c0c] p-8 flex flex-col gap-4">
-                <span className="font-display text-[44px] font-black text-[#222222] leading-none">03</span>
-                <h3 className="text-base font-semibold text-white">Inventory Risk</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">새로운 SKU 도입 시 Slow Seller와 Dead Stock 위험이 그대로 남습니다.</p>
-              </div>
-
-              <div className="bg-[#0c0c0c] p-8 flex flex-col gap-4">
-                <span className="font-display text-[44px] font-black text-[#222222] leading-none">04</span>
-                <h3 className="text-base font-semibold text-white">Retail Execution</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">Display, staff 지식, 재고 관리까지 없으면 카테고리가 완성되지 않습니다.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* 4. 02 PROBLEM - RETAILER CHALLENGES (Visual Fidelity Reproduction with Client Scroll Animations) */}
+        <ChallengesSection />
 
         {/* 5. 03 SOLUTION - 5 core standard chips + 3 feature cards */}
         <section id="solution" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
