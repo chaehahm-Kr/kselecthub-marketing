@@ -24,14 +24,14 @@ export default async function Home({ params }: PageProps) {
           <div className="flex items-center gap-[44px]">
             {/* Logo Click Area expansion - Wraps symbol and text together */}
             <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card">
-              <div className="relative" style={{ width: assetConfig.logo.width, height: assetConfig.logo.height }}>
+              <div className="relative w-[180px] h-[43px] sm:w-[252px] sm:h-[60px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   priority
                   className="object-contain"
-                  sizes="210px"
+                  sizes="(max-width: 640px) 180px, 252px"
                 />
               </div>
             </a>
@@ -985,13 +985,13 @@ export default async function Home({ params }: PageProps) {
           
           <div>
             <div className="flex items-center mb-4">
-              <div className="relative" style={{ width: assetConfig.logo.width * 0.9, height: assetConfig.logo.height * 0.9 }}>
+              <div className="relative w-[220px] h-[52px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   className="object-contain"
-                  sizes="190px"
+                  sizes="220px"
                 />
               </div>
             </div>

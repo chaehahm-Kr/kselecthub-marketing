@@ -6,14 +6,14 @@
  */
 
 export const assetConfig = {
-  // 1. 브랜드 로고 설정 - 공식 고화질 이미지 로고 (.png) 연동
+  // 1. 브랜드 로고 설정 - 공식 고화질 이미지 로고 (.png) 연동 및 가독성 크기 최적화
   logo: {
     mode: "image" as "text" | "image",
     text: "K Select Hub",
     src: "/images/logo_official.png",
     alt: "K Select Hub Official Brand Logo",
-    width: 202,
-    height: 48,
+    width: 252,
+    height: 60,
   },
 
   // 2. SVG 아이콘 리스트 (assets/icons/에 수록된 파일들 매핑)
