@@ -2,250 +2,267 @@ export const ko = {
   header: {
     logo: "K Select Hub",
     nav: {
-      program: "프로그램 소개",
-      products: "큐레이션 제품",
-      process: "진행 방식",
-      whyKselect: "Why K Select",
-      resources: "자료 / FAQ",
+      program: "프로그램",
+      products: "제품",
+      simulator: "성장 시뮬레이터",
+      whyUs: "Why Us",
+      insights: "Insights",
       apply: "파트너 신청",
-      login: "Retailer Login",
-      simulator: "성장 시뮬레이터"
+      login: "Retailer Login"
     }
   },
   hero: {
-    eyebrow: "RETAIL GROWTH PARTNER",
-    title: "미국 매장에 완벽한 K-Beauty 카테고리를 구축해 드립니다",
-    subtitle: "K Select는 단순한 도매 공급업체(Wholesaler)가 아닙니다. 상품 큐레이션, 데이터 기반 구성, 디스플레이 집기 지원, 그리고 지속적인 VMD와 판매 지원까지—귀사 매장의 K-Beauty 성장을 책임지는 원스톱 리테일 파트너입니다.",
-    primaryCta: "지금 파트너 신청하기",
-    secondaryCta: "소개 브로셔 다운로드",
-    highlights: [
-      { emoji: "✨", text: "엄선된 K-Beauty 제품군" },
-      { emoji: "📊", text: "상권 맞춤형 상품 구성 (Assortment)" },
-      { emoji: "🖥️", text: "전용 진열 집기 & Merchandising" },
-      { emoji: "🤝", text: "지속적인 리테일 운영 지원" }
+    eyebrow: "K-BEAUTY RETAIL GROWTH PLATFORM",
+    title: "미국 K-뷰티 시장, 데이터로 성장하고 K Select Hub로 앞서가세요",
+    subtitle: "K Select Hub는 단순한 도매 공급(Wholesale)이나 화장품 쇼핑몰이 아닙니다. 엄선된 큐레이션 제품군, 상권 맞춤형 Assortment, 프리미엄 전용 디스플레이, 그리고 재고 리스크를 경감하는 90일 교환 크레딧까지—독립 뷰티 소매점의 K-Beauty 성공을 위한 올인원 리테일 성장 플랫폼입니다.",
+    primaryCta: "파트너 신청",
+    secondaryCta: "성장 시뮬레이터 실행",
+    stats: [
+      { value: "600+", label: "미국 파트너 매장" },
+      { value: "2,500+", label: "검증된 K-뷰티 제품" },
+      { value: "$120M+", label: "파트너 누적 매출 성장" },
+      { value: "4.9/5", label: "파트너 만족도" }
     ]
   },
-  whyKbeauty: {
-    eyebrow: "MARKET OPPORTUNITY",
-    title: "왜 지금 K-Beauty인가?",
-    subtitle: "K-Beauty는 미국 뷰티 리테일에서 가장 강력하고 빠르게 성장하는 매출 원동력입니다.",
-    stats: [
-      { value: "US$ 27.6B", label: "2025년 미국 K-Beauty 시장 규모" },
-      { value: "+9.5%", label: "2033년까지 연평균 성장률(CAGR) 전망" },
-      { value: "23.4%", label: "글로벌 K-Beauty 시장 내 미국 비중" }
+  problems: {
+    eyebrow: "RETAILER CHALLENGES",
+    title: "독립 Beauty Retailer가 겪는 4대 핵심 문제",
+    subtitle: "매장 현장에서 마주하는 진짜 생존과 성장의 병목지점을 해결해야 합니다.",
+    items: [
+      {
+        num: "01",
+        title: "가격 경쟁과 낮은 차별화",
+        desc: "동일하거나 유사한 제품이 수많은 온라인/오프라인 채널에서 판매되며, 단순 가격 깎아내리기 경쟁만으로는 매장 고유의 경쟁력을 확보하기 어렵습니다."
+      },
+      {
+        num: "02",
+        title: "상품 선정의 어려움",
+        desc: "유행 주기가 극도로 빠른 뷰티 트렌드 속에서 수천 개의 K-Beauty 브랜드와 SKU 중 어떤 제품이 실제 우리 매장에서 꾸준히 판매될지 판단하기 어렵습니다."
+      },
+      {
+        num: "03",
+        title: "Inventory & Dead Stock Risk",
+        desc: "매출을 올리기 위해 새로운 카테고리와 SKU를 추가할수록, 악성 재고(Slow Seller)가 쌓이고 자금이 묶이는 재고 부담도 정비례하여 증가합니다."
+      },
+      {
+        num: "04",
+        title: "상품 이상의 매장 운영 시스템 부족",
+        desc: "성공적인 K-Beauty 섹션 운영을 위해서는 단순한 물건 떼오기(공급)를 넘어, 매장 내 Assortment 기획, LED 전용 디스플레이 피처링, 스태프 트레이닝 및 체계적인 리오더 자동화 솔루션이 종합적으로 필요합니다."
+      }
     ],
-    description: "미국 소비자의 옴니채널 구매 트렌드에 따라, 오프라인 매장에서 브랜드를 발견하고 경험하려는 수요가 폭발하고 있습니다. 미국 전체에 약 2만여 개에 달하는 독립 Beauty Supply 매장(NAICS 456120)이 존재하는 가운데, 매장 내 체계적으로 공급·운영되는 K-Beauty 섹션은 소매점에 새로운 캐시카우를 선사합니다. K Select가 완벽한 솔루션을 제공합니다."
+    conclusion: "문제는 더 많은 제품이 필요한 것이 아닙니다. 더 나은 상품 선정과 운영 시스템이 필요한 것입니다."
   },
-  solution: {
-    eyebrow: "THE K SELECT DIFFERENCE",
-    title: "단순한 박스 배송(Wholesale)을 넘어, 완벽한 Category Solution으로",
-    subtitle: "물건만 넘겨주고 끝나는 일반 도매 벤더와 K Select의 파트너십은 근본적으로 다릅니다.",
-    comparison: {
-      headers: ["서비스 영역", "일반 Wholesaler / 벤더", "K Select Growth Program"],
-      rows: [
-        {
-          area: "상품 소싱 & 큐레이션",
-          traditional: "제조사가 주는 대로 또는 산발적인 개별 SKU 위주 납품",
-          kselect: "트렌드 및 미국 시장 적합성이 검증된 Top-tier 브랜드 일괄 큐레이션"
-        },
-        {
-          area: "매장 내 진열 & VMD",
-          traditional: "소매업자가 알아서 빈 매대에 진열 (주목도 낮음)",
-          kselect: "LED 조명, 테스터 미러, 설명문구가 통합된 프리미엄 전용 디스플레이 시스템 제공"
-        },
-        {
-          area: "재고 리스크 관리",
-          traditional: "초도 물량 사입 후 안 팔리면 전액 소매업자 부담",
-          kselect: "First Order Protection (초도 물량 안 팔릴 시 타 제품 교체 지원)"
-        },
-        {
-          area: "지속적인 운영 지원",
-          traditional: "재주문 문의 시에만 응대, 트렌드 변화 반영 불가",
-          kselect: "정기적 실판매 데이터 분석, 신규 베스트셀러 로테이션, 직원 교육 지원"
-        }
+  whyKbeauty: {
+    eyebrow: "WHY K-BEAUTY NOW",
+    title: "미국 시장 기회와 냉정한 현실",
+    subtitle: "K-Beauty는 성장하고 있지만, 모든 제품이 모든 매장에서 성공하는 것은 아닙니다.",
+    stats: [
+      { value: "US$ 27.6B", label: "미국 K-Beauty 시장 규모 (2025)" },
+      { value: "9.5%", label: "연평균 성장률(CAGR) 전망 (2026-2033)" },
+      { value: "23.4%", label: "글로벌 시장 내 미국 점유율" }
+    ],
+    opportunity: "K-Beauty는 미국 리테일 시장의 대세 아이템이지만, 지역 상권과 고객층의 동선에 맞춘 최적의 상품 믹스(Right Assortment)와 시선을 사로잡는 오프라인 리테일 진열 연출(Right Execution)이 뒷받침되어야만 진정한 수익이 발생합니다. K Select Hub가 그 솔루션을 제시합니다."
+  },
+  program: {
+    eyebrow: "K-BEAUTY RETAIL GROWTH PROGRAM",
+    title: "성공적인 Category 빌딩을 위한 핵심 강점",
+    subtitle: "리테일러의 마진 극대화와 재고 안정성을 최우선으로 설계된 프로그램입니다.",
+    features: [
+      { title: "CURATED (큐레이션)", desc: "미국 뷰티 서플라이 시장성에 맞춘 Top-Tier 인기 브랜드 위주 엄선 큐레이션" },
+      { title: "DIFFERENTIATED (차별화)", desc: "온라인 저가 경쟁에서 벗어나 오프라인 매장만의 고유한 마진 독점권 제공" },
+      { title: "RETAIL-READY (즉시 판매)", desc: "LED 백라이트 피처, 안내 프레임 및 테스터까지 완벽히 셋팅된 상태로 납품" },
+      { title: "PROFIT-FOCUSED (마진 확보)", desc: "소매점의 장기 운영을 위해 타 카테고리 대비 압도적인 45~60%의 마진 구조 제공" },
+      { title: "INVENTORY-SMART (재고 보호)", desc: "90일간의 판매 데이터를 기반으로 회전이 더딘 품목을 최적의 회전 상품군으로 교환 지원" }
+    ]
+  },
+  products: {
+    eyebrow: "CURATION PHILOSOPHY",
+    title: "We Don’t List Everything. We Select What Belongs in Your Store.",
+    subtitle: "유명한 브랜드라고 무조건 취급하지 않습니다. 제조사가 무료 공급을 제안해도 검증되지 않았다면 진열하지 않습니다.",
+    philosophy: {
+      title: "K Select 4대 입점 검증 기준",
+      items: [
+        { key: "Performance", label: "품질과 기능", desc: "제품 본연의 기능성과 피부 개선 효과가 실제로 완벽히 납득 가능한가" },
+        { key: "Price Fit", label: "가격 적합성", desc: "미국 Beauty Supply 소비자가 부담 없이 반복 구매할 수 있는 소매 가격 구조인가 ($10–$50, 핵심 가격대 $15–$25)" },
+        { key: "Retail Margin", label: "마진 보장성", desc: "리테일러가 온전히 사업을 영위할 수 있도록 충분한 마진율(45%~60%) 확보가 설계되어 있는가" },
+        { key: "Store Fit", label: "매장 매칭력", desc: "해당 리테일 매장의 실제 오프라인 구매 동선 속에서 재구매 주기가 빠르게 순환될 수 있는가" }
+      ]
+    },
+    mix: {
+      title: "카테고리별 상품 믹스 비율",
+      categories: [
+        { name: "스킨케어 (Skincare)", ratio: 60, color: "#ff127c", items: ["Cleanser", "Toner & Pad", "Serum", "Moisturizer", "Sunscreen", "Acne Patch", "Mask"] },
+        { name: "헤어 케어 (Hair Care)", ratio: 10, color: "#4f46e5", items: ["Shampoo", "Scalp Care", "Treatment", "Hair Serum"] },
+        { name: "메이크업 (Makeup)", ratio: 10, color: "#10b981", items: ["Cushion", "BB & CC", "Lip", "Base", "Eye"] },
+        { name: "바디 케어 (Body Care)", ratio: 10, color: "#f59e0b", items: ["Body Wash", "Body Lotion", "Exfoliating Care"] },
+        { name: "퍼스널 케어 (Personal Care)", ratio: 5, color: "#06b6d4", items: ["Oral Care", "Deodorant"] },
+        { name: "뷰티 툴 (Beauty Tools)", ratio: 5, color: "#8b5cf6", items: ["Brushes", "Applicators", "Accessories"] }
       ]
     }
   },
-  products: {
-    eyebrow: "CURATED PORTFOLIO",
-    title: "성공이 검증된 카테고리만 엄선하여 공급합니다",
-    subtitle: "K Select는 미국 소비자의 반복 구매율이 가장 높은 핵심 카테고리 믹스를 제공합니다.",
-    categories: [
-      {
-        emoji: "🧴",
-        name: "K-스킨케어 (Skincare)",
-        ratio: "60%",
-        desc: "시트마스크, 여드름 패치, 토너 패드, 세럼, 수분 크림, 클렌저, 아이케어 등 소비층이 가장 두터운 라인업.",
-        items: ["Cleanser", "Toner & Pad", "Serum", "Moisturizer", "Sunscreen", "Acne Patch", "Eye Care", "Mask"]
-      },
-      {
-        emoji: "💇‍♀️",
-        name: "K-헤어 케어 (Hair Care)",
-        ratio: "10%",
-        desc: "최근 미국 뷰티 리테일에서 가장 가파르게 성장 중인 기능성 샴푸, 두피 케어, 트리트먼트, 미스트 등.",
-        items: ["Shampoo", "Scalp Care", "Treatment", "Hair Serum", "Styling"]
-      },
-      {
-        emoji: "💄",
-        name: "K-메이크업 (Makeup)",
-        ratio: "10%",
-        desc: "피부 연출을 돕는 쿠션, BB & CC 크림, 립, 컨실러, 베이스, 아이 제품 등 인디 트렌드 중심.",
-        items: ["Cushion", "BB & CC", "Lip", "Concealer", "Base", "Eye", "Brow", "Setting"]
-      },
-      {
-        emoji: "🧼",
-        name: "K-바디 케어 (Body Care)",
-        ratio: "10%",
-        desc: "피부 결 개선에 특화된 바디워시, 바디로션, 각질 케어 등 미국 규격 통과 라인업.",
-        items: ["Body Wash", "Body Lotion", "Exfoliating Care"]
-      },
-      {
-        emoji: "🦷",
-        name: "K-퍼스널 케어 (Personal Care)",
-        ratio: "5%",
-        desc: "통관 기준을 충족하고 매일 사용되는 오랄 케어, 데오도란트 등 데일리 위생 소모품.",
-        items: ["Oral Care", "Deodorant", "Daily Personal Care"]
-      },
-      {
-        emoji: "💅",
-        name: "K-뷰티 툴 (Beauty Tools)",
-        ratio: "5%",
-        desc: "메이크업 효과를 극대화하는 브러시, 어플리케이터, 셀프 네일 및 미용 소모 소품.",
-        items: ["Brushes", "Applicators", "Accessories", "Self-Care Tools"]
-      }
-    ]
-  },
-  assortment: {
-    eyebrow: "DATA-DRIVEN ASSORTMENT",
-    title: "귀사 매장의 상권과 고객층에 맞춤형 구성",
-    subtitle: "아무리 좋은 제품도 상권에 맞지 않으면 의미가 없습니다.",
-    features: [
-      {
-        title: "상권 인구통계 분석",
-        desc: "매장이 위치한 지역의 주 소비층, 소득 수준, 뷰티 트렌드를 반영한 데이터를 기반으로 입점 상품을 구성합니다."
-      },
-      {
-        title: "최적의 브랜드 믹스",
-        desc: "대기업 유명 브랜드부터 떠오르는 인디 브랜드까지, 마진율과 판매 속도(Velocity)를 고려해 최상의 포트폴리오를 제안합니다."
-      },
-      {
-        title: "독점 상권 보호 정책",
-        desc: "동일 상권 내 인접 매장에 동일한 제품이 중복 공급되어 가격 경쟁이 발생하는 것을 철저히 차단합니다."
-      }
-    ]
-  },
   display: {
-    eyebrow: "PREMIUM DISPLAY SYSTEMS",
-    title: "고객의 시선을 멈추게 하는 독자적 진열 솔루션",
-    subtitle: "K Select는 매장의 크기와 조건에 따라 표준 진열 피처(Fixture)를 매칭하여 샵인샵 섹션을 빌드합니다.",
+    eyebrow: "STORE-IN-A-STORE DISPLAY",
+    title: "고객을 끌어당기는 오프라인 숍인숍 피처",
+    subtitle: "매장 규모와 상권 특성에 매핑되는 전용 LED 디스플레이 모듈을 대여 지원합니다.",
     modules: [
       {
-        name: "Wall Display Module",
-        desc: "LED 백라이트와 조명 헤더, 테스터 미러, 제품 카테고리 정보 스트립이 장착되어 벽면을 고급스러운 샵인샵 매장으로 변화시킵니다."
+        size: "4 FT",
+        name: "Starter Module",
+        sku: "16–24 SKUs (1 Module)",
+        desc: "K-Beauty 카테고리를 처음 테스트하거나, 공간 제약이 있는 매장에 적합한 컴팩트 진열 숍인숍 피처."
       },
       {
-        name: "Island Display Hub",
-        desc: "통행량이 많은 동선 중앙에 배치하여 신상품 런칭, 시즌 프로모션, 베스트셀러 세트 구성으로 고객의 시각적 발견을 자극합니다."
+        size: "8 FT",
+        name: "Growth Module",
+        sku: "32–48 SKUs (2 Modules)",
+        desc: "보다 풍성한 스킨케어와 인디 메이크업 라인업을 통합 배치하여 안정적인 단골 고객을 형성하는 기본 진열 피처."
       },
       {
-        name: "2-Way Tower & Flexible Formats",
-        desc: "계산대 근처나 좁은 공간을 위한 세로형 타워 진열대부터 카운터/테이블 위 미니 진열대까지 매장 상황에 따라 커스텀 대응이 가능합니다."
+        size: "12 FT",
+        name: "Destination Module",
+        sku: "48–70 SKUs (3 Modules)",
+        desc: "지역 내 압도적인 K-Beauty 성지로 포지셔닝하여, 다양한 피부 고민별 맞춤 솔루션을 원스톱 서빙하는 메가 진열 피처."
       }
-    ],
-    note: "* 특정 고정형 프로그램이 아닌, 매장 상황에 맞춰 4ft / 8ft / 12ft 등 최적의 피처(Fixture) 사양으로 설계 및 커스텀 지원합니다."
-  },
-  package: {
-    eyebrow: "PARTNERSHIP PACKAGE",
-    title: "Category 운영을 위한 토탈 지원 패키지",
-    subtitle: "K Select 파트너십은 단순한 제품 공급업체 그 이상입니다. 매장 운영에 필요한 모든 것을 함께 제공합니다.",
-    benefits: [
-      { title: "검증/선별된 제품", desc: "미국 소비자의 선호도와 통관 요건이 검증된 안전한 Top-tier K-Beauty 브랜드 공급" },
-      { title: "목표 리테일 마진", desc: "안정적인 이익 창출을 돕기 위해 최소 45%에서 최대 60% 수준의 리테일 마진 확보 지원" },
-      { title: "Fixture 무상 대여", desc: "파트너 조건에 따른 전용 샵인샵 진열대 및 VMD 프레임 무상 대여 지원" },
-      { title: "초기 런칭 지원", desc: "첫 진열 시 필요한 POP 그래픽 패키지, 테스터 미러 및 안내 스트립 세팅 일체 지원" },
-      { title: "초기 결제 조건", desc: "신용도 적격 파트너 매장에 한해 런칭 초기 45일 결제 조건(Terms) 유연 조율 제공" },
-      { title: "90일 교환 크레딧", desc: "판매율이 더딘 SKU를 인기 상품군으로 교환할 수 있는 90-Day Exchange Credit 혜택 제공" },
-      { title: "지역 상권 보호", desc: "인근 경쟁 상권 내 파트너사의 가격 주도권과 영업권 보장을 위해 중복 공급 차단 검토" },
-      { title: "QR 제품 정보", desc: "매대 선반마다 배치된 QR 코드로 고객이 실시간 사용 루틴 및 상세 효능 정보를 확인 가능" },
-      { title: "온라인 직원 교육", desc: "스태프가 제품 지식을 숙지해 고객에게 적극 제안할 수 있도록 다국어 비디오 및 교육 문서 제공" },
-      { title: "재고/재주문 관리", desc: "K Select Portal을 활용해 단 한두 번의 클릭으로 신속하게 품절 상품을 리오더하는 시스템" },
-      { title: "Merchandising 지원", desc: "트렌드 변화 및 시즌 프로모션에 따른 VMD 업데이트 가이드 및 현장 밀착 세팅 지원" }
     ]
   },
   riskReduction: {
-    eyebrow: "90-DAY EXCHANGE CREDIT",
-    title: "초기 재고 부담과 Dead Stock 리스크를 줄입니다",
-    subtitle: "처음부터 완벽하게 맞힐 필요는 없습니다. K Select가 실제 판매 데이터를 보면서 더 적합한 상품으로 로테이션을 돕습니다.",
-    desc: "K Select는 파트너 매장의 초기 진입 부담을 없애기 위해 90-Day Exchange Credit 혜택을 제공합니다. 런칭 후 90일 이내에 판매 추이가 현저히 떨어지는 제품군은 리스크 없이 더 적합한 다른 베스트셀러 브랜드로 교환 및 조정할 수 있어, 상시 최적화된 마진 매대를 유지할 수 있습니다.",
-    disclaimer: "* 본 혜택은 최초 도입하는 Initial Launch Partners 매장에 한하며, 일정 조건을 충족하는 적격 판매 부진 상품에 한해 적용됩니다. 무조건적인 반품/환불 정책과는 구별되며 세부 조항은 운영 기준을 따릅니다.",
-    steps: [
-      { title: "Launch", desc: "엄선된 K-Beauty 큐레이션으로 파트너 진열대 세팅 및 런칭" },
-      { title: "Measure", desc: "매장 내 실제 고객 구매 속도 및 카테고리별 주간 판매 데이터 측정" },
-      { title: "Identify", desc: "데이터 분석을 통해 해당 상권에서 회전율이 떨어지는 일부 비적합 SKU 식별" },
-      { title: "Exchange", desc: "식별된 비적합 제품군에 대해 90일 이내에 Exchange Credit 발급 및 회수" },
-      { title: "Optimize", desc: "Exchange Credit을 활용해 회전율과 마진이 높은 다른 인기 상품군으로 교체 진열 최적화" }
+    eyebrow: "RISK REDUCTION",
+    title: "90-Day Exchange Credit 프로그램",
+    subtitle: "초기 파트너 매장의 재고 부담과 판매 리스크를 K Select가 나누어 짊어집니다.",
+    cycle: [
+      { step: "Launch", desc: "데이터 기반으로 엄선된 초도 큐레이션 세팅 및 진열 개시" },
+      { step: "Measure", desc: "런칭 후 매장 실소비자의 실제 판매 흐름 및 카테고리 회전율 측정" },
+      { step: "Identify", desc: "해당 상권 특성 상 판매가 상대적으로 저조한 일부 비적합 SKU 식별" },
+      { step: "Exchange", desc: "더딘 상품군을 90일 내에 회수하고 100% 가치의 Exchange Credit 발급" },
+      { step: "Optimize", desc: "발급된 크레딧으로 매장에서 즉각 반응이 좋은 베스트셀러 SKU로 교체 최적화" }
+    ],
+    boldMessage: "“처음부터 모든 상품을 완벽하게 맞힐 필요는 없습니다. K Select가 판매 결과를 함께 모니터링하며 더 적합한 상품 구성으로 신속히 조정해 드립니다.”",
+    conditions: [
+      "Initial Launch Partners Only (최초 초도 진입 매장에 한함)",
+      "Eligible slow-moving products only (적격 판매 부진 상품군 적용)",
+      "Subject to program terms (세부 약관 기준 이행)"
     ]
   },
-  standards: {
-    eyebrow: "PARTNER OPERATING STANDARDS",
-    title: "성공적인 파트너십을 위한 상호 약속",
-    subtitle: "상호 신뢰와 협력을 바탕으로 더 큰 리테일 성장을 이루기 위해 약속하는 파트너 매장 운영 기준입니다.",
+  simulator: {
+    eyebrow: "RETAIL ROI CALCULATOR",
+    title: "K-Beauty 성장 시뮬레이터",
+    subtitle: "매장 크기와 초기 버짓을 선택하고, 마진 및 회전율에 따른 연간 예상 순이익과 일일 판매량 목표를 도출해 보세요.",
+    inputs: {
+      size: "매장 공간 선택 (Space)",
+      budget: "초기 상품 투자 예산 (Initial Product Budget)",
+      averagePrice: "평균 소매 판매가 (Average Retail Price)",
+      margin: "목표 리테일 마진율 (Target Retail Margin)",
+      turn: "연간 재고 회전율 (Inventory Turn)"
+    },
+    outputs: {
+      sales: "연간 예상 매출 (Annual Retail Sales)",
+      profit: "연간 예상 순이익 (Annual Gross Profit)",
+      cogs: "연간 매출 원가 (Annual Cost of Goods Sold)",
+      annualUnits: "연간 판매 수량 (Annual Units Sold)",
+      monthlyUnits: "월간 판매 수량 (Monthly Units Sold)",
+      dailyUnits: "일간 판매 수량 (Daily Units)",
+      skuUnits: "SKU당 월평균 판매량 (Units per SKU/Month)",
+      gmroi: "초기 투자비용 대비 연간 마진 회수율 (GMROI)"
+    },
+    howItIsCalculated: {
+      title: "이 숫자는 어떻게 계산되나요? (How This Is Calculated)",
+      steps: [
+        { label: "1. 연간 매출원가", formula: "초기 상품 투자액 × 연간 재고 회전율" },
+        { label: "2. 연간 총소매매출", formula: "연간 매출원가 ÷ (1 - 목표 마진율)" },
+        { label: "3. 연간 예상 순이익", formula: "연간 총소매매출 - 연간 매출원가" },
+        { label: "4. 일간/월간 판매수량", formula: "연간 판매수량을 365일 / 12개월로 균등 분할" }
+      ],
+      infographic: "초기 재고 투자 ➔ 재고 회전수 ➔ 연간 원가 매입 ➔ 마진율 계산 ➔ 총 소매 매출 ➔ 최종 순이익 도출"
+    },
+    cta: "이 구성으로 상세 상담받기",
+    disclaimer: "※ 본 시뮬레이션 결과는 입력값에 기반한 산술적인 예시 예측치이며, 실제 매장의 매출과 마진 이익은 입지 조건, 소비자 성향, 계절성 및 소매점의 개별 운영 성과에 따라 차이가 있을 수 있어 실제 수익을 공식 보장하지 않습니다."
+  },
+  whyUs: {
+    eyebrow: "WHY K SELECT HUB",
+    title: "경험과 데이터가 보장하는 비즈니스 성과",
+    subtitle: "단순히 브랜드를 넘겨주는 수입업자가 아닌, 미국 현지 뷰티 유통의 검증된 플랫폼입니다.",
+    stats: [
+      { value: "2004", label: "회사 설립 연도 (Established)" },
+      { value: "20+", label: "리테일 & 이커머스 경력 (Years)" },
+      { value: "$250M+", label: "누적 거래 매출 (Cumulative Sales)" },
+      { value: "30+", label: "성공적 런칭 브랜드 (Brands)" },
+      { value: "200+", label: "관리 중인 활성 SKU 수 (Active SKUs)" },
+      { value: "10+", label: "직접 전개/운영 브랜드사 (Operated)" }
+    ],
+    official: {
+      title: "대한민국 중소벤처기업부 인증 공식 파트너",
+      desc: "K Select Hub의 모체인 Letusto Inc.는 대한민국 정부(중소벤처기업부)가 심사하여 공인하는 '해외민간네트워크 A등급 지정 기관'입니다. 투명하고 엄격한 무역 프로세스와 유통 법적 기준(FDA 통과 등)을 준수하므로 믿고 파트너십을 맺으실 수 있습니다."
+    }
+  },
+  insights: {
+    eyebrow: "RETAIL INSIGHTS",
+    title: "성공적인 매장 관리를 위한 업계 리포트",
+    subtitle: "K-Beauty 최신 트렌드와 오프라인 숍인숍 운영 전략 컬럼을 태그별로 분류해 보세요.",
+    tags: {
+      all: "전체 보기",
+      retail: "Beauty Retail",
+      trends: "K-Beauty Trends",
+      product: "Product & Ingredient",
+      makeup: "Makeup / How-to",
+      merchandising: "Merchandising & Display",
+      operations: "Store Operations",
+      partnership: "Partnership"
+    }
+  },
+  partnership: {
+    eyebrow: "PARTNERSHIP GUIDELINE",
+    title: "상호 신뢰와 협력을 위한 파트너십 규정",
+    subtitle: "K Select Hub와 리테일러가 동반 성장하기 위해 서로 지키는 약속입니다.",
     provides: {
       title: "What K Select Provides",
       items: [
-        "검증된 프리미엄 K-Beauty 제품 및 마진율 보장",
-        "디자인 집기(Fixture) 지원 및 상권 보호 정책 적용",
-        "90일 교환 크레딧 정책 및 상시적인 VMD 프로모션 그래픽 지원"
+        "검증된 고마진 K-Beauty SKU의 지속적이며 안정적인 공급망 보장",
+        "상권 크기에 맞춤 매칭되는 전용 LED 디스플레이 피처 무상 대여",
+        "90일 교환 크레딧 제공 및 VMD/트레이닝 그래픽 자료 무상 지원"
       ]
     },
     asks: {
-      title: "What We Ask From Our Partners",
+      title: "What We Ask From Our Retail Partners",
       items: [
-        "K Select 전용 Section 운영: 제공된 디스플레이 피처를 메인 동선 내에서 독점 배치해 주셔야 합니다.",
-        "기본 제품 교육 이수: 매장 직원들이 최소한의 제품 교육 프로그램(교육 비디오 시청)을 이수해야 합니다.",
-        "정기적인 재고 Update: 매대 회전율 극대화를 위해 매주 1회 이상 포털을 통한 품절 품목 재고 조회가 권장됩니다."
+        "K Select 전용 Section 운영: 제공받은 디스플레이 집기를 매장 내 고객 주 동선 상에 독점 배치하여 운영해야 합니다.",
+        "기본 Product Training 이수: 매장 직원들은 제공되는 K-Beauty 제품 교육 가이드를 반드시 사전에 시청하고 숙지해야 합니다.",
+        "정기 Inventory Update: 원활한 품절 예방 및 베스트셀러 자동 제안을 위해 매주 1회 이상 매대 재고 상태를 업데이트해야 합니다."
       ]
     },
-    agreeLabel: "K Select Retail Partner 운영 기준(전용 매대 유지, 교육 이수, 재고 관리)을 확인했으며 이에 동의합니다. *"
+    agreeLabel: "K Select Retail Partner 운영 기준(전용 매대 유지, 스태프 교육 이수, 재고 현황 공유)을 확인했으며 이에 동의합니다. * (필수)"
   },
-  simulator: {
-    eyebrow: "RETAIL GROWTH SIMULATOR",
-    title: "우리 매장의 예상 성장성 예측하기",
-    subtitle: "매장의 기본 조건을 선택하시면, 가장 효율적인 카테고리 규모와 초기 상품 투자 및 연간 리테일 매출 잠재력을 가상 시뮬레이션해 드립니다.",
-    questions: {
-      q1: "Q1. 매장의 전체 규모 (Total Store Size) *",
-      q2: "Q2. K-Beauty에 사용할 수 있는 공간 (Available Retail Space) *",
-      q3: "Q3. 초기 상품 투자 가능 예산 (Initial Inventory Budget) *"
+  ctaForm: {
+    title: "K-Beauty 리테일 성장 파트너십 신청",
+    subtitle: "독점 상권 구역 확보를 위해 거주 상권 내 파트너 선정이 조기 마감될 수 있으니 신속한 지원을 바랍니다.",
+    fields: {
+      storeName: "매장명 (Store Name) *",
+      ownerName: "대표자 성함 (Owner / Contact Name) *",
+      email: "이메일 주소 (Email) *",
+      phone: "전화번호 (Phone) *",
+      address: "매장 주소 (Store Street Address) *",
+      storeType: "매장 형태 (Store Type) *",
+      selectType: "매장 유형 선택",
+      independent: "독립 뷰티 서플라이 (Independent Beauty Supply)",
+      chain: "체인 리테일 매장 (Chain / Multi-Store)",
+      pharmacy: "드럭스토어 / 약국 (Pharmacy / Drugstore)",
+      other: "기타 소매 매장 (Other Retail Store)",
+      currentSales: "연간 예상 K-Beauty 매출 규모",
+      spaceSize: "진열 공간 도입 희망 모듈",
+      ft4: "4 FT - Starter 모듈 도입",
+      ft8: "8 FT - Growth 모듈 도입",
+      ft12: "12 FT - Destination 모듈 도입",
+      comments: "추가 문의 및 매장 특이사항 (Comments)"
     },
-    disclaimer: "본 결과는 입력된 매장 조건과 프로그램의 운영 가정을 기반으로 한 예시이며, 실제 매출 및 수익은 매장 위치, 상품 구성, 소비자 수요 및 실제 판매 실적에 따라 달라질 수 있습니다.",
-    cta: "이 구성으로 상세 상담받기"
-  },
-  process: {
-    eyebrow: "PARTNERSHIP PROCESS",
-    title: "파트너십 온보딩 과정",
-    subtitle: "K Select와 함께 귀사 매장의 K-Beauty 성장을 시작하는 5단계 프로세스입니다.",
-    steps: [
-      { num: "01", title: "파트너 신청 등록", desc: "웹사이트 신청 폼을 통해 매장명, 주소, 매장 유형 등 기본 정보를 간단히 제출합니다." },
-      { num: "02", title: "상권 및 자격 검토", desc: "상권 보호 구역 여부를 확인하고, 해당 매장의 면적과 최적의 도입 방안을 분석합니다." },
-      { num: "03", title: "맞춤형 Assortment 설계", desc: "매장 데이터에 기초하여 최적의 브랜드 믹스와 진열 집기 모듈 구성을 설계 및 제안합니다." },
-      { num: "04", title: "진열 설치 및 런칭", desc: "전용 디스플레이 피처와 큐레이션된 초도 제품을 공급하고 매장 내 세팅을 완료합니다." },
-      { num: "05", title: "지속적인 성장 지원", desc: "정기 재발주 관리, 판매 데이터 기반 SKU 로테이션 및 VMD 업데이트를 상시 진행합니다." }
-    ]
-  },
-  cta: {
-    title: "미국 대표 뷰티 리테일 파트너로 도약할 준비가 되셨습니까?",
-    subtitle: "상권 보호 정책에 따라 지역 내 파트너 매장 수가 제한되므로, 빠른 신청을 권장해 드립니다.",
-    button: "K Select 파트너 신청서 제출하기"
-  },
-  trust: {
-    eyebrow: "WHY K SELECT",
-    title: "20년 유통 업력과 미국 내 탄탄한 자체 인프라",
-    subtitle: "K Select의 운영 주체인 Letusto Inc.는 미국 현지에서 검증된 비즈니스 파트너입니다.",
-    details: [
-      { title: "20년+ 누적 노하우", desc: "2004년 설립 이래 미국 시장 내 탄탄한 유통 실적과 2억 5천만 달러 이상의 누적 판매 볼륨을 축적하였습니다." },
-      { title: "미국 동부 본사 중심 물류 인프라", desc: "미국 뉴저지(New Jersey) 본사 물류센터 및 한국 지사와의 긴밀한 파이프라인을 구축하여 지체 없는 납품과 빠른 피드백을 실현합니다." },
-      { title: "현장 밀착형 VMD 지원", desc: "단순히 컨설팅에 머무는 것이 아니라, 뉴욕/뉴저지/조지아 등 주요 거점을 중심으로 현장 영업팀이 직접 방문하여 매대 진열과 피드백을 관리합니다." }
-    ]
+    validation: {
+      storeRequired: "매장명을 입력해 주세요.",
+      ownerRequired: "대표자 성함을 입력해 주세요.",
+      emailRequired: "올바른 이메일 주소를 입력해 주세요.",
+      phoneRequired: "전화번호를 입력해 주세요.",
+      addressRequired: "매장 주소를 입력해 주세요.",
+      agreeRequired: "파트너 운영 기준 동의 체크박스는 필수 선택 사항입니다.",
+      success: "파트너 신청이 정상적으로 성공했습니다! 담당 매니저가 기재해주신 연락처로 24시간 내에 연락드리겠습니다."
+    },
+    button: "파트너 신청서 제출하기"
   },
   footer: {
     copyright: "© 2026 K Select Hub. All Rights Reserved. Letusto Inc. HQ New Jersey.",

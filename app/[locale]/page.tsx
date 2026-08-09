@@ -14,43 +14,31 @@ export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   const t = ko as LocaleDictionary; // Cast to bypass TS compilation cache issues
 
-  // Category Colors for Product Mix Chart mapping
-  const categoryColors = [
-    { name: "K-스킨케어", color: "#ff9671", percent: "60%" },
-    { name: "K-헤어 케어", color: "#845ec2", percent: "10%" },
-    { name: "K-메이크업", color: "#ffc75f", percent: "10%" },
-    { name: "K-바디 케어", color: "#00c9a7", percent: "10%" },
-    { name: "K-퍼스널 케어", color: "#4d807a", percent: "5%" },
-    { name: "K-뷰티 툴", color: "#d65db1", percent: "5%" }
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col font-body bg-bg text-ink">
-      {/* 1. Header */}
-      <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-sm border-b border-border">
+    <div className="min-h-screen flex flex-col font-body bg-[#090a0f] text-white">
+      
+      {/* 1. Header (Navigation) */}
+      <header className="sticky top-0 z-50 bg-[#090a0f]/90 backdrop-blur-md border-b border-[#202330]">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <a href="#" className="font-display text-2xl font-bold tracking-tight text-ink">
-            {t.header.logo}
+          <a href="#" className="font-display text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <span className="text-accent">K</span> Select Hub
           </a>
 
-          <nav className="hidden lg:flex items-center gap-8">
-            <a href="#program" className="text-sm font-medium hover:text-accent transition-colors">
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-text-secondary">
+            <a href="#program" className="hover:text-accent transition-colors">
               {t.header.nav.program}
             </a>
-            <a href="#products" className="text-sm font-medium hover:text-accent transition-colors">
+            <a href="#products" className="hover:text-accent transition-colors">
               {t.header.nav.products}
             </a>
-            <a href="#display" className="text-sm font-medium hover:text-accent transition-colors">
-              실제 진열 피처
-            </a>
-            <a href="#exchange" className="text-sm font-medium hover:text-accent transition-colors">
-              90일 안심 교환
-            </a>
-            <a href="#simulator-anchor" className="text-sm font-medium hover:text-accent transition-colors text-accent font-bold">
+            <a href="#simulator-section" className="hover:text-accent transition-colors">
               {t.header.nav.simulator}
             </a>
-            <a href="#why-kselect" className="text-sm font-medium hover:text-accent transition-colors">
-              {t.header.nav.whyKselect}
+            <a href="#why-us" className="hover:text-accent transition-colors">
+              {t.header.nav.whyUs}
+            </a>
+            <a href="#insights" className="hover:text-accent transition-colors">
+              {t.header.nav.insights}
             </a>
           </nav>
 
@@ -59,446 +47,225 @@ export default async function Home({ params }: PageProps) {
               href="https://portal.kselecthub.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold px-4 py-2 border border-ink rounded-pill hover:bg-ink hover:text-white transition-all"
+              className="text-xs font-semibold px-4 py-2 border border-[#33394d] text-text-secondary hover:text-white hover:border-white rounded-pill transition-all"
             >
               {t.header.nav.login}
             </a>
             <a
               href="#apply"
-              className="hidden sm:inline-block text-xs font-semibold bg-accent text-white px-5 py-2.5 rounded-pill hover:opacity-90 transition-opacity"
+              className="bg-accent hover:bg-accent-hover text-white text-xs font-bold px-5 py-2.5 rounded-pill transition-colors flex items-center gap-1.5"
             >
-              {t.header.nav.apply}
+              {t.header.nav.apply} ➔
             </a>
           </div>
         </div>
       </header>
 
-      {/* Main Sections Flow */}
+      {/* Main Storytelling Sections Flow */}
       <main className="flex-1">
         
-        {/* [Section 1] Hero - K-Beauty Opportunity + K Select 핵심 가치 */}
-        <section className="py-20 lg:py-28 max-w-7xl mx-auto px-6">
+        {/* [1단계] Hero - Premium B2B Technology Platform Feel */}
+        <section className="py-16 lg:py-24 max-w-7xl mx-auto px-6 border-b border-border">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 flex flex-col items-start gap-6">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
+            
+            {/* Left Narrative */}
+            <div className="lg:col-span-7 flex flex-col items-start gap-6">
+              <span className="bg-accent-light border border-accent/20 text-accent text-[11px] font-bold px-3.5 py-1.5 rounded-pill tracking-widest uppercase">
                 {t.hero.eyebrow}
               </span>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-ink">
-                {t.hero.title}
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+                미국 K-뷰티 시장,<br />
+                데이터로 성장하고<br />
+                <span className="text-accent">K Select Hub</span>로 앞서가세요
               </h1>
-              <p className="text-body text-text-secondary max-w-2xl">
+              <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xl">
                 {t.hero.subtitle}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
                 <a
                   href="#apply"
-                  className="inline-flex h-14 items-center justify-center bg-accent text-white px-8 font-semibold rounded-pill hover:opacity-95 transition-opacity text-center"
+                  className="inline-flex h-14 items-center justify-center bg-accent text-white px-8 font-bold rounded-pill hover:bg-accent-hover transition-colors text-center text-sm cursor-pointer whitespace-nowrap"
                 >
                   {t.hero.primaryCta}
                 </a>
                 <a
-                  href="#simulator-anchor"
-                  className="inline-flex h-14 items-center justify-center border border-ink text-ink px-8 font-semibold rounded-pill hover:bg-ink hover:text-white transition-all text-center"
+                  href="#simulator-section"
+                  className="inline-flex h-14 items-center justify-center border border-border text-text-secondary hover:text-white hover:border-white px-8 font-bold rounded-pill transition-colors text-center text-sm cursor-pointer whitespace-nowrap"
                 >
-                  {t.header.nav.simulator} 시작하기
+                  {t.hero.secondaryCta}
                 </a>
               </div>
             </div>
 
-            {/* Split layout showcasing real-store photography */}
-            <div className="lg:col-span-6 flex flex-col gap-4">
-              <div className="relative h-[340px] sm:h-[440px] w-full rounded-card overflow-hidden border border-border bg-surface">
-                <Image
-                  src="/images/display_12ft.jpg"
-                  alt="K-Beauty Store-in-a-Store Fixture Installation"
-                  fill
-                  sizes="(max-w-768px) 100vw, 50vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute bottom-4 left-4 bg-ink/90 text-bg text-[10px] font-semibold px-3 py-1.5 rounded-pill backdrop-blur-sm">
-                  📍 실제 매장 안의 K-Beauty Section 설치 사례 (12FT Destination)
+            {/* Right: Floating Data UI & Store Showcase */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              
+              {/* Product Mix Floating Box */}
+              <div className="bg-[#12141c] border border-border rounded-card p-5 flex flex-col gap-4">
+                <div className="flex justify-between items-center text-xs font-bold">
+                  <span className="text-text-secondary">큐레이션 제품 믹스</span>
+                  <span className="bg-accent-light text-accent px-2.5 py-1 rounded-pill">베스트 셀러 62%</span>
+                </div>
+                
+                {/* Simulated Donut Graph and legend bar */}
+                <div className="flex items-center gap-6">
+                  <div className="relative w-24 h-24 flex-shrink-0">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 32 32">
+                      <circle cx="16" cy="16" r="14" fill="none" stroke="#202330" strokeWidth="4" />
+                      <circle cx="16" cy="16" r="14" fill="none" stroke="#ff127c" strokeWidth="4" strokeDasharray="62 100" />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center flex-col">
+                      <span className="font-display text-base font-bold text-white">62%</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1 text-[10px] text-text-secondary">
+                    <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent" />스킨케어 60%</div>
+                    <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-indigo-500" />메이크업 10%</div>
+                    <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" />헤어 케어 10%</div>
+                    <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" />바디/기타 20%</div>
+                  </div>
                 </div>
               </div>
+
+              {/* Expected Sales Growth Simulation Graph Card */}
+              <div className="bg-[#12141c] border border-border rounded-card p-5 flex flex-col gap-2">
+                <div className="flex justify-between items-center text-xs font-bold">
+                  <span className="text-text-secondary">성장 시뮬레이션 결과</span>
+                  <span className="text-text-muted">예상 90일 후</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-xs text-text-secondary">매출 성장</span>
+                  <span className="font-display text-2xl font-bold text-accent">+42%</span>
+                </div>
+                {/* SVG Mock Line Graph */}
+                <div className="w-full h-12 mt-2">
+                  <svg className="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
+                    <path
+                      d="M0 25 Q15 20, 30 18 T60 12 T90 5 T100 2"
+                      fill="none"
+                      stroke="#ff127c"
+                      strokeWidth="2.5"
+                    />
+                    <path
+                      d="M0 25 Q15 20, 30 18 T60 12 T90 5 T100 2 L100 30 L0 30 Z"
+                      fill="url(#pink-grad)"
+                      opacity="0.1"
+                    />
+                    <defs>
+                      <linearGradient id="pink-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ff127c" />
+                        <stop offset="100%" stopColor="#ff127c" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          {/* Quick value cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-            {t.hero.highlights.map((h, i) => (
-              <div key={i} className="bg-surface border border-border p-6 rounded-card flex flex-col gap-3 justify-between">
-                <span className="text-3xl">{h.emoji}</span>
-                <p className="font-semibold text-xs sm:text-sm leading-relaxed text-ink">
-                  {h.text}
-                </p>
+          {/* Quick Metrics Row */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16 border-t border-border pt-10">
+            {t.hero.stats.map((stat, i) => (
+              <div key={i} className="flex flex-col gap-1 text-left">
+                <span className="font-display text-3xl sm:text-4xl font-bold text-accent">
+                  {stat.value}
+                </span>
+                <span className="text-xs text-text-secondary">
+                  {stat.label}
+                </span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* [Section 2] Why K-Beauty - 미국 리테일러 기회 */}
-        <section id="opportunity" className="py-20 bg-surface border-y border-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.whyKbeauty.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                {t.whyKbeauty.title}
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.whyKbeauty.subtitle}
-              </p>
-            </div>
-
-            {/* Stats grid */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {t.whyKbeauty.stats.map((s, i) => (
-                <div key={i} className="bg-bg border border-border p-8 rounded-card text-center flex flex-col gap-2">
-                  <span className="font-display text-4xl sm:text-5xl font-bold text-accent">
-                    {s.value}
-                  </span>
-                  <span className="text-sm font-medium text-text-secondary">
-                    {s.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="max-w-4xl mx-auto text-center">
-              <p className="text-body text-ink leading-relaxed">
-                {t.whyKbeauty.description}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 3] K Select Solution - 도매와의 비교 */}
-        <section id="program" className="py-20 max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16 flex flex-col gap-4">
-            <span className="text-eyebrow text-accent uppercase tracking-wider">
-              {t.solution.eyebrow}
+        {/* [2단계] Problems - Retailer Pain Points Section */}
+        <section id="problems" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+              {t.problems.eyebrow}
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-              {t.solution.title}
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+              {t.problems.title}
             </h2>
-            <p className="text-body text-text-secondary">
-              {t.solution.subtitle}
+            <p className="text-sm text-text-secondary">
+              {t.problems.subtitle}
             </p>
           </div>
 
-          {/* Comparison table */}
-          <div className="overflow-x-auto border border-border rounded-panel bg-surface">
-            <table className="w-full text-left border-collapse min-w-[700px]">
-              <thead>
-                <tr className="border-b border-border bg-bg">
-                  <th className="py-5 px-6 font-display font-bold text-sm text-ink w-1/4">
-                    {t.solution.comparison.headers[0]}
-                  </th>
-                  <th className="py-5 px-6 font-display font-bold text-sm text-text-secondary w-3/8">
-                    {t.solution.comparison.headers[1]}
-                  </th>
-                  <th className="py-5 px-6 font-display font-bold text-sm text-accent w-3/8">
-                    {t.solution.comparison.headers[2]}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {t.solution.comparison.rows.map((row, i) => (
-                  <tr key={i} className="border-b border-border last:border-0 hover:bg-bg/40 transition-colors">
-                    <td className="py-6 px-6 font-semibold text-sm text-ink">
-                      {row.area}
-                    </td>
-                    <td className="py-6 px-6 text-sm text-text-secondary leading-relaxed">
-                      {row.traditional}
-                    </td>
-                    <td className="py-6 px-6 text-sm text-ink font-medium leading-relaxed bg-accent/[0.02]">
-                      {row.kselect}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* 4 Problems Grid */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {t.problems.items.map((item, i) => (
+              <div key={i} className="bg-[#12141c] border border-border p-6 sm:p-8 rounded-card flex gap-5 text-left items-start">
+                <span className="font-display text-xl font-bold text-accent flex-shrink-0">
+                  {item.num}
+                </span>
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-display text-lg font-bold text-white">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-text-secondary leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Core Slogan Box */}
+          <div className="bg-accent-light border border-accent/20 p-6 sm:p-8 rounded-card text-center max-w-4xl mx-auto mt-10">
+            <p className="font-display text-lg sm:text-xl font-bold text-accent leading-relaxed">
+              “{t.problems.conclusion}”
+            </p>
           </div>
         </section>
 
-        {/* [Section 4] Curated Product Mix - 60/10/10/10/5/5 SVG 도넛차트 및 상세 대표 품목 */}
-        <section id="products" className="py-20 bg-surface border-y border-border">
+        {/* [3단계] Why K-Beauty Now - Market Opportunity */}
+        <section id="opportunity" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.products.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                K Select Sourcing Product Mix
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.products.subtitle}
-              </p>
-            </div>
-
             <div className="grid lg:grid-cols-12 gap-12 items-center">
-              {/* Left: Donut Ring Chart Visualizer */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center p-6 bg-bg border border-border rounded-panel">
-                <div className="relative w-72 h-72">
-                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                    {/* Circle Radius = 15.91549430918954 (~ 100/2pi) for Circumference = 100 */}
-                    {/* Skincare (60%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#ff9671"
-                      strokeWidth="12"
-                      strokeDasharray="60 40"
-                      strokeDashoffset="0"
-                    />
-                    {/* Haircare (10%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#845ec2"
-                      strokeWidth="12"
-                      strokeDasharray="10 90"
-                      strokeDashoffset="-60"
-                    />
-                    {/* Makeup (10%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#ffc75f"
-                      strokeWidth="12"
-                      strokeDasharray="10 90"
-                      strokeDashoffset="-70"
-                    />
-                    {/* Bodycare (10%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#00c9a7"
-                      strokeWidth="12"
-                      strokeDasharray="10 90"
-                      strokeDashoffset="-80"
-                    />
-                    {/* Personalcare (5%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#4d807a"
-                      strokeWidth="12"
-                      strokeDasharray="5 95"
-                      strokeDashoffset="-90"
-                    />
-                    {/* Tools (5%) */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="25"
-                      fill="transparent"
-                      stroke="#d65db1"
-                      strokeWidth="12"
-                      strokeDasharray="5 95"
-                      strokeDashoffset="-95"
-                    />
-                  </svg>
-                  {/* Center Text representation */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-transparent pointer-events-none">
-                    <span className="font-display text-xs font-semibold text-text-secondary uppercase tracking-widest">sourcing</span>
-                    <span className="font-display text-3xl font-extrabold text-ink mt-0.5">Mix Ratio</span>
-                  </div>
-                </div>
-
-                {/* Color Legend chips */}
-                <div className="grid grid-cols-3 gap-x-6 gap-y-3 w-full mt-8 pt-6 border-t border-border">
-                  {categoryColors.map((chip, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: chip.color }} />
-                      <div className="flex flex-col text-[10px] leading-tight">
-                        <span className="font-medium text-ink">{chip.name}</span>
-                        <span className="font-bold text-accent font-display">{chip.percent}</span>
-                      </div>
+              
+              {/* Left Column Stats */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                  {t.whyKbeauty.eyebrow}
+                </span>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+                  {t.whyKbeauty.title}
+                </h2>
+                
+                <div className="flex flex-col gap-4 mt-4">
+                  {t.whyKbeauty.stats.map((s, i) => (
+                    <div key={i} className="bg-surface border border-border p-5 rounded-card flex items-center justify-between">
+                      <span className="text-xs text-text-secondary font-medium">{s.label}</span>
+                      <span className="font-display text-lg sm:text-xl font-bold text-accent">{s.value}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Right: Detailed Category List & Representative Products */}
-              <div className="lg:col-span-7 flex flex-col gap-4">
-                {t.products.categories.map((c, i) => (
-                  <div key={i} className="bg-surface border border-border p-6 rounded-card flex flex-col sm:flex-row justify-between gap-4">
-                    <div className="flex flex-col gap-2 max-w-lg">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl">{c.emoji}</span>
-                        <h3 className="font-bold text-base text-ink">{c.name}</h3>
-                      </div>
-                      <p className="text-xs text-text-secondary leading-relaxed">
-                        {c.desc}
-                      </p>
-                    </div>
-
-                    {/* Dynamic Representative product label chips */}
-                    <div className="flex flex-col sm:items-end justify-center shrink-0">
-                      <span className="text-xs font-display font-extrabold text-accent bg-accent/5 px-3 py-1 rounded-pill mb-2 self-start sm:self-auto">
-                        Sourcing Ratio: {c.ratio}
-                      </span>
-                      <div className="flex flex-wrap sm:justify-end gap-1 max-w-[280px]">
-                        {c.items?.map((item, idx) => (
-                          <span key={idx} className="text-[9px] font-mono border border-border px-2 py-0.5 rounded bg-bg text-text-secondary">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 5] Assortment Strategy - 상권 맞춤 구성 및 독점 상권 보호 정책 */}
-        <section className="py-20 max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.assortment.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink leading-tight">
-                {t.assortment.title}
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.assortment.subtitle}
-              </p>
-              
-              <div className="bg-surface border border-accent/20 p-6 rounded-panel mt-4">
-                <h4 className="font-display font-bold text-sm text-accent mb-2">🔒 상권 독점 보호 정책 (Exclusive Territory Protection)</h4>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  K Select는 파트너 매장의 안정적인 가격 주도권과 영업권 확보를 위해, 반경 내 타 매장에 동일 브랜드를 무분별하게 중복 공급하여 벌어지는 파괴적 할인 경쟁을 철저하게 방지하고 통제합니다.
+              {/* Right Column Opportunity narrative */}
+              <div className="lg:col-span-7 flex flex-col gap-6 text-left">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white leading-relaxed">
+                  {t.whyKbeauty.subtitle}
+                </h3>
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                  {t.whyKbeauty.opportunity}
                 </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 flex flex-col gap-4">
-              {t.assortment.features.map((f, i) => (
-                <div key={i} className="bg-surface border border-border p-6 rounded-card flex gap-4 items-start">
-                  <div className="h-8 w-8 bg-accent/10 rounded-pill flex items-center justify-center text-accent font-bold text-sm shrink-0">
-                    {i + 1}
+                {/* 4 Pillars Mini infographic badge list */}
+                <div className="grid grid-cols-2 gap-3 mt-4 text-[11px] font-semibold text-white">
+                  <div className="bg-[#12141c] border border-border px-4 py-3 rounded-card flex items-center gap-2">
+                    <span className="text-accent">✓</span> Growing Market (성장 시장)
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-base text-ink mb-1">{f.title}</h3>
-                    <p className="text-sm text-text-secondary leading-relaxed">{f.desc}</p>
+                  <div className="bg-[#12141c] border border-border px-4 py-3 rounded-card flex items-center gap-2">
+                    <span className="text-accent">✓</span> Right Products (정확한 상품)
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 6] Actual Store / Display - 실사 이미지 배치 및 비교 레이아웃 */}
-        <section id="display" className="py-20 bg-surface border-y border-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.display.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                실제 매장 전용 디스플레이 피처(Fixture)
-              </h2>
-              <p className="text-body text-text-secondary">
-                K Select는 가구 모듈을 모듈화하여 매장 규모와 요구사항에 맞춘 맞춤형 설치를 제공합니다. 단순 벤더가 아닌 Category 파트너로서 매장의 구도를 변화시킵니다.
-              </p>
-            </div>
-
-            {/* Layout Comparison with Real Store Images */}
-            <div className="flex flex-col gap-12">
-              
-              {/* Module 1: Starter (4FT) */}
-              <div className="grid lg:grid-cols-12 gap-8 items-center bg-bg border border-border rounded-panel p-8">
-                <div className="lg:col-span-5 flex flex-col gap-4">
-                  <span className="text-xs font-bold text-accent uppercase tracking-wider">STARTER MODULE (4FT)</span>
-                  <h3 className="font-display text-2xl font-bold text-ink">16 - 24 SKUs • 1 Module</h3>
-                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                    K-Beauty를 매장 내에 처음 도입하거나 계산대 부근, 혹은 소형 뷰티서플라이 코너에 가장 효율적으로 카테고리를 시험해 볼 수 있는 미니 디스플레이 모듈 사양입니다.
-                  </p>
-                  <ul className="text-xs text-text-secondary flex flex-col gap-1 list-disc pl-5 mt-2">
-                    <li>48"W x 86"H x 18"D 가구 사양</li>
-                    <li>탑 조명 헤더 사인보드 일체</li>
-                    <li>화장품 정보 설명 스트립 포함</li>
-                  </ul>
-                </div>
-                <div className="lg:col-span-7">
-                  <div className="relative h-96 w-full rounded-card overflow-hidden border border-border bg-surface">
-                    <Image
-                      src="/images/display_4ft.png"
-                      alt="4FT K-Beauty Starter Display Module"
-                      fill
-                      sizes="(max-w-768px) 100vw, 50vw"
-                      className="object-cover"
-                    />
+                  <div className="bg-[#12141c] border border-border px-4 py-3 rounded-card flex items-center gap-2">
+                    <span className="text-accent">✓</span> Right Assortment (맞춤 구성)
                   </div>
-                </div>
-              </div>
-
-              {/* Module 2: Growth (8FT) */}
-              <div className="grid lg:grid-cols-12 gap-8 items-center bg-bg border border-border rounded-panel p-8">
-                <div className="lg:col-span-7 order-last lg:order-first">
-                  <div className="relative h-96 w-full rounded-card overflow-hidden border border-border bg-surface">
-                    <Image
-                      src="/images/display_8ft.png"
-                      alt="8FT K-Beauty Growth Display Module"
-                      fill
-                      sizes="(max-w-768px) 100vw, 50vw"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="lg:col-span-5 flex flex-col gap-4">
-                  <span className="text-xs font-bold text-accent uppercase tracking-wider">GROWTH MODULE (8FT)</span>
-                  <h3 className="font-display text-2xl font-bold text-ink">32 - 48 SKUs • 2 Modules</h3>
-                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                    본격적인 K-Beauty 스킨케어와 헤어/패치 라인업을 확보하고, 동선 중앙 혹은 벽면에 전용 쇼룸 존을 설계하여 매장 방문객의 시각적 발견율과 전환을 높이는 표준형 패키지입니다.
-                  </p>
-                  <ul className="text-xs text-text-secondary flex flex-col gap-1 list-disc pl-5 mt-2">
-                    <li>96"W x 86"H x 18"D (4FT 가구 2조 연결)</li>
-                    <li>중앙 LED 테스터 존 및 미러 포함</li>
-                    <li>다양한 브랜드 믹스를 조화롭게 수용</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Module 3: Destination (12FT) */}
-              <div className="grid lg:grid-cols-12 gap-8 items-center bg-bg border border-border rounded-panel p-8">
-                <div className="lg:col-span-5 flex flex-col gap-4">
-                  <span className="text-xs font-bold text-accent uppercase tracking-wider">DESTINATION ZONE (12FT)</span>
-                  <h3 className="font-display text-2xl font-bold text-ink">48 - 70 SKUs • 3 Modules</h3>
-                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                    지역 상권의 K-Beauty 명소(Destination)로 거듭나도록 대형 매장에 적합한 샵인샵 전용 부스를 설계합니다. 가장 넓은 범위의 스킨/메이크업/바디/헤어 SKU를 수용하여 마진 잠재력을 극대화합니다.
-                  </p>
-                  <ul className="text-xs text-text-secondary flex flex-col gap-1 list-disc pl-5 mt-2">
-                    <li>144"W x 86"H x 18"D (4FT 가구 3조 연결)</li>
-                    <li>전 카테고리(스킨, 헤어, 툴, 메이크업 등) 풀 구성</li>
-                    <li>LED 조명 액센트와 미러 갤러리 피처링</li>
-                  </ul>
-                </div>
-                <div className="lg:col-span-7">
-                  <div className="relative h-96 w-full rounded-card overflow-hidden border border-border bg-surface">
-                    <Image
-                      src="/images/display_12ft.jpg"
-                      alt="12FT K-Beauty Destination Zone Display"
-                      fill
-                      sizes="(max-w-768px) 100vw, 50vw"
-                      className="object-cover"
-                    />
+                  <div className="bg-[#12141c] border border-border px-4 py-3 rounded-card flex items-center gap-2">
+                    <span className="text-accent">✓</span> Right Retail Execution (매장 연출)
                   </div>
                 </div>
               </div>
@@ -507,273 +274,549 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* [Section 7] K Select Partnership Package - 11가지 지원 항목 패키지 */}
-        <section id="partnership-package" className="py-20 max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16 flex flex-col gap-4">
-            <span className="text-eyebrow text-accent uppercase tracking-wider">
-              {t.package.eyebrow}
+        {/* [4단계] Program Core - K-Beauty Retail Growth Program */}
+        <section id="program" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+              {t.program.eyebrow}
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-              {t.package.title}
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+              {t.program.title}
             </h2>
-            <p className="text-body text-text-secondary">
-              {t.package.subtitle}
+            <p className="text-sm text-text-secondary">
+              {t.program.subtitle}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {t.package.benefits.map((b, i) => (
-              <div key={i} className="bg-surface border border-border p-6 rounded-card flex flex-col gap-3 justify-between hover:border-accent transition-colors">
+          {/* Cards for Core Features */}
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {t.program.features.map((feat, i) => (
+              <div key={i} className="bg-[#12141c] border border-border p-6 rounded-card flex flex-col justify-between gap-4 text-left hover:border-accent/40 transition-colors">
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="h-6 w-6 bg-accent/10 rounded-pill flex items-center justify-center text-accent text-xs font-bold font-display shrink-0">
-                      {(i + 1).toString().padStart(2, "0")}
-                    </div>
-                    <h3 className="font-bold text-sm text-ink">{b.title}</h3>
-                  </div>
-                  <p className="text-xs text-text-secondary leading-relaxed">
-                    {b.desc}
-                  </p>
+                  <span className="text-[10px] text-accent font-bold tracking-widest">
+                    FEATURE 0{i + 1}
+                  </span>
+                  <h4 className="font-display text-base font-bold text-white">
+                    {feat.title}
+                  </h4>
                 </div>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  {feat.desc}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* [Section 8] 90-Day Exchange Credit / Risk Reduction */}
-        <section id="exchange" className="py-20 bg-surface border-y border-border">
+        {/* [5단계] Product Mix - 큐레이션 제품 철학 및 SVG 링 차트 */}
+        <section id="products" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.riskReduction.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                {t.riskReduction.title}
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.riskReduction.subtitle}
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-12 items-center mb-12">
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {t.riskReduction.desc}
+            
+            {/* Header / Philosophy */}
+            <div className="grid lg:grid-cols-12 gap-8 items-start mb-16">
+              <div className="lg:col-span-7 flex flex-col gap-4 text-left">
+                <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                  {t.products.eyebrow}
+                </span>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+                  {t.products.title}
+                </h2>
+                <p className="text-sm text-text-secondary">
+                  {t.products.subtitle}
                 </p>
-                <div className="bg-bg border border-border p-5 rounded-card text-xs text-text-secondary mt-2">
-                  💡 <strong>보조 메시지:</strong> 처음부터 모든 상품을 완벽하게 맞힐 필요는 없습니다. K Select가 판매 결과를 보면서 더 적합한 상품 구성으로 조정할 수 있도록 지원합니다.
-                </div>
-              </div>
-
-              {/* Infographic Steps flow layout */}
-              <div className="lg:col-span-7 flex flex-col gap-3 relative">
-                {t.riskReduction.steps.map((step, idx) => (
-                  <div key={idx} className="bg-bg border border-border p-5 rounded-card flex gap-4 items-center relative">
-                    <div className="h-10 w-10 bg-accent text-white rounded-pill flex items-center justify-center font-display font-extrabold text-sm shrink-0">
-                      Step 0{idx + 1}
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-display font-bold text-sm text-ink">{step.title}</span>
-                      <span className="text-xs text-text-secondary mt-0.5 leading-relaxed">{step.desc}</span>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
-            <div className="border-t border-border pt-6 max-w-4xl mx-auto">
-              <p className="text-[11px] text-text-secondary leading-relaxed text-center italic">
-                {t.riskReduction.disclaimer}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 9] Growth Simulator - 성장 시뮬레이터 로드 */}
-        <section id="simulator-anchor" className="py-20 max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4">
-            <span className="text-eyebrow text-accent uppercase tracking-wider">
-              {t.simulator.eyebrow}
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-              {t.simulator.title}
-            </h2>
-            <p className="text-body text-text-secondary">
-              {t.simulator.subtitle}
-            </p>
-          </div>
-
-          <Simulator />
-        </section>
-
-        {/* [Section 10] How It Works - 온보딩 과정 */}
-        <section id="process" className="py-20 bg-surface border-y border-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.process.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                {t.process.title}
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.process.subtitle}
-              </p>
-            </div>
-
-            {/* Stepper Grid */}
-            <div className="grid sm:grid-cols-5 gap-6 relative">
-              {t.process.steps.map((step, i) => (
-                <div key={i} className="flex flex-col gap-4 relative">
-                  <div className="flex items-center gap-4">
-                    <span className="font-display text-3xl font-extrabold text-accent/20">
-                      {step.num}
-                    </span>
-                    {i < 4 && (
-                      <div className="hidden sm:block absolute right-0 top-4 w-full h-[1px] bg-border translate-x-1/2 z-0" />
-                    )}
-                  </div>
-                  <div className="z-10 bg-bg p-5 border border-border rounded-card h-full flex flex-col gap-2">
-                    <h3 className="font-bold text-sm text-ink">{step.title}</h3>
-                    <p className="text-xs text-text-secondary leading-relaxed">
-                      {step.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 11] Partner Operating Standards - Provides vs We Ask */}
-        <section id="standards" className="py-20 max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-4">
-            <span className="text-eyebrow text-accent uppercase tracking-wider">
-              {t.standards.eyebrow}
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-              {t.standards.title}
-            </h2>
-            <p className="text-body text-text-secondary">
-              {t.standards.subtitle}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* What K Select Provides */}
-            <div className="bg-surface border border-border p-8 rounded-panel flex flex-col gap-6">
-              <h3 className="font-display font-bold text-lg text-accent flex items-center gap-2">
-                🤝 {t.standards.provides.title}
-              </h3>
-              <ul className="flex flex-col gap-4">
-                {t.standards.provides.items.map((item, idx) => (
-                  <li key={idx} className="text-xs sm:text-sm text-text-secondary flex gap-3 items-start leading-relaxed">
-                    <span className="text-accent shrink-0 font-bold">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* What We Ask */}
-            <div className="bg-surface border border-border p-8 rounded-panel flex flex-col gap-6">
-              <h3 className="font-display font-bold text-lg text-ink flex items-center gap-2">
-                📢 {t.standards.asks.title}
-              </h3>
-              <ul className="flex flex-col gap-4">
-                {t.standards.asks.items.map((item, idx) => (
-                  <li key={idx} className="text-xs sm:text-sm text-text-secondary flex gap-3 items-start leading-relaxed">
-                    <span className="text-ink shrink-0 font-bold">▪</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 12] Why K Select - 경험 및 인프라 (기존 신뢰 섹션) */}
-        <section id="why-kselect" className="py-20 bg-surface border-t border-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16 flex flex-col gap-4">
-              <span className="text-eyebrow text-accent uppercase tracking-wider">
-                {t.trust.eyebrow}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink">
-                {t.trust.title}
-              </h2>
-              <p className="text-body text-text-secondary">
-                {t.trust.subtitle}
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {t.trust.details.map((detail: { title: string; desc: string }, i: number) => (
-                <div key={i} className="bg-bg border border-border p-8 rounded-panel flex flex-col gap-4">
-                  <span className="text-xs font-bold text-accent tracking-wide uppercase">
-                    Reason 0{i + 1}
+            {/* Curation Standards 4 cards */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+              {t.products.philosophy.items.map((phil, i) => (
+                <div key={i} className="bg-surface border border-border p-6 rounded-card flex flex-col gap-3 text-left">
+                  <span className="text-[10px] font-display font-bold text-accent uppercase tracking-wider">
+                    {phil.key}
                   </span>
-                  <h3 className="font-display text-lg font-bold text-ink">
-                    {detail.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    {detail.desc}
+                  <h4 className="font-display text-base font-bold text-white">
+                    {phil.label}
+                  </h4>
+                  <p className="text-xs text-text-secondary leading-relaxed">
+                    {phil.desc}
                   </p>
                 </div>
               ))}
             </div>
+
+            {/* Sourcing Product Mix Visualizer (SVG Donut Chart) */}
+            <div className="bg-[#12141c] border border-border rounded-panel p-8">
+              <h3 className="font-display text-xl font-bold text-white text-center mb-8">
+                {t.products.mix.title}
+              </h3>
+              
+              <div className="grid lg:grid-cols-12 gap-8 items-center">
+                
+                {/* SVG Donut Visualizer */}
+                <div className="lg:col-span-5 flex justify-center">
+                  <div className="relative w-64 h-64 sm:w-72 sm:h-72">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="15.915" fill="none" stroke="#232738" strokeWidth="3" />
+                      
+                      {/* Skincare (60%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#ff127c"
+                        strokeWidth="3"
+                        strokeDasharray="60 100"
+                        strokeDashoffset="0"
+                      />
+                      {/* Hair Care (10%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#4f46e5"
+                        strokeWidth="3"
+                        strokeDasharray="10 100"
+                        strokeDashoffset="-60"
+                      />
+                      {/* Makeup (10%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#10b981"
+                        strokeWidth="3"
+                        strokeDasharray="10 100"
+                        strokeDashoffset="-70"
+                      />
+                      {/* Body Care (10%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#f59e0b"
+                        strokeWidth="3"
+                        strokeDasharray="10 100"
+                        strokeDashoffset="-80"
+                      />
+                      {/* Personal Care (5%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#06b6d4"
+                        strokeWidth="3"
+                        strokeDasharray="5 100"
+                        strokeDashoffset="-90"
+                      />
+                      {/* Beauty Tools (5%) */}
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="15.915"
+                        fill="none"
+                        stroke="#8b5cf6"
+                        strokeWidth="3"
+                        strokeDasharray="5 100"
+                        strokeDashoffset="-95"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="font-display text-3xl font-bold text-white">60%</span>
+                      <span className="text-[10px] text-text-secondary uppercase">Skincare Max</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Categories list details */}
+                <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+                  {t.products.mix.categories.map((cat, i) => (
+                    <div key={i} className="bg-[#0c0d14] border border-border p-4 rounded-card flex flex-col gap-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-bold text-white flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: cat.color }} />
+                          {cat.name}
+                        </span>
+                        <span className="font-display text-sm font-bold" style={{ color: cat.color }}>
+                          {cat.ratio}%
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {cat.items.map((item, idx) => (
+                          <span key={idx} className="bg-[#12141c] text-[9px] font-semibold text-text-secondary px-2 py-0.5 rounded border border-border">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="py-20 max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12 flex flex-col gap-3">
-            <span className="text-eyebrow text-accent uppercase tracking-wider">FAQ</span>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink">자주 묻는 질문</h2>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            <div className="bg-surface border border-border p-6 rounded-card">
-              <h3 className="font-bold text-sm text-ink mb-2">Q. 가입 입점 비용이나 가구 보증금이 따로 있나요?</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                K Select는 단순 집기 판매업체가 아닙니다. 입점 승인 후 상권 분석 결과와 매칭되어 집기는 무상 또는 보조금 형태로 지원(지원 사양에 따름)하며, 구체적인 계약 조건은 소싱 파트너십 단계에서 투명하게 조율됩니다.
-              </p>
-            </div>
-            <div className="bg-surface border border-border p-6 rounded-card">
-              <h3 className="font-bold text-sm text-ink mb-2">Q. 안 팔리는 재고가 남으면 어떻게 처리하나요?</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                K Select는 First Order Protection 정책을 보유하고 있어, 초기 런칭 후 판매량이 부진한 상품은 시장 선호도가 입증된 타 스킨케어/헤어 카테고리 제품으로 로테이션 교체가 가능합니다.
-              </p>
-            </div>
-            <div className="bg-surface border border-border p-6 rounded-card">
-              <h3 className="font-bold text-sm text-ink mb-2">Q. 주문 접수 및 배송 기간은 얼마나 걸리나요?</h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                미국 뉴저지 HQ 자체 물류센터에 항상 충분한 스톡을 상시 확보하고 있으므로, 발주 접수 후 미국 전역 3~5영업일 내에 신속한 물류 배송이 완료됩니다.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* [Section 13] Apply - 최종 신청서 로드 */}
-        <section id="apply" className="py-24 bg-ink text-bg relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-bg leading-tight">
-              {t.cta.title}
+        {/* [6단계] Store-in-a-Store (Display) - LED 진열 모듈 카탈로그 */}
+        <section id="display" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+              {t.display.eyebrow}
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+              {t.display.title}
             </h2>
-            <p className="text-sm opacity-80 mb-12 max-w-2xl mx-auto">
-              {t.cta.subtitle}
+            <p className="text-sm text-text-secondary">
+              {t.display.subtitle}
             </p>
+          </div>
 
-            <CtaForm />
+          {/* Modules Split Display Cards */}
+          <div className="grid lg:grid-cols-3 gap-6">
+            {t.display.modules.map((mod, i) => {
+              const imagePaths = [
+                "/images/display_4ft.png",
+                "/images/display_8ft.png",
+                "/images/display_12ft.jpg",
+              ];
+              return (
+                <div key={i} className="bg-[#12141c] border border-border rounded-card overflow-hidden flex flex-col justify-between">
+                  <div className="relative w-full aspect-4/3 bg-[#0c0d14] border-b border-border">
+                    <Image
+                      src={imagePaths[i]}
+                      alt={mod.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 30vw"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col gap-3 text-left">
+                    <div className="flex justify-between items-baseline">
+                      <span className="font-display text-2xl font-bold text-accent">{mod.size}</span>
+                      <span className="text-xs text-text-secondary font-bold">{mod.sku}</span>
+                    </div>
+                    <h4 className="font-display text-lg font-bold text-white">{mod.name}</h4>
+                    <p className="text-xs text-text-secondary leading-relaxed">{mod.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
+
+        {/* [7단계] Risk Reduction - 90일 재고 교환 안심 제도 */}
+        <section id="exchange" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+              <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                {t.riskReduction.eyebrow}
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+                {t.riskReduction.title}
+              </h2>
+              <p className="text-sm text-text-secondary">
+                {t.riskReduction.subtitle}
+              </p>
+            </div>
+
+            {/* Timeline Arrow Cards */}
+            <div className="grid md:grid-cols-5 gap-4 text-left mb-12">
+              {t.riskReduction.cycle.map((c, i) => (
+                <div key={i} className="bg-[#12141c] border border-border p-5 rounded-card relative flex flex-col gap-2 hover:border-accent-light transition-colors">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-bold text-accent tracking-widest uppercase">
+                      STAGE 0{i + 1}
+                    </span>
+                    {i < 4 && (
+                      <span className="hidden md:inline text-text-muted font-display text-lg absolute -right-3 top-1/2 -translate-y-1/2 z-10">
+                        ➔
+                      </span>
+                    )}
+                  </div>
+                  <h4 className="font-display text-base font-bold text-white">{c.step}</h4>
+                  <p className="text-[11px] text-text-secondary leading-relaxed">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Bold Message and strict conditions */}
+            <div className="bg-[#12141c] border border-border p-6 rounded-card flex flex-col md:flex-row items-center justify-between gap-6 text-left">
+              <div className="flex flex-col gap-2 max-w-xl">
+                <h4 className="font-semibold text-white text-sm">재고 걱정 없는 파트너십 약속</h4>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  {t.riskReduction.boldMessage}
+                </p>
+              </div>
+              
+              <div className="flex flex-col gap-1.5 text-[10px] text-text-muted border-l border-border pl-6 flex-shrink-0">
+                {t.riskReduction.conditions.map((cond, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" /> {cond}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* [8단계] Growth Simulator - 독립 대메뉴 & 핵심 인터랙티브 기능 */}
+        <section id="simulator-section" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="max-w-3xl mb-12 flex flex-col gap-4 text-left">
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+              {t.simulator.eyebrow}
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+              {t.simulator.title}
+            </h2>
+            <p className="text-sm text-text-secondary">
+              {t.simulator.subtitle}
+            </p>
+          </div>
+
+          {/* Interactive React Simulator Mount */}
+          <Simulator />
+        </section>
+
+        {/* [9단계] Ongoing Retail Support - 교육 및 스마트 재발주 */}
+        <section id="support" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+              <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                RETAIL SUPPORT SYSTEMS
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+                제품 공급을 넘어선 운영 관리 시스템 지원
+              </h2>
+              <p className="text-sm text-text-secondary">
+                지속적인 VMD 업데이트, 스태프 온라인 영상 트레이닝 및 매주 재고 관리 시스템을 밀착 제공합니다.
+              </p>
+            </div>
+
+            {/* 3 columns support list */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-[#12141c] border border-border p-6 rounded-card text-left flex flex-col gap-3">
+                <span className="text-2xl">📱</span>
+                <h4 className="font-display text-lg font-bold text-white">QR 제품 모바일 정보 라벨</h4>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  매대 선반마다 QR 코드가 장착되어 소비자가 현장에서 성분과 루틴 정보를 모바일로 실시간 확인 및 안심 구매 가능.
+                </p>
+              </div>
+
+              <div className="bg-[#12141c] border border-border p-6 rounded-card text-left flex flex-col gap-3">
+                <span className="text-2xl">🎓</span>
+                <h4 className="font-display text-lg font-bold text-white">온라인 스태프 교육</h4>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  매장 직원들이 미국 소비자의 질문에 즉시 답할 수 있도록 전용 비디오 아카데미 및 뷰티 수료증 트레이닝 제공.
+                </p>
+              </div>
+
+              <div className="bg-[#12141c] border border-border p-6 rounded-card text-left flex flex-col gap-3">
+                <span className="text-2xl">📈</span>
+                <h4 className="font-display text-lg font-bold text-white">주간 재고 업데이트 & 리오더</h4>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  단 한 번의 조회로 매대 품절 상태를 복구하는 간편 주문 포털 시스템을 통해 리테일 최상의 회전 속도를 돕습니다.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* [10단계] Partnership Standards - Provides vs We Ask (Compliance Checkbox) */}
+        <section id="partnership" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+              {t.partnership.eyebrow}
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+              {t.partnership.title}
+            </h2>
+            <p className="text-sm text-text-secondary">
+              {t.partnership.subtitle}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 text-left">
+            
+            {/* Provides Card */}
+            <div className="bg-[#12141c] border border-border p-6 sm:p-8 rounded-panel flex flex-col gap-4">
+              <h4 className="font-display text-lg font-bold text-accent">
+                {t.partnership.provides.title}
+              </h4>
+              <ul className="flex flex-col gap-3 text-xs text-text-secondary">
+                {t.partnership.provides.items.map((item, i) => (
+                  <li key={i} className="flex gap-2.5 items-start">
+                    <span className="text-accent">➔</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Asks Card */}
+            <div className="bg-[#12141c] border border-border p-6 sm:p-8 rounded-panel flex flex-col gap-4">
+              <h4 className="font-display text-lg font-bold text-white">
+                {t.partnership.asks.title}
+              </h4>
+              <ul className="flex flex-col gap-3 text-xs text-text-secondary">
+                {t.partnership.asks.items.map((item, i) => (
+                  <li key={i} className="flex gap-2.5 items-start">
+                    <span className="text-white opacity-40">●</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        {/* [11단계] How It Works - 6단계 파트너십 구축 과정 */}
+        <section id="process" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl mb-16 flex flex-col gap-4 text-left">
+              <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                PARTNERSHIP TIMELINE
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
+                파트너십 구축 및 런칭 진행 과정
+              </h2>
+              <p className="text-sm text-text-secondary">
+                신청부터 실제 상품 런칭 및 데이터 교환까지, 안전하고 신속한 타임라인 가이드라인입니다.
+              </p>
+            </div>
+
+            {/* Process steps grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+              {[
+                { num: "01", title: "온라인 입점 신청서 접수", desc: "웹사이트 하단의 CtaForm을 통해 매장 위치, 형태, 규모 등 기본 정보와 함께 신청서를 온라인 제출합니다." },
+                { num: "02", title: "상권 분석 및 자격 검토", desc: "Letusto 미국 지사의 상권 보호 데이터베이스와 매핑을 진행해 독점 지역 조건 가능 여부를 판별합니다." },
+                { num: "03", title: "최적의 Assortment 설계", desc: "매장 크기에 맞는 LED 숍인숍 집기 규격(4ft/8ft/12ft)과 상권 맞춤형 초도 SKU 리스트를 기획합니다." },
+                { num: "04", title: "모듈 설치 및 상품 입고", desc: "무상 대여 지원되는 전용 LED 디스플레이 집기 및 VMD 그래픽, 엄선된 큐레이션 화장품을 매장에 진열합니다." },
+                { num: "05", title: "90일 실제 판매 테스트", desc: "현장 판매를 개시하고 스태프 온라인 기본 교육 이수 및 고객 선호 데이터 추이를 모니터링합니다." },
+                { num: "06", title: "데이터 최적화 및 로테이션", desc: "90일 교환 크레딧 정책을 발동하여 더딘 품목은 회수하고, 판매가 검증된 베스트 SKU로 재고 믹스를 영구 최적화합니다." }
+              ].map((step, i) => (
+                <div key={i} className="bg-[#12141c] border border-border p-6 rounded-card flex flex-col gap-3">
+                  <span className="font-display text-xs font-bold text-accent">{step.num}</span>
+                  <h4 className="font-display text-base font-bold text-white">{step.title}</h4>
+                  <p className="text-xs text-text-secondary leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* [12단계] Why Us / Trust - 20년 노하우 & 중소벤처기업부 인증 */}
+        <section id="why-us" className="py-20 max-w-7xl mx-auto px-6 border-b border-[#202330]">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left KPIs Numbers */}
+            <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-6 text-left">
+              {t.whyUs.stats.map((s, i) => (
+                <div key={i} className="bg-[#12141c] border border-border p-5 rounded-card flex flex-col justify-between min-h-[110px]">
+                  <span className="text-[10px] text-text-muted font-bold uppercase tracking-wide block">{s.label}</span>
+                  <span className="font-display text-2xl sm:text-3xl font-bold text-accent mt-2 block">{s.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Right Curation detail & MSS Certification */}
+            <div className="lg:col-span-6 flex flex-col gap-6 text-left">
+              <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                {t.whyUs.eyebrow}
+              </span>
+              <h2 className="font-display text-3xl font-bold text-white">
+                {t.whyUs.title}
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                {t.whyUs.subtitle} K Select Hub의 운영 모체인 Letusto Inc.는 단순 무역 벤더와 구별됩니다.
+              </p>
+              
+              {/* MSS certification badge */}
+              <div className="bg-[#12141c] border border-border p-5 rounded-card flex flex-col gap-2 mt-2">
+                <span className="text-xs font-bold text-white flex items-center gap-2">
+                  <span className="text-accent">★</span> {t.whyUs.official.title}
+                </span>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  {t.whyUs.official.desc}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* Tag Insights Section */}
+        <section id="insights" className="py-20 bg-[#0c0d14] border-b border-[#202330]">
+          <div className="max-w-7xl mx-auto px-6">
+            
+            <div className="max-w-3xl mb-12 flex flex-col gap-4 text-left">
+              <span className="text-xs font-bold text-accent uppercase tracking-wider block">
+                {t.insights.eyebrow}
+              </span>
+              <h2 className="font-display text-3xl font-bold text-white leading-tight">
+                {t.insights.title}
+              </h2>
+              <p className="text-sm text-text-secondary">
+                {t.insights.subtitle}
+              </p>
+            </div>
+
+            {/* Tag Filters list */}
+            <div className="flex flex-wrap gap-2 text-xs font-semibold text-text-secondary mb-10">
+              {Object.entries(t.insights.tags).map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  className={`px-4 py-2 rounded-pill border transition-all cursor-pointer ${
+                    key === "all"
+                      ? "bg-accent-light border-accent text-accent"
+                      : "bg-[#12141c] border-border hover:border-accent-light"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Mock Article Cards Grid */}
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              {[
+                { title: "2026 미국 뷰티 서플라이 오프라인 리테일 전략 리포트", tag: "Beauty Retail", date: "2026.08.08" },
+                { title: "K-스킨케어 슬로우 셀러를 걸러내는 90일 주기 진단 가이드", tag: "Store Operations", date: "2026.08.05" },
+                { title: "왜 미국 Z세대는 클린 뷰티(Clean Beauty)에 열광하는가", tag: "K-Beauty Trends", date: "2026.08.01" }
+              ].map((art, i) => (
+                <div key={i} className="bg-[#12141c] border border-border rounded-card p-6 flex flex-col justify-between min-h-[160px] hover:border-accent/40 transition-colors cursor-pointer">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[10px] text-accent font-bold uppercase">{art.tag}</span>
+                    <h4 className="font-semibold text-white leading-snug">{art.title}</h4>
+                  </div>
+                  <span className="text-[10px] text-text-muted mt-4 block">{art.date}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* [Apply Form Section] */}
+        <section className="py-20 max-w-7xl mx-auto px-6">
+          <CtaForm />
+        </section>
+
       </main>
 
       {/* Footer */}
-      <footer className="bg-surface border-t border-border py-12">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-          <div className="flex flex-col gap-2">
-            <span className="font-display text-xl font-bold tracking-tight text-ink">
+      <footer className="bg-[#0c0d14] border-t border-[#202330] py-12 text-sm text-text-secondary">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          
+          <div className="flex flex-col gap-3 text-left">
+            <span className="font-display text-xl font-bold text-white">
               {t.header.logo}
             </span>
             <p className="text-xs text-text-secondary">
@@ -781,10 +824,11 @@ export default async function Home({ params }: PageProps) {
             </p>
           </div>
 
-          <div className="flex flex-col gap-2 text-xs text-text-secondary md:items-end">
-            <p className="font-medium text-ink">{t.footer.address}</p>
+          <div className="flex flex-col gap-2 text-xs text-text-secondary md:items-end text-left">
+            <p className="font-medium text-white">{t.footer.address}</p>
             <p>{t.footer.contact}</p>
           </div>
+
         </div>
       </footer>
     </div>

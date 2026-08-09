@@ -4,28 +4,44 @@ import React, { useState, useEffect } from "react";
 import { ko } from "../locales/ko";
 
 export default function CtaForm() {
-  const t = ko.cta;
-  const ts = ko.standards;
-  
-  const [email, setEmail] = useState("");
-  const [storeName, setStoreName] = useState("");
-  const [agreed, setAgreed] = useState(false); // Compliance checkbox state
-  const [recommendedConfig, setRecommendedConfig] = useState<string | null>(null); // Simulator integration
-  const [submitted, setSubmitted] = useState(false);
+  const t = ko.ctaForm;
+  const ts = ko.partnership;
 
-  // Sync with Simulator results via localStorage and Custom Events
+  // Form Field States
+  const [storeName, setStoreName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [storeType, setStoreType] = useState("independent");
+  const [desiredSpace, setDesiredSpace] = useState("8ft");
+  const [comments, setComments] = useState("");
+  const [agreed, setAgreed] = useState(false);
+
+  // Integration with Simulator Results
+  const [recommendedConfig, setRecommendedConfig] = useState<string | null>(null);
+  const [simulatedInvestment, setSimulatedInvestment] = useState<string | null>(null);
+  
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Check storage and custom event listeners for simulator connection
   useEffect(() => {
-    // Check initial value from localStorage if already simulated
     const savedConfig = localStorage.getItem("kselect_recommended_config");
+    const savedInvestment = localStorage.getItem("kselect_simulator_investment");
     if (savedConfig) {
       setRecommendedConfig(savedConfig);
     }
+    if (savedInvestment) {
+      setSimulatedInvestment(savedInvestment);
+    }
 
-    // Listen to custom event for real-time simulator updates
     const handleRecommendEvent = (e: Event) => {
       const customEvent = e as CustomEvent;
       if (customEvent.detail) {
-        setRecommendedConfig(customEvent.detail);
+        setRecommendedConfig(customEvent.detail.configName);
+        setSimulatedInvestment(customEvent.detail.investment.toString());
+        setDesiredSpace(customEvent.detail.space);
       }
     };
 
@@ -35,114 +51,288 @@ export default function CtaForm() {
     };
   }, []);
 
+  const handleClearRecommendation = () => {
+    setRecommendedConfig(null);
+    setSimulatedInvestment(null);
+    localStorage.removeItem("kselect_recommended_config");
+    localStorage.removeItem("kselect_simulator_investment");
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !storeName || !agreed) return;
+    setErrorMsg(null);
 
-    // Simulate Supabase table payload structure
+    // Form validations
+    if (!storeName.trim()) {
+      setErrorMsg(t.validation.storeRequired);
+      return;
+    }
+    if (!ownerName.trim()) {
+      setErrorMsg(t.validation.ownerRequired);
+      return;
+    }
+    if (!email.trim() || !email.includes("@")) {
+      setErrorMsg(t.validation.emailRequired);
+      return;
+    }
+    if (!phone.trim()) {
+      setErrorMsg(t.validation.phoneRequired);
+      return;
+    }
+    if (!address.trim()) {
+      setErrorMsg(t.validation.addressRequired);
+      return;
+    }
+    if (!agreed) {
+      setErrorMsg(t.validation.agreeRequired);
+      return;
+    }
+
+    // Submit payload structure simulation
     const payload = {
-      store_name: storeName,
-      email: email,
-      agreed_to_standards: agreed,
-      recommended_config: recommendedConfig || "None"
+      storeName,
+      ownerName,
+      email,
+      phone,
+      address,
+      storeType,
+      desiredSpace,
+      comments,
+      recommendedConfig: recommendedConfig || "None",
+      simulatedInvestment: simulatedInvestment || "None",
+      agreedToStandards: agreed,
+      submittedAt: new Date().toISOString(),
     };
 
-    console.log("Submitting Retailer Application:", payload);
+    console.log("Submitting Retailer Partnership Application:", payload);
     setSubmitted(true);
 
-    // Clear local storage after submission
+    // Clear local storage integration
     localStorage.removeItem("kselect_recommended_config");
+    localStorage.removeItem("kselect_simulator_investment");
   };
 
   return (
-    <div className="w-full">
+    <div id="apply" className="w-full max-w-3xl mx-auto">
       {submitted ? (
-        <div className="bg-accent text-white p-8 rounded-panel max-w-lg mx-auto border border-accent/20">
-          <span className="text-4xl block mb-4">🎉</span>
-          <h3 className="font-display text-xl font-bold mb-2">파트너 신청이 정상 접수되었습니다!</h3>
-          <p className="text-sm opacity-90 leading-relaxed">
-            입력해 주신 정보와 상권을 면밀히 검토한 후, 24시간 이내에 담당자가 유선 연락 또는 이메일로 답변을 제공해 드리겠습니다.
+        <div className="bg-[#0c0d14] border border-[#ff127c]/20 p-8 sm:p-12 rounded-panel text-center max-w-lg mx-auto flex flex-col items-center gap-4">
+          <span className="text-4xl">🎉</span>
+          <h3 className="font-display text-2xl font-bold text-ink">
+            신청이 성공적으로 접수되었습니다!
+          </h3>
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {t.validation.success}
           </p>
           {recommendedConfig && (
-            <div className="bg-white/10 px-4 py-2 rounded-card text-xs font-semibold mt-4">
-              신청 구성: {recommendedConfig}
+            <div className="bg-accent-light border border-accent/20 px-4 py-2 rounded-card text-xs font-semibold text-accent mt-2">
+              신청 모듈 구성: {recommendedConfig} (${Number(simulatedInvestment).toLocaleString()} 투자 규모)
             </div>
           )}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="bg-surface p-8 sm:p-10 rounded-panel text-ink text-left max-w-2xl mx-auto border border-border">
-          {/* Simulated Recommendation Pre-population Banner */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-surface border border-border p-6 sm:p-10 rounded-panel text-left flex flex-col gap-6"
+        >
+          {/* Active Simulator Recommendation Banner */}
           {recommendedConfig && (
-            <div className="bg-accent/10 border border-accent/20 px-5 py-3.5 rounded-card text-xs font-semibold text-accent mb-6 flex justify-between items-center">
-              <span>💡 성장 시뮬레이터 추천 구성: <strong>{recommendedConfig}</strong></span>
-              <button 
-                type="button" 
-                onClick={() => {
-                  setRecommendedConfig(null);
-                  localStorage.removeItem("kselect_recommended_config");
-                }}
-                className="text-[10px] underline cursor-pointer text-text-secondary"
+            <div className="bg-accent-light border border-accent/20 px-5 py-4 rounded-card text-xs text-accent flex justify-between items-center gap-4">
+              <div className="flex flex-col gap-0.5">
+                <span className="font-bold">🖥️ 시뮬레이터 연동 적용됨</span>
+                <span className="opacity-90">
+                  추천 구성: <strong>{recommendedConfig}</strong> (${Number(simulatedInvestment).toLocaleString()} 초기 예산 자동 바인딩)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={handleClearRecommendation}
+                className="text-[10px] font-bold underline cursor-pointer text-text-secondary hover:text-accent"
               >
-                지우기
+                연동 해제
               </button>
             </div>
           )}
 
-          <div className="grid sm:grid-cols-2 gap-6 mb-6">
+          {/* Form Fields Header */}
+          <div>
+            <span className="text-xs font-bold text-accent uppercase tracking-wider block mb-1">
+              PARTNERSHIP APPLICATION
+            </span>
+            <h3 className="font-display text-2xl font-bold text-ink">
+              {t.title}
+            </h3>
+            <p className="text-xs text-text-secondary mt-1">
+              {t.subtitle}
+            </p>
+          </div>
+
+          {/* Core Fields Grid */}
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* Store Name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="store-name" className="text-xs font-bold text-text-secondary">
-                매장명 (Store / Business Name) *
+                {t.fields.storeName}
               </label>
               <input
                 id="store-name"
                 type="text"
-                required
                 value={storeName}
                 onChange={(e) => setStoreName(e.target.value)}
-                placeholder="예: Jersey Beauty Supply"
-                className="h-12 px-4 border border-border rounded-pill text-sm focus:outline-none focus:border-accent"
+                placeholder="예: K-Beauty Mart NJ"
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
               />
             </div>
+
+            {/* Owner Name */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="owner-name" className="text-xs font-bold text-text-secondary">
+                {t.fields.ownerName}
+              </label>
+              <input
+                id="owner-name"
+                type="text"
+                value={ownerName}
+                onChange={(e) => setOwnerName(e.target.value)}
+                placeholder="예: John Doe"
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+              />
+            </div>
+
+            {/* Email Address */}
             <div className="flex flex-col gap-2">
               <label htmlFor="email" className="text-xs font-bold text-text-secondary">
-                담당자 이메일 (Professional Email) *
+                {t.fields.email}
               </label>
               <input
                 id="email"
                 type="email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="예: manager@store.com"
-                className="h-12 px-4 border border-border rounded-pill text-sm focus:outline-none focus:border-accent"
+                placeholder="owner@example.com"
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+              />
+            </div>
+
+            {/* Phone Number */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phone" className="text-xs font-bold text-text-secondary">
+                {t.fields.phone}
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="123-456-7890"
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
               />
             </div>
           </div>
 
-          {/* Compliance Operating Standard Checkbox */}
-          <div className="flex items-start gap-3 mb-6 bg-bg/50 p-4 border border-border rounded-card">
+          {/* Store Address */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="address" className="text-xs font-bold text-text-secondary">
+              {t.fields.address}
+            </label>
+            <input
+              id="address"
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="예: 123 Main St, Fort Lee, NJ 07024"
+              className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+            />
+          </div>
+
+          {/* Selector Fields Row */}
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* Store Type Dropdown */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="store-type" className="text-xs font-bold text-text-secondary">
+                {t.fields.storeType}
+              </label>
+              <select
+                id="store-type"
+                value={storeType}
+                onChange={(e) => setStoreType(e.target.value)}
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent cursor-pointer"
+              >
+                <option value="independent">{t.fields.independent}</option>
+                <option value="chain">{t.fields.chain}</option>
+                <option value="pharmacy">{t.fields.pharmacy}</option>
+                <option value="other">{t.fields.other}</option>
+              </select>
+            </div>
+
+            {/* Desired Module Dropdown */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="desired-space" className="text-xs font-bold text-text-secondary">
+                {t.fields.spaceSize}
+              </label>
+              <select
+                id="desired-space"
+                value={desiredSpace}
+                onChange={(e) => setDesiredSpace(e.target.value)}
+                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent cursor-pointer"
+              >
+                <option value="4ft">{t.fields.ft4}</option>
+                <option value="8ft">{t.fields.ft8}</option>
+                <option value="12ft">{t.fields.ft12}</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Comments Textarea */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="comments" className="text-xs font-bold text-text-secondary">
+              {t.fields.comments}
+            </label>
+            <textarea
+              id="comments"
+              value={comments}
+              onChange={(e) => setComments(e.target.value)}
+              placeholder="매장 상권 현황이나 도입 희망 시점 등에 대해 메모를 남겨주세요."
+              rows={4}
+              className="p-4 bg-[#0c0d14] border border-border text-ink rounded-card text-sm focus:outline-none focus:border-accent resize-none"
+            />
+          </div>
+
+          {/* Partnership Operating Guidelines Checkbox (COMPLIANCE) */}
+          <div className="flex items-start gap-3 bg-[#0c0d14] border border-border p-4 rounded-card">
             <input
               id="agreed-standards"
               type="checkbox"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-border text-accent focus:ring-accent cursor-pointer"
+              className="mt-1 h-4 w-4 rounded border-border text-accent focus:ring-accent cursor-pointer accent-accent"
             />
-            <label htmlFor="agreed-standards" className="text-xs text-text-secondary leading-relaxed cursor-pointer select-none">
+            <label
+              htmlFor="agreed-standards"
+              className="text-xs text-text-secondary leading-relaxed cursor-pointer select-none"
+            >
               {ts.agreeLabel}
             </label>
           </div>
 
-          <p className="text-[11px] text-text-secondary mb-6 leading-relaxed">
-            * 제출 즉시 Letusto 미국 본사의 상권 보호 DB와 매핑되며, 입력된 이메일로 분석 상담 안내가 전송됩니다. 가상의 수치나 보증, 의약적 효능 주장 등 FDA 관련 리스크를 철저히 관리한 합법적 스킨케어 유통만을 준수합니다.
+          {/* Error Message Box */}
+          {errorMsg && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-semibold px-4 py-3 rounded-card">
+              ⚠️ {errorMsg}
+            </div>
+          )}
+
+          {/* Disclaimer text */}
+          <p className="text-[10px] text-text-muted leading-relaxed">
+            ※ 입점 신청서 제출 즉시 Letusto Inc. 미국 본사 상권 데이터베이스와 매핑 검토를 거쳐 등록된 이메일/전화번호로 맞춤 리포트 제안서가 전송됩니다. 상권 보호 DB 조건에 일치하지 않는 경우 승인이 제한될 수 있습니다.
           </p>
 
+          {/* Submit Button (DISABLED until agreed box checked) */}
           <button
             type="submit"
             disabled={!agreed}
-            className={`w-full h-14 font-bold rounded-pill text-white text-sm transition-all ${
-              agreed 
-                ? "bg-accent hover:opacity-95 cursor-pointer" 
+            className={`w-full h-14 font-bold rounded-pill text-sm transition-all text-white ${
+              agreed
+                ? "bg-accent hover:bg-accent-hover cursor-pointer"
                 : "bg-border text-text-secondary/60 cursor-not-allowed"
             }`}
           >
