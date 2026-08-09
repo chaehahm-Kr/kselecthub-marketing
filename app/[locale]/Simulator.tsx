@@ -1,87 +1,55 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { ko } from "../locales/ko";
-import { assetConfig } from "../assets.config";
 
 export default function Simulator() {
   const t = ko.simulator;
 
-  // 1. Initial Card Selection States
-  const [selectedSpace, setSelectedSpace] = useState<"4ft" | "8ft" | "12ft">("8ft");
+  // 1. Simulator Input States (Matches Claude Design exact slider specs)
+  const [space, setSpace] = useState<number>(2000);
+  const [investment, setInvestment] = useState<number>(20000);
+  const [avgPrice, setAvgPrice] = useState<number>(18);
+  const [margin, setMargin] = useState<number>(45);
+  const [turns, setTurns] = useState<number>(6);
 
-  // Recommendation parameters mapping
-  const configMeta = {
-    "4ft": {
-      name: "4 FT - Starter 모듈 패키지",
-      defaultBudget: 3000,
-      minBudget: 3000,
-      maxBudget: 5000,
-      skuRange: "16 – 24 SKUs",
-      skuMidpoint: 20,
-      displayType: "4' LED Wall Display Feature (1 Module)",
-      imageSrc: assetConfig.displayFixtures["4ft"].src,
-    },
-    "8ft": {
-      name: "8 FT - Growth 모듈 패키지",
-      defaultBudget: 6000,
-      minBudget: 6000,
-      maxBudget: 9000,
-      skuRange: "32 – 48 SKUs",
-      skuMidpoint: 40,
-      displayType: "8' LED Wall Display Features (2 Modules)",
-      imageSrc: assetConfig.displayFixtures["8ft"].src,
-    },
-    "12ft": {
-      name: "12 FT - Destination 모듈 패키지",
-      defaultBudget: 9000,
-      minBudget: 9000,
-      maxBudget: 12000,
-      skuRange: "48 – 70 SKUs",
-      skuMidpoint: 59,
-      displayType: "12' LED Wall Display Features (3 Modules)",
-      imageSrc: assetConfig.displayFixtures["12ft"].src,
-    },
+  // Helper formats
+  const fmtMoney = (n: number) => {
+    if (n >= 1000000) return "$" + (n / 1000000).toFixed(2) + "M";
+    return "$" + Math.round(n).toLocaleString("en-US");
+  };
+  const fmtInt = (n: number) => Math.round(n).toLocaleString("en-US");
+  
+  // Custom slider background track dynamic coloring
+  const trackStyle = (val: number, min: number, max: number) => {
+    const pct = ((val - min) / (max - min)) * 100;
+    return {
+      background: `linear-gradient(to right, var(--dl-magenta-500) ${pct}%, var(--dl-grey-200) ${pct}%)`
+    };
   };
 
-  const activeConfig = configMeta[selectedSpace];
-
-  // 2. Slider States (Initialized based on selectedSpace)
-  const [initialInvestment, setInitialInvestment] = useState<number>(6000);
-  const [averagePrice, setAveragePrice] = useState<number>(20);
-  const [targetMargin, setTargetMargin] = useState<number>(50);
-  const [inventoryTurn, setInventoryTurn] = useState<number>(6); // Default 6 as per brief
-
-  // Sync investment slider when space category changes
-  useEffect(() => {
-    setInitialInvestment(activeConfig.defaultBudget);
-  }, [selectedSpace]);
-
-  // 3. Output Calculations
-  const annualCogs = initialInvestment * inventoryTurn;
-  const annualSales = Math.round(annualCogs / (1 - targetMargin / 100));
-  const annualGrossProfit = annualSales - annualCogs;
+  // 2. Verified Business Calculation Logic (Keep K Select Hub Core Business Formulas)
+  const annualCogs = investment * turns;
+  const annualSales = Math.round(annualCogs / (1 - margin / 100));
+  const grossProfit = annualSales - annualCogs;
   
-  const annualUnits = Math.round(annualSales / averagePrice);
-  const monthlyUnits = Math.round(annualUnits / 12);
-  const dailyUnits = Math.round(annualUnits / 365);
-  
-  const unitsPerSkuPerMonth = Number((monthlyUnits / activeConfig.skuMidpoint).toFixed(1));
-  const gmroi = Math.round((annualGrossProfit / initialInvestment) * 100);
+  const annualUnits = Math.round(annualSales / avgPrice);
+  const monthlySales = Math.round(annualSales / 12);
+  const dailySales = Math.round(annualSales / 365);
+  const skuProductivity = avgPrice * turns;
+  const recommendedDisplay = space < 1500 ? "4FT Starter" : space < 3500 ? "8FT Growth" : "12FT Destination";
 
-  // Scroll to application form and bind selected configuration
+  // Form submit trigger redirection
   const handleApplyClick = () => {
-    localStorage.setItem("kselect_recommended_config", activeConfig.name);
-    localStorage.setItem("kselect_simulator_investment", initialInvestment.toString());
+    localStorage.setItem("kselect_recommended_config", `${recommendedDisplay} 모듈 패키지`);
+    localStorage.setItem("kselect_simulator_investment", investment.toString());
     
-    // Dispatch custom event to auto-select fields in CtaForm
     window.dispatchEvent(
       new CustomEvent("kselect_simulator_recommend", {
         detail: {
-          configName: activeConfig.name,
-          space: selectedSpace,
-          investment: initialInvestment,
+          configName: `${recommendedDisplay} 모듈 패키지`,
+          space: space < 1500 ? "4ft" : space < 3500 ? "8ft" : "12ft",
+          investment: investment,
         },
       })
     );
@@ -93,304 +61,158 @@ export default function Simulator() {
   };
 
   return (
-    <div id="simulator" className="w-full bg-surface border border-border rounded-panel p-6 sm:p-10 flex flex-col gap-10">
+    <div className="bg-surface border border-border rounded-panel p-8 sm:p-12 grid lg:grid-cols-2 gap-14 text-left">
       
-      {/* Step 1: Input controls */}
-      <div className="grid lg:grid-cols-12 gap-8">
-        
-        {/* Left Side Inputs (Sliders and Buttons) */}
-        <div className="lg:col-span-7 flex flex-col gap-8">
+      {/* Left Input Sliders Column */}
+      <div className="flex flex-col gap-6">
+        <span className="text-xs font-black text-accent uppercase tracking-widest block">
+          매장 조건 입력
+        </span>
+        <div className="flex flex-col gap-8 mt-5">
+          
+          {/* Space Slider */}
           <div>
-            <span className="text-xs font-bold text-accent uppercase tracking-wider block mb-1">
-              STEP 01. 매장 규모 및 버짓 정보 입력
-            </span>
-            <h3 className="font-display text-2xl font-bold text-ink">
-              매장 조건 시뮬레이션 설정
-            </h3>
-          </div>
-
-          {/* Space Option Cards */}
-          <div className="flex flex-col gap-3">
-            <label className="text-sm font-semibold text-text-secondary">
-              {t.inputs.size} (K-Beauty 전용 공간)
-            </label>
-            <div className="grid grid-cols-3 gap-3">
-              {(["4ft", "8ft", "12ft"] as const).map((space) => (
-                <button
-                  key={space}
-                  type="button"
-                  onClick={() => setSelectedSpace(space)}
-                  className={`p-4 rounded-card border transition-all cursor-pointer text-center flex flex-col items-center justify-center gap-1 ${
-                    selectedSpace === space
-                      ? "bg-accent-light border-accent text-accent"
-                      : "bg-[#0c0d14] border-border text-text-secondary hover:border-accent-light"
-                  }`}
-                >
-                  <span className="font-display text-lg font-bold">
-                    {space.toUpperCase()}
-                  </span>
-                  <span className="text-[10px] opacity-85 leading-none">
-                    {configMeta[space].skuRange}
-                  </span>
-                </button>
-              ))}
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="text-sm font-semibold text-text-secondary">K-Beauty 매장 면적</span>
+              <span className="font-display text-sm font-black text-white">{fmtInt(space)} sq ft</span>
             </div>
+            <input
+              type="range"
+              min={500}
+              max={5000}
+              step={100}
+              value={space}
+              onChange={(e) => setSpace(Number(e.target.value))}
+              style={trackStyle(space, 500, 5000)}
+              className="ksh-range w-full"
+            />
           </div>
 
           {/* Investment Slider */}
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-text-secondary">{t.inputs.budget} (초기 상품 투자액)</span>
-              <span className="font-display text-accent text-lg">${initialInvestment.toLocaleString()}</span>
+          <div>
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="text-sm font-semibold text-text-secondary">초기 제품 투자금</span>
+              <span className="font-display text-sm font-black text-white">{fmtMoney(investment)}</span>
             </div>
             <input
               type="range"
-              min={activeConfig.minBudget}
-              max={activeConfig.maxBudget + 3000}
-              step={500}
-              value={initialInvestment}
-              onChange={(e) => setInitialInvestment(Number(e.target.value))}
-              className="w-full accent-accent bg-[#0c0d14] rounded-pill h-2 cursor-pointer"
+              min={5000}
+              max={100000}
+              step={1000}
+              value={investment}
+              onChange={(e) => setInvestment(Number(e.target.value))}
+              style={trackStyle(investment, 5000, 100000)}
+              className="ksh-range w-full"
             />
-            <div className="flex justify-between text-[10px] text-text-muted">
-              <span>Min: ${activeConfig.minBudget.toLocaleString()}</span>
-              <span>Max: ${(activeConfig.maxBudget + 3000).toLocaleString()}</span>
-            </div>
           </div>
 
-          {/* Average Retail Price Slider */}
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-text-secondary">{t.inputs.averagePrice} (평균 판매가)</span>
-              <span className="font-display text-accent text-lg">${averagePrice}</span>
+          {/* Average Price Slider */}
+          <div>
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="text-sm font-semibold text-text-secondary">평균 판매가</span>
+              <span className="font-display text-sm font-black text-white">${avgPrice}</span>
             </div>
             <input
               type="range"
-              min={10}
-              max={50}
+              min={8}
+              max={40}
               step={1}
-              value={averagePrice}
-              onChange={(e) => setAveragePrice(Number(e.target.value))}
-              className="w-full accent-accent bg-[#0c0d14] rounded-pill h-2 cursor-pointer"
+              value={avgPrice}
+              onChange={(e) => setAvgPrice(Number(e.target.value))}
+              style={trackStyle(avgPrice, 8, 40)}
+              className="ksh-range w-full"
             />
-            <div className="flex justify-between text-[10px] text-text-muted">
-              <span>$10</span>
-              <span>$50 (핵심 타겟대: $15 ~ $25)</span>
-            </div>
           </div>
 
-          {/* Target Retail Margin Slider */}
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-text-secondary">{t.inputs.margin} (목표 소매 마진율)</span>
-              <span className="font-display text-accent text-lg">{targetMargin}%</span>
+          {/* Margin Slider */}
+          <div>
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="text-sm font-semibold text-text-secondary">리테일 마진</span>
+              <span className="font-display text-sm font-black text-white">{margin}%</span>
             </div>
             <input
               type="range"
-              min={45}
+              min={30}
               max={60}
               step={1}
-              value={targetMargin}
-              onChange={(e) => setTargetMargin(Number(e.target.value))}
-              className="w-full accent-accent bg-[#0c0d14] rounded-pill h-2 cursor-pointer"
+              value={margin}
+              onChange={(e) => setMargin(Number(e.target.value))}
+              style={trackStyle(margin, 30, 60)}
+              className="ksh-range w-full"
             />
-            <div className="flex justify-between text-[10px] text-text-muted">
-              <span>45%</span>
-              <span>60% (K-Beauty 고마진 마크업)</span>
-            </div>
           </div>
 
-          {/* Inventory Turn Radio Group */}
-          <div className="flex flex-col gap-3">
-            <label className="text-sm font-semibold text-text-secondary">
-              {t.inputs.turn} (연간 재고 회전율)
-            </label>
-            <div className="flex justify-between gap-2">
-              {[4, 5, 6, 7, 8].map((turn) => (
-                <button
-                  key={turn}
-                  type="button"
-                  onClick={() => setInventoryTurn(turn)}
-                  className={`flex-1 py-3 text-sm font-display font-bold rounded-card border transition-all cursor-pointer text-center ${
-                    inventoryTurn === turn
-                      ? "bg-accent text-white border-accent"
-                      : "bg-[#0c0d14] border-border text-text-secondary hover:border-accent"
-                  }`}
-                >
-                  {turn} Turns
-                </button>
-              ))}
-            </div>
-            <span className="text-[10px] text-text-muted leading-tight">
-              * 기본값은 6회전입니다. 회전수가 높을수록 상품 원재고 대비 연 매출 효율이 가파르게 증대됩니다.
-            </span>
-          </div>
-
-        </div>
-
-        {/* Right Side Recommendation Card with Fixture Image */}
-        <div className="lg:col-span-5 bg-[#0c0d14] border border-border rounded-card p-6 flex flex-col justify-between gap-6">
+          {/* Turns Slider */}
           <div>
-            <span className="text-[10px] text-accent font-bold uppercase tracking-wider">
-              RECOMMENDED MODULE
-            </span>
-            <h4 className="font-display text-lg font-bold text-ink mt-1">
-              {activeConfig.name}
-            </h4>
-            <p className="text-xs text-text-secondary mt-1 leading-normal">
-              {activeConfig.displayType}
-            </p>
-          </div>
-
-          {/* Fixture image card */}
-          <div className="relative w-full aspect-square bg-[#12141c] border border-border rounded-card overflow-hidden flex items-center justify-center">
-            <Image
-              src={activeConfig.imageSrc}
-              alt={activeConfig.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 30vw"
+            <div className="flex justify-between items-center mb-2.5">
+              <span className="text-sm font-semibold text-text-secondary">연간 재고 회전율</span>
+              <span className="font-display text-sm font-black text-white">{turns}회/년</span>
+            </div>
+            <input
+              type="range"
+              min={3}
+              max={12}
+              step={1}
+              value={turns}
+              onChange={(e) => setTurns(Number(e.target.value))}
+              style={trackStyle(turns, 3, 12)}
+              className="ksh-range w-full"
             />
           </div>
 
-          <div className="border-t border-border pt-4 grid grid-cols-2 gap-4">
-            <div>
-              <span className="text-[10px] text-text-muted block">추천 수량 (SKUs)</span>
-              <span className="font-display text-sm font-bold text-ink">{activeConfig.skuRange}</span>
-            </div>
-            <div>
-              <span className="text-[10px] text-text-muted block">초기 상품 구성액</span>
-              <span className="font-display text-sm font-bold text-accent">${activeConfig.defaultBudget.toLocaleString()}</span>
-            </div>
-          </div>
         </div>
-
       </div>
 
-      {/* Step 2: Outputs (Expected ROI results) */}
-      <div className="border-t border-border pt-8 flex flex-col gap-6">
-        <div>
-          <span className="text-xs font-bold text-accent uppercase tracking-wider block mb-1">
-            STEP 02. 시뮬레이션 계산 결과
+      {/* Right Output Calculations Card Column */}
+      <div className="bg-[#121214] border border-[#2a2a2a] rounded-card p-8 sm:p-10 flex flex-col justify-between shadow-2xl relative">
+        <div className="flex justify-between items-center mb-6">
+          <span className="text-xs text-text-secondary font-black uppercase tracking-wider">
+            예상 결과 · 연간
           </span>
-          <h3 className="font-display text-2xl font-bold text-ink">
-            예상 매출 및 연간 소매 마진 (ROI)
-          </h3>
+          <span className="text-[10px] text-accent border border-accent/20 px-3 py-1 rounded-pill font-black bg-accent-light uppercase">
+            권장 디스플레이: {recommendedDisplay}
+          </span>
         </div>
 
-        {/* Main Outputs Row */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-[#0c0d14] border border-border p-6 rounded-card flex flex-col justify-between">
-            <span className="text-xs text-text-secondary font-medium">{t.outputs.sales}</span>
-            <span className="font-display text-3xl font-bold text-ink mt-3">${annualSales.toLocaleString()}</span>
-            <span className="text-[10px] text-text-muted mt-2">연간 총 소매 매출액</span>
-          </div>
+        <div className="mb-6">
+          <span className="font-display text-5xl sm:text-6xl font-black text-accent tracking-tight select-none">
+            {fmtMoney(annualSales)}
+          </span>
+          <p className="mt-2 text-xs font-semibold text-text-secondary">
+            예상 연간 소매 매출
+          </p>
+        </div>
 
-          <div className="bg-[#0c0d14] border border-border p-6 rounded-card flex flex-col justify-between">
-            <span className="text-xs text-text-secondary font-medium">{t.outputs.profit}</span>
-            <span className="font-display text-3xl font-bold text-accent mt-3">${annualGrossProfit.toLocaleString()}</span>
-            <span className="text-[10px] text-text-muted mt-2">목표 마진 대비 순수익</span>
+        {/* Dynamic calculations list grid */}
+        <div className="grid grid-cols-2 gap-6 pt-6 border-t border-[#2a2a2a] text-left">
+          <div>
+            <span className="font-display text-lg font-bold text-white">{fmtMoney(grossProfit)}</span>
+            <p className="text-[10px] text-text-secondary mt-1">총 매출총이익</p>
           </div>
-
-          <div className="bg-[#0c0d14] border border-border p-6 rounded-card flex flex-col justify-between">
-            <span className="text-xs text-text-secondary font-medium">{t.outputs.gmroi}</span>
-            <span className="font-display text-3xl font-bold text-ink mt-3">{gmroi}%</span>
-            <div className="w-full bg-border h-1.5 rounded-pill mt-3 overflow-hidden">
-              <div
-                className="bg-accent h-full transition-all duration-500"
-                style={{ width: `${Math.min(gmroi / 10, 100)}%` }}
-              />
-            </div>
+          <div>
+            <span className="font-display text-lg font-bold text-white">{fmtInt(annualUnits)}개</span>
+            <p className="text-[10px] text-text-secondary mt-1">연간 판매 수량</p>
           </div>
-
-          <div className="bg-[#0c0d14] border border-border p-6 rounded-card flex flex-col justify-between">
-            <span className="text-xs text-text-secondary font-medium">{t.outputs.cogs}</span>
-            <span className="font-display text-3xl font-bold text-ink mt-3">${annualCogs.toLocaleString()}</span>
-            <span className="text-[10px] text-text-muted mt-2">연간 총 상품 공급 매입액</span>
+          <div>
+            <span className="font-display text-lg font-bold text-white">{fmtMoney(monthlySales)}</span>
+            <p className="text-[10px] text-text-secondary mt-1">월 평균 매출</p>
+          </div>
+          <div>
+            <span className="font-display text-lg font-bold text-white">{fmtMoney(dailySales)}</span>
+            <p className="text-[10px] text-text-secondary mt-1">일 평균 매출</p>
           </div>
         </div>
 
-        {/* Sub Metrics (Units details) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-[#0c0d14] border border-border p-6 rounded-card">
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-text-secondary">{t.outputs.annualUnits}</span>
-            <span className="font-display text-xl font-bold text-ink">{annualUnits.toLocaleString()} <span className="text-xs font-semibold">Units</span></span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-text-secondary">{t.outputs.monthlyUnits}</span>
-            <span className="font-display text-xl font-bold text-ink">{monthlyUnits.toLocaleString()} <span className="text-xs font-semibold">Units</span></span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-text-secondary">{t.outputs.dailyUnits}</span>
-            <span className="font-display text-xl font-bold text-accent">{dailyUnits.toLocaleString()} <span className="text-xs font-semibold">Units</span></span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-text-secondary">{t.outputs.skuUnits}</span>
-            <span className="font-display text-xl font-bold text-ink">{unitsPerSkuPerMonth.toLocaleString()} <span className="text-xs font-semibold">Units</span></span>
-          </div>
+        <div className="mt-6 pt-6 border-t border-[#2a2a2a] flex items-center justify-between">
+          <span className="text-xs text-text-secondary font-semibold">SKU당 연간 생산성</span>
+          <span className="font-display text-sm font-black text-white">{fmtMoney(skuProductivity)}</span>
         </div>
 
-      </div>
-
-      {/* Step 3: Calculation Logic Flow Infographic */}
-      <div className="border-t border-border pt-8 flex flex-col gap-6">
-        <h4 className="font-display text-sm font-bold text-ink uppercase tracking-wider">
-          {t.howItIsCalculated.title}
-        </h4>
-        
-        {/* Step-by-Step Flow Cards */}
-        <div className="grid md:grid-cols-4 gap-4 text-xs">
-          
-          <div className="bg-[#0c0d14] border border-border p-4 rounded-card flex flex-col gap-2">
-            <span className="text-[10px] text-accent font-bold">STAGE 01</span>
-            <span className="font-semibold text-ink">{t.howItIsCalculated.steps[0].label}</span>
-            <p className="text-text-secondary leading-relaxed">
-              초기 투자액(${initialInvestment.toLocaleString()})에 재고 회전수({inventoryTurn}회)를 곱해 연간 총 공급액(${annualCogs.toLocaleString()})을 산출합니다.
-            </p>
-          </div>
-
-          <div className="bg-[#0c0d14] border border-border p-4 rounded-card flex flex-col gap-2">
-            <span className="text-[10px] text-accent font-bold">STAGE 02</span>
-            <span className="font-semibold text-ink">{t.howItIsCalculated.steps[1].label}</span>
-            <p className="text-text-secondary leading-relaxed">
-              공급액(${annualCogs.toLocaleString()})을 마진 공제비율({100 - targetMargin}%)로 나누어 연 소매 매출액(${annualSales.toLocaleString()})을 도출합니다.
-            </p>
-          </div>
-
-          <div className="bg-[#0c0d14] border border-border p-4 rounded-card flex flex-col gap-2">
-            <span className="text-[10px] text-accent font-bold">STAGE 03</span>
-            <span className="font-semibold text-ink">{t.howItIsCalculated.steps[2].label}</span>
-            <p className="text-text-secondary leading-relaxed">
-              소매매출(${annualSales.toLocaleString()})에서 원가(${annualCogs.toLocaleString()})를 빼 순이익(${annualGrossProfit.toLocaleString()})을 계산합니다.
-            </p>
-          </div>
-
-          <div className="bg-[#0c0d14] border border-border p-4 rounded-card flex flex-col gap-2">
-            <span className="text-[10px] text-accent font-bold">STAGE 04</span>
-            <span className="font-semibold text-ink">{t.howItIsCalculated.steps[3].label}</span>
-            <p className="text-text-secondary leading-relaxed">
-              연간 판매개수를 365일로 균등 쪼개어 하루 평균 목표치({dailyUnits}개)와 SKU별 월판매량({unitsPerSkuPerMonth}개)을 제공합니다.
-            </p>
-          </div>
-
-        </div>
-
-        {/* GMROI Infographic summary bar */}
-        <div className="bg-accent-light border border-accent/20 rounded-card p-5 text-sm text-ink leading-relaxed">
-          💡 <strong>매장 성장 분석 요약</strong>: 초기 재고 비용으로 <strong>${initialInvestment.toLocaleString()}</strong>을 투입하고, 연간 <strong>{inventoryTurn}회</strong> 회전하며 <strong>{targetMargin}%</strong>의 마진을 확보하면, 연간 총 소매 매출액은 <strong>${annualSales.toLocaleString()}</strong>에 이르며 순마진 이익으로만 <strong>${annualGrossProfit.toLocaleString()}</strong>을 돌려받게 됩니다. 이는 하루에 평균 약 <strong>{dailyUnits}개</strong>의 제품 판매만 꾸준히 달성해도 달성 가능한 목표입니다. (초기 재고 투자 대비 마진 회수율 <strong>GMROI: {gmroi}%</strong>)
-        </div>
-      </div>
-
-      {/* Step 4: Disclaimer & CTA */}
-      <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <p className="text-[10px] text-text-muted leading-relaxed max-w-2xl text-left">
-          {t.disclaimer}
-        </p>
         <button
           onClick={handleApplyClick}
-          className="w-full sm:w-auto inline-flex h-14 items-center justify-center bg-accent text-white px-8 font-bold rounded-pill hover:bg-accent-hover transition-colors text-sm cursor-pointer whitespace-nowrap"
+          className="w-full h-14 bg-accent hover:bg-[#e01a5e] text-white font-black rounded-pill text-xs mt-8 transition-colors cursor-pointer"
         >
-          {t.cta}
+          이 조건으로 파트너 신청하기 →
         </button>
       </div>
 
