@@ -152,3 +152,75 @@ body {
   animation: polylineDraw 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.5s;
 }
+
+/* Custom Solution Section classes from brand standalone HTML */
+.ks-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #0A0A0A;
+  border: 1.5px solid rgba(255,255,255,0.16);
+  transition: box-shadow .2s, border-color .2s;
+}
+.ks-node.active {
+  border: 1.5px solid #EB326E;
+  box-shadow: 0 0 22px 3px rgba(235,50,110,0.55);
+}
+.ks-node svg {
+  stroke: #B4B4B4;
+}
+.ks-node.active svg {
+  stroke: #EB326E;
+}
+.ks-node .num {
+  font-size: 12px;
+  font-weight: 800;
+  color: #B4B4B4;
+}
+.ks-node.active .num {
+  color: #FAFAFA;
+}
+.ks-node .lbl {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #8A8A8A;
+  max-width: 64px;
+  text-align: center;
+  line-height: 1.15;
+}
+.ks-node.active .lbl {
+  color: #EB326E;
+}
+.ks-panel {
+  display: none;
+}
+.ks-panel.active {
+  display: block;
+}
+.ks-ft {
+  border-radius: 10px;
+  padding: 16px 8px;
+  text-align: center;
+  cursor: pointer;
+  border: 1.5px solid rgba(255,255,255,0.16);
+}
+.ks-ft.active {
+  border: 1.5px solid #EB326E;
+  background: rgba(235,50,110,0.08);
+}
+.ks-ft .num {
+  font-size: 16px;
+  font-weight: 800;
+  color: #FAFAFA;
+  margin-bottom: 2px;
+}
+.ks-ft.active .num {
+  color: #EB326E;
+}
