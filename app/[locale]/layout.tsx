@@ -19,6 +19,12 @@ export const metadata: Metadata = {
   title: 'K Select Hub - Retail Growth Partner for K-Beauty',
   description: '미국 독립 Beauty Supply Retailer를 위한 최적의 K-Beauty 카테고리 솔루션. 상품 큐레이션, 맞춤형 디스플레이, 지속적 머천다이징 지원.',
   metadataBase: new URL('https://kselecthub.com'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+  },
 };
 
 interface LayoutProps {
