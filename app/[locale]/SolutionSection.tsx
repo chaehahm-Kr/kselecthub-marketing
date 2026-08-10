@@ -19,11 +19,11 @@ interface SolutionItem {
 
 export default function SolutionSection() {
   const [activeTab, setActiveTab] = useState(0); // 0 to 4 (CURATE to OPTIMIZE)
-  const [buildSize, setBuildSize] = useState<"4ft" | "8ft" | "12ft">("8ft"); // Default is 8ft Growth based on user spec
+  const [buildSize, setBuildSize] = useState<"4ft" | "8ft" | "12ft">("8ft"); // Default is 8ft Growth based on user specifications
   const [isHovered, setIsHovered] = useState(false);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // 5 Solutions Data matching final마스터 PNG 디자인 V2
+  // 5 Solutions Data matching final마스터 PNG 디자인 V3
   const solutions: SolutionItem[] = [
     {
       id: 0,
@@ -38,7 +38,7 @@ export default function SolutionSection() {
       chips: [
         { label: "QUALITY", desc: "엄격한 품질 기준 검증" },
         { label: "MARGIN", desc: "지속 가능한 마진 구조" },
-        { label: "U.S. MARKET FIT", desc: "미국 시장 트렌드 & 규제 적합성 검토" }
+        { label: "U.S. MARKET FIT", desc: "미국 시장 트렌드 & 규격 적합성 검토" }
       ]
     },
     {
@@ -50,7 +50,7 @@ export default function SolutionSection() {
       englishSub: "Differentiated Assortment",
       mainCopy: "인기 제품을 모으는 것만으로는 차별화가 되지 않습니다.",
       description: "카테고리, 가격대, 제품 역할과 매장 고객 특성을 고려하여 가격 경쟁에서 벗어날 수 있는 매장 맞춤형 Product Mix를 구성합니다.",
-      defaultImage: assetConfig.storeShowcase.heroSection.src, // Clean premium product shelves flatlay
+      defaultImage: assetConfig.storeShowcase.heroSection.src, // Clean product shelving display without labels
       chips: [
         { label: "DIFFERENTIATION", desc: "동일 상품 가격 경쟁 완화" },
         { label: "PRICE POINT BALANCE", desc: "가격대와 마진의 균형" },
@@ -82,7 +82,7 @@ export default function SolutionSection() {
       englishSub: "Retail-Ready Support",
       mainCopy: "제품 공급에서 끝나지 않습니다.",
       description: "제품 정보, 직원 교육, Merchandising과 매장 운영 지원을 통해 실제 판매가 이루어질 수 있도록 돕습니다.",
-      defaultImage: assetConfig.storeShowcase.partnershipSection.src, // Screen, Guide support mockup
+      defaultImage: assetConfig.storeShowcase.partnershipSection.src,
       chips: [
         { label: "QR PRODUCT INFO", desc: "고객이 제품 정보를 즉시 확인" },
         { label: "STAFF TRAINING", desc: "직원이 자신 있게 제품을 설명" },
@@ -138,44 +138,44 @@ export default function SolutionSection() {
   return (
     <section
       id="solution"
-      className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-16 sm:py-20 text-left relative overflow-hidden"
+      className="max-w-[1440px] mx-auto px-[32px] sm:px-[64px] py-20 sm:py-24 text-left relative overflow-hidden bg-[#0c0c0c]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* 03 Header Narrative Section */}
-      <div className="max-w-[720px] mb-12 flex flex-col gap-2.5">
-        <span className="text-xs font-semibold text-accent tracking-[0.04em]">
+      {/* 03 Header Narrative with minimized bottom margin to avoid gap */}
+      <div className="max-w-[800px] mb-6 flex flex-col gap-2.5">
+        <span className="text-xs font-semibold text-[#ff2b75] tracking-[0.04em]">
           03 — K SELECT SOLUTION
         </span>
-        <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.25] text-white">
+        <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-bold leading-[1.2] tracking-tight text-white">
           우리가 가진 5가지 솔루션으로<br />
           리테일러의 문제를 해결합니다.
         </h2>
-        <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+        <p className="text-xs sm:text-sm text-text-secondary leading-relaxed max-w-2xl mt-1">
           K Select는 제품 선정부터 디스플레이 · 운영 · 재고 최적화까지<br />
           하나로 연결된 시스템으로 리테일 성장을 지원합니다.
         </p>
       </div>
 
-      {/* Main Grid: Left Orbit Wheel (43%), Right Panel (57%) */}
-      <div className="grid lg:grid-cols-[0.43fr_0.57fr] gap-10 lg:gap-14 items-center">
+      {/* Main Grid Layout: Orbit Wheel (43%), Detail Panel (57%) - Larger scale */}
+      <div className="grid lg:grid-cols-[0.43fr_0.57fr] gap-10 lg:gap-14 items-center mt-4">
         
-        {/* Left Column: Solution Wheel */}
-        <div className="relative w-full max-w-[440px] aspect-square mx-auto flex items-center justify-center select-none">
+        {/* Left Column: Solution Wheel (Scaled up) */}
+        <div className="relative w-full max-w-[500px] aspect-square mx-auto flex items-center justify-center select-none">
           
-          {/* Circular Track Line */}
+          {/* Circular Orbit dashed track */}
           <div className="absolute w-[80%] h-[80%] rounded-full border border-dashed border-[#2a2a2a] animate-[spin_120s_linear_infinite]" />
           
           {/* Central Hub Core */}
-          <div className="absolute w-[36%] h-[36%] rounded-full bg-[#0c0c0c] border border-[#2a2a2a] flex flex-col items-center justify-center text-center shadow-2xl z-10 p-3">
-            <svg className="w-6 h-6 text-[#ff2b75]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <div className="absolute w-[36%] h-[36%] rounded-full bg-[#0c0c0c] border border-[#2a2a2a] flex flex-col items-center justify-center text-center shadow-2xl z-10 p-4">
+            <svg className="w-7 h-7 text-[#ff2b75]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 2a14.5 14.5 0 000 20M12 2a14.5 14.5 0 010 20M2 12h20" />
             </svg>
-            <span className="font-display text-[10px] font-black text-white mt-2 tracking-widest uppercase">
+            <span className="font-display text-[11px] font-black text-white mt-2 tracking-widest uppercase">
               K SELECT
             </span>
-            <span className="font-display text-[8.5px] text-[#ff2b75] font-bold uppercase mt-0.5">
+            <span className="font-display text-[9px] text-[#ff2b75] font-bold uppercase mt-0.5">
               SOLUTION
             </span>
           </div>
@@ -183,9 +183,9 @@ export default function SolutionSection() {
           {/* Node 01 - CURATE (Top / 0 deg) */}
           <button
             onClick={() => handleTabClick(0)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[84px] sm:w-[96px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[88px] sm:w-[102px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
               activeTab === 0 
-                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_20px_rgba(255,43,117,0.4)] z-20 scale-110 opacity-100" 
+                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_22px_rgba(255,43,117,0.55)] z-20 scale-110 opacity-100" 
                 : "bg-[#111] border border-[#2a2a2a] text-text-secondary opacity-45 scale-95 hover:opacity-85 z-10"
             }`}
             style={{ top: "12%", left: "50%" }}
@@ -200,9 +200,9 @@ export default function SolutionSection() {
           {/* Node 02 - DIFFERENTIATE (Top Right / 72 deg) */}
           <button
             onClick={() => handleTabClick(1)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[84px] sm:w-[96px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[88px] sm:w-[102px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
               activeTab === 1 
-                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_20px_rgba(255,43,117,0.4)] z-20 scale-110 opacity-100" 
+                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_22px_rgba(255,43,117,0.55)] z-20 scale-110 opacity-100" 
                 : "bg-[#111] border border-[#2a2a2a] text-text-secondary opacity-45 scale-95 hover:opacity-85 z-10"
             }`}
             style={{ top: "34%", left: "86%" }}
@@ -211,15 +211,15 @@ export default function SolutionSection() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M7 12l3-3 3 3 4-4M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
             <span className="text-[9px] font-black tracking-wide leading-tight">02</span>
-            <span className="text-[7.5px] font-bold tracking-wider uppercase mt-0.5">DIFF</span>
+            <span className="text-[7.5px] font-bold tracking-wider uppercase mt-0.5 font-sans">DIFF</span>
           </button>
 
           {/* Node 03 - BUILD (Bottom Right / 144 deg) */}
           <button
             onClick={() => handleTabClick(2)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[84px] sm:w-[96px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[88px] sm:w-[102px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
               activeTab === 2 
-                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_20px_rgba(255,43,117,0.4)] z-20 scale-110 opacity-100" 
+                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_22px_rgba(255,43,117,0.55)] z-20 scale-110 opacity-100" 
                 : "bg-[#111] border border-[#2a2a2a] text-text-secondary opacity-45 scale-95 hover:opacity-85 z-10"
             }`}
             style={{ top: "74%", left: "73%" }}
@@ -234,9 +234,9 @@ export default function SolutionSection() {
           {/* Node 04 - SUPPORT (Bottom Left / 216 deg) */}
           <button
             onClick={() => handleTabClick(3)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[84px] sm:w-[96px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[88px] sm:w-[102px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
               activeTab === 3 
-                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_20px_rgba(255,43,117,0.4)] z-20 scale-110 opacity-100" 
+                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_22px_rgba(255,43,117,0.55)] z-20 scale-110 opacity-100" 
                 : "bg-[#111] border border-[#2a2a2a] text-text-secondary opacity-45 scale-95 hover:opacity-85 z-10"
             }`}
             style={{ top: "74%", left: "27%" }}
@@ -251,9 +251,9 @@ export default function SolutionSection() {
           {/* Node 05 - OPTIMIZE (Top Left / 288 deg) */}
           <button
             onClick={() => handleTabClick(4)}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[84px] sm:w-[96px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
+            className={`absolute -translate-x-1/2 -translate-y-1/2 w-[88px] sm:w-[102px] aspect-square rounded-full flex flex-col justify-center items-center text-center transition-all duration-300 focus:outline-none ${
               activeTab === 4 
-                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_20px_rgba(255,43,117,0.4)] z-20 scale-110 opacity-100" 
+                ? "bg-[#0c0c0c] border-2 border-[#ff2b75] text-[#ff2b75] shadow-[0_0_22px_rgba(255,43,117,0.55)] z-20 scale-110 opacity-100" 
                 : "bg-[#111] border border-[#2a2a2a] text-text-secondary opacity-45 scale-95 hover:opacity-85 z-10"
             }`}
             style={{ top: "34%", left: "14%" }}
@@ -265,8 +265,8 @@ export default function SolutionSection() {
             <span className="text-[7.5px] font-bold tracking-wider uppercase mt-0.5">OPTIMIZE</span>
           </button>
 
-          {/* Wheel Footer Nav */}
-          <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+          {/* Wheel Nav Footer */}
+          <div className="absolute bottom-[1%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10">
             <div className="flex items-center gap-4 text-[9px] text-text-secondary font-medium tracking-wide">
               <button 
                 onClick={() => handleTabClick((activeTab - 1 + 5) % 5)}
@@ -297,22 +297,22 @@ export default function SolutionSection() {
 
         </div>
 
-        {/* Right Column: Premium Swap Specs Details Panel (57% width on desktop, larger view) */}
-        <div className="bg-[#0c0c0c] border border-[#ff2b75]/40 rounded-[24px] p-8 sm:p-10 shadow-2xl relative min-h-[520px] flex flex-col justify-between text-left transition-all duration-300">
+        {/* Right Column: Premium Swap Specs Details Panel (Expanded to match 시안 비율) */}
+        <div className="bg-[#0c0c0c] border border-[#ff2b75]/40 rounded-[24px] p-9 sm:p-11 shadow-2xl relative min-h-[580px] flex flex-col justify-between text-left transition-all duration-300">
           
           {/* Swapped content container with React key for trigger transition */}
-          <div key={activeTab} className="flex flex-col gap-5.5 animate-fade-in">
+          <div key={activeTab} className="flex flex-col gap-6 animate-fade-in">
             
-            {/* Header Title info */}
+            {/* Header Title info (strict subtitle formatting) */}
             <div>
-              <span className="text-[10px] text-accent tracking-[0.08em] font-black uppercase">
+              <span className="text-[10px] text-[#ff2b75] tracking-[0.08em] font-black uppercase">
                 {solutions[activeTab].number}
               </span>
-              <h3 className="font-display text-3xl sm:text-[34px] font-black text-white leading-tight mb-1 mt-0.5">
+              <h3 className="font-display text-3xl sm:text-[36px] font-black text-white leading-none mb-2.5 mt-1">
                 {solutions[activeTab].title}
               </h3>
-              <h4 className="text-xs font-bold text-accent">
-                {solutions[activeTab].subtitle} <span className="text-text-secondary font-medium text-[11px] ml-1">| {solutions[activeTab].englishSub}</span>
+              <h4 className="text-xs sm:text-sm font-bold text-[#ff2b75] flex items-center gap-1.5">
+                {solutions[activeTab].subtitle} <span className="text-text-secondary font-medium text-[11px] sm:text-xs">| {solutions[activeTab].englishSub}</span>
               </h4>
             </div>
 
@@ -320,26 +320,26 @@ export default function SolutionSection() {
             <div className="border-b border-white/10 w-full" />
 
             {/* Split layout inside detail panel (Left text info, Right graphic showcase) */}
-            <div className="grid sm:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
+            <div className="grid sm:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
               
               {/* Left narrative text */}
-              <div className="flex flex-col gap-3.5">
-                <p className="text-sm sm:text-base text-white leading-relaxed font-bold">
+              <div className="flex flex-col gap-4">
+                <p className="text-base sm:text-lg text-white leading-relaxed font-bold">
                   {solutions[activeTab].mainCopy}
                 </p>
-                <p className="text-xs text-text-secondary leading-relaxed font-medium">
+                <p className="text-[12.5px] text-text-secondary leading-relaxed font-medium">
                   {solutions[activeTab].description}
                 </p>
                 
                 {/* BUILD section size swapper button group */}
                 {solutions[activeTab].key === "BUILD" && (
-                  <div className="flex flex-col gap-2 mt-2">
-                    <div className="flex gap-2">
+                  <div className="flex flex-col gap-2 mt-3">
+                    <div className="flex gap-2.5">
                       {(["4ft", "8ft", "12ft"] as const).map((size) => (
                         <button
                           key={size}
                           onClick={() => setBuildSize(size)}
-                          className={`px-3.5 py-1.5 rounded-[8px] text-[10px] font-black tracking-wider transition-all focus:outline-none ${
+                          className={`px-4 py-2 rounded-[8px] text-[10px] font-black tracking-wider transition-all focus:outline-none ${
                             buildSize === size
                               ? "bg-[#ff2b75] text-white shadow-[0_0_10px_rgba(255,43,117,0.35)]"
                               : "bg-[#111] border border-[#2a2a2a] text-text-secondary hover:border-white/10"
@@ -350,7 +350,7 @@ export default function SolutionSection() {
                       ))}
                     </div>
                     {/* Small button descriptors label matching user specs */}
-                    <span className="text-[9px] text-text-muted mt-1">
+                    <span className="text-[10px] text-text-muted mt-1 font-medium">
                       {buildSize === "4ft" && "Starter / 1 Module"}
                       {buildSize === "8ft" && "Growth / 2 Modules"}
                       {buildSize === "12ft" && "Destination / 3 Modules"}
@@ -362,13 +362,13 @@ export default function SolutionSection() {
               {/* Right graphical image or mini dashboard block */}
               <div className="relative w-full aspect-square rounded-[20px] overflow-hidden border border-[#2a2a2a] bg-[#111] shadow-lg flex items-center justify-center">
                 
-                {/* OPTIMIZE: Custom simplified visual dashboard display 복제 */}
+                {/* OPTIMIZE: Custom simplified visual dashboard display 복제 V3 */}
                 {solutions[activeTab].key === "OPTIMIZE" ? (
                   <div className="absolute inset-0 p-4 flex flex-col justify-between text-left select-none bg-[#0c0c0c] border border-white/5 rounded-[20px]">
                     
                     {/* 1. SELL-THROUGH (7D) 막대 그래프 */}
                     <div className="bg-[#111] border border-white/5 rounded-[12px] p-2.5 shadow-md flex-1 flex flex-col justify-between">
-                      <span className="text-[7px] text-text-secondary uppercase tracking-widest font-black block mb-1">SELL-THROUGH (7D)</span>
+                      <span className="text-[7.5px] text-text-secondary uppercase tracking-widest font-black block mb-1.5">SELL-THROUGH (7D)</span>
                       
                       <div className="flex-1 flex items-end justify-between gap-1.5 px-1 relative h-12">
                         {/* Grid lines */}
@@ -408,7 +408,7 @@ export default function SolutionSection() {
                     
                     {/* 2. REORDER RECOMMENDATION 위젯 */}
                     <div className="bg-[#111] border border-[#ff2b75]/35 rounded-[12px] p-2.5 my-2 shadow-md relative z-10 flex flex-col justify-between">
-                      <span className="text-[7px] text-text-secondary uppercase tracking-widest font-black block mb-0.5">REORDER RECOMMENDATION</span>
+                      <span className="text-[7.5px] text-text-secondary uppercase tracking-widest font-black block mb-0.5">REORDER RECOMMENDATION</span>
                       <div className="flex items-center justify-between mt-1">
                         <div className="flex flex-col">
                           <span className="text-[6.5px] text-text-muted">SKU-1023</span>
@@ -423,7 +423,7 @@ export default function SolutionSection() {
 
                     {/* 3. PRODUCT MIX ADJUSTMENT 원형 도넛 차트 위젯 */}
                     <div className="bg-[#111] border border-white/5 rounded-[12px] p-2.5 shadow-md flex flex-col justify-between">
-                      <span className="text-[7px] text-text-secondary uppercase font-bold block mb-1">PRODUCT MIX ADJUSTMENT</span>
+                      <span className="text-[7.5px] text-text-secondary uppercase font-bold block mb-1">PRODUCT MIX ADJUSTMENT</span>
                       <div className="flex items-center justify-around gap-2 py-1">
                         
                         {/* BEFORE Donut */}
@@ -476,13 +476,13 @@ export default function SolutionSection() {
           </div>
 
           {/* Bottom 3 Points matching 마스터 디자인 */}
-          <div className="grid grid-cols-3 gap-3 border-t border-[#2a2a2a] mt-8 pt-6">
+          <div className="grid grid-cols-3 gap-4 border-t border-white/10 mt-8 pt-6">
             {solutions[activeTab].chips.map((chip, index) => (
-              <div key={index} className="flex flex-col gap-1 text-left">
-                <span className="text-[9px] text-[#ff2b75] uppercase tracking-widest font-black">
+              <div key={index} className="flex flex-col gap-1.5 text-left">
+                <span className="text-[9.5px] text-[#ff2b75] uppercase tracking-widest font-black">
                   {chip.label}
                 </span>
-                <p className="margin-0 text-[10px] text-text-secondary leading-normal font-medium">
+                <p className="margin-0 text-[10.5px] text-text-secondary leading-normal font-medium">
                   {chip.desc}
                 </p>
               </div>
@@ -494,11 +494,11 @@ export default function SolutionSection() {
       </div>
 
       {/* Bottom Explore Deep Dive Navigation Strip */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-[#2a2a2a] overflow-hidden rounded-[16px] mt-16 border border-[#2a2a2a] shadow-lg">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-[#2a2a2a] overflow-hidden rounded-[16px] mt-16 border border-2 border-[#2a2a2a] shadow-lg">
         
         {/* Left header cell */}
         <div className="bg-[#0c0c0c] p-6 flex flex-col justify-center text-left">
-          <div className="flex items-center gap-2 text-[9px] text-[#ff2b75] font-black uppercase mb-1">
+          <div className="flex items-center gap-2 text-[9.5px] text-[#ff2b75] font-black uppercase mb-1">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
               <rect x="3" y="3" width="7" height="9" rx="1" />
               <rect x="14" y="3" width="7" height="5" rx="1" />
@@ -518,8 +518,8 @@ export default function SolutionSection() {
           className="bg-[#0c0c0c] hover:bg-[#111] p-6 flex items-center justify-between text-left transition-colors duration-200 group focus:outline-none"
         >
           <div className="flex flex-col gap-1">
-            <span className="text-[9px] text-[#ff2b75] tracking-widest font-bold">01</span>
-            <span className="text-xs font-bold text-white group-hover:text-accent transition-colors">
+            <span className="text-[9.5px] text-[#ff2b75] tracking-widest font-bold">01</span>
+            <span className="text-[13px] font-bold text-white group-hover:text-accent transition-colors">
               Curated Product Mix
             </span>
           </div>
@@ -534,8 +534,8 @@ export default function SolutionSection() {
           className="bg-[#0c0c0c] hover:bg-[#111] p-6 flex items-center justify-between text-left transition-colors duration-200 group focus:outline-none"
         >
           <div className="flex flex-col gap-1">
-            <span className="text-[9px] text-[#ff2b75] tracking-widest font-bold">02</span>
-            <span className="text-xs font-bold text-white group-hover:text-accent transition-colors">
+            <span className="text-[9.5px] text-[#ff2b75] tracking-widest font-bold">02</span>
+            <span className="text-[13px] font-bold text-white group-hover:text-accent transition-colors">
               Store-in-a-Store
             </span>
           </div>
@@ -550,8 +550,8 @@ export default function SolutionSection() {
           className="bg-[#0c0c0c] hover:bg-[#111] p-6 flex items-center justify-between text-left transition-colors duration-200 group focus:outline-none"
         >
           <div className="flex flex-col gap-1">
-            <span className="text-[9px] text-[#ff2b75] tracking-widest font-bold">03</span>
-            <span className="text-xs font-bold text-white group-hover:text-accent transition-colors">
+            <span className="text-[9.5px] text-[#ff2b75] tracking-widest font-bold">03</span>
+            <span className="text-[13px] font-bold text-white group-hover:text-accent transition-colors">
               90-Day Exchange Credit
             </span>
           </div>
