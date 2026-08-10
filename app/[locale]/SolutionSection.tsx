@@ -88,39 +88,39 @@ export default function SolutionSection() {
             </div>
           )}
 
-          {/* Absolute Hotspot Button Maps - Solution Wheel Nodes */}
+          {/* Absolute Hotspot Button Maps - Solution Wheel Nodes V2 */}
           {/* Node 01 - CURATE (Top / 0 deg) */}
           <button
             onClick={() => handleTabClick(0)}
-            className="absolute top-[25.5%] left-[18.3%] w-[7.0%] h-[12.0%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
+            className="absolute top-[23.0%] left-[21.0%] w-[8.2%] h-[14.5%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
             aria-label="Solution 01 Curate"
           />
 
           {/* Node 02 - DIFFERENTIATE (Top Right / 72 deg) */}
           <button
             onClick={() => handleTabClick(1)}
-            className="absolute top-[39.5%] left-[31.2%] w-[7.0%] h-[12.0%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
+            className="absolute top-[35.0%] left-[30.5%] w-[8.2%] h-[14.5%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
             aria-label="Solution 02 Differentiate"
           />
 
           {/* Node 03 - BUILD (Bottom Right / 144 deg) */}
           <button
             onClick={() => handleTabClick(2)}
-            className="absolute top-[62.5%] left-[28.5%] w-[7.0%] h-[12.0%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
+            className="absolute top-[57.0%] left-[27.0%] w-[8.2%] h-[14.5%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
             aria-label="Solution 03 Build"
           />
 
           {/* Node 04 - SUPPORT (Bottom Left / 216 deg) */}
           <button
             onClick={() => handleTabClick(3)}
-            className="absolute top-[62.5%] left-[9.5%] w-[7.0%] h-[12.0%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
+            className="absolute top-[57.0%] left-[15.0%] w-[8.2%] h-[14.5%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
             aria-label="Solution 04 Support"
           />
 
           {/* Node 05 - OPTIMIZE (Top Left / 288 deg) */}
           <button
             onClick={() => handleTabClick(4)}
-            className="absolute top-[39.5%] left-[6.5%] w-[7.0%] h-[12.0%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
+            className="absolute top-[35.0%] left-[11.5%] w-[8.2%] h-[14.5%] z-30 cursor-pointer rounded-full bg-transparent border-0 focus:outline-none"
             aria-label="Solution 05 Optimize"
           />
 
