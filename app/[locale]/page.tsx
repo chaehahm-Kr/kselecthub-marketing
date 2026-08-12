@@ -25,38 +25,40 @@ export default async function Home({ params }: PageProps) {
   return (
     <div className="min-h-screen flex flex-col font-body bg-[#141414] text-white overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
       
-      {/* 0. NAV (Header) - Height 88px, sticky nav with backdrop blur */}
+      {/* 0. NAV (Header) - Height 88px, sticky nav with backdrop blur and responsive horizontal padding */}
       <header className="sticky top-0 z-50 bg-[#141414]/86 backdrop-blur-md border-b border-[#2A2A2A]">
-        <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] h-[88px] flex items-center justify-between gap-10">
-          <div className="flex items-center gap-[32px] xl:gap-[44px]">
-            {/* Logo Click Area expansion - Wraps symbol and text together with negative margin to align left */}
-            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card -ml-[12px] sm:-ml-[16px]">
-              <div className="relative w-[210px] h-[50px] sm:w-[294px] sm:h-[70px]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-6 xl:px-12 h-[88px] flex items-center justify-between gap-4 sm:gap-6 lg:gap-8">
+          <div className="flex items-center gap-4 lg:gap-5 xl:gap-8">
+            {/* Logo Click Area expansion - Compact sizing to save desktop navigation space */}
+            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card -ml-2 sm:-ml-4">
+              <div className="relative w-[170px] h-[40px] sm:w-[220px] sm:h-[52px]">
                 <Image
                   src={assetConfig.logo.src}
                   alt={assetConfig.logo.alt}
                   fill
                   priority
                   className="object-contain"
-                  sizes="(max-width: 640px) 210px, 294px"
+                  sizes="(max-width: 640px) 170px, 220px"
                 />
               </div>
             </a>
-            {/* Header navigation bar links with dropdown hover menus and zero-jitter cross-fade translation support */}
-            <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-semibold text-white/70">
+            {/* Header navigation bar links with dropdown hover menus, compact gaps, and zero-jitter cross-fade translation support */}
+            <nav className="hidden lg:flex items-center gap-3 xl:gap-5 text-sm font-semibold text-white/70">
               
-              {/* 01. K-BEAUTY GROWTH PROGRAM */}
+              {/* 01. PROGRAM */}
               <div className="relative group/nav py-6">
                 <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[185px] flex items-center justify-start select-none">
+                  <div className="relative h-5 w-[75px] flex items-center justify-start select-none">
                     {/* English (Default) */}
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      K-BEAUTY GROWTH PROGRAM
+                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                      PROGRAM
                     </span>
                     {/* Korean (Hover) */}
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      K-뷰티 성장 프로그램
-                    </span>
+                    {locale === "ko" && (
+                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                        프로그램
+                      </span>
+                    )}
                   </div>
                   <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -66,14 +68,14 @@ export default async function Home({ params }: PageProps) {
                 {/* Dropdown Container */}
                 <div className="absolute top-[100%] left-0 w-[300px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3.5 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
                   {[
-                    { label: "01. Why K-Beauty Now", sub: "왜 지금 K-Beauty인가", href: "#why-kbeauty" },
-                    { label: "02. Retailer Challenges", sub: "리테일러가 겪는 현실적인 문제", href: "#challenges" },
-                    { label: "03. K Select Solution", sub: "5가지 통합 성장 솔루션", href: "#solutions" },
-                    { label: "04. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: "#curation" },
+                    { label: "01. Why K-Beauty Now", sub: "왜 지금 K-Beauty인가", href: "#opportunity" },
+                    { label: "02. Retailer Challenges", sub: "리테일러가 겪는 현실적인 문제", href: "#problems-section" },
+                    { label: "03. K Select Solution", sub: "5가지 통합 성장 솔루션", href: "#solution" },
+                    { label: "04. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: "#products" },
                     { label: "05. K-Beauty Category Display", sub: "4FT · 8FT · 12FT 전문 디스플레이", href: "#display" },
                     { label: "06. 90-Day Exchange Credit", sub: "초기 재고 리스크 완화", href: "#exchange-credit" },
                     { label: "07. Launch Partner Benefits", sub: "초기 런칭 파트너 전용 혜택", href: "#benefits" },
-                    { label: "08. How It Works", sub: "신청부터 성장까지", href: "#how-it-works" },
+                    { label: "08. How It Works", sub: "신청부터 성장까지", href: "#partnership-timeline" },
                     { label: "09. Partnership", sub: "함께 성장하는 리테일 파트너십", href: "#launch-readiness" }
                   ].map((item) => (
                     <a
@@ -92,28 +94,32 @@ export default async function Home({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* 02. GROWTH SIMULATOR (Independent Main Menu) */}
+              {/* 02. SIMULATOR (Independent Main Menu) */}
               <a href="#simulator-section" className="flex items-center cursor-pointer py-6">
-                <div className="relative h-5 w-[145px] flex items-center justify-start select-none group/sim">
-                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/sim:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                    GROWTH SIMULATOR
+                <div className="relative h-5 w-[110px] flex items-center justify-start select-none group/sim">
+                  <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/sim:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                    SIMULATOR
                   </span>
-                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/sim:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                    성장 시뮬레이터
-                  </span>
+                  {locale === "ko" && (
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/sim:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      성장 시뮬레이터
+                    </span>
+                  )}
                 </div>
               </a>
 
-              {/* 03. ABOUT US */}
+              {/* 03. ABOUT */}
               <div className="relative group/nav py-6">
                 <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[80px] flex items-center justify-start select-none">
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      ABOUT US
+                  <div className="relative h-5 w-[55px] flex items-center justify-start select-none">
+                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                      ABOUT
                     </span>
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      회사 및 프로그램 소개
-                    </span>
+                    {locale === "ko" && (
+                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                        소개
+                      </span>
+                    )}
                   </div>
                   <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -142,16 +148,18 @@ export default async function Home({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* 04. PARTNER RESOURCES */}
+              {/* 04. INSIGHTS */}
               <div className="relative group/nav py-6">
                 <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[150px] flex items-center justify-start select-none">
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      PARTNER RESOURCES
+                  <div className="relative h-5 w-[75px] flex items-center justify-start select-none">
+                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                      INSIGHTS
                     </span>
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      파트너 자료실
-                    </span>
+                    {locale === "ko" && (
+                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                        인사이트
+                      </span>
+                    )}
                   </div>
                   <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -160,8 +168,8 @@ export default async function Home({ params }: PageProps) {
                 
                 <div className="absolute top-[100%] left-0 w-[220px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
                   {[
-                    { label: "Retailer Guide", href: "#how-it-works" },
-                    { label: "K-Beauty Insights", href: "#insights" },
+                    { label: "Retailer Guide", href: "#partnership-timeline" },
+                    { label: "K-Beauty Insights", href: "#partnership-timeline" },
                     { label: "Product Education", href: "#launch-readiness" },
                     { label: "FAQ", href: "#launch-readiness" },
                     { label: "Partner Login", href: "https://portal.kselecthub.com", isExternal: true }
@@ -182,11 +190,11 @@ export default async function Home({ params }: PageProps) {
             </nav>
           </div>
 
-          <div className="flex items-center gap-[20px]">
-            {/* Language Selector UI (Language -> 로그인 -> 파트너 신청) */}
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary">
+          <div className="flex items-center gap-3 sm:gap-[20px]">
+            {/* Language Selector UI */}
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary select-none whitespace-nowrap">
               <span className="text-white font-bold cursor-pointer" aria-label="Korean active selection">KR</span>
-              <span className="text-text-muted select-none">|</span>
+              <span className="text-text-muted">|</span>
               <span className="hover:text-white cursor-pointer transition-colors" aria-label="English locale selection waiting">EN</span>
             </div>
             
@@ -194,20 +202,19 @@ export default async function Home({ params }: PageProps) {
               href="https://portal.kselecthub.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-text-secondary hover:text-white transition-all focus:outline-none focus:underline"
+              className="text-sm font-semibold text-text-secondary hover:text-white transition-all focus:outline-none focus:underline whitespace-nowrap"
             >
               로그인
             </a>
-            <div className="w-px h-5 bg-[#2A2A2A]" />
+            <div className="w-px h-5 bg-[#2A2A2A] hidden xs:block" />
             
             <a
               id="btn-header-apply"
               data-analytics="header-apply"
               href="#launch-readiness"
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
+              className="inline-flex items-center gap-1.5 h-10 px-4 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
             >
               파트너 신청 
-              {/* Inline SVG arrow instead of broken icons */}
               <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -215,6 +222,7 @@ export default async function Home({ params }: PageProps) {
           </div>
         </div>
       </header>
+
 
       {/* Main Container */}
       <main className="flex-1">
@@ -494,7 +502,7 @@ export default async function Home({ params }: PageProps) {
         </section>
 
         {/* 9. LAUNCH PARTNER BENEFITS - Core 3 + Additional 4 Premium Package Layout */}
-        <section className="bg-[#0c0c0c] border-b border-[#2a2a2a] overflow-hidden">
+        <section id="benefits" className="bg-[#0c0c0c] border-b border-[#2a2a2a] overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative">
             
             {/* Header info */}
