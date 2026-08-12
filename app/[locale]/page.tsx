@@ -601,20 +601,8 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 10. 07 GROWTH SIMULATOR - React simulation tool layout */}
+        {/* 10. 07 GROWTH SIMULATOR - Redesigned interactive diagnostic teaser layout */}
         <section id="simulator-section" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
-          <div className="text-center max-w-[680px] mx-auto mb-14 flex flex-col gap-3">
-            <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-              07 — GROWTH SIMULATOR
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.25] text-white">
-              매장 조건을 입력하면, 예상 결과가 바로 계산됩니다.
-            </h2>
-            <p className="text-sm text-text-secondary">
-              일반적인 계산기가 아닙니다. K Select Hub의 데이터 기반 리테일 성장 도구입니다.
-            </p>
-          </div>
-
           <Simulator />
         </section>
 
