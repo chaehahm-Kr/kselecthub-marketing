@@ -11,6 +11,7 @@ import SolutionSection from "./SolutionSection";
 import CurationSection from "./CurationSection";
 import DisplaySection from "./DisplaySection";
 import PartnerModal from "./PartnerModal";
+import ReadinessSection from "./ReadinessSection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -73,7 +74,7 @@ export default async function Home({ params }: PageProps) {
             <a
               id="btn-header-apply"
               data-analytics="header-apply"
-              href="#apply"
+              href="#launch-readiness"
               className="inline-flex items-center gap-2 h-11 px-5 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
             >
               파트너 신청 
@@ -119,7 +120,7 @@ export default async function Home({ params }: PageProps) {
               <a
                 id="btn-hero-apply"
                 data-analytics="hero-apply"
-                href="#apply"
+                href="#launch-readiness"
                 className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-semibold text-[15px] transition-all hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,43,117,0.4)] active:translate-y-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414]"
               >
                 파트너 신청하기 →
@@ -583,7 +584,7 @@ export default async function Home({ params }: PageProps) {
                 디스플레이 무상 대여부터 첫 결제 유예, 상권 독점 보호까지 — 런칭 파트너 자격은 상권 내 최초 신청 매장에게 우선권이 제공됩니다.
               </p>
               <a
-                href="#apply"
+                href="#launch-readiness"
                 className="group/btn h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all hover:shadow-[0_4px_20px_rgba(255,43,117,0.35)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
               >
                 {locale === "ko" ? "런칭 파트너 우선 신청하기" : "Apply as a Launch Partner"}
@@ -803,6 +804,9 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
+        {/* Readiness Section Insertion */}
+        <ReadinessSection />
+
         {/* 12. 08 Partnership CTA section - Redesigned closing partnership philosophy */}
         <section className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] pb-[140px]">
           <div className="bg-[#0c0c0c] border border-white/10 rounded-[28px] overflow-hidden grid lg:grid-cols-[1.15fr_0.85fr] items-stretch text-left shadow-2xl relative group/card transition-all duration-300">
@@ -835,7 +839,7 @@ export default async function Home({ params }: PageProps) {
               {/* CTA Buttons */}
               <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href="#apply"
+                  href="#launch-readiness"
                   className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] cursor-pointer"
                 >
                   런치 파트너 신청 →
