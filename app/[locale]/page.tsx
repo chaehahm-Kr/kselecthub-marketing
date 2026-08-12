@@ -42,14 +42,143 @@ export default async function Home({ params }: PageProps) {
                 />
               </div>
             </a>
-            {/* Header navigation bar links with whitespace-nowrap and optimized gap */}
-            <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-semibold text-text-secondary">
-              <a href="#opportunity" className="hover:text-accent transition-colors whitespace-nowrap">솔루션</a>
-              <a href="#products" className="hover:text-accent transition-colors whitespace-nowrap">제품 큐레이션</a>
-              <a href="#display" className="hover:text-accent transition-colors whitespace-nowrap">디스플레이</a>
-              <a href="#exchange-credit" className="hover:text-accent transition-colors whitespace-nowrap">신용 프로그램</a>
-              <a href="#simulator-section" className="hover:text-accent transition-colors whitespace-nowrap">성장 시뮬레이터</a>
-              <a href="#partnership-timeline" className="hover:text-accent transition-colors whitespace-nowrap">파트너 리소스</a>
+            {/* Header navigation bar links with dropdown hover menus and zero-jitter cross-fade translation support */}
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-semibold text-white/70">
+              
+              {/* 01. K-BEAUTY GROWTH PROGRAM */}
+              <div className="relative group/nav py-6">
+                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
+                  <div className="relative h-5 w-[185px] flex items-center justify-start select-none">
+                    {/* English (Default) */}
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      K-BEAUTY GROWTH PROGRAM
+                    </span>
+                    {/* Korean (Hover) */}
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      K-뷰티 성장 프로그램
+                    </span>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Dropdown Container */}
+                <div className="absolute top-[100%] left-0 w-[300px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3.5 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
+                  {[
+                    { label: "01. Why K-Beauty Now", sub: "왜 지금 K-Beauty인가", href: "#why-kbeauty" },
+                    { label: "02. Retailer Challenges", sub: "리테일러가 겪는 현실적인 문제", href: "#challenges" },
+                    { label: "03. K Select Solution", sub: "5가지 통합 성장 솔루션", href: "#solutions" },
+                    { label: "04. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: "#curation" },
+                    { label: "05. K-Beauty Category Display", sub: "4FT · 8FT · 12FT 전문 디스플레이", href: "#display" },
+                    { label: "06. 90-Day Exchange Credit", sub: "초기 재고 리스크 완화", href: "#exchange-credit" },
+                    { label: "07. Launch Partner Benefits", sub: "초기 런칭 파트너 전용 혜택", href: "#benefits" },
+                    { label: "08. How It Works", sub: "신청부터 성장까지", href: "#how-it-works" },
+                    { label: "09. Partnership", sub: "함께 성장하는 리테일 파트너십", href: "#launch-readiness" }
+                  ].map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item"
+                    >
+                      <span className="text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors">
+                        {item.label}
+                      </span>
+                      <span className="text-[10px] text-[#7A7A7A] mt-0.5 font-semibold">
+                        {item.sub}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* 02. GROWTH SIMULATOR (Independent Main Menu) */}
+              <a href="#simulator-section" className="flex items-center cursor-pointer py-6">
+                <div className="relative h-5 w-[145px] flex items-center justify-start select-none group/sim">
+                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/sim:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                    GROWTH SIMULATOR
+                  </span>
+                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/sim:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                    성장 시뮬레이터
+                  </span>
+                </div>
+              </a>
+
+              {/* 03. ABOUT US */}
+              <div className="relative group/nav py-6">
+                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
+                  <div className="relative h-5 w-[80px] flex items-center justify-start select-none">
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      ABOUT US
+                    </span>
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      회사 및 프로그램 소개
+                    </span>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
+                  {[
+                    { label: "About K SELECT HUB", sub: "K SELECT HUB와 Retail Growth Network", href: "#why-us" },
+                    { label: "About Letusto", sub: "Letusto의 Retail & E-commerce Experience", href: "#why-us" },
+                    { label: "Why Partner With Us", sub: "경험, 인프라, 운영 역량", href: "#why-us" }
+                  ].map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item"
+                    >
+                      <span className="text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors">
+                        {item.label}
+                      </span>
+                      <span className="text-[10px] text-[#7A7A7A] mt-0.5 font-semibold">
+                        {item.sub}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* 04. PARTNER RESOURCES */}
+              <div className="relative group/nav py-6">
+                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
+                  <div className="relative h-5 w-[150px] flex items-center justify-start select-none">
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 group-hover/nav:opacity-0 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      PARTNER RESOURCES
+                    </span>
+                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                      파트너 자료실
+                    </span>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                <div className="absolute top-[100%] left-0 w-[220px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
+                  {[
+                    { label: "Retailer Guide", href: "#how-it-works" },
+                    { label: "K-Beauty Insights", href: "#insights" },
+                    { label: "Product Education", href: "#launch-readiness" },
+                    { label: "FAQ", href: "#launch-readiness" },
+                    { label: "Partner Login", href: "https://portal.kselecthub.com", isExternal: true }
+                  ].map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target={item.isExternal ? "_blank" : undefined}
+                      rel={item.isExternal ? "noopener noreferrer" : undefined}
+                      className="flex px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left text-[12px] font-extrabold text-white hover:text-[#ff2b75]"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
             </nav>
           </div>
 
