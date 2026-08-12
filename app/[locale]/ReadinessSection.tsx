@@ -56,11 +56,23 @@ export default function ReadinessSection() {
     return () => window.removeEventListener("hashchange", checkHash);
   }, []);
 
+  // Toggle selection on double-click/second click
   const handleSelect = (idx: number, type: "available" | "discuss") => {
-    setAnswers((prev) => ({
-      ...prev,
-      [idx]: type
-    }));
+    setAnswers((prev) => {
+      if (prev[idx] === type) {
+        const next = { ...prev };
+        delete next[idx];
+        return next;
+      }
+      return {
+        ...prev,
+        [idx]: type
+      };
+    });
+  };
+
+  const handleReset = () => {
+    setAnswers({});
   };
 
   const answeredCount = Object.keys(answers).length;
@@ -117,16 +129,27 @@ export default function ReadinessSection() {
                 />
               </div>
 
-              {/* Counts */}
-              <div className="flex gap-4 text-[12px] font-bold text-white/50">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> 
-                  진행 가능 <strong className="text-[#ff2b75] font-extrabold">{availableCount}</strong>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> 
-                  협의 필요 <strong className="text-[#00F0FF] font-extrabold">{discussCount}</strong>
-                </span>
+              {/* Counts & Reset Trigger */}
+              <div className="flex justify-between items-center text-[12px] font-bold">
+                <div className="flex gap-4 text-white/50">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> 
+                    진행 가능 <strong className="text-[#ff2b75] font-extrabold">{availableCount}</strong>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> 
+                    협의 필요 <strong className="text-[#00F0FF] font-extrabold">{discussCount}</strong>
+                  </span>
+                </div>
+                {answeredCount > 0 && (
+                  <button
+                    onClick={handleReset}
+                    className="text-[11px] text-white/40 hover:text-[#ff2b75] transition-colors flex items-center gap-1 underline underline-offset-2 cursor-pointer font-bold focus:outline-none"
+                    title="초기화"
+                  >
+                    초기화 ↺
+                  </button>
+                )}
               </div>
             </div>
 

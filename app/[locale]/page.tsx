@@ -129,7 +129,7 @@ export default async function Home({ params }: PageProps) {
                 id="btn-hero-simulator"
                 data-analytics="hero-simulator"
                 href="#simulator-section"
-                className="h-14 inline-flex items-center justify-center border border-[#2a2a2a] hover:border-white hover:bg-white/5 text-white px-8 rounded-[8px] font-semibold text-[15px] transition-all active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
+                className="h-14 inline-flex items-center justify-center border border-[#00F0FF]/30 hover:border-[#00F0FF] hover:bg-[#00F0FF]/5 hover:shadow-[0_0_15px_rgba(0,240,255,0.25)] text-[#00F0FF] px-8 rounded-[8px] font-semibold text-[15px] transition-all active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#00F0FF]"
               >
                 성장 시뮬레이터 보기
               </a>
@@ -846,7 +846,7 @@ export default async function Home({ params }: PageProps) {
                 </a>
                 <a
                   href="#simulator-section"
-                  className="h-14 inline-flex items-center justify-center border border-white/10 hover:border-white/30 text-white px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-white/[0.02] cursor-pointer"
+                  className="h-14 inline-flex items-center justify-center border border-[#00F0FF]/30 hover:border-[#00F0FF] hover:bg-[#00F0FF]/5 hover:shadow-[0_0_15px_rgba(0,240,255,0.25)] text-[#00F0FF] px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 cursor-pointer"
                 >
                   성장 시뮬레이터
                 </a>
