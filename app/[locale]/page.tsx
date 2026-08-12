@@ -584,70 +584,207 @@ export default async function Home({ params }: PageProps) {
           <Simulator />
         </section>
 
-        {/* 11. Partnership Process - 3-phase / 6-step timeline diagram */}
-        <section id="partnership-timeline" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-[72px] text-left">
-            <h3 className="font-display text-3xl font-bold text-white mb-1">
-              From Application to Growth
-            </h3>
-            <p className="text-sm text-text-secondary mb-10">
-              신청부터 매출 최적화까지, K Select가 함께합니다.
-            </p>
+        {/* 11. Partnership Process - Single Connected Journey Timeline (PLAN ➔ LAUNCH ➔ GROW) */}
+        <section id="partnership-timeline" className="bg-[#0c0c0c] border-y border-[#2a2a2a] overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative">
             
-            <div className="grid md:grid-cols-3 gap-px bg-[#2a2a2a] overflow-hidden rounded-[8px]">
+            {/* Header info */}
+            <div className="text-center max-w-[720px] mx-auto mb-16 flex flex-col items-center">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
+                <span className="text-[10px] tracking-[0.12em] font-black text-white/70 uppercase font-display">
+                  HOW IT WORKS
+                </span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.22] text-white text-center tracking-tight m-0">
+                신청부터 매출 성장까지, K SELECT HUB가 함께합니다.
+              </h2>
+              <p className="text-[14px] text-[#9ca3af] mt-4 max-w-xl text-center leading-relaxed font-medium">
+                매장 분석, 프로그램 추천, 상품 구성, 디스플레이 설치, 런칭, 판매 데이터 최적화까지 하나의 프로세스로 지원합니다.
+              </p>
+            </div>
+
+            {/* Timeline Wrapper (Desktop Horizontal Journey / Mobile Vertical List) */}
+            <div className="relative w-full">
               
-              {/* Phase 1 */}
-              <div className="bg-[#121214] p-8">
-                <span className="text-[11px] font-bold text-accent tracking-[0.08em] block mb-4">
-                  PLAN (준비 단계)
-                </span>
-                <div className="flex flex-col gap-4 text-xs font-semibold text-white">
-                  <div>
-                    <span>01 Apply</span>
-                    <p className="text-[11px] text-text-secondary font-medium mt-1">파트너 신청</p>
-                  </div>
-                  <div>
-                    <span>02 Store Review</span>
-                    <p className="text-[11px] text-text-secondary font-medium mt-1">매장·상권 분석</p>
-                  </div>
-                  <div>
-                    <span>03 Assortment Design</span>
-                    <p className="text-[11px] text-text-secondary font-medium mt-1">맞춤 상품 구성 설계</p>
-                  </div>
-                </div>
-              </div>
+              {/* Outer Horizontal Grid dividing PLAN (3cols) / LAUNCH (2cols) / GROW (2cols) */}
+              <div className="grid lg:grid-cols-7 gap-8 relative z-10">
 
-              {/* Phase 2 */}
-              <div className="bg-[#121214] p-8 flex flex-col justify-between">
-                <span className="text-[11px] font-bold text-accent tracking-[0.08em] block mb-4">
-                  LAUNCH (실행 단계)
-                </span>
-                <div className="text-xs font-semibold text-white">
-                  <span>04 Display &amp; Launch</span>
-                  <p className="text-[11px] text-text-secondary font-medium mt-1">
-                    K-Beauty 카테고리를 매장에 구축합니다. (LED Wall Display 모듈 설치)
-                  </p>
-                </div>
-              </div>
+                {/* Timeline Connection Line background (Desktop only) */}
+                <div className="absolute top-[84px] left-[5%] right-[5%] h-[2.5px] bg-white/5 hidden lg:block z-0" />
+                <div 
+                  className="absolute top-[84px] left-[5%] h-[2.5px] bg-gradient-to-r from-[#ff2b75] via-[#ff2b75] to-[#ff2b75]/40 hidden lg:block z-0 origin-left"
+                  style={{
+                    animation: "timelineDraw 2s cubic-bezier(0.4, 0, 0.2, 1) forwards"
+                  }}
+                />
 
-              {/* Phase 3 */}
-              <div className="bg-[#121214] p-8">
-                <span className="text-[11px] font-bold text-accent tracking-[0.08em] block mb-4">
-                  GROW (성장 단계)
-                </span>
-                <div className="flex flex-col gap-4 text-xs font-semibold text-white">
-                  <div>
-                    <span>05 90-Day Sales Test</span>
-                    <p className="text-[11px] text-text-secondary font-medium mt-1">실제 Sell-through 측정</p>
-                  </div>
-                  <div>
-                    <span>06 Optimize &amp; Grow</span>
-                    <p className="text-[11px] text-text-secondary font-medium mt-1">Reorder·Slow Seller 조정 및 카테고리 확장</p>
+                {/* ================= PHASE 1: PLAN (Step 01 - 03) ================= */}
+                <div className="lg:col-span-3 bg-white/[0.01] border border-white/5 rounded-[20px] p-6 lg:pt-14 relative group/phase hover:bg-white/[0.02] transition-colors duration-300">
+                  <span className="text-[11px] font-black tracking-[0.15em] text-[#E6C687] uppercase font-display bg-[#E6C687]/10 px-2.5 py-1 rounded-[4px] absolute top-4 left-6">
+                    PLAN
+                  </span>
+                  <div className="grid sm:grid-cols-3 gap-6 mt-6 lg:mt-8">
+                    
+                    {/* Step 01 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-[#ff2b75] bg-[#0c0c0c] text-white flex items-center justify-center font-bold text-xs shadow-[0_0_15px_rgba(255,43,117,0.3)] mb-4 hover:scale-105 transition-transform duration-200">
+                        01
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Apply</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">파트너 신청</p>
+                    </div>
+
+                    {/* Step 02 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "400ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        02
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Store Review</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">매장·상권 분석</p>
+                    </div>
+
+                    {/* Step 03 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        03
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Program Match</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">Display &amp; AP 추천</p>
+                    </div>
+
                   </div>
                 </div>
+
+                {/* ================= PHASE 2: LAUNCH (Step 04 - 05) ================= */}
+                <div className="lg:col-span-2 bg-white/[0.01] border border-white/5 rounded-[20px] p-6 lg:pt-14 relative group/phase hover:bg-white/[0.02] transition-colors duration-300">
+                  <span className="text-[11px] font-black tracking-[0.15em] text-[#ff2b75] uppercase font-display bg-[#ff2b75]/10 px-2.5 py-1 rounded-[4px] absolute top-4 left-6">
+                    LAUNCH
+                  </span>
+                  <div className="grid sm:grid-cols-2 gap-6 mt-6 lg:mt-8">
+                    
+                    {/* Step 04 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "800ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        04
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Design &amp; Mix</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">상품 &amp; 디스플레이 설계</p>
+                    </div>
+
+                    {/* Step 05 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "1000ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        05
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Setup &amp; Launch</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">Fixture 설치 &amp; 셋업 완료</p>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* ================= PHASE 3: GROW (Step 06 - 07) ================= */}
+                <div className="lg:col-span-2 bg-white/[0.01] border border-white/5 rounded-[20px] p-6 lg:pt-14 relative group/phase hover:bg-white/[0.02] transition-colors duration-300">
+                  <span className="text-[11px] font-black tracking-[0.15em] text-[#ff2b75] uppercase font-display bg-[#ff2b75]/10 px-2.5 py-1 rounded-[4px] absolute top-4 left-6">
+                    GROW
+                  </span>
+                  <div className="grid sm:grid-cols-2 gap-6 mt-6 lg:mt-8">
+                    
+                    {/* Step 06 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "1200ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        06
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white whitespace-nowrap">90-Day Review</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">90일 판매 실적 리뷰</p>
+                    </div>
+
+                    {/* Step 07 */}
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10 animate-fade-in opacity-0" style={{ animationDelay: "1400ms", animationFillMode: "forwards" }}>
+                      <div className="w-11 h-11 rounded-full border-2 border-white/10 bg-[#0c0c0c] text-white/50 flex items-center justify-center font-bold text-xs mb-4 group-hover/phase:border-[#ff2b75]/40 transition-colors">
+                        07
+                      </div>
+                      <div className="flex items-center gap-1.5 mb-2.5">
+                        <svg className="w-4 h-4 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        <h4 className="text-[13.5px] font-extrabold text-white">Optimize &amp; Grow</h4>
+                      </div>
+                      <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold">상품 최적화 및 지속 성장</p>
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
 
             </div>
+
+            {/* Bottom Closing Info Panel */}
+            <div className="text-center mt-16 border-t border-white/10 pt-10 flex flex-col items-center select-none">
+              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-2">
+                ONE PROGRAM · ONE PROCESS
+              </span>
+              <h4 className="text-[15px] font-black text-white/95 m-0 tracking-wide font-display">
+                One Program. One Process. From Setup to Growth.
+              </h4>
+              <p className="text-[13px] text-[#9ca3af] mt-1.5 font-medium leading-relaxed">
+                하나의 프로그램으로, 준비부터 성장까지.
+              </p>
+            </div>
+
+            {/* Timeline Draw Keyframe CSS Injection */}
+            <style dangerouslySetInnerHTML={{ __html: `
+              @keyframes timelineDraw {
+                from { width: 0; }
+                to { width: 90%; }
+              }
+              @keyframes fadeUp {
+                from {
+                  opacity: 0;
+                  transform: translateY(12px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+              .animate-fade-in {
+                animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+              }
+            ` }} />
+
           </div>
         </section>
 
