@@ -268,54 +268,43 @@ export default async function Home({ params }: PageProps) {
                   90-Day Exchange Credit
                 </h2>
                 <span className="text-[9.5px] font-black text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/25 px-3 py-1 rounded-full uppercase tracking-wider select-none">
-                  {locale === "ko" ? "런칭 파트너 혜택" : "Launch Partner Benefit"}
+                  Launch Partner Benefit
                 </span>
               </div>
 
-              {locale === "ko" ? (
-                <div className="flex flex-col gap-4">
-                  <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl font-medium">
-                    초기 파트너에게 가장 큰 부담은 팔리지 않는 재고입니다. K SELECT HUB는 첫 90일 동안 실제 판매 데이터를 확인하고, <strong className="text-white font-bold">판매율이 50% 미만인 대상 SKU를 더 적합한 상품으로 교환할 수 있는 Exchange Credit</strong>을 제공합니다.
-                  </p>
-                  <p className="text-[13.5px] text-[#ff2b75] leading-relaxed max-w-xl font-bold">
-                    목적은 반품이 아니라, 매장에 더 잘 맞는 상품 구성으로 최적화하는 것입니다.
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-4">
-                  <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl font-medium">
-                    One of the biggest challenges for new retail partners is slow-moving inventory. During the first 90 days, K SELECT HUB reviews actual sell-through data and offers <strong className="text-white font-bold">Exchange Credit for eligible SKUs with less than 50% sell-through</strong>, helping optimize the assortment with products that better fit the store.
-                  </p>
-                  <p className="text-[13.5px] text-[#ff2b75] leading-relaxed max-w-xl font-bold">
-                    The goal is not product return — it is better product mix optimization.
-                  </p>
-                </div>
-              )}
+              <div className="flex flex-col gap-4">
+                <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl font-medium">
+                  초기 파트너에게 가장 큰 부담은 팔리지 않는 재고입니다. K SELECT HUB는 첫 90일 동안 실제 판매 데이터를 확인하고, <strong className="text-white font-bold">판매율이 50% 미만인 대상 SKU를 더 적합한 상품으로 교환할 수 있는 Exchange Credit</strong>을 제공합니다.
+                </p>
+                <p className="text-[13.5px] text-[#ff2b75] leading-relaxed max-w-xl font-bold">
+                  목적은 반품이 아니라, 매장에 더 잘 맞는 상품 구성으로 최적화하는 것입니다. (Better Product Mix Optimization)
+                </p>
+              </div>
 
               {/* 4 numeric highlights */}
               <div className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-8 mt-8">
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[20px] font-black text-white leading-none">90 DAYS</span>
                   <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
-                    {locale === "ko" ? "초기 성과 측정 기간" : "Initial Performance Window"}
+                    초기 성과 측정 기간 (Initial Performance Window)
                   </span>
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[20px] font-black text-white leading-none">&lt; 50% SELL-THROUGH</span>
                   <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
-                    {locale === "ko" ? "교환 검토 기준" : "Sell-Through Target for Exchange"}
+                    교환 검토 기준 (Sell-Through Target for Exchange)
                   </span>
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[20px] font-black text-white leading-none">EXCHANGE CREDIT</span>
                   <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
-                    {locale === "ko" ? "상품 교환 크레딧 발급" : "Eligible SKU Replacement Credit"}
+                    상품 교환 크레딧 발급 (Eligible SKU Replacement Credit)
                   </span>
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[20px] font-black text-white leading-none">DATA-BASED MATCH</span>
                   <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
-                    {locale === "ko" ? "실제 판매 데이터 기반 재구성" : "Assortment Optimization"}
+                    실제 판매 데이터 기반 재구성 (Assortment Optimization)
                   </span>
                 </div>
               </div>
@@ -346,7 +335,7 @@ export default async function Home({ params }: PageProps) {
 
               {/* Optimization cycle */}
               <span className="text-[9.5px] text-[#7A7A7A] tracking-wider font-black uppercase text-left border-b border-white/10 pb-2">
-                {locale === "ko" ? "최적화 운영 시스템" : "Optimization Refinement System"}
+                최적화 운영 시스템 (Optimization Refinement System)
               </span>
               
               <div className="flex items-center gap-2 mt-4 mb-4 text-[10.5px] font-black text-white flex-wrap">
@@ -361,25 +350,14 @@ export default async function Home({ params }: PageProps) {
                 <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-[4px]">Optimize</span>
               </div>
 
-              {locale === "ko" ? (
-                <div className="flex flex-col gap-2.5 text-left pt-2">
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed">
-                    초기 상품 구성이 완벽하지 않아도 괜찮습니다. K SELECT HUB는 실제 판매 데이터를 보고, 판매율이 낮은 SKU를 더 적합한 상품으로 교환하며 product mix를 최적화합니다.
-                  </p>
-                  <p className="text-[12px] text-[#ff2b75] font-black tracking-tight leading-relaxed">
-                    * 본 프로그램은 현금 환불(Cash Refund)이 아닌 더 나은 상품군 교환(Exchange Credit)을 지원합니다.
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2.5 text-left pt-2">
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed">
-                    Your first assortment does not have to be perfect. K SELECT HUB reviews actual sell-through performance and helps optimize the product mix by exchanging slower-moving eligible SKUs for better-fit products.
-                  </p>
-                  <p className="text-[12px] text-[#ff2b75] font-black tracking-tight leading-relaxed">
-                    * This program provides exchange credits for better product mix optimization, not cash refunds.
-                  </p>
-                </div>
-              )}
+              <div className="flex flex-col gap-2.5 text-left pt-2">
+                <p className="text-[12.5px] text-[#9ca3af] leading-relaxed">
+                  초기 상품 구성이 완벽하지 않아도 괜찮습니다. K SELECT HUB는 실제 판매 데이터를 보고, 판매율이 낮은 SKU를 더 적합한 상품으로 교환하며 product mix를 최적화합니다.
+                </p>
+                <p className="text-[12px] text-[#ff2b75] font-black tracking-tight leading-relaxed">
+                  * 본 프로그램은 현금 환불(Cash Refund)이 아닌 더 나은 상품군 교환(Exchange Credit)을 지원합니다.
+                </p>
+              </div>
             </div>
 
           </div>
