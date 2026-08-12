@@ -803,50 +803,67 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 12. 08 Partnership CTA section */}
-        <section className="max-w-[1400px] mx-auto px-[64px] py-[96px] pb-[120px]">
-          <div className="bg-[#0c0c0c] border border-[#2a2a2a] rounded-[20px] overflow-hidden grid lg:grid-cols-[1.2fr_0.8fr] items-stretch text-left">
+        {/* 12. 08 Partnership CTA section - Redesigned closing partnership philosophy */}
+        <section className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] pb-[140px]">
+          <div className="bg-[#0c0c0c] border border-white/10 rounded-[28px] overflow-hidden grid lg:grid-cols-[1.15fr_0.85fr] items-stretch text-left shadow-2xl relative group/card transition-all duration-300">
             
-            <div className="p-14 flex flex-col justify-center">
-              <span className="text-xs font-semibold text-accent tracking-[0.04em] block">
+            <div className="p-8 sm:p-14 lg:p-16 flex flex-col justify-center relative z-10">
+              <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.15em] uppercase font-display block mb-5">
                 08 — PARTNERSHIP
               </span>
-              <h2 className="font-display text-[34px] font-bold leading-[1.22] text-white my-3.5">
-                초기 K-Beauty<br />
-                Launch Partner를<br />
-                모집합니다.
+              <h2 className="font-display text-[28px] sm:text-[38px] lg:text-[42px] font-black leading-[1.18] text-white tracking-tight m-0 select-none">
+                리테일러의 성공이<br />
+                우리의 성공입니다.
               </h2>
-              <p className="text-sm text-text-secondary leading-relaxed mb-3 max-w-[420px]">
-                상품 선정부터 Display, 재고 관리와 런칭 이후 성장까지 K Select가 함께합니다.
+              
+              <p className="text-[14.5px] text-[#9ca3af] leading-relaxed mt-6 mb-5 max-w-[480px] font-medium">
+                상품 공급에서 끝나지 않습니다. K Select는 큐레이션, 디스플레이, 교체 프로그램, 운영 지원까지 함께하며 매장의 K-Beauty 카테고리가 실제 매출이 되도록 끝까지 동행합니다.
               </p>
-              <p className="text-xs text-accent font-semibold mb-6">
-                Launch Partner에게는 초기 한정 특별 혜택이 제공됩니다.
+              
+              {/* Highlight Line */}
+              <div className="border-l-2 border-[#ff2b75] pl-4 my-2 select-none">
+                <p className="text-[13.5px] text-[#ff2b75] font-extrabold leading-normal m-0">
+                  먼저 시작할수록 더 좋은 조건과 더 많은 지원으로 출발할 수 있습니다.
+                </p>
+              </div>
+
+              {/* Support Line */}
+              <p className="text-[12px] text-[#7A7A7A] font-semibold mt-2 mb-8">
+                Launch Partner에게는 초기 런칭 특별 혜택이 제공됩니다.
               </p>
-              <div className="flex items-center gap-4">
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-4">
                 <a
                   href="#apply"
-                  className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-7 rounded-[8px] font-semibold text-[15px] transition-colors cursor-pointer"
+                  className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] cursor-pointer"
                 >
-                  런칭 파트너 신청 →
+                  런치 파트너 신청 →
                 </a>
                 <a
                   href="#simulator-section"
-                  className="h-14 inline-flex items-center justify-center border border-[#2a2a2a] hover:border-white text-white px-7 rounded-[8px] font-semibold text-[15px] transition-colors cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("simulator-section")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="h-14 inline-flex items-center justify-center border border-white/10 hover:border-white/30 text-white px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-white/[0.02] cursor-pointer"
                 >
                   성장 시뮬레이터
                 </a>
               </div>
             </div>
 
-            {/* Right side background image slot */}
-            <div className="relative min-h-[460px]">
+            {/* Right side custom beauty store owner portrait */}
+            <div className="relative min-h-[460px] overflow-hidden">
               <Image
-                src={assetConfig.storeShowcase.partnershipSection.src}
-                alt={assetConfig.storeShowcase.partnershipSection.alt}
+                src="/images/partnership_owner.jpg"
+                alt="Confident beauty store owner partnering with K Select"
                 fill
-                className="object-cover rounded-r-[20px]"
+                className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.03]"
                 sizes="(max-width: 1024px) 100vw, 35vw"
+                priority
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/80 via-transparent to-transparent lg:hidden pointer-events-none" />
             </div>
 
           </div>
