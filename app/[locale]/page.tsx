@@ -363,113 +363,157 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 9. LAUNCH PARTNER BENEFITS - 8 modular benefit grids */}
+        {/* 9. LAUNCH PARTNER BENEFITS - 3 High-Emphasis Core + 4 Subdued Supports */}
         <section className="bg-[#0c0c0c] border-b border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-[100px] text-left">
-            <div className="text-center max-w-[640px] mx-auto mb-14 flex flex-col items-center">
-              
-              {/* Highlight badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff2b75]/20 mb-5">
+          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left">
+            
+            {/* Header info */}
+            <div className="text-center max-w-[720px] mx-auto mb-16 flex flex-col items-center">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                <span className="text-[11px] tracking-[0.1em] font-semibold text-[#ff2b75]">
+                <span className="text-[10px] tracking-[0.12em] font-black text-white/70 uppercase font-display">
                   LAUNCH PARTNER · LIMITED BENEFITS
                 </span>
               </div>
-
-              <h2 className="font-display text-4xl font-bold leading-[1.25] text-white text-center">
-                Early Partners Get More<br />
-                <span className="text-xl font-medium text-text-secondary mt-2 block">
-                  먼저 시작하는 파트너에게 더 많은 혜택을 제공합니다.
-                </span>
+              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.22] text-white text-center tracking-tight m-0">
+                {locale === "ko" ? "먼저 시작하는 파트너가 더 유리한 조건을 선점합니다." : "Launch Earlier. Secure More. Grow Faster."}
               </h2>
+              <p className="text-[13.5px] text-[#9ca3af] mt-4 max-w-xl text-center leading-relaxed font-medium">
+                초기 Launch Partner에게는 일반 파트너보다 더욱 특별한 진입 조건과 전폭적인 리테일 인프라 지원을 제공하여 초기 부담을 낮추고 빠르게 지역 K-Beauty 시장을 선점하도록 돕습니다.
+              </p>
             </div>
 
-            {/* 8 items grids split layout */}
-            <div className="grid md:grid-cols-4 border-t border-l border-white/10 mb-px">
+            {/* SECTION 1: 3 High-Emphasis Core Benefits (Large 3-Column Layout) */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
               
-              {/* 01 */}
-              <div className="border-r border-b border-white/10 p-[28px_24px]">
-                <span className="text-xs text-accent font-semibold">01</span>
-                <h4 className="text-sm font-semibold text-white mt-2.5 mb-1">Complimentary Display Fixture</h4>
-                <span className="text-xs text-accent block mb-1.5">전용 디스플레이 무상 대여</span>
-                <p className="text-[11px] text-text-secondary leading-relaxed">초기 Launch Partner에게 K Select 전용 Display Fixture를 무상 대여합니다.</p>
+              {/* Core 01 */}
+              <div className="border border-white/15 bg-white/[0.02] rounded-[20px] p-8 flex flex-col justify-between shadow-lg hover:border-white/20 transition-all duration-300">
+                <div className="flex flex-col gap-4">
+                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
+                    CORE BENEFIT 01
+                  </span>
+                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
+                    Complimentary Display Fixture Rental
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">전용 디스플레이 무상 대여</span>
+                  </h3>
+                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
+                    초기 Launch Partner의 초기 인프라 구축 부담을 완전히 제거하기 위해, K SELECT HUB 전용 LED 모듈형 Display Fixture를 무상으로 대여해 드립니다.
+                  </p>
+                </div>
+                <div className="border-t border-white/10 pt-4 mt-6">
+                  <span className="text-[10.5px] text-[#ff2b75] font-bold">초기 집기 투자 비용 $0</span>
+                </div>
               </div>
 
-              {/* 02 */}
-              <div className="border-r border-b border-white/10 p-[28px_24px]">
-                <span className="text-xs text-accent font-semibold">02</span>
-                <h4 className="text-sm font-semibold text-white mt-2.5 mb-1">45-Day Payment Terms</h4>
-                <span className="text-xs text-accent block mb-1.5">최대 45일 결제 조건</span>
-                <p className="text-[11px] text-text-secondary leading-relaxed">자격 요건 충족 시 초기 주문에 대해 최대 45일 payment term을 제공합니다.</p>
+              {/* Core 02 */}
+              <div className="border border-[#ff2b75]/30 bg-[#ff2b75]/[0.01] rounded-[20px] p-8 flex flex-col justify-between shadow-lg shadow-pink-950/5 hover:border-[#ff2b75]/40 transition-all duration-300">
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
+                      CORE BENEFIT 02
+                    </span>
+                    <span className="text-[8.5px] font-black text-[#ff2b75] bg-[#ff2b75]/10 border border-[#ff2b75]/25 px-2 py-0.5 rounded-[4px] tracking-wider uppercase font-display">
+                      FIRST ORDER ONLY
+                    </span>
+                  </div>
+                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
+                    45-Day Payment Terms
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">첫 주문 한정 최대 45일 결제 조건</span>
+                  </h3>
+                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
+                    초기 제품 사입 자금의 유동성을 원활하게 확보하고 부담을 경감할 수 있도록, 첫 번째 런칭 주문 한정에 대해 최대 45일의 Payment Terms 조건을 파격적으로 제공합니다.
+                  </p>
+                </div>
+                <div className="border-t border-white/10 pt-4 mt-6">
+                  <span className="text-[10.5px] text-[#ff2b75] font-bold">첫 초도 물량 도입 자금 유예</span>
+                </div>
               </div>
 
-              {/* 03 */}
-              <div className="border-r border-b border-white/10 p-[28px_24px]">
-                <span className="text-xs text-accent font-semibold">03</span>
-                <h4 className="text-sm font-semibold text-white mt-2.5 mb-1">90-Day Exchange Credit</h4>
-                <span className="text-xs text-accent block mb-1.5">90일 상품 교환 크레딧</span>
-                <p className="text-[11px] text-text-secondary leading-relaxed">적격 Slow-moving SKU를 더 적합한 상품으로 조정할 수 있습니다.</p>
-              </div>
-
-              {/* 04 */}
-              <div className="border-r border-b border-white/10 p-[28px_24px]">
-                <span className="text-xs text-accent font-semibold">04</span>
-                <h4 className="text-sm font-semibold text-white mt-2.5 mb-1">Priority Territory Protection</h4>
-                <span className="text-xs text-accent block mb-1.5">우선 지역 보호</span>
-                <p className="text-[11px] text-text-secondary leading-relaxed">초기 Launch Partner의 상권과 운영 지역을 우선적으로 보호합니다.</p>
+              {/* Core 03 */}
+              <div className="border border-white/15 bg-white/[0.02] rounded-[20px] p-8 flex flex-col justify-between shadow-lg hover:border-white/20 transition-all duration-300">
+                <div className="flex flex-col gap-4">
+                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
+                    CORE BENEFIT 03
+                  </span>
+                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
+                    Priority Territory Protection
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">우선 지역 / 독점 상권 보호</span>
+                  </h3>
+                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
+                    먼저 진입한 매장의 선점 효과와 안정적인 장기 매출 독점권을 지켜드리기 위해, 지역 상권 내 타 리테일러 입점을 제한하고 우선권을 엄격히 보장합니다.
+                  </p>
+                </div>
+                <div className="border-t border-white/10 pt-4 mt-6">
+                  <span className="text-[10.5px] text-[#ff2b75] font-bold">상권 내 K-Beauty 경쟁 차단</span>
+                </div>
               </div>
 
             </div>
 
-            <div className="grid md:grid-cols-4 border-l border-white/10 mb-12">
+            {/* SECTION 2: 4 Subdued Supports (Clean 4-Column Layout) */}
+            <div className="grid md:grid-cols-4 gap-6 mb-16 border-t border-white/10 pt-12">
               
-              {/* 05 */}
-              <div className="border-r border-b border-white/10 p-[22px_20px]">
-                <span className="text-[11px] text-text-secondary font-semibold">05</span>
-                <h4 className="text-xs font-semibold text-text-secondary mt-2 mb-1">Free Initial Delivery</h4>
-                <span className="text-[11px] text-accent block mb-1.5">초기 배송비 지원</span>
-                <p className="text-[10px] text-text-secondary leading-relaxed">초도 Launch 시 상품 및 Display 관련 초기 배송비 부담을 지원합니다.</p>
+              {/* Sub 04 */}
+              <div className="flex flex-col gap-2.5 p-1 text-left">
+                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 04</span>
+                <h4 className="text-[13.5px] font-bold text-white">Free Initial Delivery</h4>
+                <span className="text-[11px] text-[#ff2b75] font-bold">초기 배송비 전액 지원</span>
+                <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
+                  첫 런칭 시 무거운 전용 LED Display Fixture 및 초도 상품군의 물류 배송비 일체를 K SELECT가 전액 지원합니다.
+                </p>
               </div>
 
-              {/* 06 */}
-              <div className="border-r border-b border-white/10 p-[22px_20px]">
-                <span className="text-[11px] text-text-secondary font-semibold">06</span>
-                <h4 className="text-xs font-semibold text-text-secondary mt-2 mb-1">Priority Product Access</h4>
-                <span className="text-[11px] text-accent block mb-1.5">신규·독점 상품 우선 공급</span>
-                <p className="text-[10px] text-text-secondary leading-relaxed">새로운 K-Beauty 및 일부 Exclusive Product에 우선 접근 기회를 제공합니다.</p>
+              {/* Sub 05 */}
+              <div className="flex flex-col gap-2.5 p-1 text-left">
+                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 05</span>
+                <h4 className="text-[13.5px] font-bold text-white">Display Setup Support</h4>
+                <span className="text-[11px] text-[#ff2b75] font-bold">초기 디스플레이 셋업 지원</span>
+                <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
+                  Fixture 조립부터 테스터 배치, 그리고 고객 시선을 극대화하는 Merchandising 상품 진열 가이드를 지원하여 즉시 판매 상태로 진입하게 돕습니다.
+                </p>
               </div>
 
-              {/* 07 */}
-              <div className="border-r border-b border-white/10 p-[22px_20px]">
-                <span className="text-[11px] text-text-secondary font-semibold">07</span>
-                <h4 className="text-xs font-semibold text-text-secondary mt-2 mb-1">Personalized Launch Support</h4>
-                <span className="text-[11px] text-accent block mb-1.5">맞춤형 런칭 지원</span>
-                <p className="text-[10px] text-text-secondary leading-relaxed">매장 규모와 고객 특성에 맞춰 Assortment, Display 및 Setup을 함께 설계합니다.</p>
+              {/* Sub 06 */}
+              <div className="flex flex-col gap-2.5 p-1 text-left">
+                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 06</span>
+                <h4 className="text-[13.5px] font-bold text-white">Priority Product Access</h4>
+                <span className="text-[11px] text-[#ff2b75] font-bold">신규·독점 상품 우선 공급</span>
+                <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
+                  새롭게 런칭하는 트렌디한 인디 K-Beauty 신제품 및 특정 브랜드의 독점 SKU 배정 시 Launch Partner에게 최우선권을 제공합니다.
+                </p>
               </div>
 
-              {/* 08 */}
-              <div className="border-r border-b border-white/10 p-[22px_20px]">
-                <span className="text-[11px] text-text-secondary font-semibold">08</span>
-                <h4 className="text-xs font-semibold text-text-secondary mt-2 mb-1">Post-Launch Category Support</h4>
-                <span className="text-[11px] text-accent block mb-1.5">런칭 이후 카테고리 운영 지원</span>
-                <p className="text-[10px] text-text-secondary leading-relaxed">판매 데이터, Reorder, Slow Seller 조정 및 Category Optimization을 지속적으로 지원합니다.</p>
+              {/* Sub 07 */}
+              <div className="flex flex-col gap-2.5 p-1 text-left">
+                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 07</span>
+                <h4 className="text-[13.5px] font-bold text-white">Personalized Launch Support</h4>
+                <span className="text-[11px] text-[#ff2b75] font-bold">맞춤형 런칭 지원</span>
+                <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
+                  매장 면적, 핵심 단골 연령대, 가격 민감도를 모두 분석하여 매장에 100% 최적화된 초도 Assortment(AP) 설계 및 판매 매뉴얼을 밀착 매핑합니다.
+                </p>
               </div>
 
             </div>
 
-            {/* Bottom mini CTA row */}
-            <div className="text-center border-t border-white/10 pt-10">
-              <h3 className="font-display text-[22px] font-bold text-white mb-2">
-                Launch With Support. Grow With Support.
+            {/* Bottom Closing Panel */}
+            <div className="text-center border-t border-white/10 pt-14 max-w-[800px] mx-auto flex flex-col items-center">
+              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-3">
+                {locale === "ko" ? "선점의 가치" : "VALUE OF TIMING"}
+              </span>
+              <h3 className="font-display text-[20px] sm:text-[23px] font-bold text-white mb-2 tracking-tight">
+                {locale === "ko" ? "먼저 시작할수록, 더 유리한 조건으로 성장할 수 있습니다." : "Launch Earlier. Secure More. Grow Faster."}
               </h3>
-              <p className="text-xs text-text-secondary mb-8">
-                런칭할 때도, 성장할 때도 함께합니다 — 판매 모니터링, Smart Reorder, 상품 교체, Category Optimization까지.
+              <p className="text-[12.5px] text-[#9ca3af] mb-8 font-medium">
+                {locale === "ko" 
+                  ? "디스플레이 지원부터 결제 유예, 상권 독점 보호까지 — 런칭 파트너 자격은 상권 내 최초 신청 매장에게 우선권이 제공됩니다." 
+                  : "From display rentals to deferred terms and region protection — early launch slots are limited per local territory."
+                }
               </p>
               <a
                 href="#apply"
-                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-semibold text-[15px] transition-colors cursor-pointer"
+                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_15px_rgba(255,43,117,0.2)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
               >
-                런칭 파트너 신청 →
+                {locale === "ko" ? "런칭 파트너 우선 신청하기 →" : "Apply as a Launch Partner →"}
               </a>
             </div>
 
