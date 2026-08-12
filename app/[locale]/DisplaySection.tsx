@@ -24,7 +24,7 @@ export default function DisplaySection() {
       titleEn: "Start small and validate fast.",
       sub: "진입형 매대",
       desc: "K-Beauty를 처음 도입하거나 매장의 한정된 유휴 공간에서 고객 반응 및 시장성을 빠르게 테스트하기 위한 핵심 집중형 구성.",
-      image: "/images/display_4ft.png"
+      image: "/images/solutions/4F_A.jpg"
     },
     {
       id: "8ft",
@@ -33,7 +33,7 @@ export default function DisplaySection() {
       titleEn: "Scale K-Beauty into a core revenue driver.",
       sub: "성장형 매대",
       desc: "카테고리와 SKU 진열폭을 대폭 넓혀 본격적인 매장 내 K-Beauty 목적 구매 유입과 카테고리 매출 성장을 이끄는 2열 모듈 구성.",
-      image: "/images/display_8ft.png"
+      image: "/images/solutions/8F_AA.jpg"
     },
     {
       id: "12ft",
@@ -42,7 +42,7 @@ export default function DisplaySection() {
       titleEn: "Create a complete beauty destination zone.",
       sub: "데스티네이션 매대",
       desc: "여러 스킨케어, 헤어케어, 메이크업 브랜드를 아울러 폭넓은 풀 라인업 쇼핑 가이드를 제공하는 완성형 모듈러 리테일 인프라 시스템.",
-      image: "/images/display_12ft.jpg"
+      image: "/images/solutions/12F_AAA.jpg"
     }
   ];
 
