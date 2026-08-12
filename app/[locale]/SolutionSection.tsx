@@ -63,14 +63,14 @@ export default function SolutionSection() {
   return (
     <section
       id="solution"
-      className="w-full bg-[#0A0A0A] select-none text-left font-sans"
+      className="w-full bg-[#141414] select-none text-left font-sans"
       style={{ fontFamily: "'Pretendard', -apple-system, sans-serif" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Outer wrapper replicating inline styles of the standalone HTML */}
-      <div className="py-[72px] px-6 sm:px-10 md:px-10" style={{ background: "#0A0A0A" }}>
-        <div className="max-w-[1600px] mx-auto flex flex-col gap-[36px]">
+      <div className="py-[72px] px-[32px] sm:px-[64px]" style={{ background: "#141414" }}>
+        <div className="max-w-[1400px] mx-auto flex flex-col gap-[36px]">
 
           {/* Main Grid: Left Column (38%), Right Column (62%) on Desktop */}
           <div className="grid lg:grid-cols-[minmax(320px,38%)_1fr] gap-[56px] items-start">
