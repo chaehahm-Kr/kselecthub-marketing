@@ -255,90 +255,130 @@ export default async function Home({ params }: PageProps) {
 
         {/* 8. 06 90-DAY EXCHANGE CREDIT - Black luxury card layout */}
         <section id="exchange-credit" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-[120px] grid lg:grid-cols-2 gap-[72px] items-center text-left">
+          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] grid lg:grid-cols-[0.52fr_0.48fr] gap-12 lg:gap-[72px] items-center text-left">
             
             {/* Left Content Column */}
             <div>
-              <span className="text-xs font-semibold text-accent tracking-[0.04em]">
+              <span className="text-xs font-black text-accent tracking-[0.08em] uppercase">
                 06 — RISK REDUCTION
               </span>
-              <div className="flex items-center gap-3 mt-4 mb-5">
-                <h2 className="margin-0 font-display text-4xl font-bold leading-tight text-white tracking-tight">
+              <div className="flex flex-wrap items-center gap-3 mt-4 mb-5">
+                <h2 className="margin-0 font-display text-3xl sm:text-[38px] font-bold leading-tight text-white tracking-tight">
                   90-Day Exchange Credit
                 </h2>
-                <span className="text-[11px] font-semibold text-accent border border-[#ff2b75] px-2.5 py-1 rounded-full select-none">
-                  업계 유일
+                <span className="text-[9.5px] font-black text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/25 px-3 py-1 rounded-full uppercase tracking-wider select-none">
+                  {locale === "ko" ? "런칭 파트너 혜택" : "Launch Partner Benefit"}
                 </span>
               </div>
 
-              <p className="text-sm text-text-secondary leading-relaxed mb-8 max-w-[460px]">
-                초기 파트너의 가장 큰 부담은 팔리지 않는 재고입니다. 90일 이내 판매 부진 제품을, 판매 가능성 높은 다른 제품으로 교환할 수 있습니다. 재고 부담은 낮추고, 성장의 기회는 계속 열어둡니다.
-              </p>
+              {locale === "ko" ? (
+                <div className="flex flex-col gap-4">
+                  <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl font-medium">
+                    초기 파트너에게 가장 큰 부담은 팔리지 않는 재고입니다. K SELECT HUB는 첫 90일 동안 실제 판매 데이터를 확인하고, <strong className="text-white font-bold">판매율이 50% 미만인 대상 SKU를 더 적합한 상품으로 교환할 수 있는 Exchange Credit</strong>을 제공합니다.
+                  </p>
+                  <p className="text-[13.5px] text-[#ff2b75] leading-relaxed max-w-xl font-bold">
+                    목적은 반품이 아니라, 매장에 더 잘 맞는 상품 구성으로 최적화하는 것입니다.
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl font-medium">
+                    One of the biggest challenges for new retail partners is slow-moving inventory. During the first 90 days, K SELECT HUB reviews actual sell-through data and offers <strong className="text-white font-bold">Exchange Credit for eligible SKUs with less than 50% sell-through</strong>, helping optimize the assortment with products that better fit the store.
+                  </p>
+                  <p className="text-[13.5px] text-[#ff2b75] leading-relaxed max-w-xl font-bold">
+                    The goal is not product return — it is better product mix optimization.
+                  </p>
+                </div>
+              )}
 
               {/* 4 numeric highlights */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="border-t-2 border-[#ff2b75] pt-3.5">
-                  <span className="text-2xl font-bold text-white">90일</span>
-                  <p className="text-[11px] text-text-secondary mt-1">유연한 교환 기간</p>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-8 mt-8">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[20px] font-black text-white leading-none">90 DAYS</span>
+                  <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
+                    {locale === "ko" ? "초기 성과 측정 기간" : "Initial Performance Window"}
+                  </span>
                 </div>
-                <div className="border-t-2 border-[#ff2b75] pt-3.5">
-                  <span className="text-2xl font-bold text-white">100%</span>
-                  <p className="text-[11px] text-text-secondary mt-1">미판매 제품 교환 가능</p>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[20px] font-black text-white leading-none">&lt; 50% SELL-THROUGH</span>
+                  <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
+                    {locale === "ko" ? "교환 검토 기준" : "Sell-Through Target for Exchange"}
+                  </span>
                 </div>
-                <div className="border-t-2 border-[#ff2b75] pt-3.5">
-                  <span className="text-2xl font-bold text-white">0%</span>
-                  <p className="text-[11px] text-text-secondary mt-1">현금 환불 부담</p>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[20px] font-black text-white leading-none">EXCHANGE CREDIT</span>
+                  <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
+                    {locale === "ko" ? "상품 교환 크레딧 발급" : "Eligible SKU Replacement Credit"}
+                  </span>
                 </div>
-                <div className="border-t-2 border-[#ff2b75] pt-3.5">
-                  <span className="text-2xl font-bold text-white">↑</span>
-                  <p className="text-[11px] text-text-secondary mt-1">매출 상황에 따라 확대</p>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[20px] font-black text-white leading-none">DATA-BASED MATCH</span>
+                  <span className="text-[10px] text-[#7A7A7A] font-bold uppercase tracking-wider mt-1">
+                    {locale === "ko" ? "실제 판매 데이터 기반 재구성" : "Assortment Optimization"}
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Right Card Graphic Column */}
-            <div className="bg-[#121214] border border-[#2a2a2a] rounded-[20px] p-10 flex flex-col justify-center">
+            <div className="bg-[#0c0c0c] border border-white/10 rounded-[20px] p-8 sm:p-10 flex flex-col justify-center shadow-xl">
               
               {/* Floating physical card replica */}
-              <div className="w-[280px] max-w-full aspect-[1.6/1] rounded-[12px] bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c] border border-[#2a2a2a] shadow-2xl p-6 flex flex-col justify-between transform rotate-[-3deg] mx-auto mb-8 relative select-none">
+              <div className="w-[300px] max-w-full aspect-[1.58/1] rounded-[16px] bg-gradient-to-br from-[#18181a] via-[#0e0e10] to-[#070708] border border-white/10 shadow-2xl p-6 flex flex-col justify-between transform rotate-[-2.5deg] mx-auto mb-8 relative select-none">
                 <div className="flex justify-between items-center">
-                  <div className="w-[26px] h-[26px] rounded-[6px] bg-[#ff2b75] flex items-center justify-center color-white font-bold text-xs">
+                  <div className="w-[30px] h-[30px] rounded-[8px] bg-[#ff2b75] flex items-center justify-center text-white font-black text-sm">
                     K
                   </div>
-                  <span className="text-[10px] font-semibold text-[#ff2b75] tracking-widest uppercase">
-                    업계 유일
+                  <span className="text-[8.5px] font-black text-[#ff2b75] bg-[#ff2b75]/10 border border-[#ff2b75]/20 px-2 py-0.5 rounded-[4px] tracking-wider uppercase font-display">
+                    Launch Partner Program
                   </span>
                 </div>
                 <div>
-                  <span className="block text-sm font-bold text-white tracking-tight leading-normal whitespace-nowrap">
-                    90-Day Exchange Credit
+                  <span className="block text-[14.5px] font-black text-white tracking-tight leading-normal uppercase">
+                    Inventory Risk Protection
                   </span>
-                  <span className="block mt-2.5 text-[10px] text-text-secondary tracking-widest uppercase whitespace-nowrap">
-                    K SELECT HUB · PARTNER PROGRAM
+                  <span className="block mt-1 text-[9.5px] text-[#ff2b75] font-black tracking-widest uppercase">
+                    Powered by 90-Day Exchange Credit
                   </span>
                 </div>
               </div>
 
               {/* Optimization cycle */}
-              <span className="text-[11px] text-text-secondary tracking-widest uppercase text-left">
-                최적화 사이클
+              <span className="text-[9.5px] text-[#7A7A7A] tracking-wider font-black uppercase text-left border-b border-white/10 pb-2">
+                {locale === "ko" ? "최적화 운영 시스템" : "Optimization Refinement System"}
               </span>
               
-              <div className="flex items-center gap-2 mt-5 mb-7 text-xs font-semibold text-white flex-wrap">
-                <span>Launch</span>
-                <span className="text-text-secondary">→</span>
-                <span>Measure</span>
-                <span className="text-text-secondary">→</span>
-                <span>Identify</span>
-                <span className="text-text-secondary">→</span>
-                <span className="text-accent">Exchange</span>
-                <span className="text-text-secondary">→</span>
-                <span>Optimize</span>
+              <div className="flex items-center gap-2 mt-4 mb-4 text-[10.5px] font-black text-white flex-wrap">
+                <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-[4px]">Launch</span>
+                <span className="text-[#7A7A7A]">→</span>
+                <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-[4px]">Measure</span>
+                <span className="text-[#7A7A7A]">→</span>
+                <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-[4px]">Identify</span>
+                <span className="text-[#7A7A7A]">→</span>
+                <span className="px-2 py-0.5 bg-[#ff2b75]/10 border border-[#ff2b75]/35 text-[#ff2b75] rounded-[4px] shadow-[0_0_8px_rgba(255,43,117,0.1)]">Exchange</span>
+                <span className="text-[#7A7A7A]">→</span>
+                <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-[4px]">Optimize</span>
               </div>
 
-              <p className="text-xs text-text-secondary leading-relaxed">
-                초기 상품 선택이 완벽하지 않아도 괜찮습니다. K Select가 실제 판매 데이터를 보고 매장의 product mix를 계속 최적화합니다.
-              </p>
+              {locale === "ko" ? (
+                <div className="flex flex-col gap-2.5 text-left pt-2">
+                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed">
+                    초기 상품 구성이 완벽하지 않아도 괜찮습니다. K SELECT HUB는 실제 판매 데이터를 보고, 판매율이 낮은 SKU를 더 적합한 상품으로 교환하며 product mix를 최적화합니다.
+                  </p>
+                  <p className="text-[12px] text-[#ff2b75] font-black tracking-tight leading-relaxed">
+                    * 본 프로그램은 현금 환불(Cash Refund)이 아닌 더 나은 상품군 교환(Exchange Credit)을 지원합니다.
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-2.5 text-left pt-2">
+                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed">
+                    Your first assortment does not have to be perfect. K SELECT HUB reviews actual sell-through performance and helps optimize the product mix by exchanging slower-moving eligible SKUs for better-fit products.
+                  </p>
+                  <p className="text-[12px] text-[#ff2b75] font-black tracking-tight leading-relaxed">
+                    * This program provides exchange credits for better product mix optimization, not cash refunds.
+                  </p>
+                </div>
+              )}
             </div>
 
           </div>
