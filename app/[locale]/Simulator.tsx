@@ -8,38 +8,38 @@ export default function Simulator() {
   const [activeTileIndex, setActiveTileIndex] = useState<number>(-1);
   const [progress, setProgress] = useState<number>(0);
 
-  // 6.5s Loop sequence simulation
+  // 7.2s Loop sequence simulation
   useEffect(() => {
     let timer: NodeJS.Timeout;
     let progressInterval: NodeJS.Timeout;
 
     const runLoop = () => {
-      // Step 1: Sequential Store Profile Tiles reveal (0s - 2.4s)
+      // Step 1: Sequential Store Profile Tiles reveal (0s - 2.5s)
       setStep("store_profile");
       setActiveTileIndex(-1);
       setProgress(0);
 
-      // Tile 0 (0.2s)
+      // Tile 0 (0.3s)
       timer = setTimeout(() => {
         setActiveTileIndex(0);
       }, 300);
 
-      // Tile 1 (0.8s)
+      // Tile 1 (0.9s)
       timer = setTimeout(() => {
         setActiveTileIndex(1);
       }, 900);
 
-      // Tile 2 (1.4s)
+      // Tile 2 (1.5s)
       timer = setTimeout(() => {
         setActiveTileIndex(2);
       }, 1500);
 
-      // Tile 3 (2.0s)
+      // Tile 3 (2.1s)
       timer = setTimeout(() => {
         setActiveTileIndex(3);
       }, 2100);
 
-      // Step 2: Analyzing (2.4s - 4.2s)
+      // Step 2: Analyzing (2.5s - 4.4s)
       timer = setTimeout(() => {
         setStep("analyzing");
         setActiveTileIndex(-1);
@@ -55,15 +55,15 @@ export default function Simulator() {
         }, 80);
       }, 2500);
 
-      // Step 3: Recommended Results (4.2s - 6.8s)
+      // Step 3: Recommended Results (4.4s - 7.2s)
       timer = setTimeout(() => {
         setStep("results");
         clearInterval(progressInterval);
-      }, 4300);
+      }, 4400);
     };
 
     runLoop();
-    const mainInterval = setInterval(runLoop, 6800);
+    const mainInterval = setInterval(runLoop, 7200);
 
     return () => {
       clearInterval(mainInterval);
@@ -94,11 +94,14 @@ export default function Simulator() {
           찾아보세요.
         </h2>
         <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-md my-2 font-medium">
-          몇 가지 간단한 매장 정보를 입력하면 K SELECT HUB가 적합한 Display Program과 Assortment Profile을 추천하고, 예상 투자 규모와 판매 성과를 함께 시뮬레이션합니다.
+          몇 가지 간단한 매장 정보를 입력하면, K SELECT HUB가 <strong className="text-white font-bold">매장에 맞는 디스플레이 규모와 상품 구성</strong>을 추천하고 예상 투자와 판매 성과를 함께 시뮬레이션합니다.
         </p>
+        <span className="text-[10px] text-[#7A7A7A] font-semibold tracking-wide block -mt-1 mb-2">
+          * Display Program + Assortment Profile 공식 매칭 기준
+        </span>
 
         {/* CTA Button Block */}
-        <div className="flex flex-col gap-2.5 mt-6 items-start">
+        <div className="flex flex-col gap-2.5 mt-4 items-start">
           <a
             href="#apply"
             onClick={(e) => handleSmoothScroll(e, "apply")}
@@ -118,15 +121,15 @@ export default function Simulator() {
       </div>
 
       {/* ================= RIGHT COLUMN: Diagnostic Loop Motion Box ================= */}
-      <div className="relative min-h-[460px] aspect-[1.12] rounded-[24px] overflow-hidden border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between p-8 sm:p-10 select-none group">
+      <div className="relative min-h-[480px] aspect-[1.12] rounded-[24px] overflow-hidden border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between p-8 sm:p-10 select-none group">
         
-        {/* Underlay: K-Beauty Display Fixture Image (Subdued/Dark opacity for legibility) */}
-        <div className="absolute inset-0 z-0 bg-[#0c0c0c]/85">
+        {/* Underlay: K-Beauty Display Fixture Image (Adjusted Dim level for higher visibility of UI structure) */}
+        <div className="absolute inset-0 z-0 bg-[#0c0c0c]/68 backdrop-blur-[0.5px]">
           <Image
             src="/images/solutions/build.jpg"
             alt="K-Beauty display module framework"
             fill
-            className="object-cover opacity-[0.16] transition-transform duration-700 group-hover:scale-105"
+            className="object-cover opacity-[0.32] transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 1024px) 100vw, 45vw"
           />
         </div>
@@ -144,7 +147,7 @@ export default function Simulator() {
         </div>
 
         {/* Main Content Area (Swap content by state with soft fade-in animation) */}
-        <div className="relative z-10 flex-1 flex items-center justify-center w-full my-6 min-h-[220px]">
+        <div className="relative z-10 flex-1 flex items-center justify-center w-full my-4 min-h-[250px]">
           
           {/* Phase 1: Store Profile Tiles */}
           {step === "store_profile" && (
@@ -159,7 +162,7 @@ export default function Simulator() {
                   key={tile.label}
                   className={`border rounded-[16px] p-5 flex flex-col justify-center text-left transition-all duration-300 ${
                     activeTileIndex >= idx
-                      ? "border-[#ff2b75] bg-[#0c0c0c] shadow-[0_0_15px_rgba(255,43,117,0.15)] scale-[1.02]"
+                      ? "border-[#ff2b75] bg-[#0A0A0A]/90 shadow-[0_0_15px_rgba(255,43,117,0.15)] scale-[1.02]"
                       : "border-white/5 bg-[#111113]/40 opacity-40"
                   }`}
                 >
@@ -197,20 +200,37 @@ export default function Simulator() {
             </div>
           )}
 
-          {/* Phase 3: Results & Metrics Recommendation Preview */}
+          {/* Phase 3: Results & Metrics Recommendation Preview with Diagnostic Tags */}
           {step === "results" && (
-            <div className="w-full flex flex-col gap-5 animate-fade-in">
+            <div className="w-full flex flex-col gap-4 animate-fade-in">
               
               {/* Header result row */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#111113]/60 border border-white/5 rounded-[14px] p-4 text-left">
-                  <span className="text-[9px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">RECOMMENDED DISPLAY</span>
-                  <span className="text-[13px] font-bold text-[#ff2b75] tracking-tight">GROW · 8FT Module</span>
+                <div className="bg-[#0A0A0A]/90 border border-white/10 rounded-[14px] p-4 text-left">
+                  <span className="text-[8.5px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">RECOMMENDED DISPLAY</span>
+                  <span className="text-[13px] font-black text-[#ff2b75] tracking-tight">GROW · 8FT Module</span>
                 </div>
-                <div className="bg-[#111113]/60 border border-white/5 rounded-[14px] p-4 text-left">
-                  <span className="text-[9px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">ASSORTMENT PROFILE</span>
-                  <span className="text-[13px] font-bold text-[#ff2b75] tracking-tight">AP-03 · 스킨케어 강화형</span>
+                <div className="bg-[#0A0A0A]/90 border border-white/10 rounded-[14px] p-4 text-left">
+                  <span className="text-[8.5px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">ASSORTMENT PROFILE</span>
+                  <span className="text-[13px] font-black text-[#ff2b75] tracking-tight">AP-03 · 스킨케어 강화형</span>
                 </div>
+              </div>
+
+              {/* Recommendation Tags Preview */}
+              <div className="flex flex-wrap gap-1.5 justify-start py-0.5">
+                {[
+                  "Hair & Scalp Demand",
+                  "Fast Reorder",
+                  "Mid-Premium",
+                  "Growth Focus"
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[8.5px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2 py-0.5 rounded-[4px] tracking-wide"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               {/* Dynamic scroll indicator / metrics listing */}
