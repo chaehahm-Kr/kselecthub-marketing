@@ -9,6 +9,7 @@ import OpportunitySection from "./OpportunitySection";
 import ChallengesSection from "./ChallengesSection";
 import SolutionSection from "./SolutionSection";
 import CurationSection from "./CurationSection";
+import DisplaySection from "./DisplaySection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -249,94 +250,8 @@ export default async function Home({ params }: PageProps) {
         {/* 6. 04 PRODUCT CURATION - Interactive Selection & Showcase Curation Component */}
         <CurationSection />
 
-        {/* 7. 05 DISPLAY PROGRAM - 4ft, 8ft, 12ft modular cards */}
-        <section id="display" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
-          <div className="max-w-[720px] mb-16 flex flex-col gap-3">
-            <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-              05 — STORE-IN-A-STORE DISPLAY
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.25] tracking-tight text-white">
-              매장 안에, 하나의 전문 K-Beauty 카테고리를 만듭니다.
-            </h2>
-            <p className="text-sm text-text-secondary leading-relaxed mt-1">
-              매장 규모와 고객 동선에 맞춘 모듈형 디스플레이 시스템. 제품 한 줄이 아니라, 카테고리 전체를 설계합니다.
-            </p>
-          </div>
-
-          {/* 3 columns displays mapping */}
-          <div className="grid md:grid-cols-3 gap-6">
-            
-            {/* 4FT */}
-            <div className="border border-[#2a2a2a] rounded-[20px] overflow-hidden bg-[#0c0c0c]">
-              <div className="relative w-full h-[280px] bg-[#121214] border-b border-[#2a2a2a]">
-                <Image
-                  src={assetConfig.displayFixtures["4ft"].src}
-                  alt={assetConfig.displayFixtures["4ft"].alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                />
-              </div>
-              <div className="p-6">
-                <span className="text-[11px] font-semibold text-text-secondary tracking-[0.04em]">
-                  4 FT — STARTER
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2.5 mb-2">진입형 매대</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  K-Beauty를 처음 도입하는 매장을 위한 컴팩트 구성.
-                </p>
-              </div>
-            </div>
-
-            {/* 8FT */}
-            <div className="border border-[#ff2b75] rounded-[20px] overflow-hidden bg-[#0c0c0c] relative">
-              <span className="absolute top-4 right-4 bg-[#ff2b75] text-white text-[9px] font-bold px-2.5 py-1 rounded-full z-10 select-none">
-                MOST POPULAR
-              </span>
-              <div className="relative w-full h-[280px] bg-[#121214] border-b border-[#2a2a2a]">
-                <Image
-                  src={assetConfig.displayFixtures["8ft"].src}
-                  alt={assetConfig.displayFixtures["8ft"].alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                />
-              </div>
-              <div className="p-6">
-                <span className="text-[11px] font-semibold text-accent tracking-[0.04em]">
-                  8 FT — GROWTH
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2.5 mb-2">성장형 매대</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  카테고리별 분류와 풀 라인업으로 매출을 확장.
-                </p>
-              </div>
-            </div>
-
-            {/* 12FT */}
-            <div className="border border-[#2a2a2a] rounded-[20px] overflow-hidden bg-[#0c0c0c]">
-              <div className="relative w-full h-[280px] bg-[#121214] border-b border-[#2a2a2a]">
-                <Image
-                  src={assetConfig.displayFixtures["12ft"].src}
-                  alt={assetConfig.displayFixtures["12ft"].alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                />
-              </div>
-              <div className="p-6">
-                <span className="text-[11px] font-semibold text-text-secondary tracking-[0.04em]">
-                  12 FT — DESTINATION
-                </span>
-                <h3 className="text-lg font-bold text-white mt-2.5 mb-2">데스티네이션 매대</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  K-Beauty 자체가 목적 구매가 되는 완결형 존.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        {/* 7. 05 DISPLAY PROGRAM - Interactive K-Beauty Category Display Component */}
+        <DisplaySection />
 
         {/* 8. 06 90-DAY EXCHANGE CREDIT - Black luxury card layout */}
         <section id="exchange-credit" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
