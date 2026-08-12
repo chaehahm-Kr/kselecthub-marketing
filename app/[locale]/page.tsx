@@ -10,6 +10,7 @@ import ChallengesSection from "./ChallengesSection";
 import SolutionSection from "./SolutionSection";
 import CurationSection from "./CurationSection";
 import DisplaySection from "./DisplaySection";
+import PartnerModal from "./PartnerModal";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -618,10 +619,8 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* [Apply Form Section] */}
-        <section className="py-20 max-w-[1400px] mx-auto px-[64px]">
-          <CtaForm />
-        </section>
+        {/* [Apply Form Popup Modal Listener] */}
+        <PartnerModal />
 
       </main>
 
