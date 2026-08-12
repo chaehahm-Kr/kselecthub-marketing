@@ -8,6 +8,7 @@ import Simulator from "./Simulator";
 import OpportunitySection from "./OpportunitySection";
 import ChallengesSection from "./ChallengesSection";
 import SolutionSection from "./SolutionSection";
+import CurationSection from "./CurationSection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -245,68 +246,8 @@ export default async function Home({ params }: PageProps) {
         {/* 5. 03 SOLUTION - K SELECT SOLUTION (Visual Fidelity Reproduction with Client Interaction Orbit) */}
         <SolutionSection />
 
-        {/* 6. 04 PRODUCT CURATION - We don't list everything */}
-        <section id="products" className="bg-[#0c0c0c] border-y border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[64px] py-[120px] grid lg:grid-cols-2 gap-[72px] items-center text-left">
-            <div>
-              <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-                04 — PRODUCT CURATION
-              </span>
-              <h2 className="font-display text-4xl sm:text-[46px] font-bold leading-[1.2] tracking-tight text-white my-5">
-                We Don't List<br />
-                Everything.<br />
-                <span className="text-accent">We Select What<br />Belongs in Your Store.</span>
-              </h2>
-              <p className="text-sm text-text-secondary leading-relaxed mb-6 max-w-[440px]">
-                모든 제품을 나열하지 않습니다. 판매 가능성과 리테일 적합성을 기준으로, 매장에 실제로 어울리는 제품만 선별합니다.
-              </p>
-              
-              {/* 4 standards tag chips */}
-              <div className="flex flex-wrap gap-2.5 mb-6">
-                <span className="text-xs text-text-secondary border border-[#2a2a2a] px-3.5 py-1.5 rounded-full">Performance · 상품 경쟁력</span>
-                <span className="text-xs text-text-secondary border border-[#2a2a2a] px-3.5 py-1.5 rounded-full">Price Fit · 적정 가격</span>
-                <span className="text-xs text-text-secondary border border-[#2a2a2a] px-3.5 py-1.5 rounded-full">Retail Margin · 리테일 마진</span>
-                <span className="text-xs text-text-secondary border border-[#2a2a2a] px-3.5 py-1.5 rounded-full">Store Fit · 매장 적합성</span>
-              </div>
-
-              {/* 6 categories chip list */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">스킨케어</span></div>
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">헤어케어</span></div>
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">메이크업</span></div>
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">바디케어</span></div>
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">퍼스널케어</span></div>
-                <div className="border border-[#2a2a2a] rounded-[8px] p-3.5"><span className="text-xs font-medium text-white">뷰티 툴</span></div>
-              </div>
-            </div>
-
-            {/* Right side flatlay image slot */}
-            <div className="relative">
-              <div className="w-full h-[480px] rounded-[20px] overflow-hidden border border-[#2a2a2a] relative">
-                <Image
-                  src={assetConfig.storeShowcase.curationSection.src}
-                  alt={assetConfig.storeShowcase.curationSection.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-              </div>
-              <span className="absolute top-5 left-5 bg-[#ff2b75] text-white text-[11px] font-bold px-3 py-1.5 rounded-full select-none">
-                NEW · 이번 시즌 베스트셀러
-              </span>
-              <div className="absolute bottom-5 left-5 right-5 bg-[#121214]/85 backdrop-blur-sm border border-[#2a2a2a] rounded-[12px] p-[14px_18px] text-left">
-                <span className="text-[11px] text-text-secondary">인기 검색 키워드</span>
-                <div className="flex gap-2 mt-2 flex-wrap text-xs text-white">
-                  <span className="bg-[#0c0d14] px-2.5 py-1.5 rounded-full">#진정</span>
-                  <span className="bg-[#0c0d14] px-2.5 py-1.5 rounded-full">#보습</span>
-                  <span className="bg-[#0c0d14] px-2.5 py-1.5 rounded-full">#속광</span>
-                  <span className="bg-[#0c0d14] px-2.5 py-1.5 rounded-full">#장벽케어</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        {/* 6. 04 PRODUCT CURATION - Interactive Selection & Showcase Curation Component */}
+        <CurationSection />
 
         {/* 7. 05 DISPLAY PROGRAM - 4ft, 8ft, 12ft modular cards */}
         <section id="display" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
