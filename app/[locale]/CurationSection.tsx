@@ -183,7 +183,7 @@ export default function CurationSection() {
           </div>
 
           {/* ================= RIGHT COLUMN: Premium Full-Image Curation Showcase ================= */}
-          <div className="relative rounded-[24px] border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between overflow-hidden p-8 sm:p-10 min-h-[460px]">
+          <div className="relative rounded-[24px] border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between overflow-hidden p-8 sm:p-10 min-h-[480px]">
             
             {/* Showcase Background Image: Full sized background visual (High Opacity, Clear Central Visibility) */}
             <div className="absolute inset-0 z-0">
@@ -198,18 +198,18 @@ export default function CurationSection() {
                     src={cat.image}
                     alt={`${cat.nameKo} Curation Visual`}
                     fill
-                    className="object-cover opacity-[0.82] transition-transform duration-700 hover:scale-102"
+                    className="object-cover opacity-[0.84] transition-transform duration-700 hover:scale-102"
                     sizes="45vw"
                     priority={index === 0}
                   />
                 </div>
               ))}
               {/* Premium dark gradient overlay: Clear in center, shading only top and bottom for readability */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/80 via-transparent to-[#0c0c0c]/90 z-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/82 via-transparent to-[#0c0c0c]/90 z-10 pointer-events-none" />
             </div>
 
             {/* Top header labels overlay (z-20) */}
-            <div className="relative z-20 flex justify-between items-center w-full">
+            <div className="relative z-20 flex justify-between items-center w-full bg-black/40 backdrop-blur-sm border border-white/5 rounded-[12px] p-4.5">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-[#ff2b75] tracking-widest font-black uppercase">
                   ACTIVE SHOWCASE
@@ -223,38 +223,48 @@ export default function CurationSection() {
               </span>
             </div>
 
-            {/* Mid Section: Subcategories overlayed beautifully as slim, light tags (z-20) */}
-            <div className="relative z-20 flex flex-col gap-2 my-6 text-left">
-              <span className="text-[9px] text-[#ff2b75] font-black uppercase tracking-[0.15em] block mb-1">
-                {categories[activeCategory].nameKo} 핵심 제품군
-              </span>
-              <div className="flex flex-wrap gap-1.5 max-w-[85%]">
-                {categories[activeCategory].items.map((item) => (
-                  <span
-                    key={item}
-                    className="text-[10.5px] font-bold text-white/95 bg-black/60 border border-white/15 px-2.5 py-1 rounded-[6px] tracking-tight hover:bg-black/80 hover:border-[#ff2b75]/30 transition-all duration-200"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* Center Area: Left Empty intentionally to allow clear visibility of center products */}
+            <div className="flex-1 min-h-[140px] pointer-events-none" />
 
-            {/* Bottom Curation Strategy metrics (z-20) */}
-            <div className="relative z-20 border-t border-white/10 pt-4 flex flex-col gap-2 text-left">
-              <span className="text-[9px] text-[#FAFAFA]/50 tracking-widest font-black uppercase">
-                RECOMMENDED CURATION STRATEGY
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {categories[activeCategory].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[9.5px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2.5 py-0.5 rounded-[4px] tracking-wide"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            {/* Bottom Combined Panel (z-20): Core items and strategy metrics grouped clean at the bottom */}
+            <div className="relative z-20 bg-black/60 backdrop-blur-md border border-white/10 rounded-[18px] p-5 flex flex-col gap-4 text-left">
+              
+              {/* 1. 핵심 제품군 (2Depth Items) */}
+              <div className="flex flex-col gap-2">
+                <span className="text-[9.5px] text-[#ff2b75] font-black uppercase tracking-[0.12em] block">
+                  {categories[activeCategory].nameKo} 핵심 제품군
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {categories[activeCategory].items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-[10.5px] font-bold text-white/95 bg-white/5 border border-white/15 px-2.5 py-1 rounded-[6px] tracking-tight"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
+
+              <div className="border-t border-white/10 w-full" />
+
+              {/* 2. Recommended Curation Strategy */}
+              <div className="flex flex-col gap-2">
+                <span className="text-[9px] text-[#FAFAFA]/50 tracking-widest font-black uppercase">
+                  RECOMMENDED CURATION STRATEGY
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {categories[activeCategory].tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[9.5px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2.5 py-0.5 rounded-[4px] tracking-wide"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
             </div>
 
           </div>
