@@ -239,7 +239,10 @@ export const ko = {
       ownerName: "대표자 / 담당자명 (Owner / Contact Name) *",
       email: "이메일 주소 (Email) *",
       phone: "전화번호 (Phone) *",
-      address: "매장 주소 (Store Address) *",
+      address: "상세 주소 (Street Address) *",
+      city: "도시 (City) *",
+      state: "주 (State) *",
+      zipCode: "우편번호 (Zip Code) *",
       comments: "추가 문의 또는 메모 (Comments / Optional)"
     },
     validation: {
@@ -247,7 +250,10 @@ export const ko = {
       ownerRequired: "대표자 / 담당자명을 입력해 주세요.",
       emailRequired: "올바른 이메일 주소를 입력해 주세요.",
       phoneRequired: "전화번호를 입력해 주세요.",
-      addressRequired: "매장 주소를 입력해 주세요.",
+      addressRequired: "상세 주소를 입력해 주세요.",
+      cityRequired: "도시를 입력해 주세요.",
+      stateRequired: "주(State)를 입력해 주세요.",
+      zipRequired: "우편번호(Zip Code)를 입력해 주세요.",
       agreeRequired: "개인정보 수집 및 연락 동의 체크박스는 필수 선택 사항입니다.",
       success: "파트너십 신청이 완료되었습니다. 제출해주신 정보를 검토한 후 K SELECT HUB 팀이 연락드리겠습니다."
     },

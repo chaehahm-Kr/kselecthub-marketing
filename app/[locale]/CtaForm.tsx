@@ -6,12 +6,15 @@ import { ko } from "../locales/ko";
 export default function CtaForm() {
   const t = ko.ctaForm;
 
-  // Form Field States (only core items kept)
+  // Form Field States (only core items kept, address splits included)
   const [storeName, setStoreName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [stateVal, setStateVal] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [comments, setComments] = useState("");
   const [agreed, setAgreed] = useState(false);
 
@@ -84,10 +87,25 @@ export default function CtaForm() {
       setErrorMsg(t.validation.addressRequired);
       return;
     }
+    if (!city.trim()) {
+      setErrorMsg(t.validation.cityRequired);
+      return;
+    }
+    if (!stateVal.trim()) {
+      setErrorMsg(t.validation.stateRequired);
+      return;
+    }
+    if (!zipCode.trim()) {
+      setErrorMsg(t.validation.zipRequired);
+      return;
+    }
     if (!agreed) {
       setErrorMsg(t.validation.agreeRequired);
       return;
     }
+
+    // Combine granular addresses for backward-compatible unified string
+    const fullAddress = `${address.trim()}, ${city.trim()}, ${stateVal.trim()} ${zipCode.trim()}`;
 
     // Submit payload structure simulation
     const payload = {
@@ -95,7 +113,10 @@ export default function CtaForm() {
       ownerName,
       email,
       phone,
-      address,
+      address: fullAddress,
+      city: city.trim(),
+      state: stateVal.trim(),
+      zipCode: zipCode.trim(),
       storeType,
       desiredSpace,
       comments,
@@ -235,19 +256,70 @@ export default function CtaForm() {
             </div>
           </div>
 
-          {/* Store Address */}
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="address" className="text-xs font-bold text-[#9ca3af]">
-              {t.fields.address}
-            </label>
-            <input
-              id="address"
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="예: 123 Main St, Fort Lee, NJ 07024"
-              className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
-            />
+          {/* Store Address Block - Split into Street Address, City, State, and Zip Code */}
+          <div className="flex flex-col gap-3.5">
+            {/* Street Address */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="address" className="text-xs font-bold text-[#9ca3af]">
+                {t.fields.address}
+              </label>
+              <input
+                id="address"
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="예: 123 Main St"
+                className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
+              />
+            </div>
+
+            {/* City, State, Zip Code (3 Columns Grid) */}
+            <div className="grid grid-cols-3 gap-3.5">
+              {/* City */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="city" className="text-xs font-bold text-[#9ca3af]">
+                  {t.fields.city}
+                </label>
+                <input
+                  id="city"
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="예: Fort Lee"
+                  className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
+                />
+              </div>
+
+              {/* State */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="state-val" className="text-xs font-bold text-[#9ca3af]">
+                  {t.fields.state}
+                </label>
+                <input
+                  id="state-val"
+                  type="text"
+                  value={stateVal}
+                  onChange={(e) => setStateVal(e.target.value)}
+                  placeholder="예: NJ"
+                  className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
+                />
+              </div>
+
+              {/* Zip Code */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="zip-code" className="text-xs font-bold text-[#9ca3af]">
+                  {t.fields.zipCode}
+                </label>
+                <input
+                  id="zip-code"
+                  type="text"
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value)}
+                  placeholder="예: 07024"
+                  className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Comments Textarea */}
