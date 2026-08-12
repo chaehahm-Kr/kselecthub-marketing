@@ -363,133 +363,190 @@ export default async function Home({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 9. LAUNCH PARTNER BENEFITS - 3 High-Emphasis Core + 4 Subdued Supports */}
-        <section className="bg-[#0c0c0c] border-b border-[#2a2a2a]">
-          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left">
+        {/* 9. LAUNCH PARTNER BENEFITS - Core 3 + Additional 4 Premium Package Layout */}
+        <section className="bg-[#0c0c0c] border-b border-[#2a2a2a] overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative">
             
             {/* Header info */}
-            <div className="text-center max-w-[720px] mx-auto mb-16 flex flex-col items-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-6">
+            <div className="text-center max-w-[760px] mx-auto mb-12 flex flex-col items-center animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-6 shadow-[0_0_15px_rgba(255,43,117,0.06)] animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                <span className="text-[10px] tracking-[0.12em] font-black text-white/70 uppercase font-display">
-                  LAUNCH PARTNER · LIMITED BENEFITS
+                <span className="text-[10px] tracking-[0.14em] font-black text-[#ff2b75] uppercase font-display">
+                  LAUNCH PARTNER ONLY · Early Partner Exclusive
                 </span>
               </div>
-              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.22] text-white text-center tracking-tight m-0">
-                {locale === "ko" ? "먼저 시작하는 파트너가 더 유리한 조건을 선점합니다." : "Launch Earlier. Secure More. Grow Faster."}
+              <h2 className="font-display text-3xl sm:text-[42px] font-black leading-[1.18] text-white text-center tracking-tight m-0">
+                {locale === "ko" ? "먼저 시작할수록 더 유리한 조건으로 출발합니다" : "Launch Earlier. Secure More. Grow Faster."}
               </h2>
-              <p className="text-[13.5px] text-[#9ca3af] mt-4 max-w-xl text-center leading-relaxed font-medium">
-                초기 Launch Partner에게는 일반 파트너보다 더욱 특별한 진입 조건과 전폭적인 리테일 인프라 지원을 제공하여 초기 부담을 낮추고 빠르게 지역 K-Beauty 시장을 선점하도록 돕습니다.
+              <p className="text-[14.5px] text-[#9ca3af] mt-4 max-w-xl text-center leading-relaxed font-medium">
+                초기 Launch Partner에게만 한정 제공되는 우선 혜택으로 도입 부담은 제로로 낮추고, 지역 상권 선점 속도는 높여드립니다.
               </p>
             </div>
 
-            {/* SECTION 1: 3 High-Emphasis Core Benefits (Large 3-Column Layout) */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Metric-style Summary 요약 스트립 */}
+            <div className="max-w-[960px] mx-auto mb-14 bg-white/[0.02] border border-white/10 rounded-full py-4 px-6 sm:px-10 flex flex-wrap items-center justify-between gap-y-3 gap-x-6 text-xs text-white/50 select-none shadow-inner">
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> 7 Exclusive Benefits
+              </span>
+              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> 45-Day First Order Terms
+              </span>
+              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> Complimentary Fixture
+              </span>
+              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <span className="flex items-center gap-2 font-semibold text-white/80">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> Territory Protection
+              </span>
+            </div>
+
+            {/* SECTION A: Core 3 Benefits (Large High-Emphasis Cards with Stagger Hover Glow) */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
               
               {/* Core 01 */}
-              <div className="border border-white/15 bg-white/[0.02] rounded-[20px] p-8 flex flex-col justify-between shadow-lg hover:border-white/20 transition-all duration-300">
-                <div className="flex flex-col gap-4">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
-                    CORE BENEFIT 01
-                  </span>
-                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
-                    Complimentary Display Fixture Rental
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">전용 디스플레이 무상 대여</span>
+              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
+                <div className="flex flex-col gap-5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display bg-[#ff2b75]/10 border border-[#ff2b75]/25 px-2 py-0.5 rounded-[4px]">
+                      EXCLUSIVE BENEFIT 01
+                    </span>
+                    {/* Display Icon */}
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
+                    Complimentary Fixture Rental
+                    <span className="block text-[14px] text-[#ff2b75] font-bold mt-1">LED 전용 진열 매대 무상 대여</span>
                   </h3>
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
-                    초기 Launch Partner의 초기 인프라 구축 부담을 완전히 제거하기 위해, K SELECT HUB 전용 LED 모듈형 Display Fixture를 무상으로 대여해 드립니다.
+                  <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
+                    K-Beauty 모듈형 전용 LED 디스플레이 쇼케이스 집기 전체를 100% 무상으로 렌탈 대여해 드립니다.
                   </p>
                 </div>
-                <div className="border-t border-white/10 pt-4 mt-6">
-                  <span className="text-[10.5px] text-[#ff2b75] font-bold">초기 집기 투자 비용 $0</span>
+                <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
+                  <span className="text-white/60">초기 집기 시설 구축 비용</span>
+                  <span className="text-[#ff2b75] text-[12px] font-extrabold uppercase">$0 Free Rental</span>
                 </div>
               </div>
 
               {/* Core 02 */}
-              <div className="border border-[#ff2b75]/30 bg-[#ff2b75]/[0.01] rounded-[20px] p-8 flex flex-col justify-between shadow-lg shadow-pink-950/5 hover:border-[#ff2b75]/40 transition-all duration-300">
-                <div className="flex flex-col gap-4">
+              <div className="group border border-[#ff2b75]/25 bg-gradient-to-b from-[#ff2b75]/[0.02] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/60 hover:shadow-[0_8px_30px_rgba(255,43,117,0.18)] transition-all duration-300">
+                <div className="flex flex-col gap-5">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
-                      CORE BENEFIT 02
+                    <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display bg-[#ff2b75]/20 border border-[#ff2b75]/40 px-2 py-0.5 rounded-[4px]">
+                      EXCLUSIVE BENEFIT 02
                     </span>
-                    <span className="text-[8.5px] font-black text-[#ff2b75] bg-[#ff2b75]/10 border border-[#ff2b75]/25 px-2 py-0.5 rounded-[4px] tracking-wider uppercase font-display">
-                      FIRST ORDER ONLY
-                    </span>
+                    {/* Payment Terms Icon */}
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
                   </div>
-                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
+                  <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
                     45-Day Payment Terms
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">첫 주문 한정 최대 45일 결제 조건</span>
+                    <span className="block text-[14px] text-[#ff2b75] font-bold mt-1">첫 주문 최대 45일 결제 유예</span>
                   </h3>
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
-                    초기 제품 사입 자금의 유동성을 원활하게 확보하고 부담을 경감할 수 있도록, 첫 번째 런칭 주문 한정에 대해 최대 45일의 Payment Terms 조건을 파격적으로 제공합니다.
+                  <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
+                    초도 사입 자금의 부담을 원천 경감하기 위해 첫 런칭 사입액에 한해 최대 45일의 결제 Terms를 지급합니다.
                   </p>
                 </div>
-                <div className="border-t border-white/10 pt-4 mt-6">
-                  <span className="text-[10.5px] text-[#ff2b75] font-bold">첫 초도 물량 도입 자금 유예</span>
+                <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
+                  <span className="text-white/60">초도 오더 결제 유예</span>
+                  <span className="text-[#ff2b75] text-[12px] font-extrabold uppercase bg-[#ff2b75]/10 px-2 py-0.5 rounded-[4px]">FIRST ORDER ONLY</span>
                 </div>
               </div>
 
               {/* Core 03 */}
-              <div className="border border-white/15 bg-white/[0.02] rounded-[20px] p-8 flex flex-col justify-between shadow-lg hover:border-white/20 transition-all duration-300">
-                <div className="flex flex-col gap-4">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
-                    CORE BENEFIT 03
-                  </span>
-                  <h3 className="text-[19px] font-bold text-white tracking-tight leading-snug">
+              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
+                <div className="flex flex-col gap-5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display bg-[#ff2b75]/10 border border-[#ff2b75]/25 px-2 py-0.5 rounded-[4px]">
+                      EXCLUSIVE BENEFIT 03
+                    </span>
+                    {/* Protection Shield Icon */}
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
                     Priority Territory Protection
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">우선 지역 / 독점 상권 보호</span>
+                    <span className="block text-[14px] text-[#ff2b75] font-bold mt-1">상권 내 독점적 지위 보호 보장</span>
                   </h3>
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed mt-2 font-medium">
-                    먼저 진입한 매장의 선점 효과와 안정적인 장기 매출 독점권을 지켜드리기 위해, 지역 상권 내 타 리테일러 입점을 제한하고 우선권을 엄격히 보장합니다.
+                  <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
+                    상권 선점 효과를 독점 보장하기 위해 일정 반경 내 타 리테일러 입점을 제한하고 상권 독점 보호를 약속합니다.
                   </p>
                 </div>
-                <div className="border-t border-white/10 pt-4 mt-6">
-                  <span className="text-[10.5px] text-[#ff2b75] font-bold">상권 내 K-Beauty 경쟁 차단</span>
+                <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
+                  <span className="text-white/60">지역 파트너 선점 권리 보증</span>
+                  <span className="text-[#ff2b75] text-[12px] font-extrabold uppercase">Territory Protection</span>
                 </div>
               </div>
 
             </div>
 
-            {/* SECTION 2: 4 Subdued Supports (Clean 4-Column Layout) */}
+            {/* SECTION B: Additional 4 Supporting Benefits (Subdued, Clean Layout with subtle hovers) */}
             <div className="grid md:grid-cols-4 gap-6 mb-16 border-t border-white/10 pt-12">
               
               {/* Sub 04 */}
-              <div className="flex flex-col gap-2.5 p-1 text-left">
-                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 04</span>
-                <h4 className="text-[13.5px] font-bold text-white">Free Initial Delivery</h4>
-                <span className="text-[11px] text-[#ff2b75] font-bold">초기 배송비 전액 지원</span>
+              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 04</span>
+                  {/* Delivery Icon */}
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                  </svg>
+                </div>
+                <h4 className="text-[14.5px] font-bold text-white leading-tight">Free Initial Delivery</h4>
                 <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
-                  첫 런칭 시 무거운 전용 LED Display Fixture 및 초도 상품군의 물류 배송비 일체를 K SELECT가 전액 지원합니다.
+                  첫 런칭 시 무거운 LED Fixture 장비와 초도 뷰티 상품군의 초기 물류 배송비를 전액 지원합니다.
                 </p>
               </div>
 
               {/* Sub 05 */}
-              <div className="flex flex-col gap-2.5 p-1 text-left">
-                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 05</span>
-                <h4 className="text-[13.5px] font-bold text-white">Display Setup Support</h4>
-                <span className="text-[11px] text-[#ff2b75] font-bold">초기 디스플레이 셋업 지원</span>
+              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 05</span>
+                  {/* Setup Icon */}
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-[14.5px] font-bold text-white leading-tight">Display Setup Support</h4>
                 <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
-                  Fixture 조립부터 테스터 배치, 그리고 고객 시선을 극대화하는 Merchandising 상품 진열 가이드를 지원하여 즉시 판매 상태로 진입하게 돕습니다.
+                  스토어 내에 매대 조립, 상품 배치, 테스터 설치 등 최적화된 Merchandising 진열 셋업을 밀착 지원합니다.
                 </p>
               </div>
 
               {/* Sub 06 */}
-              <div className="flex flex-col gap-2.5 p-1 text-left">
-                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 06</span>
-                <h4 className="text-[13.5px] font-bold text-white">Priority Product Access</h4>
-                <span className="text-[11px] text-[#ff2b75] font-bold">신규·독점 상품 우선 공급</span>
+              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 06</span>
+                  {/* Access Star Icon */}
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.906a1 1 0 00.95-.69l1.519-4.674z" />
+                  </svg>
+                </div>
+                <h4 className="text-[14.5px] font-bold text-white leading-tight">Priority Product Access</h4>
                 <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
-                  새롭게 런칭하는 트렌디한 인디 K-Beauty 신제품 및 특정 브랜드의 독점 SKU 배정 시 Launch Partner에게 최우선권을 제공합니다.
+                  신규 발굴되는 트렌디한 K-Beauty 신제품 및 일부 독점 브랜드 제품 공급 시 최우선 권리를 제공합니다.
                 </p>
               </div>
 
               {/* Sub 07 */}
-              <div className="flex flex-col gap-2.5 p-1 text-left">
-                <span className="text-[11px] text-[#7A7A7A] font-black uppercase font-display">SUPPORT 07</span>
-                <h4 className="text-[13.5px] font-bold text-white">Personalized Launch Support</h4>
-                <span className="text-[11px] text-[#ff2b75] font-bold">맞춤형 런칭 지원</span>
+              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 07</span>
+                  {/* Personalized Launch Target Icon */}
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <h4 className="text-[14.5px] font-bold text-white leading-tight">Personalized Launch Support</h4>
                 <p className="text-[11.5px] text-[#9ca3af] leading-relaxed font-medium">
-                  매장 면적, 핵심 단골 연령대, 가격 민감도를 모두 분석하여 매장에 100% 최적화된 초도 Assortment(AP) 설계 및 판매 매뉴얼을 밀착 매핑합니다.
+                  매장 상권 데이터와 면적, 고객 성향을 기반으로 최적화된 맞춤형 Assortment 설계 분석을 제공합니다.
                 </p>
               </div>
 
@@ -497,23 +554,21 @@ export default async function Home({ params }: PageProps) {
 
             {/* Bottom Closing Panel */}
             <div className="text-center border-t border-white/10 pt-14 max-w-[800px] mx-auto flex flex-col items-center">
-              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-3">
+              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-3 select-none">
                 {locale === "ko" ? "선점의 가치" : "VALUE OF TIMING"}
               </span>
-              <h3 className="font-display text-[20px] sm:text-[23px] font-bold text-white mb-2 tracking-tight">
+              <h3 className="font-display text-[20px] sm:text-[24px] font-black text-white mb-2 tracking-tight">
                 {locale === "ko" ? "먼저 시작할수록, 더 유리한 조건으로 성장할 수 있습니다." : "Launch Earlier. Secure More. Grow Faster."}
               </h3>
               <p className="text-[12.5px] text-[#9ca3af] mb-8 font-medium">
-                {locale === "ko" 
-                  ? "디스플레이 지원부터 결제 유예, 상권 독점 보호까지 — 런칭 파트너 자격은 상권 내 최초 신청 매장에게 우선권이 제공됩니다." 
-                  : "From display rentals to deferred terms and region protection — early launch slots are limited per local territory."
-                }
+                디스플레이 무상 대여부터 첫 결제 유예, 상권 독점 보호까지 — 런칭 파트너 자격은 상권 내 최초 신청 매장에게 우선권이 제공됩니다.
               </p>
               <a
                 href="#apply"
-                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_15px_rgba(255,43,117,0.2)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
+                className="group/btn h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all hover:shadow-[0_4px_20px_rgba(255,43,117,0.35)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
               >
-                {locale === "ko" ? "런칭 파트너 우선 신청하기 →" : "Apply as a Launch Partner →"}
+                {locale === "ko" ? "런칭 파트너 우선 신청하기" : "Apply as a Launch Partner"}
+                <span className="ml-1.5 group-hover/btn:translate-x-1 transition-transform duration-200">→</span>
               </a>
             </div>
 
