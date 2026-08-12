@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { assetConfig } from "../assets.config";
 
 export default function SolutionSection() {
   const [activeTab, setActiveTab] = useState(0); // 0 to 4 (CURATE to OPTIMIZE)
@@ -49,7 +48,7 @@ export default function SolutionSection() {
   const getBuildImage = () => {
     if (buildSize === "4ft") return "/images/solutions/4F_A.jpg";
     if (buildSize === "12ft") return "/images/solutions/12F_AAA.jpg";
-    return "/images/solutions/8F_AA.jpg"; // Updated store background composite visual files
+    return "/images/solutions/8F_AA.jpg"; // Modern store-composited real fixture view
   };
 
   return (
@@ -228,7 +227,7 @@ export default function SolutionSection() {
             </div>
           </div>
 
-          {/* ================= RIGHT COLUMN: Fixed Height Solution Panel Card ================= */}
+          {/* ================= RIGHT COLUMN: Fixed Height Premium Solution Panel Card ================= */}
           <div 
             style={{ 
               border: "1.5px solid #ff2b75", 
@@ -236,395 +235,427 @@ export default function SolutionSection() {
               padding: "44px 48px", 
               background: "#0c0c0c", 
               display: "flex", 
-              flexDirection: "column",
-              justifyContent: "space-between"
+              flexDirection: "column"
             }}
-            className="w-full h-full min-h-[560px] relative self-stretch"
+            className="w-full h-full min-h-[640px] justify-between relative self-stretch"
           >
 
             {/* 01 CURATE PANEL */}
-            <div className={`ks-panel ${activeTab === 0 ? "active" : ""} h-full flex flex-col justify-between`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1">
+            <div className={`ks-panel ${activeTab === 0 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
+              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  <div style={{ color: "#ff2b75", fontSize: "15px", fontWeight: 800, marginBottom: "6px" }}>01</div>
-                  <div style={{ color: "#FAFAFA", fontSize: "44px", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1, marginBottom: "14px" }}>
+                  <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">01</span>
+                  <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     CURATE
+                  </h3>
+                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                    <span className="text-[#ff2b75]">검증된 제품 선별</span>
+                    <span className="text-white/20">|</span>
+                    <span className="text-white/60">Curated Product Mix</span>
                   </div>
-                  <div style={{ color: "#FAFAFA", fontSize: "15px", marginBottom: "20px" }}>
-                    <span style={{ color: "#ff2b75", fontWeight: 700 }}>검증된 제품 선별</span> <span style={{ color: "#8A8A8A" }}>|</span> Curated Product Mix
-                  </div>
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "20px" }} />
-                  <div style={{ color: "#FAFAFA", fontSize: "19.5px", fontWeight: 700, lineHeight: 1.5, marginBottom: "16px" }}>
-                    모든 K-뷰티 제품이<br />K Select에 포함되지는 않습니다.
-                  </div>
-                  <div style={{ color: "#B9B9B9", fontSize: "14px", lineHeight: "1.75" }}>
-                    엄격한 기준으로 품질, 마진,<br />시장 적합성을 종합적으로 검토하여<br />가장 경쟁력 있는 제품만을 선별합니다.
-                  </div>
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
+                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                    모든 K-뷰티 제품이<br />K SELECT에 포함되지는 않습니다.
+                  </h4>
+                  <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
+                    엄격한 기준을 통해 성분 안전성, 안정적 마진, 그리고 미국 시장 적합성을 종합적으로 검증하여 가장 경쟁력 있는 에센셜 라인업을 큐레이션합니다.
+                  </p>
                 </div>
-                <div className="relative w-full md:w-[280px] h-[280px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] aspect-square">
+                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
                   <Image 
-                    src="/images/solutions/curate.png" 
-                    alt="Curated K-Beauty product mix" 
+                    src="/images/solutions/solution_curate_v2.jpg" 
+                    alt="Selected premium product mix lineup with clean blank labels" 
                     fill 
                     className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 280px"
+                    sizes="(max-width: 640px) 100vw, 320px"
                   />
                 </div>
               </div>
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "24px 0 20px" }} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-0 mt-auto">
-                <div className="flex flex-col gap-1.5 md:pr-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z" />
-                      <path d="M8.5 12 L11 14.5 L16 9" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>QUALITY</span>
+              
+              {/* Bottom anchor 3 points */}
+              <div className="border-t border-white/10 pt-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
+                  <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z" />
+                        <path d="M8.5 12 L11 14.5 L16 9" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">QUALITY</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">엄격한 품질 및 성분 검증</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>엄격한 품질 기준 검증</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:px-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="3 17 9 11 13 15 21 7" />
-                      <polyline points="15 7 21 7 21 13" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>MARGIN</span>
+                  <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 17 9 11 13 15 21 7" />
+                        <polyline points="15 7 21 7 21 13" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">MARGIN</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">지속 가능한 높은 리테일 마진</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>지속 가능한 마진 구조</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:pl-[18px]">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="9" />
-                      <line x1="3" y1="12" x2="21" y2="12" />
-                      <path d="M12 3C15 6 15 18 12 21C9 18 9 6 12 3Z" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>U.S. MARKET FIT</span>
+                  <div className="flex flex-col gap-1.5 md:pl-6">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <path d="M12 3C15 6 15 18 12 21C9 18 9 6 12 3Z" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">U.S. MARKET FIT</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">미국 로컬 트렌드 적합성 검토</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>미국 트렌드 &amp; 규격 적합성</span>
                 </div>
               </div>
             </div>
 
             {/* 02 DIFFERENTIATE PANEL */}
-            <div className={`ks-panel ${activeTab === 1 ? "active" : ""} h-full flex flex-col justify-between`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1">
+            <div className={`ks-panel ${activeTab === 1 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
+              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  <div style={{ color: "#ff2b75", fontSize: "15px", fontWeight: 800, marginBottom: "6px" }}>02</div>
-                  <div style={{ color: "#FAFAFA", fontSize: "40px", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1, marginBottom: "14px" }}>
+                  <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">02</span>
+                  <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     DIFFERENTIATE
+                  </h3>
+                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                    <span className="text-[#ff2b75]">차별화된 상품 구성</span>
+                    <span className="text-white/20">|</span>
+                    <span className="text-white/60">Differentiated Assortment</span>
                   </div>
-                  <div style={{ color: "#FAFAFA", fontSize: "15px", marginBottom: "20px" }}>
-                    <span style={{ color: "#ff2b75", fontWeight: 700 }}>차별화된 상품 구성</span> <span style={{ color: "#8A8A8A" }}>|</span> Differentiated Assortment
-                  </div>
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "20px" }} />
-                  <div style={{ color: "#FAFAFA", fontSize: "19.5px", fontWeight: 700, lineHeight: 1.5, marginBottom: "16px" }}>
-                    인기 제품을 모으는 것만으로는<br />차별화가 되지 않습니다.
-                  </div>
-                  <div style={{ color: "#B9B9B9", fontSize: "14px", lineHeight: "1.75" }}>
-                    카테고리, 가격대, 제품 역할과<br />매장 고객 특성을 고려하여<br />가격 경쟁에서 벗어날 수 있는<br />매장 맞춤형 Product Mix를 구성합니다.
-                  </div>
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
+                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                    단순히 인기 제품의 나열만으로는<br />상권 독점을 만들 수 없습니다.
+                  </h4>
+                  <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
+                    매장별 상권 특성, 고객 구매 데이터 및 마진율의 최적 균형을 설계하여 주변 Mass 매장들과 완전히 차별화되는 고유의 K-Beauty 코너를 확보해 드립니다.
+                  </p>
                 </div>
-                <div className="relative w-full md:w-[280px] h-[280px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] aspect-square">
+                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
                   <Image 
-                    src="/images/solutions/differentiate.png" 
-                    alt="Differentiated K-Beauty assortment display" 
+                    src="/images/solutions/solution_differentiate_v2.jpg" 
+                    alt="Premium 3D store assortment matrix comparison graphics with pink glow" 
                     fill 
                     className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 280px"
+                    sizes="(max-width: 640px) 100vw, 320px"
                   />
                 </div>
               </div>
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "24px 0 20px" }} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-0 mt-auto">
-                <div className="flex flex-col gap-1.5 md:pr-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 3H18L22 9L12 22L2 9Z" />
-                      <path d="M2 9H22" />
-                      <path d="M9 3L12 9L15 3" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>DIFFERENTIATION</span>
+              
+              {/* Bottom anchor 3 points */}
+              <div className="border-t border-white/10 pt-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
+                  <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 3H18L22 9L12 22L2 9Z" />
+                        <path d="M2 9H22" />
+                        <path d="M9 3L12 9L15 3" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DIFFERENTIATION</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">인근 매장과의 가격 경쟁 차단</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>가격 경쟁 완화</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:px-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="12" y1="3" x2="12" y2="21" />
-                      <line x1="5" y1="7" x2="19" y2="7" />
-                      <path d="M4 7 Q4 12 8 12 Q12 12 12 7" />
-                      <path d="M12 7 Q12 12 16 12 Q20 12 20 7" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>PRICE BALANCE</span>
+                  <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="3" x2="12" y2="21" />
+                        <line x1="5" y1="7" x2="19" y2="7" />
+                        <path d="M4 7 Q4 12 8 12 Q12 12 12 7" />
+                        <path d="M12 7 Q12 12 16 12 Q20 12 20 7" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">PRICE POINT</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">가격대와 판매율의 최적 밸런스</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>가격대와 마진 균형</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:pl-[18px]">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 9L4 4H20L21 9" />
-                      <path d="M4 9V20H20V9" />
-                      <line x1="9" y1="20" x2="9" y2="13" />
-                      <line x1="15" y1="20" x2="15" y2="13" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>STORE FIT</span>
+                  <div className="flex flex-col gap-1.5 md:pl-6">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 9L4 4H20L21 9" />
+                        <path d="M4 9V20H20V9" />
+                        <line x1="9" y1="20" x2="9" y2="13" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">STORE FIT</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">매장 단골 고객 맞춤형 믹스</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>매장 고객 맞춤 구성</span>
                 </div>
               </div>
             </div>
 
-            {/* 03 BUILD PANEL (Includes 4FT/8FT/12FT Switcher) */}
-            <div className={`ks-panel ${activeTab === 2 ? "active" : ""} h-full flex flex-col justify-between`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1">
+            {/* 03 BUILD PANEL */}
+            <div className={`ks-panel ${activeTab === 2 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
+              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  <div style={{ color: "#ff2b75", fontSize: "15px", fontWeight: 800, marginBottom: "6px" }}>03</div>
-                  <div style={{ color: "#FAFAFA", fontSize: "44px", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1, marginBottom: "14px" }}>
+                  <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">03</span>
+                  <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     BUILD
+                  </h3>
+                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                    <span className="text-[#ff2b75]">숍인숍 카테고리 구축</span>
+                    <span className="text-white/20">|</span>
+                    <span className="text-white/60">Store-in-a-Store</span>
                   </div>
-                  <div style={{ color: "#FAFAFA", fontSize: "15px", marginBottom: "20px" }}>
-                    <span style={{ color: "#ff2b75", fontWeight: 700 }}>숍인숍 카테고리 구축</span> <span style={{ color: "#8A8A8A" }}>|</span> Store-in-a-Store
-                  </div>
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "20px" }} />
-                  <div style={{ color: "#FAFAFA", fontSize: "18.5px", fontWeight: 700, lineHeight: 1.5, marginBottom: "16px" }}>
-                    4FT / 8FT / 12FT 모듈형 디스플레이로<br />전문 K-Beauty 섹션을 매장에 구축합니다.
-                  </div>
-                  <div style={{ color: "#B9B9B9", fontSize: "14px", lineHeight: "1.75" }}>
-                    단순 제품 진열을 넘어, 매장의 실제 판매를 가속화하는 조명 프레임 인프라 시설을 완벽히 매핑 설치해 드립니다.
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
+                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                    4FT / 8FT / 12FT 모듈러 시스템으로<br />매장에 완성형 뷰티 섹션을 짓습니다.
+                  </h4>
+                  <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
+                    단순 선반 진열을 탈피하여, K SELECT HUB 특유의 조명 인프라 프레임과 LED 전용 디바이스가 장착된 완성도 높은 카테고리 존을 매장 내에 직접 구축해 드립니다.
+                  </p>
+
+                  {/* Built-in Switcher Tabs mapped neatly to content */}
+                  <div className="grid grid-cols-3 gap-[10px] mt-6 max-w-[340px]">
+                    <button 
+                      onClick={() => setBuildSize("4ft")}
+                      className={`ks-ft ${buildSize === "4ft" ? "active" : ""}`}
+                      style={{ background: "transparent", outline: "none" }}
+                    >
+                      <div className="num text-[14px] font-black">4FT</div>
+                      <div style={{ color: "#9A9A9A", fontSize: "10.5px" }}>Starter Module</div>
+                    </button>
+                    <button 
+                      onClick={() => setBuildSize("8ft")}
+                      className={`ks-ft ${buildSize === "8ft" ? "active" : ""}`}
+                      style={{ background: "transparent", outline: "none" }}
+                    >
+                      <div className="num text-[14px] font-black">8FT</div>
+                      <div style={{ color: "#9A9A9A", fontSize: "10.5px" }}>Growth Module</div>
+                    </button>
+                    <button 
+                      onClick={() => setBuildSize("12ft")}
+                      className={`ks-ft ${buildSize === "12ft" ? "active" : ""}`}
+                      style={{ background: "transparent", outline: "none" }}
+                    >
+                      <div className="num text-[14px] font-black">12FT</div>
+                      <div style={{ color: "#9A9A9A", fontSize: "10.5px" }}>Destination</div>
+                    </button>
                   </div>
                 </div>
-                <div className="relative w-full md:w-[280px] h-[280px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] aspect-square">
+                
+                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
                   <Image 
                     src={getBuildImage()} 
-                    alt="K-Beauty store-in-a-store display module" 
+                    alt="Modular K-Beauty LED store display fixture composites" 
                     fill 
                     className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 280px"
+                    sizes="(max-width: 640px) 100vw, 320px"
                   />
                 </div>
               </div>
-
-              {/* 4FT / 8FT / 12FT tabs swapper */}
-              <div className="grid grid-cols-3 gap-[10px] my-4 mt-auto">
-                <button 
-                  onClick={() => setBuildSize("4ft")}
-                  className={`ks-ft ${buildSize === "4ft" ? "active" : ""}`}
-                  style={{ background: "transparent", outline: "none" }}
-                >
-                  <div className="num">4FT</div>
-                  <div style={{ color: "#9A9A9A", fontSize: "11px" }}>Starter</div>
-                </button>
-                <button 
-                  onClick={() => setBuildSize("8ft")}
-                  className={`ks-ft ${buildSize === "8ft" ? "active" : ""}`}
-                  style={{ background: "transparent", outline: "none" }}
-                >
-                  <div className="num">8FT</div>
-                  <div style={{ color: "#9A9A9A", fontSize: "11px" }}>Growth</div>
-                </button>
-                <button 
-                  onClick={() => setBuildSize("12ft")}
-                  className={`ks-ft ${buildSize === "12ft" ? "active" : ""}`}
-                  style={{ background: "transparent", outline: "none" }}
-                >
-                  <div className="num">12FT</div>
-                  <div style={{ color: "#9A9A9A", fontSize: "11px" }}>Destination</div>
-                </button>
-              </div>
-
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "16px 0 20px" }} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-0">
-                <div className="flex flex-col gap-1.5 md:pr-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 12C4 6 20 6 22 12C20 18 4 18 2 12Z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>VISIBILITY</span>
+              
+              {/* Bottom anchor 3 points */}
+              <div className="border-t border-white/10 pt-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
+                  <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M2 12C4 6 20 6 22 12C20 18 4 18 2 12Z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">VISIBILITY</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">LED 시그니처 조명 시선 유도</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>LED 조명 가시성 강화</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:px-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="9" width="8" height="8" />
-                      <rect x="13" y="9" width="8" height="8" />
-                      <rect x="8" y="3" width="8" height="8" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>MODULAR</span>
+                  <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="9" width="8" height="8" />
+                        <rect x="13" y="9" width="8" height="8" />
+                        <rect x="8" y="3" width="8" height="8" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">MODULAR FORMAT</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">매장 면적별 유연한 모듈 증설</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>매장 규모별 모듈 선택</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:pl-[18px]">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 9L4 4H20L21 9" />
-                      <path d="M4 9V20H20V9" />
-                      <line x1="9" y1="20" x2="9" y2="13" />
-                      <line x1="15" y1="20" x2="15" y2="13" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>STRUCTURE</span>
+                  <div className="flex flex-col gap-1.5 md:pl-6">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 9L4 4H20L21 9" />
+                        <path d="M4 9V20H20V9" />
+                        <line x1="9" y1="20" x2="9" y2="13" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">INSTALLATION</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">현장 맞춤형 프레임 셋업 완료</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>완성형 숍인숍 피처</span>
                 </div>
               </div>
             </div>
 
             {/* 04 SUPPORT PANEL */}
-            <div className={`ks-panel ${activeTab === 3 ? "active" : ""} h-full flex flex-col justify-between`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1">
+            <div className={`ks-panel ${activeTab === 3 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
+              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  <div style={{ color: "#ff2b75", fontSize: "15px", fontWeight: 800, marginBottom: "6px" }}>04</div>
-                  <div style={{ color: "#FAFAFA", fontSize: "44px", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1, marginBottom: "14px" }}>
+                  <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">04</span>
+                  <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     SUPPORT
+                  </h3>
+                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                    <span className="text-[#ff2b75]">판매 준비 지원</span>
+                    <span className="text-white/20">|</span>
+                    <span className="text-white/60">Retail-Ready Support</span>
                   </div>
-                  <div style={{ color: "#FAFAFA", fontSize: "15px", marginBottom: "20px" }}>
-                    <span style={{ color: "#ff2b75", fontWeight: 700 }}>판매 준비 지원</span> <span style={{ color: "#8A8A8A" }}>|</span> Retail-Ready Support
-                  </div>
-                  <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "20px" }} />
-                  <div style={{ color: "#FAFAFA", fontSize: "19.5px", fontWeight: 700, lineHeight: 1.5, marginBottom: "16px" }}>
-                    제품 공급에서 끝나지 않습니다.
-                  </div>
-                  <div style={{ color: "#B9B9B9", fontSize: "14px", lineHeight: "1.75" }}>
-                    제품 정보 QR 매핑, 스태프 가이드 교육,<br />그리고 현장 Merchandising 지원을 통해<br />매장의 판매 전환율을 함께 높여 드립니다.
-                  </div>
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
+                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                    제품을 납품하는 것만으로는<br />실제 판매가 일어나지 않습니다.
+                  </h4>
+                  <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
+                    매장 스태프 가이드 교육, 고객용 모바일 제품 QR 정보 매핑, 그리고 현장 Merchandising VMD 진열 지원 등 실질적인 매출 발생을 위해 K SELECT의 마케팅 파워를 매장에 지원합니다.
+                  </p>
                 </div>
-                <div className="relative w-full md:w-[280px] h-[280px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] aspect-square">
+                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
                   <Image 
-                    src="/images/solutions/support.png" 
-                    alt="Retail-ready support: staff training and merchandising" 
+                    src="/images/solutions/solution_support_v2.jpg" 
+                    alt="Smartphone scanning QR code on sleek black cosmetics shelf layout" 
                     fill 
                     className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 280px"
+                    sizes="(max-width: 640px) 100vw, 320px"
                   />
                 </div>
               </div>
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "24px 0 20px" }} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-0 mt-auto">
-                <div className="flex flex-col gap-1.5 md:pr-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="7" height="7" />
-                      <rect x="14" y="3" width="7" height="7" />
-                      <rect x="3" y="14" width="7" height="7" />
-                      <rect x="15" y="15" width="2.5" height="2.5" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>QR GUIDE</span>
+              
+              {/* Bottom anchor 3 points */}
+              <div className="border-t border-white/10 pt-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
+                  <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <rect x="15" y="15" width="2.5" height="2.5" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">QR GUIDE</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">QR 스캔을 통한 성분 상세 정보 제공</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>성분/사용 가이드 스캔</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:px-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 3L22 8L12 13L2 8Z" />
-                      <path d="M6 10V16C6 18 9 19 12 19C15 19 18 18 18 16V10" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>TRAINING</span>
+                  <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 3L22 8L12 13L2 8Z" />
+                        <path d="M6 10V16C6 18 9 19 12 19C15 19 18 18 18 16V10" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">STAFF GUIDE</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">스태프용 K-뷰티 판매 핵심 교육</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>가이드북 및 교육 지원</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:pl-[18px]">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="4" r="1.5" />
-                      <path d="M12 5.5 L3 13H21Z" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>DISPLAY FIT</span>
+                  <div className="flex flex-col gap-1.5 md:pl-6">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="4" r="1.5" />
+                        <path d="M12 5.5 L3 13H21Z" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DISPLAY SETTING</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">초기 상품 진열 및 테스터 배치 지원</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>진열 및 쇼케이스 세팅</span>
                 </div>
               </div>
             </div>
 
-            {/* 05 OPTIMIZE PANEL (Includes HTML/CSS Charts & Widgets) */}
-            <div className={`ks-panel ${activeTab === 4 ? "active" : ""} h-full flex flex-col justify-between`}>
+            {/* 05 OPTIMIZE PANEL */}
+            <div className={`ks-panel ${activeTab === 4 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
               <div className="flex flex-col justify-center flex-1">
-                <div style={{ color: "#ff2b75", fontSize: "15px", fontWeight: 800, marginBottom: "6px" }}>05</div>
-                <div style={{ color: "#FAFAFA", fontSize: "44px", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1, marginBottom: "14px" }}>
+                <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">05</span>
+                <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                   OPTIMIZE
+                </h3>
+                <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                  <span className="text-[#ff2b75]">판매 데이터 기반 최적화</span>
+                  <span className="text-white/20">|</span>
+                  <span className="text-white/60">Inventory &amp; Growth Optimization</span>
                 </div>
-                <div style={{ color: "#FAFAFA", fontSize: "15px", marginBottom: "20px" }}>
-                  <span style={{ color: "#ff2b75", fontWeight: 700 }}>판매 데이터 기반 최적화</span> <span style={{ color: "#8A8A8A" }}>|</span> Inventory &amp; Growth Optimization
-                </div>
-                <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "20px" }} />
-                <div style={{ color: "#FAFAFA", fontSize: "19.5px", fontWeight: 700, lineHeight: 1.5, marginBottom: "10px" }}>
-                  판매 이후에도 시스템 관리는 계속됩니다.
-                </div>
-                <div style={{ color: "#B9B9B9", fontSize: "14px", lineHeight: "1.75", marginBottom: "20px" }}>
-                  실제 Sell-through 데이터를 바탕으로 제품 회전율을 분석하고,<br />재주문 제안과 Product Mix를 매장 상권에 딱 맞게 상시 고도화합니다.
-                </div>
+                <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
+                <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                  판매 이후에도 재고 흐름을 밀착 모니터링합니다.
+                </h4>
+                <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium mb-6">
+                  실제 매장에서 수집된 주간 Sell-through 회전율 데이터를 바탕으로, 누적 판매 성과 분석과 자동화된 재주문(Reorder) 제안을 통해 악성 재고 없는 건전한 매출 순환을 책임집니다.
+                </p>
 
-                {/* Dashboard Widgets layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[12px] my-1">
+                {/* Rich Dashboard Widgets layout to fill center space */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] my-2">
                   
                   {/* SELL-THROUGH Chart widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", padding: "14px 16px" }}>
-                    <div style={{ color: "#ff2b75", fontSize: "10px", fontWeight: 800, letterSpacing: "0.06em", marginBottom: "12px" }}>SELL-THROUGH</div>
-                    <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "64px" }}>
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "100%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "85%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "72%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "55%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "42%" }} />
+                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px" }} className="bg-[#111]">
+                    <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-3">SELL-THROUGH (7D)</div>
+                    <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "76px" }}>
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "100%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "85%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "72%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "55%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "42%" }} />
+                    </div>
+                    <div className="flex justify-between mt-2.5 text-[9px] text-[#7A7A7A] font-bold">
+                      <span>W1</span>
+                      <span>W2</span>
+                      <span>W3</span>
+                      <span>W4</span>
+                      <span>W5</span>
                     </div>
                   </div>
 
                   {/* REORDER RECOMMENDATION widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", padding: "14px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }} className="bg-[#111]">
                     <div>
-                      <div style={{ color: "#ff2b75", fontSize: "10px", fontWeight: 800, letterSpacing: "0.06em", marginBottom: "8px" }}>REORDER SUGGESTION</div>
-                      <div style={{ color: "#FAFAFA", fontSize: "12.5px", fontWeight: 700 }}>SKU-1023</div>
+                      <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-1.5">REORDER SUGGESTION</div>
+                      <div className="text-white text-[13px] font-bold">SKU-1023 (Skincare)</div>
                     </div>
-                    <div style={{ color: "#FAFAFA", fontSize: "22px", fontWeight: 800, margin: "6px 0" }}>240<span style={{ fontSize: "12px", color: "#9A9A9A", fontWeight: 600 }}> EA</span></div>
-                    <div style={{ border: "1px solid #ff2b75", color: "#ff2b75", borderRadius: "6px", padding: "4px 8px", fontSize: "10.5px", fontWeight: 800, textAlign: "center" }}>✓ AUTO REORDER</div>
+                    <div className="text-white text-[24px] font-black my-1">240<span className="text-[12px] text-[#9A9A9A] font-bold"> EA</span></div>
+                    <div className="border border-[#ff2b75] text-[#ff2b75] rounded-[6px] py-1 text-[10px] font-black text-center select-none">
+                      ✓ AUTO-REORDER NOW
+                    </div>
                   </div>
 
-                  {/* MARGIN PERFORMANCE widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "10px", padding: "14px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  {/* MARGIN SCORECARD widget */}
+                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }} className="bg-[#111]">
                     <div>
-                      <div style={{ color: "#ff2b75", fontSize: "10px", fontWeight: 800, letterSpacing: "0.06em", marginBottom: "8px" }}>MARGIN PROFILE</div>
-                      <div style={{ color: "#FAFAFA", fontSize: "12.5px", fontWeight: 700 }}>Average Category Margin</div>
+                      <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-1.5">MARGIN PROFILE</div>
+                      <div className="text-white text-[13px] font-bold">Category Average</div>
                     </div>
-                    <div style={{ color: "#FAFAFA", fontSize: "22px", fontWeight: 800, margin: "6px 0" }}>52.4%</div>
-                    <div style={{ background: "#ff2b75/10", border: "1px solid #ff2b75/20", color: "#ff2b75", borderRadius: "6px", padding: "4px 8px", fontSize: "10.5px", fontWeight: 800, textAlign: "center" }}>OPTIMIZED</div>
+                    <div className="text-[#ff2b75] text-[24px] font-black my-1">52.4%</div>
+                    <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/20 text-[#ff2b75] rounded-[6px] py-1 text-[10px] font-black text-center select-none">
+                      OPTIMIZED VALUE
+                    </div>
                   </div>
 
                 </div>
               </div>
-
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "24px 0 20px" }} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-0 mt-auto">
-                <div className="flex flex-col gap-1.5 md:pr-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="20" x2="18" y2="10" />
-                      <line x1="12" y1="20" x2="12" y2="4" />
-                      <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>TURNOVER SPEED</span>
+              
+              {/* Bottom anchor 3 points */}
+              <div className="border-t border-white/10 pt-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
+                  <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10" />
+                        <line x1="12" y1="20" x2="12" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="14" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">TURNOVER SPEED</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">데이터 분석을 통한 회전율 가속</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>재고 회전 주기 가속화</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:px-[18px] md:border-r border-white/12">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <line x1="21" y1="12" x2="3" y2="12" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>AUTOMATIC REORDER</span>
+                  <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <line x1="21" y1="12" x2="3" y2="12" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">AUTO REORDER</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">품절 방지 자동 재오더 주문 루프</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>자동 리오더 솔루션</span>
-                </div>
-                <div className="flex flex-col gap-1.5 md:pl-[18px]">
-                  <div className="flex items-center gap-1.5">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    <span style={{ color: "#FAFAFA", fontSize: "11px", fontWeight: 700, letterSpacing: "0.04em" }}>DEADSTOCK CONTROL</span>
+                  <div className="flex flex-col gap-1.5 md:pl-6">
+                    <div className="flex items-center gap-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DEADSTOCK CONTROL</span>
+                    </div>
+                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">비정체 SKU 조기 식별 및 제어</span>
                   </div>
-                  <span style={{ color: "#8F8F8F", fontSize: "11.5px" }}>악성 재고 최소화 케어</span>
                 </div>
               </div>
             </div>
