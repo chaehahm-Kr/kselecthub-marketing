@@ -20,42 +20,42 @@ export default function CurationSection() {
     {
       nameKo: "스킨케어",
       nameEn: "Skincare",
-      image: "/images/solutions/curate.png",
+      image: "/images/solutions/curation_skincare.jpg",
       items: ["클렌징", "토너·미스트", "에센스·세럼", "앰플", "모이스처라이저", "선케어", "마스크", "패치", "아이케어"],
       tags: ["Balanced Core", "Essential Mix", "Price Fit"]
     },
     {
       nameKo: "헤어케어",
       nameEn: "Hair Care",
-      image: "/images/solutions/differentiate.png",
+      image: "/images/solutions/curation_haircare.jpg",
       items: ["샴푸·클렌징", "컨디셔너", "트리트먼트", "스칼프 케어", "스타일링", "헤어 에센스", "헤어 컬러"],
       tags: ["Premium Tier", "Essential Mix", "Margin Focus"]
     },
     {
       nameKo: "메이크업",
       nameEn: "Makeup",
-      image: "/images/solutions/support.png",
+      image: "/images/solutions/curation_makeup.jpg",
       items: ["베이스 메이크업", "페이스 컬러", "아이 메이크업", "아이브로우", "립 메이크업"],
       tags: ["Trend Selection", "Price Fit", "Balanced Core"]
     },
     {
       nameKo: "바디케어",
       nameEn: "Body Care",
-      image: "/images/solutions/differentiate.png",
+      image: "/images/solutions/curation_bodycare.jpg",
       items: ["바디 클렌징", "바디 모이스처라이저", "각질 케어", "핸드·풋 케어", "데오도란트"],
       tags: ["Essential Mix", "Price Fit", "Margin Focus"]
     },
     {
       nameKo: "퍼스널케어",
       nameEn: "Personal Care",
-      image: "/images/solutions/curate.png",
+      image: "/images/solutions/curation_personalcare.jpg",
       items: ["오럴 케어", "여성 위생", "남성 그루밍", "쉐이빙", "위생 케어"],
       tags: ["Balanced Core", "Essential Mix", "Price Fit"]
     },
     {
       nameKo: "뷰티 툴",
       nameEn: "Beauty Tools",
-      image: "/images/solutions/support.png",
+      image: "/images/solutions/curation_beautytools.jpg",
       items: ["페이스 툴", "메이크업 툴", "헤어 툴", "바디 툴", "보관·액세서리"],
       tags: ["Trend Selection", "Premium Tier", "Margin Focus"]
     }
@@ -185,7 +185,7 @@ export default function CurationSection() {
           {/* ================= RIGHT COLUMN: Premium Full-Image Curation Showcase ================= */}
           <div className="relative rounded-[24px] border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between overflow-hidden p-8 sm:p-10 min-h-[460px]">
             
-            {/* Showcase Background Image: Full sized background visual (Opacity high, clear representation) */}
+            {/* Showcase Background Image: Full sized background visual (High Opacity, Clear Central Visibility) */}
             <div className="absolute inset-0 z-0">
               {categories.map((cat, index) => (
                 <div
@@ -198,14 +198,14 @@ export default function CurationSection() {
                     src={cat.image}
                     alt={`${cat.nameKo} Curation Visual`}
                     fill
-                    className="object-cover opacity-[0.64] transition-transform duration-700 hover:scale-102"
+                    className="object-cover opacity-[0.82] transition-transform duration-700 hover:scale-102"
                     sizes="45vw"
                     priority={index === 0}
                   />
                 </div>
               ))}
-              {/* Premium dark gradient overlay ensuring clear typography visibility */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/85 via-[#0c0c0c]/30 to-[#0c0c0c]/90 z-10 pointer-events-none" />
+              {/* Premium dark gradient overlay: Clear in center, shading only top and bottom for readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/80 via-transparent to-[#0c0c0c]/90 z-10 pointer-events-none" />
             </div>
 
             {/* Top header labels overlay (z-20) */}
@@ -218,21 +218,21 @@ export default function CurationSection() {
                   {categories[activeCategory].nameEn}
                 </span>
               </div>
-              <span className="text-[9.5px] text-[#FAFAFA]/50 font-bold tracking-wider">
-                Store-fit curation applied
+              <span className="text-[9.5px] text-[#FAFAFA]/70 font-bold tracking-wider">
+                Store-fit Curation Applied
               </span>
             </div>
 
-            {/* Mid Section: Subcategories overlayed beautifully as light tags (z-20) */}
-            <div className="relative z-20 flex flex-col gap-3 my-6 text-left">
-              <span className="text-[9px] text-[#ff2b75] font-black uppercase tracking-[0.15em] block">
+            {/* Mid Section: Subcategories overlayed beautifully as slim, light tags (z-20) */}
+            <div className="relative z-20 flex flex-col gap-2 my-6 text-left">
+              <span className="text-[9px] text-[#ff2b75] font-black uppercase tracking-[0.15em] block mb-1">
                 {categories[activeCategory].nameKo} 핵심 제품군
               </span>
               <div className="flex flex-wrap gap-1.5 max-w-[85%]">
                 {categories[activeCategory].items.map((item) => (
                   <span
                     key={item}
-                    className="text-[11px] font-semibold text-white/90 bg-black/60 border border-white/10 px-2.5 py-1 rounded-[6px] tracking-tight hover:bg-black/80 hover:border-[#ff2b75]/30 transition-all duration-200"
+                    className="text-[10.5px] font-bold text-white/95 bg-black/60 border border-white/15 px-2.5 py-1 rounded-[6px] tracking-tight hover:bg-black/80 hover:border-[#ff2b75]/30 transition-all duration-200"
                   >
                     {item}
                   </span>
