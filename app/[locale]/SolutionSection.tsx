@@ -48,7 +48,7 @@ export default function SolutionSection() {
   const getBuildImage = () => {
     if (buildSize === "4ft") return "/images/solutions/4F_A.jpg";
     if (buildSize === "12ft") return "/images/solutions/12F_AAA.jpg";
-    return "/images/solutions/8F_AA.jpg"; // Modern store-composited real fixture view
+    return "/images/solutions/8F_AA.jpg";
   };
 
   return (
@@ -237,31 +237,31 @@ export default function SolutionSection() {
               display: "flex", 
               flexDirection: "column"
             }}
-            className="w-full h-full min-h-[640px] justify-between relative self-stretch"
+            className="w-full h-full min-h-[640px] justify-between relative self-stretch overflow-hidden"
           >
 
             {/* 01 CURATE PANEL */}
             <div className={`ks-panel ${activeTab === 0 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
+              <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-[36px] flex-1 items-center">
+                <div className="flex flex-col justify-center h-full">
                   <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">01</span>
                   <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     CURATE
                   </h3>
-                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                  <div className="text-[14px] text-white/90 font-semibold mb-5 flex items-center gap-2">
                     <span className="text-[#ff2b75]">검증된 제품 선별</span>
                     <span className="text-white/20">|</span>
                     <span className="text-white/60">Curated Product Mix</span>
                   </div>
-                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
-                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-5" />
+                  <h4 className="text-[18px] font-bold text-white leading-snug mb-3">
                     모든 K-뷰티 제품이<br />K SELECT에 포함되지는 않습니다.
                   </h4>
                   <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
                     엄격한 기준을 통해 성분 안전성, 안정적 마진, 그리고 미국 시장 적합성을 종합적으로 검증하여 가장 경쟁력 있는 에센셜 라인업을 큐레이션합니다.
                   </p>
                 </div>
-                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
+                <div className="relative w-full h-[260px] md:h-[290px] rounded-[14px] overflow-hidden my-auto border border-white/10 shadow-lg">
                   <Image 
                     src="/images/solutions/solution_curate_v2.jpg" 
                     alt="Selected premium product mix lineup with clean blank labels" 
@@ -273,7 +273,7 @@ export default function SolutionSection() {
               </div>
               
               {/* Bottom anchor 3 points */}
-              <div className="border-t border-white/10 pt-6 mt-8">
+              <div className="border-t border-white/10 pt-5 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
                   <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -281,9 +281,9 @@ export default function SolutionSection() {
                         <path d="M12 2 L20 5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5 Z" />
                         <path d="M8.5 12 L11 14.5 L16 9" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">QUALITY</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">QUALITY</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">엄격한 품질 및 성분 검증</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">엄격한 품질 및 성분 검증</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -291,9 +291,9 @@ export default function SolutionSection() {
                         <polyline points="3 17 9 11 13 15 21 7" />
                         <polyline points="15 7 21 7 21 13" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">MARGIN</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">MARGIN</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">지속 가능한 높은 리테일 마진</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">지속 가능한 높은 리테일 마진</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:pl-6">
                     <div className="flex items-center gap-2">
@@ -302,9 +302,9 @@ export default function SolutionSection() {
                         <line x1="3" y1="12" x2="21" y2="12" />
                         <path d="M12 3C15 6 15 18 12 21C9 18 9 6 12 3Z" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">U.S. MARKET FIT</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">U.S. MARKET FIT</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">미국 로컬 트렌드 적합성 검토</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">미국 로컬 트렌드 적합성 검토</span>
                   </div>
                 </div>
               </div>
@@ -312,26 +312,26 @@ export default function SolutionSection() {
 
             {/* 02 DIFFERENTIATE PANEL */}
             <div className={`ks-panel ${activeTab === 1 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
+              <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-[36px] flex-1 items-center">
+                <div className="flex flex-col justify-center h-full">
                   <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">02</span>
                   <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     DIFFERENTIATE
                   </h3>
-                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                  <div className="text-[14px] text-white/90 font-semibold mb-5 flex items-center gap-2">
                     <span className="text-[#ff2b75]">차별화된 상품 구성</span>
                     <span className="text-white/20">|</span>
                     <span className="text-white/60">Differentiated Assortment</span>
                   </div>
-                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
-                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-5" />
+                  <h4 className="text-[18px] font-bold text-white leading-snug mb-3">
                     단순히 인기 제품의 나열만으로는<br />상권 독점을 만들 수 없습니다.
                   </h4>
                   <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
                     매장별 상권 특성, 고객 구매 데이터 및 마진율의 최적 균형을 설계하여 주변 Mass 매장들과 완전히 차별화되는 고유의 K-Beauty 코너를 확보해 드립니다.
                   </p>
                 </div>
-                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
+                <div className="relative w-full h-[260px] md:h-[290px] rounded-[14px] overflow-hidden my-auto border border-white/10 shadow-lg">
                   <Image 
                     src="/images/solutions/solution_differentiate_v2.jpg" 
                     alt="Premium 3D store assortment matrix comparison graphics with pink glow" 
@@ -343,7 +343,7 @@ export default function SolutionSection() {
               </div>
               
               {/* Bottom anchor 3 points */}
-              <div className="border-t border-white/10 pt-6 mt-8">
+              <div className="border-t border-white/10 pt-5 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
                   <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -352,9 +352,9 @@ export default function SolutionSection() {
                         <path d="M2 9H22" />
                         <path d="M9 3L12 9L15 3" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DIFFERENTIATION</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">DIFFERENTIATION</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">인근 매장과의 가격 경쟁 차단</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">인근 매장과의 가격 경쟁 차단</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -364,9 +364,9 @@ export default function SolutionSection() {
                         <path d="M4 7 Q4 12 8 12 Q12 12 12 7" />
                         <path d="M12 7 Q12 12 16 12 Q20 12 20 7" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">PRICE POINT</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">PRICE POINT</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">가격대와 판매율의 최적 밸런스</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">가격대와 판매율의 최적 밸런스</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:pl-6">
                     <div className="flex items-center gap-2">
@@ -375,9 +375,9 @@ export default function SolutionSection() {
                         <path d="M4 9V20H20V9" />
                         <line x1="9" y1="20" x2="9" y2="13" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">STORE FIT</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">STORE FIT</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">매장 단골 고객 맞춤형 믹스</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">매장 단골 고객 맞춤형 믹스</span>
                   </div>
                 </div>
               </div>
@@ -385,19 +385,19 @@ export default function SolutionSection() {
 
             {/* 03 BUILD PANEL */}
             <div className={`ks-panel ${activeTab === 2 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
+              <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-[36px] flex-1 items-center">
+                <div className="flex flex-col justify-center h-full">
                   <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">03</span>
                   <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     BUILD
                   </h3>
-                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                  <div className="text-[14px] text-white/90 font-semibold mb-5 flex items-center gap-2">
                     <span className="text-[#ff2b75]">숍인숍 카테고리 구축</span>
                     <span className="text-white/20">|</span>
                     <span className="text-white/60">Store-in-a-Store</span>
                   </div>
-                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
-                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-5" />
+                  <h4 className="text-[18px] font-bold text-white leading-snug mb-3">
                     4FT / 8FT / 12FT 모듈러 시스템으로<br />매장에 완성형 뷰티 섹션을 짓습니다.
                   </h4>
                   <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
@@ -405,7 +405,7 @@ export default function SolutionSection() {
                   </p>
 
                   {/* Built-in Switcher Tabs mapped neatly to content */}
-                  <div className="grid grid-cols-3 gap-[10px] mt-6 max-w-[340px]">
+                  <div className="grid grid-cols-3 gap-[10px] mt-5 max-w-[340px]">
                     <button 
                       onClick={() => setBuildSize("4ft")}
                       className={`ks-ft ${buildSize === "4ft" ? "active" : ""}`}
@@ -433,7 +433,7 @@ export default function SolutionSection() {
                   </div>
                 </div>
                 
-                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
+                <div className="relative w-full h-[260px] md:h-[290px] rounded-[14px] overflow-hidden my-auto border border-white/10 shadow-lg">
                   <Image 
                     src={getBuildImage()} 
                     alt="Modular K-Beauty LED store display fixture composites" 
@@ -445,7 +445,7 @@ export default function SolutionSection() {
               </div>
               
               {/* Bottom anchor 3 points */}
-              <div className="border-t border-white/10 pt-6 mt-8">
+              <div className="border-t border-white/10 pt-5 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
                   <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -453,9 +453,9 @@ export default function SolutionSection() {
                         <path d="M2 12C4 6 20 6 22 12C20 18 4 18 2 12Z" />
                         <circle cx="12" cy="12" r="3" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">VISIBILITY</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">VISIBILITY</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">LED 시그니처 조명 시선 유도</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">LED 시그니처 조명 시선 유도</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -464,9 +464,9 @@ export default function SolutionSection() {
                         <rect x="13" y="9" width="8" height="8" />
                         <rect x="8" y="3" width="8" height="8" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">MODULAR FORMAT</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">MODULAR FORMAT</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">매장 면적별 유연한 모듈 증설</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">매장 면적별 유연한 모듈 증설</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:pl-6">
                     <div className="flex items-center gap-2">
@@ -475,9 +475,9 @@ export default function SolutionSection() {
                         <path d="M4 9V20H20V9" />
                         <line x1="9" y1="20" x2="9" y2="13" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">INSTALLATION</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">INSTALLATION</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">현장 맞춤형 프레임 셋업 완료</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">현장 맞춤형 프레임 셋업 완료</span>
                   </div>
                 </div>
               </div>
@@ -485,26 +485,26 @@ export default function SolutionSection() {
 
             {/* 04 SUPPORT PANEL */}
             <div className={`ks-panel ${activeTab === 3 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
-              <div className="flex flex-col md:flex-row gap-[40px] flex-1 items-stretch justify-between">
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
+              <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-[36px] flex-1 items-center">
+                <div className="flex flex-col justify-center h-full">
                   <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">04</span>
                   <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
                     SUPPORT
                   </h3>
-                  <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
+                  <div className="text-[14px] text-white/90 font-semibold mb-5 flex items-center gap-2">
                     <span className="text-[#ff2b75]">판매 준비 지원</span>
                     <span className="text-white/20">|</span>
                     <span className="text-white/60">Retail-Ready Support</span>
                   </div>
-                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
-                  <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-5" />
+                  <h4 className="text-[18px] font-bold text-white leading-snug mb-3">
                     제품을 납품하는 것만으로는<br />실제 판매가 일어나지 않습니다.
                   </h4>
                   <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
                     매장 스태프 가이드 교육, 고객용 모바일 제품 QR 정보 매핑, 그리고 현장 Merchandising VMD 진열 지원 등 실질적인 매출 발생을 위해 K SELECT의 마케팅 파워를 매장에 지원합니다.
                   </p>
                 </div>
-                <div className="relative w-full md:w-[320px] min-h-[260px] md:h-auto flex-shrink-0 rounded-[14px] overflow-hidden my-auto max-h-[300px] border border-white/10 shadow-lg">
+                <div className="relative w-full h-[260px] md:h-[290px] rounded-[14px] overflow-hidden my-auto border border-white/10 shadow-lg">
                   <Image 
                     src="/images/solutions/solution_support_v2.jpg" 
                     alt="Smartphone scanning QR code on sleek black cosmetics shelf layout" 
@@ -516,7 +516,7 @@ export default function SolutionSection() {
               </div>
               
               {/* Bottom anchor 3 points */}
-              <div className="border-t border-white/10 pt-6 mt-8">
+              <div className="border-t border-white/10 pt-5 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
                   <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -526,9 +526,9 @@ export default function SolutionSection() {
                         <rect x="3" y="14" width="7" height="7" />
                         <rect x="15" y="15" width="2.5" height="2.5" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">QR GUIDE</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">QR GUIDE</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">QR 스캔을 통한 성분 상세 정보 제공</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">QR 스캔을 통한 성분 상세 정보 제공</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -536,9 +536,9 @@ export default function SolutionSection() {
                         <path d="M12 3L22 8L12 13L2 8Z" />
                         <path d="M6 10V16C6 18 9 19 12 19C15 19 18 18 18 16V10" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">STAFF GUIDE</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">TRAINING</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">스태프용 K-뷰티 판매 핵심 교육</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">스태프용 K-뷰티 판매 핵심 교육</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:pl-6">
                     <div className="flex items-center gap-2">
@@ -546,9 +546,9 @@ export default function SolutionSection() {
                         <circle cx="12" cy="4" r="1.5" />
                         <path d="M12 5.5 L3 13H21Z" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DISPLAY SETTING</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">DISPLAY FIT</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">초기 상품 진열 및 테스터 배치 지원</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">초기 상품 진열 및 테스터 배치 지원</span>
                   </div>
                 </div>
               </div>
@@ -556,75 +556,67 @@ export default function SolutionSection() {
 
             {/* 05 OPTIMIZE PANEL */}
             <div className={`ks-panel ${activeTab === 4 ? "active" : ""} h-full flex flex-col justify-between flex-1`}>
-              <div className="flex flex-col justify-center flex-1">
-                <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">05</span>
-                <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
-                  OPTIMIZE
-                </h3>
-                <div className="text-[14px] text-white/90 font-semibold mb-6 flex items-center gap-2">
-                  <span className="text-[#ff2b75]">판매 데이터 기반 최적화</span>
-                  <span className="text-white/20">|</span>
-                  <span className="text-white/60">Inventory &amp; Growth Optimization</span>
+              <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-[36px] flex-1 items-center">
+                <div className="flex flex-col justify-center h-full">
+                  <span className="text-[14px] font-black text-[#ff2b75] tracking-widest uppercase block mb-1">05</span>
+                  <h3 className="font-display text-white text-[42px] font-extrabold tracking-tight leading-none mb-3">
+                    OPTIMIZE
+                  </h3>
+                  <div className="text-[14px] text-white/90 font-semibold mb-5 flex items-center gap-2">
+                    <span className="text-[#ff2b75]">판매 데이터 기반 최적화</span>
+                    <span className="text-white/20">|</span>
+                    <span className="text-white/60">Inventory &amp; Growth Optimization</span>
+                  </div>
+                  <div className="w-12 h-0.5 bg-[#ff2b75] mb-5" />
+                  <h4 className="text-[18px] font-bold text-white leading-snug mb-3">
+                    판매 이후에도 재고 흐름을 밀착 모니터링합니다.
+                  </h4>
+                  <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium">
+                    실제 매장에서 수집된 주간 Sell-through 회전율 데이터를 바탕으로, 누적 판매 성과 분석과 자동화된 재주문(Reorder) 제안을 통해 악성 재고 없는 건전한 매출 순환을 책임집니다.
+                  </p>
                 </div>
-                <div className="w-12 h-0.5 bg-[#ff2b75] mb-6" />
-                <h4 className="text-[18.5px] font-bold text-white leading-snug mb-3">
-                  판매 이후에도 재고 흐름을 밀착 모니터링합니다.
-                </h4>
-                <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-medium mb-6">
-                  실제 매장에서 수집된 주간 Sell-through 회전율 데이터를 바탕으로, 누적 판매 성과 분석과 자동화된 재주문(Reorder) 제안을 통해 악성 재고 없는 건전한 매출 순환을 책임집니다.
-                </p>
-
-                {/* Rich Dashboard Widgets layout to fill center space */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] my-2">
+                
+                {/* Visual Stack mapping exactly to the 290px frame layout for perfect Jitter-free transition */}
+                <div className="w-full h-[260px] md:h-[290px] bg-[#111]/70 border border-white/10 rounded-[14px] p-5 flex flex-col justify-between my-auto shadow-lg">
                   
                   {/* SELL-THROUGH Chart widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px" }} className="bg-[#111]">
-                    <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-3">SELL-THROUGH (7D)</div>
-                    <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "76px" }}>
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "100%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "85%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "72%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "55%" }} />
-                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "3px 3px 0 0", height: "42%" }} />
-                    </div>
-                    <div className="flex justify-between mt-2.5 text-[9px] text-[#7A7A7A] font-bold">
-                      <span>W1</span>
-                      <span>W2</span>
-                      <span>W3</span>
-                      <span>W4</span>
-                      <span>W5</span>
+                  <div className="bg-[#080808]/90 border border-white/5 rounded-[8px] p-3">
+                    <div className="text-[#ff2b75] text-[9.5px] font-black tracking-wider uppercase font-display mb-2">WEEKLY SELL-THROUGH</div>
+                    <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "42px" }}>
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "100%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "85%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "72%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "55%" }} />
+                      <div style={{ width: "100%", background: "#ff2b75", borderRadius: "2px 2px 0 0", height: "35%" }} />
                     </div>
                   </div>
 
                   {/* REORDER RECOMMENDATION widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }} className="bg-[#111]">
+                  <div className="flex items-center justify-between bg-[#080808]/90 border border-white/5 rounded-[8px] p-3">
                     <div>
-                      <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-1.5">REORDER SUGGESTION</div>
-                      <div className="text-white text-[13px] font-bold">SKU-1023 (Skincare)</div>
+                      <div className="text-[#ff2b75] text-[9.5px] font-black tracking-wider uppercase font-display mb-0.5">REORDER SUGGESTION</div>
+                      <div className="text-white text-[11.5px] font-bold">SKU-1023 (Skincare)</div>
                     </div>
-                    <div className="text-white text-[24px] font-black my-1">240<span className="text-[12px] text-[#9A9A9A] font-bold"> EA</span></div>
-                    <div className="border border-[#ff2b75] text-[#ff2b75] rounded-[6px] py-1 text-[10px] font-black text-center select-none">
-                      ✓ AUTO-REORDER NOW
+                    <div className="text-right">
+                      <div className="text-white text-[16px] font-black">240<span className="text-[10px] text-[#9A9A9A] font-bold"> EA</span></div>
+                      <span className="text-[8px] text-[#ff2b75] font-black tracking-widest uppercase">AUTO RUNNING</span>
                     </div>
                   </div>
 
-                  {/* MARGIN SCORECARD widget */}
-                  <div style={{ border: "1px solid rgba(255,255,255,0.12)", borderRadius: "12px", padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }} className="bg-[#111]">
+                  {/* MARGIN PERFORMANCE widget */}
+                  <div className="flex items-center justify-between bg-[#080808]/90 border border-white/5 rounded-[8px] p-3">
                     <div>
-                      <div className="text-[#ff2b75] text-[11px] font-black tracking-wider uppercase font-display mb-1.5">MARGIN PROFILE</div>
-                      <div className="text-white text-[13px] font-bold">Category Average</div>
+                      <div className="text-[#ff2b75] text-[9.5px] font-black tracking-wider uppercase font-display mb-0.5">MARGIN PROFILE</div>
+                      <div className="text-white text-[11.5px] font-bold">Category Average</div>
                     </div>
-                    <div className="text-[#ff2b75] text-[24px] font-black my-1">52.4%</div>
-                    <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/20 text-[#ff2b75] rounded-[6px] py-1 text-[10px] font-black text-center select-none">
-                      OPTIMIZED VALUE
-                    </div>
+                    <div className="text-[#ff2b75] text-[18px] font-black">52.4%</div>
                   </div>
 
                 </div>
               </div>
               
               {/* Bottom anchor 3 points */}
-              <div className="border-t border-white/10 pt-6 mt-8">
+              <div className="border-t border-white/10 pt-5 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-0">
                   <div className="flex flex-col gap-1.5 md:pr-4 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -633,9 +625,9 @@ export default function SolutionSection() {
                         <line x1="12" y1="20" x2="12" y2="4" />
                         <line x1="6" y1="20" x2="6" y2="14" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">TURNOVER SPEED</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">TURNOVER SPEED</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">데이터 분석을 통한 회전율 가속</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">데이터 분석을 통한 회전율 가속</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:px-6 md:border-r border-white/10">
                     <div className="flex items-center gap-2">
@@ -643,18 +635,18 @@ export default function SolutionSection() {
                         <rect x="3" y="3" width="18" height="18" rx="2" />
                         <line x1="21" y1="12" x2="3" y2="12" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">AUTO REORDER</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">AUTO REORDER</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">품절 방지 자동 재오더 주문 루프</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">품절 방지 자동 재오더 주문 루프</span>
                   </div>
                   <div className="flex flex-col gap-1.5 md:pl-6">
                     <div className="flex items-center gap-2">
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff2b75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                       </svg>
-                      <span className="text-white text-[11px] font-black tracking-wider uppercase font-display">DEADSTOCK CONTROL</span>
+                      <span className="text-white text-[11.5px] font-black tracking-wider uppercase font-display">DEADSTOCK CONTROL</span>
                     </div>
-                    <span className="text-[#8F8F8F] text-[11.5px] font-medium">비정체 SKU 조기 식별 및 제어</span>
+                    <span className="text-[#8F8F8F] text-[12px] font-semibold">비정체 SKU 조기 식별 및 제어</span>
                   </div>
                 </div>
               </div>
