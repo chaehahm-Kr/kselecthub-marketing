@@ -103,12 +103,12 @@ export default function Simulator() {
         {/* CTA Button Block */}
         <div className="flex flex-col gap-2.5 mt-4 items-start">
           <a
-            href="#apply"
-            onClick={(e) => handleSmoothScroll(e, "apply")}
-            className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all cursor-pointer shadow-[0_4px_20px_rgba(255,43,117,0.25)] focus:outline-none focus:ring-2 focus:ring-[#ff2b75]/50"
+            href="#simulator-section"
+            onClick={(e) => handleSmoothScroll(e, "simulator-section")}
+            className="h-14 inline-flex items-center justify-center border border-[#22D3EE]/30 text-[#22D3EE] px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-[#22D3EE] hover:text-[#0c0c0c] hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#22D3EE]/50"
             aria-label="Start My Simulation"
           >
-            내 매장 시뮬레이션 해보기 →
+            내 매장 시뮬레이션 시작하기 →
           </a>
           <span className="text-[11px] text-[#7A7A7A] font-semibold tracking-wide pl-2 flex items-center gap-1.5">
             <svg className="w-3.5 h-3.5 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">

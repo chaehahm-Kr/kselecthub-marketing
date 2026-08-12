@@ -129,9 +129,9 @@ export default async function Home({ params }: PageProps) {
                 id="btn-hero-simulator"
                 data-analytics="hero-simulator"
                 href="#simulator-section"
-                className="h-14 inline-flex items-center justify-center border border-[#00F0FF]/30 hover:border-[#00F0FF] hover:bg-[#00F0FF]/5 hover:shadow-[0_0_15px_rgba(0,240,255,0.25)] text-[#00F0FF] px-8 rounded-[8px] font-semibold text-[15px] transition-all active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#00F0FF]"
+                className="h-14 inline-flex items-center justify-center border border-[#22D3EE]/30 text-[#22D3EE] px-8 rounded-[8px] font-bold text-[15px] transition-all hover:bg-[#22D3EE] hover:text-[#0c0c0c] hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#22D3EE]"
               >
-                성장 시뮬레이터 보기
+                성장 시뮬레이터 시작하기 →
               </a>
             </div>
 
@@ -846,9 +846,9 @@ export default async function Home({ params }: PageProps) {
                 </a>
                 <a
                   href="#simulator-section"
-                  className="h-14 inline-flex items-center justify-center border border-[#00F0FF]/30 hover:border-[#00F0FF] hover:bg-[#00F0FF]/5 hover:shadow-[0_0_15px_rgba(0,240,255,0.25)] text-[#00F0FF] px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 cursor-pointer"
+                  className="h-14 inline-flex items-center justify-center border border-[#22D3EE]/30 text-[#22D3EE] px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-[#22D3EE] hover:text-[#0c0c0c] hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] cursor-pointer"
                 >
-                  성장 시뮬레이터
+                  성장 시뮬레이터 시작하기 →
                 </a>
               </div>
             </div>
