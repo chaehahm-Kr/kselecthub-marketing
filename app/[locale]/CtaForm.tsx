@@ -5,18 +5,19 @@ import { ko } from "../locales/ko";
 
 export default function CtaForm() {
   const t = ko.ctaForm;
-  const ts = ko.partnership;
 
-  // Form Field States
+  // Form Field States (only core items kept)
   const [storeName, setStoreName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [storeType, setStoreType] = useState("independent");
-  const [desiredSpace, setDesiredSpace] = useState("8ft");
   const [comments, setComments] = useState("");
   const [agreed, setAgreed] = useState(false);
+
+  // Hidden/Default inputs for legacy API compatibility
+  const storeType = "independent";
+  const [desiredSpace, setDesiredSpace] = useState("8ft");
 
   // Integration with Simulator Results
   const [recommendedConfig, setRecommendedConfig] = useState<string | null>(null);
@@ -115,16 +116,21 @@ export default function CtaForm() {
   return (
     <div id="apply" className="w-full max-w-3xl mx-auto">
       {submitted ? (
-        <div className="bg-[#0c0d14] border border-[#ff127c]/20 p-8 sm:p-12 rounded-panel text-center max-w-lg mx-auto flex flex-col items-center gap-4">
-          <span className="text-4xl">🎉</span>
-          <h3 className="font-display text-2xl font-bold text-ink">
-            신청이 성공적으로 접수되었습니다!
+        <div className="bg-[#0c0c0c] border border-[#ff2b75]/20 p-8 sm:p-10 rounded-[20px] text-center max-w-lg mx-auto flex flex-col items-center gap-3">
+          <span className="text-4xl select-none">🎉</span>
+          <h3 className="font-display text-xl font-bold text-white leading-normal">
+            파트너십 신청이 완료되었습니다.
           </h3>
-          <p className="text-sm text-text-secondary leading-relaxed">
-            {t.validation.success}
+          <p className="text-[13px] text-[#9ca3af] leading-relaxed">
+            제출해주신 정보를 검토한 후 K SELECT HUB 팀이 연락드리겠습니다.
+          </p>
+          <div className="w-full h-px bg-white/5 my-2" />
+          <p className="text-[11.5px] text-[#7A7A7A] leading-relaxed">
+            Your partnership application has been received.<br />
+            Our K SELECT HUB team will review your information and contact you regarding the next step.
           </p>
           {recommendedConfig && (
-            <div className="bg-accent-light border border-accent/20 px-4 py-2 rounded-card text-xs font-semibold text-accent mt-2">
+            <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/20 px-4 py-2 rounded-[6px] text-xs font-semibold text-[#ff2b75] mt-2 select-none">
               신청 모듈 구성: {recommendedConfig} (${Number(simulatedInvestment).toLocaleString()} 투자 규모)
             </div>
           )}
@@ -132,21 +138,21 @@ export default function CtaForm() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="bg-surface border border-border p-6 sm:p-10 rounded-panel text-left flex flex-col gap-6"
+          className="bg-[#0c0c0c] border border-white/10 p-6 sm:p-8 rounded-[20px] text-left flex flex-col gap-5.5"
         >
           {/* Active Simulator Recommendation Banner */}
           {recommendedConfig && (
-            <div className="bg-accent-light border border-accent/20 px-5 py-4 rounded-card text-xs text-accent flex justify-between items-center gap-4">
+            <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/25 px-4.5 py-3.5 rounded-[12px] text-xs text-[#ff2b75] flex justify-between items-center gap-4">
               <div className="flex flex-col gap-0.5">
                 <span className="font-bold">🖥️ 시뮬레이터 연동 적용됨</span>
-                <span className="opacity-90">
-                  추천 구성: <strong>{recommendedConfig}</strong> (${Number(simulatedInvestment).toLocaleString()} 초기 예산 자동 바인딩)
+                <span className="opacity-90 text-[#9ca3af]">
+                  추천 구성: <strong className="text-white font-bold">{recommendedConfig}</strong> (${Number(simulatedInvestment).toLocaleString()} 초기 예산 자동 바인딩)
                 </span>
               </div>
               <button
                 type="button"
                 onClick={handleClearRecommendation}
-                className="text-[10px] font-bold underline cursor-pointer text-text-secondary hover:text-accent"
+                className="text-[10px] font-bold underline cursor-pointer text-[#7A7A7A] hover:text-[#ff2b75]"
               >
                 연동 해제
               </button>
@@ -155,22 +161,22 @@ export default function CtaForm() {
 
           {/* Form Fields Header */}
           <div>
-            <span className="text-xs font-bold text-accent uppercase tracking-wider block mb-1">
+            <span className="text-[10px] font-black text-[#ff2b75] tracking-widest uppercase font-display block mb-1.5 select-none">
               PARTNERSHIP APPLICATION
             </span>
-            <h3 className="font-display text-2xl font-bold text-ink">
+            <h3 className="font-display text-xl sm:text-2xl font-black text-white m-0 tracking-tight select-none">
               {t.title}
             </h3>
-            <p className="text-xs text-text-secondary mt-1">
+            <p className="text-xs text-[#9ca3af] mt-1.5 leading-relaxed">
               {t.subtitle}
             </p>
           </div>
 
           {/* Core Fields Grid */}
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-4">
             {/* Store Name */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="store-name" className="text-xs font-bold text-text-secondary">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="store-name" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.storeName}
               </label>
               <input
@@ -179,13 +185,13 @@ export default function CtaForm() {
                 value={storeName}
                 onChange={(e) => setStoreName(e.target.value)}
                 placeholder="예: K-Beauty Mart NJ"
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+                className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
               />
             </div>
 
             {/* Owner Name */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="owner-name" className="text-xs font-bold text-text-secondary">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="owner-name" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.ownerName}
               </label>
               <input
@@ -194,13 +200,13 @@ export default function CtaForm() {
                 value={ownerName}
                 onChange={(e) => setOwnerName(e.target.value)}
                 placeholder="예: John Doe"
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+                className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
               />
             </div>
 
             {/* Email Address */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-xs font-bold text-text-secondary">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="email" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.email}
               </label>
               <input
@@ -209,13 +215,13 @@ export default function CtaForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="owner@example.com"
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+                className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
               />
             </div>
 
             {/* Phone Number */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="phone" className="text-xs font-bold text-text-secondary">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="phone" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.phone}
               </label>
               <input
@@ -224,14 +230,14 @@ export default function CtaForm() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="123-456-7890"
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+                className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
               />
             </div>
           </div>
 
           {/* Store Address */}
-          <div className="flex flex-col gap-2">
-            <label htmlFor="address" className="text-xs font-bold text-text-secondary">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="address" className="text-xs font-bold text-[#9ca3af]">
               {t.fields.address}
             </label>
             <input
@@ -240,100 +246,62 @@ export default function CtaForm() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="예: 123 Main St, Fort Lee, NJ 07024"
-              className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent"
+              className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors"
             />
           </div>
 
-          {/* Selector Fields Row */}
-          <div className="grid sm:grid-cols-2 gap-5">
-            {/* Store Type Dropdown */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="store-type" className="text-xs font-bold text-text-secondary">
-                {t.fields.storeType}
-              </label>
-              <select
-                id="store-type"
-                value={storeType}
-                onChange={(e) => setStoreType(e.target.value)}
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent cursor-pointer"
-              >
-                <option value="independent">{t.fields.independent}</option>
-                <option value="chain">{t.fields.chain}</option>
-                <option value="pharmacy">{t.fields.pharmacy}</option>
-                <option value="other">{t.fields.other}</option>
-              </select>
-            </div>
-
-            {/* Desired Module Dropdown */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="desired-space" className="text-xs font-bold text-text-secondary">
-                {t.fields.spaceSize}
-              </label>
-              <select
-                id="desired-space"
-                value={desiredSpace}
-                onChange={(e) => setDesiredSpace(e.target.value)}
-                className="h-12 px-4 bg-[#0c0d14] border border-border text-ink rounded-pill text-sm focus:outline-none focus:border-accent cursor-pointer"
-              >
-                <option value="4ft">{t.fields.ft4}</option>
-                <option value="8ft">{t.fields.ft8}</option>
-                <option value="12ft">{t.fields.ft12}</option>
-              </select>
-            </div>
-          </div>
-
           {/* Comments Textarea */}
-          <div className="flex flex-col gap-2">
-            <label htmlFor="comments" className="text-xs font-bold text-text-secondary">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="comments" className="text-xs font-bold text-[#9ca3af]">
               {t.fields.comments}
             </label>
             <textarea
               id="comments"
               value={comments}
               onChange={(e) => setComments(e.target.value)}
-              placeholder="매장 상권 현황이나 도입 희망 시점 등에 대해 메모를 남겨주세요."
-              rows={4}
-              className="p-4 bg-[#0c0d14] border border-border text-ink rounded-card text-sm focus:outline-none focus:border-accent resize-none"
+              placeholder="궁금한 점이나 미리 알려주실 내용이 있다면 남겨주세요."
+              rows={3}
+              className="p-3.5 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] resize-none transition-colors"
             />
           </div>
 
-          {/* Partnership Operating Guidelines Checkbox (COMPLIANCE) */}
-          <div className="flex items-start gap-3 bg-[#0c0d14] border border-border p-4 rounded-card">
+          {/* Consent Checkbox */}
+          <div className="flex items-start gap-3 bg-[#070708] border border-white/10 p-4 rounded-[12px]">
             <input
               id="agreed-standards"
               type="checkbox"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-border text-accent focus:ring-accent cursor-pointer accent-accent"
+              className="mt-0.5 h-4.5 w-4.5 rounded border-white/10 text-[#ff2b75] focus:ring-[#ff2b75] cursor-pointer accent-[#ff2b75]"
             />
             <label
               htmlFor="agreed-standards"
-              className="text-xs text-text-secondary leading-relaxed cursor-pointer select-none"
+              className="text-[11.5px] text-[#9ca3af] leading-relaxed cursor-pointer select-none flex flex-col gap-0.5"
             >
-              {ts.agreeLabel}
+              <span className="font-bold text-white/90">
+                파트너십 신청 검토와 후속 상담을 위해 제출한 매장 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. *
+              </span>
+              <span className="text-[10px] text-[#7A7A7A] font-semibold">
+                I agree that K SELECT HUB may collect and use the submitted store and contact information for partnership review and follow-up communication.
+              </span>
             </label>
           </div>
 
           {/* Error Message Box */}
           {errorMsg && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-semibold px-4 py-3 rounded-card">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-semibold px-4 py-2.5 rounded-[8px] select-none">
               ⚠️ {errorMsg}
             </div>
           )}
 
-          {/* Disclaimer text */}
-          <p className="text-[10px] text-text-muted leading-relaxed">
-            ※ 입점 신청서 제출 즉시 Letusto Inc. 미국 본사 상권 데이터베이스와 매핑 검토를 거쳐 등록된 이메일/전화번호로 맞춤 리포트 제안서가 전송됩니다. 상권 보호 DB 조건에 일치하지 않는 경우 승인이 제한될 수 있습니다.
-          </p>
-
-          {/* Submit Button (DISABLED until agreed box checked) */}
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={!agreed}
-            className={`w-full h-14 font-bold rounded-pill text-sm transition-all text-white ${
+            className={`w-full h-14 font-extrabold rounded-[8px] text-[14.5px] tracking-wide transition-all ${
               agreed
-                ? "bg-accent hover:bg-accent-hover cursor-pointer"
-                : "bg-border text-text-secondary/60 cursor-not-allowed"
+                ? "bg-[#ff2b75] hover:bg-[#e01a5e] text-white hover:shadow-[0_4px_20px_rgba(255,43,117,0.35)] cursor-pointer"
+                : "bg-white/5 border border-white/5 text-white/20 cursor-not-allowed"
             }`}
           >
             {t.button}

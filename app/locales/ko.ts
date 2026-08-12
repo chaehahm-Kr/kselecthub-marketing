@@ -229,40 +229,29 @@ export const ko = {
         "정기 Inventory Update: 원활한 품절 예방 및 베스트셀러 자동 제안을 위해 매주 1회 이상 매대 재고 상태를 업데이트해야 합니다."
       ]
     },
-    agreeLabel: "K Select Retail Partner 운영 기준(전용 매대 유지, 스태프 교육 이수, 재고 현황 공유)을 확인했으며 이에 동의합니다. * (필수)"
+    agreeLabel: "파트너십 신청 검토와 후속 상담을 위해 제출한 매장 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. * (필수)",
   },
   ctaForm: {
-    title: "K-Beauty 리테일 성장 파트너십 신청",
-    subtitle: "독점 상권 구역 확보를 위해 거주 상권 내 파트너 선정이 조기 마감될 수 있으니 신속한 지원을 바랍니다.",
+    title: "K-Beauty Retail Growth Partnership 신청",
+    subtitle: "간단한 매장 정보를 남겨주시면 검토 후 K SELECT HUB 팀이 연락드리겠습니다.",
     fields: {
       storeName: "매장명 (Store Name) *",
-      ownerName: "대표자 성함 (Owner / Contact Name) *",
+      ownerName: "대표자 / 담당자명 (Owner / Contact Name) *",
       email: "이메일 주소 (Email) *",
       phone: "전화번호 (Phone) *",
-      address: "매장 주소 (Store Street Address) *",
-      storeType: "매장 형태 (Store Type) *",
-      selectType: "매장 유형 선택",
-      independent: "독립 뷰티 서플라이 (Independent Beauty Supply)",
-      chain: "체인 리테일 매장 (Chain / Multi-Store)",
-      pharmacy: "드럭스토어 / 약국 (Pharmacy / Drugstore)",
-      other: "기타 소매 매장 (Other Retail Store)",
-      currentSales: "연간 예상 K-Beauty 매출 규모",
-      spaceSize: "진열 공간 도입 희망 모듈",
-      ft4: "4 FT - Starter 모듈 도입",
-      ft8: "8 FT - Growth 모듈 도입",
-      ft12: "12 FT - Destination 모듈 도입",
-      comments: "추가 문의 및 매장 특이사항 (Comments)"
+      address: "매장 주소 (Store Address) *",
+      comments: "추가 문의 또는 메모 (Comments / Optional)"
     },
     validation: {
       storeRequired: "매장명을 입력해 주세요.",
-      ownerRequired: "대표자 성함을 입력해 주세요.",
+      ownerRequired: "대표자 / 담당자명을 입력해 주세요.",
       emailRequired: "올바른 이메일 주소를 입력해 주세요.",
       phoneRequired: "전화번호를 입력해 주세요.",
       addressRequired: "매장 주소를 입력해 주세요.",
-      agreeRequired: "파트너 운영 기준 동의 체크박스는 필수 선택 사항입니다.",
-      success: "파트너 신청이 정상적으로 성공했습니다! 담당 매니저가 기재해주신 연락처로 24시간 내에 연락드리겠습니다."
+      agreeRequired: "개인정보 수집 및 연락 동의 체크박스는 필수 선택 사항입니다.",
+      success: "파트너십 신청이 완료되었습니다. 제출해주신 정보를 검토한 후 K SELECT HUB 팀이 연락드리겠습니다."
     },
-    button: "파트너 신청서 제출하기"
+    button: "파트너십 신청하기 →"
   },
   footer: {
     copyright: "© 2026 K Select Hub. All Rights Reserved. Letusto Inc. HQ New Jersey.",
