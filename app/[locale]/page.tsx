@@ -369,13 +369,16 @@ export default async function Home({ params }: PageProps) {
             
             {/* Header info */}
             <div className="text-center max-w-[840px] mx-auto mb-12 flex flex-col items-center">
-              <div className="inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full border border-[#E6C687]/30 bg-[#E6C687]/5 mb-6 shadow-[0_0_15px_rgba(230,198,135,0.08)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E6C687] animate-pulse" />
-                <span className="text-[10px] tracking-[0.14em] font-black text-[#E6C687] uppercase font-display">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-[#00F0FF]/30 bg-[#00F0FF]/5 mb-7 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+                <span className="text-[11.5px] tracking-[0.18em] font-black text-[#00F0FF] uppercase font-display select-none">
                   LAUNCH PARTNER ONLY · Early Partner Exclusive
                 </span>
               </div>
-              <h2 className="font-display text-[22px] xs:text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[42px] font-black leading-none text-white text-center tracking-tight m-0 whitespace-nowrap break-keep">
+              <div className="font-display text-[26px] sm:text-[34px] md:text-[40px] lg:text-[46px] xl:text-[48px] font-black text-[#00F0FF] tracking-tight mb-3 uppercase italic leading-none select-none">
+                Launch Earlier, Secure More, Grow Faster.
+              </div>
+              <h2 className="font-display text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] lg:text-[35px] xl:text-[36px] font-black leading-none text-white text-center tracking-tight m-0 whitespace-nowrap break-keep">
                 {locale === "ko" ? "먼저 시작할수록 더 유리한 조건으로 출발합니다." : "Launch Earlier. Secure More. Grow Faster."}
               </h2>
               <p className="text-[14.5px] text-[#9ca3af] mt-5 max-w-2xl text-center leading-relaxed font-medium hidden md:block">
@@ -387,22 +390,22 @@ export default async function Home({ params }: PageProps) {
               </p>
             </div>
 
-            {/* Metric-style Summary 요약 스트립 (Scaled up and Gold highlights) */}
+            {/* Metric-style Summary 요약 스트립 (Scaled up and Neon Cyan highlights) */}
             <div className="max-w-[1000px] mx-auto mb-14 bg-white/[0.03] border border-white/15 rounded-full py-4.5 px-8 sm:px-12 flex flex-wrap items-center justify-between gap-y-3 gap-x-8 text-[13.5px] font-bold text-white/90 select-none shadow-md">
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E6C687]" /> 7 Exclusive Benefits
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> 7 Exclusive Benefits
               </span>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E6C687]" /> 45-Day First Order Terms
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> 45-Day First Order Terms
               </span>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E6C687]" /> Territory Priority
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> Territory Priority
               </span>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
-              <span className="flex items-center gap-2 text-[#E6C687]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E6C687]" /> Free Initial Delivery
+              <span className="flex items-center gap-2 text-[#00F0FF]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> Free Initial Delivery
               </span>
             </div>
 
@@ -410,20 +413,20 @@ export default async function Home({ params }: PageProps) {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               
               {/* Core 01 */}
-              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
+              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2.5 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
                 <div className="flex flex-col gap-5">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] text-[#E6C687] font-black tracking-widest uppercase font-display bg-[#E6C687]/10 border border-[#E6C687]/25 px-2 py-0.5 rounded-[4px]">
+                    <span className="text-[10px] text-[#00F0FF] font-black tracking-widest uppercase font-display bg-[#00F0FF]/10 border border-[#00F0FF]/25 px-2 py-0.5 rounded-[4px]">
                       EXCLUSIVE BENEFIT 01
                     </span>
                     {/* Display Icon */}
-                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#00F0FF] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                   </div>
                   <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
                     Complimentary Fixture Rental
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">전용 디스플레이 <span className="text-[#E6C687] font-semibold">무상 대여</span></span>
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">전용 디스플레이 <span className="text-[#00F0FF] font-semibold">무상 대여</span></span>
                   </h3>
                   <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
                     K-Beauty 모듈형 전용 LED 디스플레이 쇼케이스 집기 전체를 100% 무상으로 렌탈 대여해 드립니다.
@@ -431,25 +434,25 @@ export default async function Home({ params }: PageProps) {
                 </div>
                 <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
                   <span className="text-white/60">초기 집기 시설 구축 비용</span>
-                  <span className="text-[#E6C687] text-[12px] font-extrabold uppercase">$0 Free Rental</span>
+                  <span className="text-[#00F0FF] text-[12px] font-extrabold uppercase">$0 Free Rental</span>
                 </div>
               </div>
 
               {/* Core 02 */}
-              <div className="group border border-[#ff2b75]/25 bg-gradient-to-b from-[#ff2b75]/[0.02] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/60 hover:shadow-[0_8px_30px_rgba(255,43,117,0.18)] transition-all duration-300">
+              <div className="group border border-[#ff2b75]/25 bg-gradient-to-b from-[#ff2b75]/[0.02] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2.5 hover:border-[#ff2b75]/60 hover:shadow-[0_8px_30px_rgba(255,43,117,0.18)] transition-all duration-300">
                 <div className="flex flex-col gap-5">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] text-[#E6C687] font-black tracking-widest uppercase font-display bg-[#E6C687]/10 border border-[#E6C687]/25 px-2 py-0.5 rounded-[4px]">
+                    <span className="text-[10px] text-[#00F0FF] font-black tracking-widest uppercase font-display bg-[#00F0FF]/10 border border-[#00F0FF]/25 px-2 py-0.5 rounded-[4px]">
                       EXCLUSIVE BENEFIT 02
                     </span>
                     {/* Payment Terms Icon */}
-                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#00F0FF] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
                   </div>
                   <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
                     45-Day Payment Terms
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">첫 주문 최대 <span className="text-[#E6C687] font-semibold">45일 결제 유예</span></span>
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">첫 주문 최대 <span className="text-[#00F0FF] font-semibold">45일 결제 유예</span></span>
                   </h3>
                   <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
                     초도 사입 자금의 부담을 원천 경감하기 위해 첫 런칭 사입액에 한해 최대 45일의 결제 Terms를 지급합니다.
@@ -457,25 +460,25 @@ export default async function Home({ params }: PageProps) {
                 </div>
                 <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
                   <span className="text-white/60">초도 오더 결제 유예</span>
-                  <span className="text-[#E6C687] text-[12px] font-extrabold uppercase bg-[#E6C687]/10 px-2 py-0.5 rounded-[4px]">FIRST ORDER ONLY</span>
+                  <span className="text-[#00F0FF] text-[12.5px] font-extrabold uppercase bg-[#00F0FF]/10 px-2.5 py-0.5 rounded-[4px]">FIRST ORDER ONLY</span>
                 </div>
               </div>
 
               {/* Core 03 */}
-              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
+              <div className="group border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent rounded-[24px] p-8 flex flex-col justify-between shadow-xl hover:-translate-y-2.5 hover:border-[#ff2b75]/40 hover:shadow-[0_8px_30px_rgba(255,43,117,0.1)] transition-all duration-300">
                 <div className="flex flex-col gap-5">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] text-[#E6C687] font-black tracking-widest uppercase font-display bg-[#E6C687]/10 border border-[#E6C687]/25 px-2 py-0.5 rounded-[4px]">
+                    <span className="text-[10px] text-[#00F0FF] font-black tracking-widest uppercase font-display bg-[#00F0FF]/10 border border-[#00F0FF]/25 px-2 py-0.5 rounded-[4px]">
                       EXCLUSIVE BENEFIT 03
                     </span>
                     {/* Protection Shield Icon */}
-                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                    <svg className="w-6 h-6 text-white/40 group-hover:text-[#00F0FF] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                   </div>
                   <h3 className="text-[20px] font-black text-white tracking-tight leading-snug">
                     Priority Territory Protection
-                    <span className="block text-[14px] text-white/50 font-normal mt-1">상권 내 <span className="text-[#E6C687] font-semibold">독점적 지위 보호</span> 보장</span>
+                    <span className="block text-[14px] text-white/50 font-normal mt-1">상권 내 <span className="text-[#00F0FF] font-semibold">독점적 지위 보호</span> 보장</span>
                   </h3>
                   <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium">
                     상권 선점 효과를 독점 보장하기 위해 일정 반경 내 타 리테일러 입점을 제한하고 상권 독점 보호를 약속합니다.
@@ -483,21 +486,24 @@ export default async function Home({ params }: PageProps) {
                 </div>
                 <div className="border-t border-white/10 pt-4 mt-8 flex justify-between items-center text-[11px] font-bold">
                   <span className="text-white/60">지역 파트너 선점 권리 보증</span>
-                  <span className="text-[#E6C687] text-[12px] font-extrabold uppercase">Territory Protection</span>
+                  <span className="text-[#00F0FF] text-[12.5px] font-extrabold uppercase">Territory Protection</span>
                 </div>
               </div>
 
             </div>
 
-            {/* SECTION B: Additional 4 Supporting Benefits (Subdued, Clean Layout with subtle hovers) */}
+            {/* SECTION B: Additional 4 Supporting Benefits (Subdued, Clean Layout with stagger hovers) */}
             <div className="grid md:grid-cols-4 gap-6 mb-16 border-t border-white/10 pt-12">
               
               {/* Sub 04 */}
-              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+              <div 
+                className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-[#00F0FF]/50 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300 hover:-translate-y-2.5 hover:shadow-[0_8px_25px_rgba(0,240,255,0.12)] animate-fade-in opacity-0"
+                style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 04</span>
                   {/* Delivery Icon */}
-                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#00F0FF] group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                   </svg>
@@ -509,11 +515,14 @@ export default async function Home({ params }: PageProps) {
               </div>
 
               {/* Sub 05 */}
-              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+              <div 
+                className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-[#00F0FF]/50 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300 hover:-translate-y-2.5 hover:shadow-[0_8px_25px_rgba(0,240,255,0.12)] animate-fade-in opacity-0"
+                style={{ animationDelay: "450ms", animationFillMode: "forwards" }}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 05</span>
                   {/* Setup Icon */}
-                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#00F0FF] group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -525,11 +534,14 @@ export default async function Home({ params }: PageProps) {
               </div>
 
               {/* Sub 06 */}
-              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+              <div 
+                className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-[#00F0FF]/50 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300 hover:-translate-y-2.5 hover:shadow-[0_8px_25px_rgba(0,240,255,0.12)] animate-fade-in opacity-0"
+                style={{ animationDelay: "600ms", animationFillMode: "forwards" }}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 06</span>
                   {/* Access Star Icon */}
-                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#00F0FF] group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.906a1 1 0 00.95-.69l1.519-4.674z" />
                   </svg>
                 </div>
@@ -540,11 +552,14 @@ export default async function Home({ params }: PageProps) {
               </div>
 
               {/* Sub 07 */}
-              <div className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-white/10 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300">
+              <div 
+                className="group bg-white/[0.01] hover:bg-white/[0.03] border border-white/5 hover:border-[#00F0FF]/50 rounded-[16px] p-6 flex flex-col gap-3 text-left transition-all duration-300 hover:-translate-y-2.5 hover:shadow-[0_8px_25px_rgba(0,240,255,0.12)] animate-fade-in opacity-0"
+                style={{ animationDelay: "750ms", animationFillMode: "forwards" }}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-[#7A7A7A] font-black font-display tracking-widest uppercase">SUPPORT 07</span>
                   {/* Personalized Launch Target Icon */}
-                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#E6C687] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-white/30 group-hover:text-[#00F0FF] group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
                 </div>
