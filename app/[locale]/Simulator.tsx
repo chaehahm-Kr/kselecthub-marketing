@@ -14,7 +14,7 @@ export default function Simulator() {
     let progressInterval: NodeJS.Timeout;
 
     const runLoop = () => {
-      // Step 1: Sequential Store Profile Tiles reveal (0s - 2.5s)
+      // Step 1: Store Profile Tiles (0s - 2.5s)
       setStep("store_profile");
       setActiveTileIndex(-1);
       setProgress(0);
@@ -52,7 +52,7 @@ export default function Simulator() {
             clearInterval(progressInterval);
           }
           setProgress(currentProgress);
-        }, 80);
+        }, 85);
       }, 2500);
 
       // Step 3: Recommended Results (4.4s - 7.2s)
@@ -120,73 +120,97 @@ export default function Simulator() {
         </div>
       </div>
 
-      {/* ================= RIGHT COLUMN: Diagnostic Loop Motion Box ================= */}
-      <div className="relative min-h-[480px] aspect-[1.12] rounded-[24px] overflow-hidden border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between p-8 sm:p-10 select-none group">
+      {/* ================= RIGHT COLUMN: Premium Minimal Curation Showcase ================= */}
+      <div className="relative min-h-[480px] aspect-[1.12] rounded-[24px] overflow-hidden border border-white/10 bg-[#070708] shadow-2xl flex flex-col justify-between p-8 sm:p-10 select-none">
         
-        {/* Underlay: K-Beauty Display Fixture Image (Adjusted Dim level for higher visibility of UI structure) */}
-        <div className="absolute inset-0 z-0 bg-[#0c0c0c]/68 backdrop-blur-[0.5px]">
+        {/* Underlay: Highly Subdued Shelf Silhouette (Strictly 8% opacity, no competing text/UI details) */}
+        <div className="absolute inset-0 z-0">
           <Image
             src="/images/solutions/build.jpg"
-            alt="K-Beauty display module framework"
+            alt="Subdued display fixture silhouette background"
             fill
-            className="object-cover opacity-[0.32] transition-transform duration-700 group-hover:scale-105"
+            className="object-cover opacity-[0.06] pointer-events-none"
             sizes="(max-width: 1024px) 100vw, 45vw"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/90 via-transparent to-[#070708]/95 pointer-events-none" />
         </div>
 
-        {/* Top Header Label */}
-        <div className="relative z-10 flex justify-between items-center w-full">
-          <span className="text-[10px] text-[#ff2b75] tracking-widest font-black uppercase">
-            LIVE PREVIEW
-          </span>
-          <span className="text-[9px] text-[#FAFAFA]/70 bg-white/5 border border-white/10 px-3 py-1 rounded-[20px] font-bold tracking-wide uppercase">
-            {step === "store_profile" && "Step 1: Your Store Profile"}
-            {step === "analyzing" && "Step 2: Smart Matching"}
-            {step === "results" && "Step 3: Growth Simulation"}
-          </span>
+        {/* Top Header Step Indicators (Bold step navigation header) */}
+        <div className="relative z-10 flex justify-between items-center w-full gap-2 border-b border-white/10 pb-4.5">
+          {[
+            { step: "01", key: "store_profile", title: "YOUR STORE" },
+            { step: "02", key: "analyzing", title: "SMART MATCH" },
+            { step: "03", key: "results", title: "SIMULATION" }
+          ].map((s) => {
+            const isCurrent = step === s.key;
+            return (
+              <div key={s.step} className="flex items-center gap-2">
+                <span className={`text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                  isCurrent ? "bg-[#ff2b75] border-[#ff2b75] text-white" : "border-white/10 text-white/30"
+                }`}>
+                  {s.step}
+                </span>
+                <span className={`text-[10px] font-black tracking-wider transition-all duration-300 ${
+                  isCurrent ? "text-white" : "text-white/30"
+                }`}>
+                  {s.title}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Main Content Area (Swap content by state with soft fade-in animation) */}
-        <div className="relative z-10 flex-1 flex items-center justify-center w-full my-4 min-h-[250px]">
+        {/* Main Content Area (Swap content by step state) */}
+        <div className="relative z-10 flex-1 flex items-center justify-center w-full my-4 min-h-[260px]">
           
-          {/* Phase 1: Store Profile Tiles */}
+          {/* STEP 1: Store Profile Tiles */}
           {step === "store_profile" && (
-            <div className="grid grid-cols-2 gap-4 w-full animate-fade-in">
-              {[
-                { label: "SPACE CAPACITY", val: "1,500 - 3,500 sq ft" },
-                { label: "PRODUCT DEMAND", val: "Skincare + Makeup" },
-                { label: "PRICE PREFERENCE", val: "Value & Premium" },
-                { label: "REORDER PATTERN", val: "90-Day Loop Cycle" }
-              ].map((tile, idx) => (
-                <div
-                  key={tile.label}
-                  className={`border rounded-[16px] p-5 flex flex-col justify-center text-left transition-all duration-300 ${
-                    activeTileIndex >= idx
-                      ? "border-[#ff2b75] bg-[#0A0A0A]/90 shadow-[0_0_15px_rgba(255,43,117,0.15)] scale-[1.02]"
-                      : "border-white/5 bg-[#111113]/40 opacity-40"
-                  }`}
-                >
-                  <span className="text-[9px] text-[#ff2b75] font-black tracking-widest block mb-1">
-                    {tile.label}
-                  </span>
-                  <span className="text-[12.5px] font-bold text-white tracking-tight">
-                    {tile.val}
-                  </span>
-                </div>
-              ))}
+            <div className="flex flex-col gap-5 w-full animate-fade-in text-left">
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold text-[#ff2b75] tracking-widest uppercase">
+                  STEP 1 — YOUR STORE PROFILE
+                </span>
+                <h3 className="text-base font-bold text-white tracking-tight">
+                  매장 면적, 핵심 타겟 및 운영 조건을 입력합니다
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3.5">
+                {[
+                  { label: "SPACE CAPACITY", val: "1,500 - 3,500 sq ft" },
+                  { label: "PRODUCT DEMAND", val: "Skincare + Makeup" },
+                  { label: "PRICE PREFERENCE", val: "Value & Premium" },
+                  { label: "REORDER PATTERN", val: "90-Day Loop Cycle" }
+                ].map((tile, idx) => (
+                  <div
+                    key={tile.label}
+                    className={`border rounded-[14px] p-4.5 flex flex-col justify-center transition-all duration-300 ${
+                      activeTileIndex >= idx
+                        ? "border-[#ff2b75] bg-[#0c0c0c]/90 shadow-[0_0_15px_rgba(255,43,117,0.15)] scale-[1.02]"
+                        : "border-white/5 bg-[#111113]/20 opacity-30"
+                    }`}
+                  >
+                    <span className="text-[8.5px] text-[#ff2b75] font-black tracking-widest block mb-1 font-display">
+                      {tile.label}
+                    </span>
+                    <span className="text-[12.5px] font-bold text-white tracking-tight">
+                      {tile.val}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
-          {/* Phase 2: Analyzing Loader */}
+          {/* STEP 2: Smart Matching Loader */}
           {step === "analyzing" && (
             <div className="flex flex-col items-center justify-center gap-6 w-full max-w-[320px] text-center animate-fade-in">
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-[#ff2b75] font-black tracking-[0.16em] uppercase animate-pulse">
-                  ANALYZING STORE PROFILE...
+                <span className="text-[10px] font-bold text-[#ff2b75] tracking-[0.16em] uppercase">
+                  STEP 2 — SMART MATCHING
                 </span>
-                <span className="text-[11px] text-[#9ca3af] font-medium mt-1">
-                  매장 조건에 최적화된 상품군을 조합하고 있습니다
-                </span>
+                <h3 className="text-[14.5px] font-bold text-white tracking-tight mt-1 animate-pulse">
+                  스토어 조건에 맞는 최적의 디스플레이 규모와 상품 구성(AP)을 조합하고 있습니다
+                </h3>
               </div>
               <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
                 <div
@@ -200,57 +224,71 @@ export default function Simulator() {
             </div>
           )}
 
-          {/* Phase 3: Results & Metrics Recommendation Preview with Diagnostic Tags */}
+          {/* STEP 3: Results Preview - Large Display, Highlighted Program & Metrics */}
           {step === "results" && (
-            <div className="w-full flex flex-col gap-4 animate-fade-in">
+            <div className="w-full flex flex-col gap-4 animate-fade-in text-left">
               
-              {/* Header result row */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0A0A0A]/90 border border-white/10 rounded-[14px] p-4 text-left">
-                  <span className="text-[8.5px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">RECOMMENDED DISPLAY</span>
-                  <span className="text-[13px] font-black text-[#ff2b75] tracking-tight">GROW · 8FT Module</span>
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold text-[#ff2b75] tracking-widest uppercase">
+                  STEP 3 — GROWTH SIMULATION
+                </span>
+                <h3 className="text-[13.5px] font-bold text-[#9ca3af] tracking-tight">
+                  매칭 결과 및 예상 성과 Preview
+                </h3>
+              </div>
+
+              {/* Main Recommendations Container (Prominent Hero Display) */}
+              <div className="bg-[#0c0c0c]/80 border border-white/10 rounded-[16px] p-5 flex justify-between items-center gap-4 shadow-lg">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[8.5px] text-[#7A7A7A] font-black tracking-wider uppercase">RECOMMENDED DISPLAY</span>
+                  <span className="text-[17px] font-black text-white tracking-tight leading-none">
+                    GROW · <span className="text-[#ff2b75]">8FT Module</span>
+                  </span>
                 </div>
-                <div className="bg-[#0A0A0A]/90 border border-white/10 rounded-[14px] p-4 text-left">
-                  <span className="text-[8.5px] text-[#9ca3af] font-bold block tracking-wider uppercase mb-1">ASSORTMENT PROFILE</span>
-                  <span className="text-[13px] font-black text-[#ff2b75] tracking-tight">AP-03 · 스킨케어 강화형</span>
+                <div className="w-px h-10 bg-white/10" />
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[8.5px] text-[#7A7A7A] font-black tracking-wider uppercase">ASSORTMENT PROFILE</span>
+                  <span className="text-[15px] font-bold text-white tracking-tight leading-none">
+                    AP-03 · 스킨케어 강화형
+                  </span>
                 </div>
               </div>
 
-              {/* Recommendation Tags Preview */}
-              <div className="flex flex-wrap gap-1.5 justify-start py-0.5">
-                {[
-                  "Hair & Scalp Demand",
-                  "Fast Reorder",
-                  "Mid-Premium",
-                  "Growth Focus"
-                ].map((tag) => (
+              {/* Minimized Recommendation Reason Tags (3 elements) */}
+              <div className="flex flex-wrap gap-1.5 py-0.5 justify-start">
+                {["Skincare Demand", "Mid-Premium Price", "Fast Reorder Loop", "Growth Focus"].map((tag) => (
                   <span
                     key={tag}
-                    className="text-[8.5px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2 py-0.5 rounded-[4px] tracking-wide"
+                    className="text-[8px] font-black text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2 py-0.5 rounded-[4px] tracking-wide"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* Dynamic scroll indicator / metrics listing */}
-              <div className="grid grid-cols-2 gap-y-3.5 gap-x-6 border-t border-white/10 pt-4 text-left">
-                <div>
-                  <span className="text-[12px] font-bold text-white">120+ SKUs</span>
-                  <p className="text-[9.5px] text-[#9ca3af] mt-0.5">Recommended SKU Size</p>
+              {/* Key Metrics Grid - Bold highlighted first tier, clean secondary tier */}
+              <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
+                
+                {/* Highlighted Primary metrics */}
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[15px] font-black text-[#ff2b75] leading-none">Estimated 180%</span>
+                  <span className="text-[9.5px] text-[#9ca3af] font-bold uppercase tracking-tight">Expected ROI Simulation</span>
                 </div>
-                <div>
-                  <span className="text-[12px] font-bold text-white">$25,000 - $30,000</span>
-                  <p className="text-[9.5px] text-[#9ca3af] mt-0.5">Estimated Product Investment</p>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[15px] font-black text-white leading-none">$25,000 - $30,000</span>
+                  <span className="text-[9.5px] text-[#9ca3af] font-bold uppercase tracking-tight">Product Investment</span>
                 </div>
-                <div>
-                  <span className="text-[12px] font-bold text-white">6x / Year</span>
-                  <p className="text-[9.5px] text-[#9ca3af] mt-0.5">Inventory Turnover</p>
+
+                {/* Secondary metrics */}
+                <div className="flex flex-col gap-0.5 opacity-60">
+                  <span className="text-[12px] font-bold text-white leading-none">120+ SKUs</span>
+                  <span className="text-[9px] text-[#7A7A7A] font-semibold tracking-tight">Recommended SKU Size</span>
                 </div>
-                <div>
-                  <span className="text-[12px] font-bold text-white">Estimated 180%</span>
-                  <p className="text-[9.5px] text-[#9ca3af] mt-0.5">Expected ROI Simulation</p>
+                <div className="flex flex-col gap-0.5 opacity-60">
+                  <span className="text-[12px] font-bold text-white leading-none">6x / Year</span>
+                  <span className="text-[9px] text-[#7A7A7A] font-semibold tracking-tight">Inventory Turnover</span>
                 </div>
+
               </div>
 
             </div>
