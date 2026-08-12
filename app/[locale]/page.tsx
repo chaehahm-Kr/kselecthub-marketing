@@ -842,10 +842,6 @@ export default async function Home({ params }: PageProps) {
                 </a>
                 <a
                   href="#simulator-section"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("simulator-section")?.scrollIntoView({ behavior: "smooth" });
-                  }}
                   className="h-14 inline-flex items-center justify-center border border-white/10 hover:border-white/30 text-white px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-white/[0.02] cursor-pointer"
                 >
                   성장 시뮬레이터
