@@ -41,14 +41,14 @@ export default function CurationSection() {
     {
       nameKo: "바디케어",
       nameEn: "Body Care",
-      image: "/images/solutions/curate.png",
+      image: "/images/solutions/differentiate.png",
       items: ["바디 클렌징", "바디 모이스처라이저", "각질 케어", "핸드·풋 케어", "데오도란트"],
       tags: ["Essential Mix", "Price Fit", "Margin Focus"]
     },
     {
       nameKo: "퍼스널케어",
       nameEn: "Personal Care",
-      image: "/images/solutions/differentiate.png",
+      image: "/images/solutions/curate.png",
       items: ["오럴 케어", "여성 위생", "남성 그루밍", "쉐이빙", "위생 케어"],
       tags: ["Balanced Core", "Essential Mix", "Price Fit"]
     },
@@ -97,90 +97,119 @@ export default function CurationSection() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] grid lg:grid-cols-[0.45fr_0.55fr] gap-14 items-center">
+      {/* Container aligning exact content widths with outer margin rhythms */}
+      <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px]">
         
-        {/* ================= LEFT COLUMN: Narrative & Category Switcher ================= */}
-        <div className="flex flex-col gap-2">
-          <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
-            04 — PRODUCT CURATION
-          </span>
-          <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.25] text-white my-2 tracking-tight">
-            모든 제품을 공급하지 않습니다.<br />
-            당신의 매장에 맞는 제품을 큐레이션합니다.
-          </h2>
-          <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl my-2 font-medium">
-            전문가의 검토와 테스트를 거쳐 선별된 상품 풀을 기반으로, 매장의 고객 특성, 가격대, 판매 환경에 가장 적합한 K-Beauty 제품을 큐레이션합니다.
-          </p>
-
-          {/* Core Selection Standards Tags (Visual check icons list) */}
-          <div className="flex flex-wrap gap-2 my-4">
-            {[
-              "Performance · 상품 경쟁력",
-              "Store Fit · 매장 적합성",
-              "Price Fit · 적정 가격",
-              "Retail Margin · 리테일 마진",
-              "Store Profile Match · 매장 특성 반영"
-            ].map((std) => (
-              <span
-                key={std}
-                className="text-[11.5px] font-semibold text-[#FAFAFA] border border-white/10 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 bg-[#0A0A0A]/30"
-              >
-                <svg className="w-3.5 h-3.5 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                {std}
-              </span>
-            ))}
-          </div>
-
-          <div className="border-t border-white/10 my-4 w-full" />
-
-          {/* 6 Category Interactive Button grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 mt-2">
-            {categories.map((cat, index) => (
-              <button
-                key={cat.nameEn}
-                onClick={() => handleCategoryClick(index)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                className={`flex items-center justify-between px-4 py-3.5 rounded-[12px] border transition-all duration-300 focus:outline-none cursor-pointer group text-left ${
-                  activeCategory === index
-                    ? "border-[#ff2b75] bg-[#0c0c0c] shadow-[0_0_15px_rgba(255,43,117,0.15)]"
-                    : "border-white/10 bg-[#0A0A0A]/40 hover:border-white/20"
-                }`}
-              >
-                <div className="flex flex-col gap-0.5">
-                  <span className={`text-[12.5px] font-bold transition-colors ${activeCategory === index ? "text-white" : "text-[#FAFAFA]"}`}>
-                    {cat.nameKo}
-                  </span>
-                  <span className="text-[9.5px] font-bold text-[#7A7A7A] tracking-wider uppercase font-display">
-                    {cat.nameEn}
-                  </span>
-                </div>
-                <span className={`text-xs font-bold transition-transform group-hover:translate-x-0.5 ${activeCategory === index ? "text-[#ff2b75]" : "text-[#7A7A7A]"}`}>
-                  ➔
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Closing Message */}
-          <div className="flex items-center gap-2 text-[11px] text-[#7A7A7A] font-semibold mt-8 pl-1">
-            <svg className="w-3.5 h-3.5 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <circle cx="12" cy="12" r="10" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
-            </svg>
-            <span>복잡한 상품 선정은 K SELECT HUB가 맡고, 리테일러는 판매와 성장에 집중합니다.</span>
-          </div>
-
-        </div>
-
-        {/* ================= RIGHT COLUMN: Interactive Showcase Panel ================= */}
-        <div className="bg-[#0c0c0c] border border-white/10 rounded-[24px] p-8 sm:p-10 shadow-2xl relative min-h-[480px] flex flex-col justify-between overflow-hidden">
+        {/* Main Grid: items-stretch synchronizes heights of left content and right showcase perfectly */}
+        <div className="grid lg:grid-cols-[0.43fr_0.57fr] gap-12 items-stretch">
           
-          <div className="flex flex-col gap-6">
+          {/* ================= LEFT COLUMN: Narrative & Category Switcher ================= */}
+          <div className="flex flex-col justify-between gap-6">
             
-            {/* Showcase Header displaying active category and meta tag */}
-            <div className="flex justify-between items-center w-full">
+            {/* Upper text block */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
+                04 — PRODUCT CURATION
+              </span>
+              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.25] text-white my-2 tracking-tight">
+                모든 제품을 공급하지 않습니다.<br />
+                당신의 매장에 맞는 제품을 큐레이션합니다.
+              </h2>
+              <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-xl my-2 font-medium">
+                전문가의 검토와 테스트를 거쳐 선별된 상품 풀을 기반으로, 매장의 고객 특성, 가격대, 판매 환경에 가장 적합한 K-Beauty 제품을 큐레이션합니다.
+              </p>
+
+              {/* Core Selection Standards Tags */}
+              <div className="flex flex-wrap gap-2.5 my-3">
+                {[
+                  "Performance · 상품 경쟁력",
+                  "Store Fit · 매장 적합성",
+                  "Price Fit · 적정 가격",
+                  "Retail Margin · 리테일 마진",
+                  "Store Profile Match · 매장 특성 반영"
+                ].map((std) => (
+                  <span
+                    key={std}
+                    className="text-[11px] font-bold text-[#FAFAFA] border border-white/10 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 bg-[#0c0c0c]/30"
+                  >
+                    <svg className="w-3 h-3 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {std}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Category Button grid - Bottom aligns with showcase bottom */}
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {categories.map((cat, index) => (
+                  <button
+                    key={cat.nameEn}
+                    onClick={() => handleCategoryClick(index)}
+                    onKeyDown={(e) => handleKeyDown(e, index)}
+                    className={`flex items-center justify-between px-4 py-3.5 rounded-[12px] border transition-all duration-300 focus:outline-none cursor-pointer group text-left ${
+                      activeCategory === index
+                        ? "border-[#ff2b75] bg-[#0c0c0c] shadow-[0_0_15px_rgba(255,43,117,0.15)]"
+                        : "border-white/10 bg-[#0A0A0A]/40 hover:border-white/20"
+                    }`}
+                  >
+                    <div className="flex flex-col gap-0.5">
+                      <span className={`text-[12.5px] font-bold transition-colors ${activeCategory === index ? "text-white" : "text-[#FAFAFA]"}`}>
+                        {cat.nameKo}
+                      </span>
+                      <span className="text-[9.5px] font-bold text-[#7A7A7A] tracking-wider uppercase font-display">
+                        {cat.nameEn}
+                      </span>
+                    </div>
+                    <span className={`text-xs font-bold transition-transform group-hover:translate-x-0.5 ${activeCategory === index ? "text-[#ff2b75]" : "text-[#7A7A7A]"}`}>
+                      ➔
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Closing Message */}
+              <div className="flex items-center gap-2 text-[11px] text-[#7A7A7A] font-semibold pl-1 mt-1">
+                <svg className="w-3.5 h-3.5 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                <span>복잡한 상품 선정은 K SELECT HUB가 맡고, 리테일러는 판매와 성장에 집중합니다.</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* ================= RIGHT COLUMN: Premium Full-Image Curation Showcase ================= */}
+          <div className="relative rounded-[24px] border border-white/10 bg-[#0c0c0c] shadow-2xl flex flex-col justify-between overflow-hidden p-8 sm:p-10 min-h-[460px]">
+            
+            {/* Showcase Background Image: Full sized background visual (Opacity high, clear representation) */}
+            <div className="absolute inset-0 z-0">
+              {categories.map((cat, index) => (
+                <div
+                  key={cat.nameEn}
+                  className={`absolute inset-0 transition-opacity duration-500 ${
+                    activeCategory === index ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  }`}
+                >
+                  <Image
+                    src={cat.image}
+                    alt={`${cat.nameKo} Curation Visual`}
+                    fill
+                    className="object-cover opacity-[0.64] transition-transform duration-700 hover:scale-102"
+                    sizes="45vw"
+                    priority={index === 0}
+                  />
+                </div>
+              ))}
+              {/* Premium dark gradient overlay ensuring clear typography visibility */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/85 via-[#0c0c0c]/30 to-[#0c0c0c]/90 z-10 pointer-events-none" />
+            </div>
+
+            {/* Top header labels overlay (z-20) */}
+            <div className="relative z-20 flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-[#ff2b75] tracking-widest font-black uppercase">
                   ACTIVE SHOWCASE
@@ -189,73 +218,45 @@ export default function CurationSection() {
                   {categories[activeCategory].nameEn}
                 </span>
               </div>
-              <span className="text-[9.5px] text-[#7A7A7A] font-bold tracking-wider">
+              <span className="text-[9.5px] text-[#FAFAFA]/50 font-bold tracking-wider">
                 Store-fit curation applied
               </span>
             </div>
 
-            <div className="border-t border-white/10 w-full" />
-
-            {/* Showcase Product Visual & 2Depth subcategories */}
-            <div className="grid sm:grid-cols-[1.15fr_0.85fr] gap-6 items-center">
-              
-              {/* Left Column: subcategories list (2Depth Items) */}
-              <div className="flex flex-col gap-4">
-                <h3 className="text-xl font-bold text-white tracking-tight">
-                  {categories[activeCategory].nameKo} 핵심 제품군
-                </h3>
-                <div className="flex flex-wrap gap-1.5 mt-1">
-                  {categories[activeCategory].items.map((item) => (
-                    <span
-                      key={item}
-                      className="text-[11.5px] font-bold text-[#FAFAFA] bg-white/5 border border-white/10 px-3 py-2 rounded-[8px] tracking-tight hover:bg-white/[0.08] transition-colors"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Column: Representation Curation Image with Crossfade transition */}
-              <div className="relative w-full aspect-square rounded-[20px] overflow-hidden border border-white/5 bg-[#111] shadow-lg">
-                {categories.map((cat, index) => (
-                  <div
-                    key={cat.nameEn}
-                    className={`absolute inset-0 transition-opacity duration-300 ${
-                      activeCategory === index ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                    }`}
+            {/* Mid Section: Subcategories overlayed beautifully as light tags (z-20) */}
+            <div className="relative z-20 flex flex-col gap-3 my-6 text-left">
+              <span className="text-[9px] text-[#ff2b75] font-black uppercase tracking-[0.15em] block">
+                {categories[activeCategory].nameKo} 핵심 제품군
+              </span>
+              <div className="flex flex-wrap gap-1.5 max-w-[85%]">
+                {categories[activeCategory].items.map((item) => (
+                  <span
+                    key={item}
+                    className="text-[11px] font-semibold text-white/90 bg-black/60 border border-white/10 px-2.5 py-1 rounded-[6px] tracking-tight hover:bg-black/80 hover:border-[#ff2b75]/30 transition-all duration-200"
                   >
-                    <Image
-                      src={cat.image}
-                      alt={`${cat.nameKo} Showcase`}
-                      fill
-                      className="object-cover"
-                      sizes="25vw"
-                      priority={index === 0}
-                    />
-                  </div>
+                    {item}
+                  </span>
                 ))}
               </div>
-
             </div>
 
-          </div>
-
-          {/* Bottom: Store-Fit Curation Preview tags */}
-          <div className="border-t border-white/10 mt-6 pt-5 flex flex-col gap-3">
-            <span className="text-[9px] text-[#7A7A7A] tracking-widest font-black uppercase text-left">
-              RECOMMENDED CURATION STRATEGY
-            </span>
-            <div className="flex flex-wrap gap-2 justify-start">
-              {categories[activeCategory].tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-3 py-1 rounded-[6px] tracking-wide"
-                >
-                  {tag}
-                </span>
-              ))}
+            {/* Bottom Curation Strategy metrics (z-20) */}
+            <div className="relative z-20 border-t border-white/10 pt-4 flex flex-col gap-2 text-left">
+              <span className="text-[9px] text-[#FAFAFA]/50 tracking-widest font-black uppercase">
+                RECOMMENDED CURATION STRATEGY
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {categories[activeCategory].tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[9.5px] font-bold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/20 px-2.5 py-0.5 rounded-[4px] tracking-wide"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
+
           </div>
 
         </div>
