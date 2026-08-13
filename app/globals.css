@@ -198,12 +198,7 @@ body {
 .ks-node.active .lbl {
   color: #EB326E;
 }
-.ks-panel {
-  display: none;
-}
-.ks-panel.active {
-  display: block;
-}
+
 .ks-ft {
   border-radius: 10px;
   padding: 16px 8px;

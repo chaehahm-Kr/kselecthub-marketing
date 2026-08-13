@@ -2,9 +2,11 @@ export const dynamic = 'force-dynamic';
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ko, LocaleDictionary } from "../locales/ko";
 import CtaForm from "./CtaForm";
-import Simulator from "./Simulator";
+import Header from "./Header";
+import Footer from "./Footer";
 import OpportunitySection from "./OpportunitySection";
 import ChallengesSection from "./ChallengesSection";
 import SolutionSection from "./SolutionSection";
@@ -24,204 +26,8 @@ export default async function Home({ params }: PageProps) {
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-[#141414] text-white overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
-      
-      {/* 0. NAV (Header) - Height 88px, sticky nav with backdrop blur and responsive horizontal padding */}
-      <header className="sticky top-0 z-50 bg-[#141414]/86 backdrop-blur-md border-b border-[#2A2A2A]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-6 xl:px-12 h-[88px] flex items-center justify-between gap-4 sm:gap-6 lg:gap-8">
-          <div className="flex items-center gap-4 lg:gap-5 xl:gap-8">
-            {/* Logo Click Area expansion - Compact sizing to save desktop navigation space */}
-            <a href="/ko" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#141414] rounded-card -ml-2 sm:-ml-4">
-              <div className="relative w-[170px] h-[40px] sm:w-[220px] sm:h-[52px]">
-                <Image
-                  src={assetConfig.logo.src}
-                  alt={assetConfig.logo.alt}
-                  fill
-                  priority
-                  className="object-contain"
-                  sizes="(max-width: 640px) 170px, 220px"
-                />
-              </div>
-            </a>
-            {/* Header navigation bar links with dropdown hover menus, compact gaps, and zero-jitter cross-fade translation support */}
-            <nav className="hidden lg:flex items-center gap-3 xl:gap-5 text-sm font-semibold text-white/70">
-              
-              {/* 01. PROGRAM */}
-              <div className="relative group/nav py-6">
-                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[75px] flex items-center justify-start select-none">
-                    {/* English (Default) */}
-                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
-                      PROGRAM
-                    </span>
-                    {/* Korean (Hover) */}
-                    {locale === "ko" && (
-                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                        프로그램
-                      </span>
-                    )}
-                  </div>
-                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                {/* Dropdown Container */}
-                <div className="absolute top-[100%] left-0 w-[300px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3.5 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
-                  {[
-                    { label: "01. Why K-Beauty Now", sub: "왜 지금 K-Beauty인가", href: "#opportunity" },
-                    { label: "02. Retailer Challenges", sub: "리테일러가 겪는 현실적인 문제", href: "#problems-section" },
-                    { label: "03. K Select Solution", sub: "5가지 통합 성장 솔루션", href: "#solution" },
-                    { label: "04. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: "#products" },
-                    { label: "05. K-Beauty Category Display", sub: "4FT · 8FT · 12FT 전문 디스플레이", href: "#display" },
-                    { label: "06. 90-Day Exchange Credit", sub: "초기 재고 리스크 완화", href: "#exchange-credit" },
-                    { label: "07. Launch Partner Benefits", sub: "초기 런칭 파트너 전용 혜택", href: "#benefits" },
-                    { label: "08. How It Works", sub: "신청부터 성장까지", href: "#partnership-timeline" },
-                    { label: "09. Partnership", sub: "함께 성장하는 리테일 파트너십", href: "#launch-readiness" }
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className="flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item"
-                    >
-                      <span className="text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors">
-                        {item.label}
-                      </span>
-                      <span className="text-[10px] text-[#7A7A7A] mt-0.5 font-semibold">
-                        {item.sub}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* 02. SIMULATOR (Independent Main Menu) */}
-              <a href="#simulator-section" className="flex items-center cursor-pointer py-6">
-                <div className="relative h-5 w-[110px] flex items-center justify-start select-none group/sim">
-                  <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/sim:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
-                    SIMULATOR
-                  </span>
-                  {locale === "ko" && (
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/sim:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      성장 시뮬레이터
-                    </span>
-                  )}
-                </div>
-              </a>
-
-              {/* 03. ABOUT */}
-              <div className="relative group/nav py-6">
-                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[55px] flex items-center justify-start select-none">
-                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
-                      ABOUT
-                    </span>
-                    {locale === "ko" && (
-                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                        소개
-                      </span>
-                    )}
-                  </div>
-                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
-                  {[
-                    { label: "About K SELECT HUB", sub: "K SELECT HUB와 Retail Growth Network", href: "#why-us" },
-                    { label: "About Letusto", sub: "Letusto의 Retail & E-commerce Experience", href: "#why-us" },
-                    { label: "Why Partner With Us", sub: "경험, 인프라, 운영 역량", href: "#why-us" }
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      className="flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item"
-                    >
-                      <span className="text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors">
-                        {item.label}
-                      </span>
-                      <span className="text-[10px] text-[#7A7A7A] mt-0.5 font-semibold">
-                        {item.sub}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* 04. INSIGHTS */}
-              <div className="relative group/nav py-6">
-                <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                  <div className="relative h-5 w-[75px] flex items-center justify-start select-none">
-                    <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
-                      INSIGHTS
-                    </span>
-                    {locale === "ko" && (
-                      <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                        인사이트
-                      </span>
-                    )}
-                  </div>
-                  <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                <div className="absolute top-[100%] left-0 w-[220px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
-                  {[
-                    { label: "Retailer Guide", href: "#partnership-timeline" },
-                    { label: "K-Beauty Insights", href: "#partnership-timeline" },
-                    { label: "Product Education", href: "#launch-readiness" },
-                    { label: "FAQ", href: "#launch-readiness" },
-                    { label: "Partner Login", href: "https://portal.kselecthub.com", isExternal: true }
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target={item.isExternal ? "_blank" : undefined}
-                      rel={item.isExternal ? "noopener noreferrer" : undefined}
-                      className="flex px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left text-[12px] font-extrabold text-white hover:text-[#ff2b75]"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-3 sm:gap-[20px]">
-            {/* Language Selector UI */}
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary select-none whitespace-nowrap">
-              <span className="text-white font-bold cursor-pointer" aria-label="Korean active selection">KR</span>
-              <span className="text-text-muted">|</span>
-              <span className="hover:text-white cursor-pointer transition-colors" aria-label="English locale selection waiting">EN</span>
-            </div>
-            
-            <a
-              href="https://portal.kselecthub.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-text-secondary hover:text-white transition-all focus:outline-none focus:underline whitespace-nowrap"
-            >
-              로그인
-            </a>
-            <div className="w-px h-5 bg-[#2A2A2A] hidden xs:block" />
-            
-            <a
-              id="btn-header-apply"
-              data-analytics="header-apply"
-              href="#launch-readiness"
-              className="inline-flex items-center gap-1.5 h-10 px-4 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
-            >
-              파트너 신청 
-              <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </header>
+      {/* 0. NAV (Header) */}
+      <Header locale={locale} />
 
 
       {/* Main Container */}
@@ -262,14 +68,14 @@ export default async function Home({ params }: PageProps) {
               >
                 파트너 신청하기 →
               </a>
-              <a
+              <Link
                 id="btn-hero-simulator"
                 data-analytics="hero-simulator"
-                href="#simulator-section"
+                href={`/${locale}/simulator`}
                 className="h-14 inline-flex items-center justify-center border border-[#22D3EE]/30 text-[#22D3EE] px-8 rounded-[8px] font-bold text-[15px] transition-all hover:bg-[#22D3EE] hover:text-[#0c0c0c] hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] active:scale-[0.98] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#22D3EE]"
               >
                 성장 시뮬레이터 시작하기 →
-              </a>
+              </Link>
             </div>
 
             {/* Benefits Check Labels with Pure Inline SVGs */}
@@ -734,7 +540,92 @@ export default async function Home({ params }: PageProps) {
 
         {/* 10. 07 GROWTH SIMULATOR - Redesigned interactive diagnostic teaser layout */}
         <section id="simulator-section" className="max-w-[1400px] mx-auto px-[64px] py-[120px] text-left">
-          <Simulator />
+          <div className="w-full grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center max-w-[1250px] mx-auto">
+            
+            {/* Left Narrative Column */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
+                07 — GROWTH SIMULATOR
+              </span>
+              <h2 className="font-display text-3xl sm:text-[36px] font-bold leading-[1.25] text-white my-2 tracking-tight">
+                {locale === "ko" ? (
+                  <>내 매장에 맞는<br />K-Beauty 성장 플랜을<br />확인해보세요.</>
+                ) : (
+                  <>Explore the K-Beauty<br />Growth Plan Tailored<br />to Your Store.</>
+                )}
+              </h2>
+              <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-md my-2 font-medium">
+                {locale === "ko" ? (
+                  "매장 규모, 고객 특성, 상품 판매 방식과 투자 예산을 분석하여 귀 매장에 적합한 디스플레이 모듈, 브랜드 상품 구성 비율, 그리고 예상 매출 및 ROI 시뮬레이션을 제공합니다."
+                ) : (
+                  "Analyze your store space, customer demand, inventory frequency, and initial investment budget to generate tailored display fixtures, brand assortment mixes, and multi-year financial ROI projections."
+                )}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                <Link
+                  href={`/${locale}/simulator`}
+                  className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
+                >
+                  {locale === "ko" ? "성장 시뮬레이션 시작하기 →" : "Start Growth Simulation →"}
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Card Grid Column */}
+            <div className="relative min-h-[380px] w-full max-w-[530px] rounded-[24px] overflow-hidden border border-white/10 bg-[#121214] shadow-2xl flex flex-col justify-between p-6 sm:p-8 mx-auto lg:mx-0">
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/images/solutions/build.jpg"
+                  alt="Fixture preview"
+                  fill
+                  className="object-cover opacity-[0.06] pointer-events-none"
+                />
+              </div>
+
+              <div className="relative z-10 flex flex-col h-full justify-between gap-6">
+                <div>
+                  <span className="text-[10px] font-bold text-[#ff2b75] uppercase tracking-widest block mb-2">PROJECTIONS DETAILS</span>
+                  <h3 className="text-[20px] font-bold text-white tracking-tight leading-tight">
+                    {locale === "ko" ? "시뮬레이터를 통해 확인 가능한 결과" : "Output Projections Included"}
+                  </h3>
+                </div>
+
+                <div className="flex flex-col gap-4.5">
+                  {[
+                    {
+                      num: "01",
+                      title: locale === "ko" ? "디스플레이 규격 추천" : "Display Recommendation",
+                      desc: locale === "ko" ? "START 4FT · GROW 8FT · EXPAND 12FT 모듈 매칭" : "START 4FT · GROW 8FT · EXPAND 12FT fixtures"
+                    },
+                    {
+                      num: "02",
+                      title: locale === "ko" ? "MD 상품 구성비 제안" : "Assortment Strategy",
+                      desc: locale === "ko" ? "스킨케어, 헤어, 메이크업 등 카테고리 진열 믹스" : "Category mix percentages (skincare, hair, makeup)"
+                    },
+                    {
+                      num: "03",
+                      title: locale === "ko" ? "재무/수익성 시뮬레이션" : "Financial ROI Projections",
+                      desc: locale === "ko" ? "예상 연간 마진, 연 매출, 초기 투자 대비 회수 기간" : "Annual margin, retail sales, cogs, payback periods"
+                    }
+                  ].map((item) => (
+                    <div key={item.num} className="flex gap-4 items-start">
+                      <span className="font-display font-black text-[#ff2b75] text-[18px] leading-none pt-0.5">{item.num}</span>
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[13.5px] font-bold text-white">{item.title}</span>
+                        <span className="text-[11.5px] text-[#7A7A7A] font-semibold leading-normal">{item.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t border-white/5 pt-4 text-[11px] text-[#7A7A7A] font-semibold">
+                  {locale === "ko" ? "* K SELECT HUB 디스플레이 및 MD 매칭 표준 알고리즘 기반" : "* Based on K SELECT HUB display and assortment standards"}
+                </div>
+              </div>
+            </div>
+
+          </div>
         </section>
 
         {/* 11. Partnership Process - Single Connected Journey Timeline (PLAN ➔ LAUNCH ➔ GROW) */}
@@ -981,12 +872,12 @@ export default async function Home({ params }: PageProps) {
                 >
                   런치 파트너 신청 →
                 </a>
-                <a
-                  href="#simulator-section"
+                <Link
+                  href={`/${locale}/simulator`}
                   className="h-14 inline-flex items-center justify-center border border-[#22D3EE]/30 text-[#22D3EE] px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:bg-[#22D3EE] hover:text-[#0c0c0c] hover:shadow-[0_0_15px_rgba(34,211,238,0.35)] cursor-pointer"
                 >
                   성장 시뮬레이터 시작하기 →
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1011,57 +902,8 @@ export default async function Home({ params }: PageProps) {
 
       </main>
 
-      {/* 13. Footer - 4 columns navigation */}
-      <footer className="border-t border-[#2a2a2a] bg-[#0c0c0c]">
-        <div className="max-w-[1400px] mx-auto px-[64px] py-16 grid grid-cols-2 md:grid-cols-4 gap-10 text-left">
-          
-          <div>
-            <div className="flex items-center mb-4 -ml-[12px] sm:-ml-[16px]">
-              <div className="relative w-[210px] h-[50px] sm:w-[294px] sm:h-[70px]">
-                <Image
-                  src={assetConfig.logo.src}
-                  alt={assetConfig.logo.alt}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 210px, 294px"
-                />
-              </div>
-            </div>
-            <p className="text-xs text-text-secondary leading-relaxed max-w-[280px]">
-              미국 독립 뷰티 리테일러를 위한 K-Beauty Retail Growth Platform.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3 text-xs text-text-secondary">
-            <span className="font-semibold text-white mb-1">솔루션</span>
-            <span>제품 큐레이션</span>
-            <span>디스플레이 프로그램</span>
-            <span>90일 교환 크레딧</span>
-            <span>성장 시뮬레이터</span>
-          </div>
-
-          <div className="flex flex-col gap-3 text-xs text-text-secondary">
-            <span className="font-semibold text-white mb-1">파트너</span>
-            <span>파트너 신청</span>
-            <span>파트너 로그인</span>
-            <span>파트너 리소스</span>
-          </div>
-
-          <div className="flex flex-col gap-3 text-xs text-text-secondary">
-            <span className="font-semibold text-white mb-1">회사</span>
-            <span>소개</span>
-            <span>문의하기</span>
-            <span>이용약관 · 개인정보처리방침</span>
-          </div>
-
-        </div>
-
-        <div className="border-t border-[#2a2a2a] py-5">
-          <div className="max-w-[1400px] mx-auto px-[64px] text-xs text-text-secondary text-left">
-            <span>© 2026 K Select Hub. All rights reserved. Letusto Inc. HQ New Jersey.</span>
-          </div>
-        </div>
-      </footer>
+      {/* 13. Footer */}
+      <Footer locale={locale} />
 
     </div>
   );
