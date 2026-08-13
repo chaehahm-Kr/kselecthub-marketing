@@ -139,7 +139,7 @@ export default function Header({ locale }: HeaderProps) {
             </div>
 
             {/* 04. INSIGHTS (Independent Main Menu) */}
-            <Link href="#" className="flex items-center cursor-pointer py-6" onClick={(e) => e.preventDefault()}>
+            <Link href={`/${locale}/insights`} className="flex items-center cursor-pointer py-6">
               <div className="relative h-5 w-[75px] flex items-center justify-start select-none group/insights">
                 <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/insights:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
                   INSIGHTS
