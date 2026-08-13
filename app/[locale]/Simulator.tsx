@@ -66,6 +66,8 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
   // Compute current section
   const currentSection = activeQuestion?.section;
+  const sectionKeys = ["store_space", "customer_demand", "product_price", "inventory_reorder", "investment_growth"];
+  const currentStepNumber = currentSection ? sectionKeys.indexOf(currentSection) + 1 : 1;
 
   // Calculate accuracy indicator
   const accuracyInfo = useMemo(() => {
@@ -242,13 +244,19 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-4 items-start sm:items-center">
-              <button
-                onClick={() => setStep("assessment")}
-                className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
-              >
-                내 매장 분석 시작하기 →
-              </button>
+            <div className="flex flex-col gap-2.5 mt-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                <button
+                  onClick={() => setStep("assessment")}
+                  className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
+                >
+                  내 매장 분석 시작하기 →
+                </button>
+              </div>
+              <span className="text-[12.5px] text-white/60 font-semibold inline-flex items-center gap-1.5 mt-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
+                가장 큰 프로그램이 아닌, 귀 매장에 가장 맞는 시작점을 추천합니다.
+              </span>
             </div>
           </div>
 
@@ -259,6 +267,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 alt="Fixture preview"
                 fill
                 className="object-cover opacity-[0.06] pointer-events-none"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-[#121214]/90 via-transparent to-[#121214]/95 pointer-events-none" />
             </div>
@@ -270,15 +279,18 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               
               <div className="flex flex-col gap-4">
                 {[
-                  { num: "01", title: "DISPLAY PLAN", desc: "4FT · 8FT · 12FT 등 매장 크기와 적합도를 매칭한 피처 집기" },
-                  { num: "02", title: "PRODUCT STRATEGY", desc: "고객 구매 성향에 최적화된 Assortment 믹스 및 맞춤 카테고리 비율" },
-                  { num: "03", title: "BUSINESS OUTLOOK", desc: "초도 매입 비용, 예상 회전율, 연간 매출 및 이익 등 종합 ROI" }
+                  { num: "01", title_ko: "추천 디스플레이", title_en: "DISPLAY PLAN", desc: "4FT · 8FT · 12FT 등 매장 크기와 적합도를 매칭한 피처 집기" },
+                  { num: "02", title_ko: "상품 구성 전략", title_en: "PRODUCT STRATEGY", desc: "고객 구매 성향에 최적화된 Assortment 믹스 및 맞춤 카테고리 비율" },
+                  { num: "03", title_ko: "예상 사업성 분석", title_en: "BUSINESS OUTLOOK", desc: "초도 매입 비용, 예상 회전율, 연간 매출 및 이익 등 종합 ROI" }
                 ].map((item) => (
-                  <div key={item.num} className="flex gap-4 items-start p-3 bg-white/5 border border-white/5 rounded-[12px] hover:border-white/10 transition-colors">
-                    <span className="text-[#ff2b75] font-black text-sm">{item.num}</span>
+                  <div key={item.num} className="flex gap-4 items-start p-4 bg-[#1b1b1f] border border-white/10 rounded-[12px] hover:border-[#ff2b75]/35 transition-all duration-300 group/card shadow-lg hover:shadow-xl">
+                    <span className="text-[#ff2b75] font-black text-[15px] font-display mt-0.5 group-hover/card:scale-110 transition-transform duration-200">{item.num}</span>
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-white text-[13px] font-bold tracking-tight">{item.title}</span>
-                      <span className="text-white/60 text-[12px] leading-normal font-medium">{item.desc}</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-white text-[13.5px] font-extrabold tracking-tight">{item.title_ko}</span>
+                        <span className="text-white/40 text-[9px] font-bold tracking-wider font-display">{item.title_en}</span>
+                      </div>
+                      <span className="text-white/75 text-[11.5px] leading-normal font-medium mt-1">{item.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -295,11 +307,11 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
         <div className="w-full max-w-[800px] mx-auto bg-[#121214] border border-white/10 rounded-[24px] p-6 sm:p-10 shadow-2xl relative animate-slide-up">
           
           <div className="flex justify-between items-center gap-4 border-b border-white/10 pb-5 mb-8">
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] font-black text-[#ff2b75] tracking-wider uppercase font-display">
-                {sectionLabels[currentSection]?.en || "DIAGNOSTIC"}
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[10px] font-black text-[#ff2b75] tracking-widest uppercase font-display">
+                {currentSection ? `STEP ${currentStepNumber} / 5` : "DIAGNOSTIC"}
               </span>
-              <h3 className="text-[14.5px] font-bold text-white tracking-tight">
+              <h3 className="text-[15.5px] font-extrabold text-white tracking-tight leading-none mt-1">
                 {sectionLabels[currentSection]?.ko || "진단 진행 중"}
               </h3>
             </div>
@@ -390,22 +402,37 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   : answers[activeQuestion.id] === ans.label_ko;
 
                 if (activeQuestion.type === "tag_chip") {
+                  const selectIndex = activeQuestion.is_ranking
+                    ? (answers[activeQuestion.id] || []).indexOf(ans.label_ko)
+                    : -1;
+
                   return (
                     <button
                       key={ans.id}
                       onClick={() => handleToggleAnswer(activeQuestion.id, ans.label_ko, activeQuestion.max_select)}
                       className={isSelected 
-                        ? "px-4.5 py-3 rounded-[10px] border border-[#ff2b75] bg-[#ff2b75]/8 text-white font-extrabold shadow-[0_0_12px_rgba(255,43,117,0.15)] text-left cursor-pointer" 
-                        : "px-4.5 py-3 rounded-[10px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/70 hover:text-white text-left cursor-pointer"}
+                        ? "px-4.5 py-3 rounded-[10px] border border-[#ff2b75] bg-[#ff2b75]/8 text-white font-extrabold shadow-[0_0_12px_rgba(255,43,117,0.15)] text-left cursor-pointer flex flex-col justify-center gap-0.5" 
+                        : "px-4.5 py-3 rounded-[10px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/70 hover:text-white text-left cursor-pointer flex flex-col justify-center gap-0.5"}
                     >
-                      <div className="flex justify-between items-center gap-2">
-                        <span className="text-[13px] leading-tight tracking-tight font-semibold">{ans.label_ko}</span>
+                      <div className="flex justify-between items-center gap-2 w-full">
+                        <span className="text-[13px] leading-tight tracking-tight font-bold">{ans.label_ko}</span>
                         {isSelected && (
-                          <svg className="w-3.5 h-3.5 text-[#ff2b75] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
+                          activeQuestion.is_ranking && selectIndex !== -1 ? (
+                            <div className="w-[18px] h-[18px] rounded-full bg-[#ff2b75] text-[10px] text-white flex items-center justify-center font-black font-display shrink-0">
+                              {selectIndex + 1}
+                            </div>
+                          ) : (
+                            <svg className="w-3.5 h-3.5 text-[#ff2b75] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                          )
                         )}
                       </div>
+                      {ans.label_ko !== ans.label_en && (
+                        <span className="text-[10px] text-white/40 block leading-tight font-semibold mt-0.5">
+                          {ans.label_en}
+                        </span>
+                      )}
                     </button>
                   );
                 }
@@ -433,6 +460,32 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 );
               })}
             </div>
+
+            {activeQuestion.is_ranking && (answers[activeQuestion.id] || []).length > 0 && (
+              <div className="mt-6 p-4 bg-[#ff2b75]/4 border border-[#ff2b75]/15 rounded-[12px] animate-fade-in text-left">
+                <h4 className="text-[10px] font-black text-[#ff2b75] tracking-widest uppercase mb-2 font-display">
+                  선택된 순위 (Ranked Selection)
+                </h4>
+                <div className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+                  {(answers[activeQuestion.id] || []).map((selectedLabel: string, idx: number) => {
+                    const correspondingAnswer = activeQuestion.answers.find(a => a.label_ko === selectedLabel);
+                    return (
+                      <div key={selectedLabel} className="flex items-center gap-2">
+                        <span className="text-[#ff2b75] font-black font-display text-[10.5px] w-5 h-5 rounded-full bg-[#ff2b75]/10 border border-[#ff2b75]/25 flex items-center justify-center shrink-0">
+                          {idx + 1}
+                        </span>
+                        <span>{selectedLabel}</span>
+                        {correspondingAnswer && correspondingAnswer.label_ko !== correspondingAnswer.label_en && (
+                          <span className="text-[11px] text-white/35 font-medium leading-none">
+                            ({correspondingAnswer.label_en})
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-between items-center gap-4 border-t border-white/10 pt-6">
@@ -524,28 +577,28 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-auto border-t lg:border-t-0 border-white/10 pt-5 lg:pt-0">
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">RECOMMENDED DISPLAY</span>
-                <span className="text-[17px] font-black text-[#ff2b75]">
+              <div className="flex flex-col gap-0.5 text-left">
+                <span className="text-[9px] text-[#ff2b75] font-black tracking-wider uppercase font-display">권장 매대 크기 · DISPLAY</span>
+                <span className="text-[16px] font-black text-[#ff2b75]">
                   {mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT
                 </span>
               </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">RECOMMENDED SKU</span>
-                <span className="text-[17px] font-black text-white">
+              <div className="flex flex-col gap-0.5 text-left">
+                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">권장 상품 수 · RECOMMENDED SKU</span>
+                <span className="text-[16px] font-black text-white">
                   {mainRecommendation.display.sku_count} SKU
                 </span>
               </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">ESTIMATED TURNOVER</span>
-                <span className="text-[17px] font-black text-[#22D3EE]">
-                  {mainRecommendation.financial.turnover}x
+              <div className="flex flex-col gap-0.5 text-left">
+                <span className="text-[9px] text-[#22D3EE] font-black tracking-wider uppercase font-display">예상 연간 회전율 · TURNOVER</span>
+                <span className="text-[16px] font-black text-[#22D3EE]">
+                  약 {mainRecommendation.financial.turnover}회
                 </span>
               </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">ESTIMATED SALES</span>
-                <span className="text-[17px] font-black text-white">
-                  ${mainRecommendation.financial.annual_sales.toLocaleString()}
+              <div className="flex flex-col gap-0.5 text-left">
+                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">예상 연간 매출 · ESTIMATED SALES</span>
+                <span className="text-[16px] font-black text-white">
+                  약 ${mainRecommendation.financial.annual_sales.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -555,19 +608,22 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             
             <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible border-b lg:border-b-0 border-white/10 pb-3 lg:pb-0">
               {[
-                { key: "display", label: "01. Recommended Display", icon: "📐" },
-                { key: "product", label: "02. Product Strategy", icon: "🧴" },
-                { key: "financial", label: "03. Financial Outlook", icon: "📊" }
+                { key: "display", label_ko: "01. 추천 디스플레이", label_en: "Recommended Display", icon: "📐" },
+                { key: "product", label_ko: "02. 상품 구성 전략", label_en: "Product Strategy", icon: "🧴" },
+                { key: "financial", label_ko: "03. 예상 사업성", label_en: "Financial Outlook", icon: "📊" }
               ].map(tab => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveResultTab(tab.key as any)}
                   className={activeResultTab === tab.key
-                    ? "h-12 px-4.5 rounded-[8px] text-left text-[13px] font-bold tracking-tight transition-all shrink-0 cursor-pointer flex items-center gap-2 bg-[#ff2b75] text-white font-extrabold shadow-[0_4px_12px_rgba(255,43,117,0.25)]"
-                    : "h-12 px-4.5 rounded-[8px] text-left text-[13px] font-bold tracking-tight transition-all shrink-0 cursor-pointer flex items-center gap-2 border border-white/5 hover:border-white/10 text-white/60 hover:text-white"}
+                    ? "h-14 px-4.5 rounded-[8px] text-left transition-all shrink-0 cursor-pointer flex items-center gap-3.5 bg-[#ff2b75] text-white font-extrabold shadow-[0_4px_12px_rgba(255,43,117,0.25)]"
+                    : "h-14 px-4.5 rounded-[8px] text-left transition-all shrink-0 cursor-pointer flex items-center gap-3.5 border border-white/5 bg-[#171719]/40 hover:border-white/10 text-white/60 hover:text-white"}
                 >
-                  <span>{tab.icon}</span>
-                  <span>{tab.label}</span>
+                  <span className="text-lg">{tab.icon}</span>
+                  <div className="flex flex-col text-left leading-tight">
+                    <span className="text-[12.5px] font-extrabold">{tab.label_ko}</span>
+                    <span className={`text-[9.5px] font-bold ${activeResultTab === tab.key ? "text-white/80" : "text-white/40"}`}>{tab.label_en}</span>
+                  </div>
                 </button>
               ))}
             </div>
@@ -580,11 +636,16 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     
                     <div className="flex flex-col gap-5 text-left">
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">RECOMMENDED FIXTURE SIZE</span>
-                        <h3 className="font-display text-[26px] font-extrabold text-white leading-none tracking-tight">
-                          {mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT Module
-                        </h3>
+                      <div className="flex flex-col gap-1.5">
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">권장 집기 규격 · RECOMMENDED FIXTURE SIZE</span>
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                          <h3 className="font-display text-[26px] font-extrabold text-white leading-none tracking-tight">
+                            {mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT Module
+                          </h3>
+                          <span className="text-[10px] text-[#ff2b75] font-black tracking-wide border border-[#ff2b75]/30 bg-[#ff2b75]/5 px-2.5 py-0.5 rounded-[4px] uppercase font-display">
+                            추천안 · BEST FIT
+                          </span>
+                        </div>
                       </div>
                       
                       <div className="flex flex-col gap-3 font-medium text-[13.5px] text-white/70">
@@ -632,6 +693,16 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                   <div className="border-t border-white/10 pt-6 mt-2">
                     <h4 className="text-[14.5px] font-bold text-white mb-3">왜 이 Display 모듈이 추천되었나요? (Why This Result)</h4>
+                    
+                    {/* Decision Factor Chips */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {["공간 적합도", "고객 수요", "현재 판매 규모", "성장 의지"].map((chip) => (
+                        <span key={chip} className="text-[11px] font-extrabold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/15 px-2.5 py-1 rounded-full">
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+
                     <div className="flex flex-col gap-3">
                       {mainRecommendation.display.reasons.map((r, i) => (
                         <div key={i} className="flex gap-3 items-start p-3 bg-white/5 border border-white/5 rounded-[10px] text-white/80 text-[13px] leading-relaxed">
@@ -648,14 +719,33 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               {activeResultTab === "product" && (
                 <div className="flex flex-col gap-8 animate-fade-in">
                   
-                  <div className="flex flex-col gap-2 text-left">
+                  <div className="flex flex-col gap-2.5 text-left">
                     <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">RECOMMENDED ASSORTMENT PROFILE</span>
                     <h3 className="font-display text-[22px] font-extrabold text-white leading-tight tracking-tight">
-                      {mainRecommendation.assortment.primary_description_ko}
+                      {(() => {
+                        const p = mainRecommendation.assortment.primary_description_ko.replace(" 구성", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
+                        const s = mainRecommendation.assortment.secondary_description_ko.replace(" 구성", "").replace(" 매칭", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
+                        return `“${p} 중심 + ${s} 보강 구성”`;
+                      })()}
                     </h3>
-                    <span className="text-[13.5px] text-[#b4b4b4] font-medium leading-relaxed max-w-xl">
-                      고객 및 가격 성향 데이터를 바탕으로 <strong className="text-white font-bold">{mainRecommendation.assortment.primary_description_ko}</strong>를 기본 뼈대로 잡고, 부가적으로 <strong className="text-white font-bold">{mainRecommendation.assortment.secondary_description_ko}</strong>를 보완 매칭한 맞춤형 상품 포트폴리오입니다.
+                    <span className="text-[13.5px] text-[#b4b4b4] font-semibold leading-relaxed max-w-xl">
+                      고객 및 가격 성향 데이터를 분석하여 맞춤 설계된 상품 포트폴리오 전략입니다.
                     </span>
+
+                    <div className="flex flex-col gap-2.5 text-white/70 text-[13px] leading-relaxed max-w-xl bg-white/3 border border-white/5 p-4 rounded-[12px] mt-2">
+                      <div className="flex gap-2">
+                        <span className="text-[#ff2b75] font-black shrink-0">·</span>
+                        <span><strong>타깃 고객 맞춤</strong>: 매장을 이용하는 주 고객층의 특성을 고려하여, {mainRecommendation.assortment.primary_description_ko}으로 핵심 구매 전환을 유도합니다.</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-[#ff2b75] font-black shrink-0">·</span>
+                        <span><strong>시너지 상품 보강</strong>: 매장 방문 빈도와 추가 구매(Add-on)를 극대화하기 위해 {mainRecommendation.assortment.secondary_description_ko}을 결합하여 매대 효율을 높입니다.</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-[#ff2b75] font-black shrink-0">·</span>
+                        <span><strong>상권 매칭</strong>: 입력해주신 상권 및 고객 데이터를 기준으로 K SELECT가 엄선한 베스트셀링 카테고리 비율입니다.</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-3.5 mt-2">
@@ -688,10 +778,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                   <div className="border-t border-white/10 pt-6 mt-2">
                     <div className="flex justify-between items-center mb-3.5">
-                      <h4 className="text-[14.5px] font-bold text-white">추천 상품군 예시 (Sample Catalog)</h4>
-                      <span className="text-[11px] text-[#ff2b75] font-black tracking-wide border border-[#ff2b75]/20 bg-[#ff2b75]/5 px-2.5 py-0.5 rounded-[4px]">
-                        ENGINE PREVIEW MOCK
-                      </span>
+                      <h4 className="text-[14.5px] font-bold text-white">추천 상품 구성 예시 (Sample Product Mix)</h4>
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
@@ -722,36 +809,66 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               {activeResultTab === "financial" && (
                 <div className="flex flex-col gap-8 animate-fade-in">
                   
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-left">
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-[#ff2b75] font-black tracking-wider uppercase font-display">초도 예산 (Initial Product Investment)</span>
-                      <strong className="text-white text-[20px] font-black">${mainRecommendation.financial.initial_product_investment.toLocaleString()}</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">디스플레이 무상 대여 포함</span>
+                  {/* Primary KPIs Block */}
+                  <div className="flex flex-col gap-3">
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display">핵심 예상 사업성 (Primary Financial Outlook)</h4>
+                      <span className="text-[11px] text-white/50 font-semibold bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-[4px]">
+                        현재 입력 조건 기준 예상치
+                      </span>
                     </div>
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-white/50 font-black tracking-wider uppercase font-display">예상 연간 매출 (Annual Retail Sales)</span>
-                      <strong className="text-[#ff2b75] text-[20px] font-black">${mainRecommendation.financial.annual_sales.toLocaleString()}</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">연간 예상 총소매매출액</span>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+                      <div className="p-5 bg-white/5 border border-white/10 rounded-[14px] flex flex-col gap-1.5 shadow-md">
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">① 초도 상품 투자금 (Initial Product Investment)</span>
+                        <strong className="text-white text-[24px] font-black">~${mainRecommendation.financial.initial_product_investment.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">디스플레이 무상 임대 및 초기 맞춤 상품 세팅비 포함</span>
+                      </div>
+
+                      <div className="p-5 bg-white/5 border border-[#22D3EE]/30 rounded-[14px] flex flex-col gap-1.5 shadow-md">
+                        <span className="text-[10px] text-[#22D3EE] font-black tracking-wider uppercase font-display">② 예상 연간 재고 회전율 (Estimated Turnover)</span>
+                        <strong className="text-white text-[24px] font-black">~{mainRecommendation.financial.turnover}회 / 년</strong>
+                        <span className="text-[11px] text-white/60 font-medium leading-normal mt-0.5">
+                          💡 판매와 재주문이 반복되는 운영 과정에서 평균 재고가 연간 약 {mainRecommendation.financial.turnover}회 회전하는 수준을 의미합니다.
+                        </span>
+                      </div>
+
+                      <div className="p-5 bg-white/5 border border-white/10 rounded-[14px] flex flex-col gap-1.5 shadow-md">
+                        <span className="text-[10px] text-white/50 font-black tracking-wider uppercase font-display">③ 예상 연간 소매 매출 (Projected Retail Sales)</span>
+                        <strong className="text-white text-[24px] font-black">~${mainRecommendation.financial.annual_sales.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">연간 예상 총소매매출액 (소비자가 합산)</span>
+                      </div>
+
+                      <div className="p-5 bg-[#ff2b75]/5 border border-[#ff2b75]/35 rounded-[14px] flex flex-col gap-1.5 shadow-lg">
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">④ 예상 연간 소매 수익 (Estimated Gross Profit)</span>
+                        <strong className="text-[#ff2b75] text-[24px] font-black">~${mainRecommendation.financial.gross_profit.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/60 font-semibold leading-relaxed">디바이스 투자 원금 대비 우수한 수익성 예측치</span>
+                      </div>
                     </div>
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-[#22D3EE] font-black tracking-wider uppercase font-display">예상 연간 회전율 (Estimated Turnover)</span>
-                      <strong className="text-white text-[20px] font-black">{mainRecommendation.financial.turnover}x / Year</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">평균 재고 회전 수</span>
-                    </div>
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-white/50 font-black tracking-wider uppercase font-display">초도 공급 수량 (Initial Pack Units)</span>
-                      <strong className="text-white text-[20px] font-black">{mainRecommendation.display.initial_units} Pcs</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">평균 소매가 약 $23-$24 산출</span>
-                    </div>
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-white/50 font-black tracking-wider uppercase font-display">보장 소매 마진율 (Gross Margin)</span>
-                      <strong className="text-white text-[20px] font-black">{mainRecommendation.financial.gross_margin * 100}%</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">타사 대비 우수한 마진 효율</span>
-                    </div>
-                    <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] flex flex-col gap-1">
-                      <span className="text-[9px] text-[#ff2b75] font-black tracking-wider uppercase font-display">예상 연간 총수익 (Gross Profit)</span>
-                      <strong className="text-[#ff2b75] text-[20px] font-black">${mainRecommendation.financial.gross_profit.toLocaleString()}</strong>
-                      <span className="text-[10px] text-white/40 font-semibold leading-none">연간 예상 순수익액</span>
+                  </div>
+
+                  {/* Secondary KPIs Block */}
+                  <div className="flex flex-col gap-3 border-t border-white/10 pt-6">
+                    <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display mb-1">부가 운영 지표 (Secondary Metrics)</h4>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">초도 공급 수량 (Initial Pack Qty)</span>
+                        <strong className="text-white text-[16px] font-black">{mainRecommendation.display.initial_units} Pcs</strong>
+                        <span className="text-[10px] text-white/40 font-medium">평균 소매가 $23-$24 기준 산출</span>
+                      </div>
+
+                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">보장 소매 마진율 (Gross Margin)</span>
+                        <strong className="text-white text-[16px] font-black">{mainRecommendation.financial.gross_margin * 100}%</strong>
+                        <span className="text-[10px] text-white/40 font-medium">타사 카테고리 대비 우수한 마진 효율</span>
+                      </div>
+
+                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 투자금 회수 기간 (Est. Payback)</span>
+                        <strong className="text-white text-[16px] font-black">약 {mainRecommendation.financial.payback_months}개월</strong>
+                        <span className="text-[10px] text-white/40 font-medium">마진 총액 기준 보수적 계산</span>
+                      </div>
                     </div>
                   </div>
 
@@ -773,11 +890,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         <strong className="text-white font-bold">3. 보장 소매 마진 (Estimated Gross Profit)</strong>
                         <span>수식: [연간 총 소매 매출액 - 연간 매출원가]를 통해 연간 ${mainRecommendation.financial.gross_profit.toLocaleString()}의 마진 수익을 예상 시뮬레이션하였습니다.</span>
                       </div>
-                      <div className="p-3 bg-[#ff2b75]/5 border border-[#ff2b75]/10 rounded-[8px] text-[11.5px] text-white/50 leading-relaxed">
-                        ⚠️ **주의**: 본 시뮬레이션 결과는 산술적인 예측 모델에 기반하며, 상권 입지 조건, 소비자 선향 및 개별 매장의 실제 운영 성과에 따라 최종 이익 규모가 달라질 수 있습니다. K SELECT는 확정 매출액을 법적으로 보장하지 않습니다.
-                      </div>
                     </div>
                   </details>
+
+                  <div className="p-3.5 bg-white/3 border border-white/10 rounded-[10px] text-[11.5px] text-white/50 leading-relaxed">
+                    ⚠️ **시뮬레이션 Disclaimer**: 본 결과는 입력된 매장 정보와 현재 적용된 가정값을 기준으로 한 시뮬레이션이며 실제 판매 결과를 보장하지 않습니다. 상권 입지 조건, 소비자 성향 및 매장 운영에 따라 실제 성과는 달라질 수 있습니다.
+                  </div>
                 </div>
               )}
 
@@ -792,40 +910,50 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             
             <button
               onClick={() => setShowAlternative(!showAlternative)}
-              className="h-10 inline-flex items-center justify-center border border-[#ff2b75]/30 hover:border-[#ff2b75]/50 text-[#ff2b75] px-5.5 rounded-[6px] font-bold text-[12.5px] tracking-wide transition-colors cursor-pointer"
+              className="h-12 inline-flex flex-col items-center justify-center border border-[#ff2b75]/30 hover:border-[#ff2b75]/50 text-[#ff2b75] px-5.5 rounded-[6px] font-bold tracking-tight transition-colors cursor-pointer py-1"
             >
-              {showAlternative ? "메인 추천 결과 유지" : "START · 4FT 대안 시나리오 비교"}
+              {showAlternative ? (
+                <span className="text-[12.5px] font-extrabold">메인 추천 결과 유지</span>
+              ) : (
+                <>
+                  <span className="text-[12.5px] font-extrabold">더 작은 규모의 시작안 보기</span>
+                  <span className="text-[9px] text-[#ff2b75]/70 font-bold uppercase tracking-wider font-display">START · {alternativeRecommendation.display.width_ft}FT Alternative</span>
+                </>
+              )}
             </button>
           </div>
 
           {showAlternative && (
-            <div className="bg-white/3 border border-[#ff2b75]/20 rounded-[18px] p-6.5 sm:p-8 shadow-inner animate-slide-up flex flex-col gap-6">
+            <div className="bg-[#121214]/60 border border-white/10 rounded-[18px] p-6.5 sm:p-8 shadow-inner animate-slide-up flex flex-col gap-6">
               <div className="flex justify-between items-start gap-4">
-                <div className="flex flex-col gap-0.5 text-left">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">ALTERNATIVE OPTION</span>
-                  <h3 className="font-display text-[20px] font-extrabold text-white">START · {alternativeRecommendation.display.width_ft}FT 컴팩트 시나리오</h3>
+                <div className="flex flex-col gap-1 text-left">
+                  <span className="text-[10px] text-white/50 font-black tracking-widest uppercase">초기 투자 부담을 낮춘 선택 · LOWER-INVESTMENT OPTION</span>
+                  <h3 className="font-display text-[18px] font-extrabold text-white/85">START · {alternativeRecommendation.display.width_ft}FT 컴팩트 시나리오</h3>
+                  <p className="text-[13px] text-white/60 font-medium leading-relaxed mt-1.5">
+                    초기 투자 부담을 낮추고 먼저 시장 반응을 확인하고 싶다면 {alternativeRecommendation.display.program} · {alternativeRecommendation.display.width_ft}FT로 시작할 수 있습니다.
+                  </p>
                 </div>
-                <span className="text-[11px] font-bold text-white/50 border border-white/10 bg-white/5 px-2.5 py-0.5 rounded-[4px]">
+                <span className="text-[11px] font-bold text-white/40 border border-white/10 bg-white/5 px-2.5 py-0.5 rounded-[4px] shrink-0">
                   대안 시뮬레이션
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 text-left">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 text-left border-t border-white/5 pt-4">
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">초도 예산 (Product investment)</span>
-                  <strong className="text-white text-[15px] font-black">${alternativeRecommendation.display.investment.toLocaleString()}</strong>
+                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">초도 예산 · INVESTMENT</span>
+                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.display.investment.toLocaleString()}</strong>
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">추천 SKU (SKU Count)</span>
-                  <strong className="text-white text-[15px] font-black">{alternativeRecommendation.display.sku_count} SKU</strong>
+                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">추천 SKU · SKU COUNT</span>
+                  <strong className="text-white/80 text-[15px] font-black">{alternativeRecommendation.display.sku_count} SKU</strong>
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">예상 연간 매출 (Annual Sales)</span>
-                  <strong className="text-[#ff2b75] text-[15px] font-black">${alternativeRecommendation.financial.annual_sales.toLocaleString()}</strong>
+                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">예상 연간 매출 · SALES</span>
+                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.financial.annual_sales.toLocaleString()}</strong>
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">연간 예상 순익 (Gross Profit)</span>
-                  <strong className="text-[#ff2b75] text-[15px] font-black">${alternativeRecommendation.financial.gross_profit.toLocaleString()}</strong>
+                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">예상 연간 순익 · PROFIT</span>
+                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.financial.gross_profit.toLocaleString()}</strong>
                 </div>
               </div>
             </div>
@@ -854,17 +982,18 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4 w-full">
             <button
               onClick={() => setShowConsultationModal(true)}
-              className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none"
+              className="h-14 flex-1 sm:flex-none inline-flex flex-col items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none py-2"
             >
-              이 Growth Plan으로 파트너십 상담 신청하기 →
+              <span className="font-extrabold text-[14.5px] leading-tight">이 플랜으로 상담 신청하기 →</span>
+              <span className="text-[9.5px] text-white/70 font-bold font-display uppercase tracking-wider">Partnership Consultation</span>
             </button>
             
             <button
               onClick={handleRestart}
-              className="h-14 inline-flex items-center justify-center border border-white/15 hover:border-white/35 text-white px-8 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-colors cursor-pointer"
+              className="h-14 flex-1 sm:flex-none inline-flex items-center justify-center border border-white/15 hover:border-white/35 text-white px-8 rounded-[8px] font-extrabold text-[14px] tracking-tight transition-colors cursor-pointer"
             >
               조건 변경 후 다시 분석하기
             </button>

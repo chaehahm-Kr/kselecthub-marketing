@@ -91,7 +91,7 @@ export default function Header({ locale }: HeaderProps) {
                   SIMULATOR
                 </span>
                 {locale === "ko" && (
-                  <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] ${isSimulator ? "opacity-100" : "opacity-0 group-hover/sim:opacity-100"} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/sim:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
                     성장 시뮬레이터
                   </span>
                 )}

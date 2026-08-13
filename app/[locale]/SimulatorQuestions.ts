@@ -12,6 +12,7 @@ export interface QuestionConfig {
   is_optional: boolean;
   multi_select: boolean;
   max_select?: number;
+  is_ranking?: boolean;
   label_ko: string;
   label_en: string;
   helper_ko?: string;
@@ -107,19 +108,20 @@ export const QUESTIONS: QuestionConfig[] = [
     is_optional: false,
     multi_select: true,
     max_select: 3,
+    is_ranking: true,
     label_ko: "현재 매장에서 매출이 가장 높은 카테고리 3개를 순서대로 선택해주세요.",
     label_en: "Please select the top 3 highest-revenue categories in your store in order.",
     answers: [
-      { id: "Q5_A1", label_ko: "Hair Chemicals / Hair Care", label_en: "Hair Chemicals / Hair Care" },
-      { id: "Q5_A2", label_ko: "Wigs / Hair Extensions", label_en: "Wigs / Hair Extensions" },
-      { id: "Q5_A3", label_ko: "Cosmetics / Makeup", label_en: "Cosmetics / Makeup" },
-      { id: "Q5_A4", label_ko: "Skincare", label_en: "Skincare" },
-      { id: "Q5_A5", label_ko: "Nail", label_en: "Nail" },
-      { id: "Q5_A6", label_ko: "Hair Accessories", label_en: "Hair Accessories" },
-      { id: "Q5_A7", label_ko: "Beauty Tools", label_en: "Beauty Tools" },
-      { id: "Q5_A8", label_ko: "Body / Personal Care", label_en: "Body / Personal Care" },
-      { id: "Q5_A9", label_ko: "Bags / Fashion Accessories", label_en: "Bags / Fashion Accessories" },
-      { id: "Q5_A10", label_ko: "General Merchandise", label_en: "General Merchandise" },
+      { id: "Q5_A1", label_ko: "헤어 케미컬 / 헤어케어", label_en: "Hair Chemicals / Hair Care" },
+      { id: "Q5_A2", label_ko: "가발 / 헤어 익스텐션", label_en: "Wigs / Hair Extensions" },
+      { id: "Q5_A3", label_ko: "화장품 / 메이크업", label_en: "Cosmetics / Makeup" },
+      { id: "Q5_A4", label_ko: "스킨케어", label_en: "Skincare" },
+      { id: "Q5_A5", label_ko: "네일", label_en: "Nail" },
+      { id: "Q5_A6", label_ko: "헤어 액세서리", label_en: "Hair Accessories" },
+      { id: "Q5_A7", label_ko: "뷰티 툴", label_en: "Beauty Tools" },
+      { id: "Q5_A8", label_ko: "바디 / 퍼스널 케어", label_en: "Body / Personal Care" },
+      { id: "Q5_A9", label_ko: "가방 / 패션 잡화", label_en: "Bags / Fashion Accessories" },
+      { id: "Q5_A10", label_ko: "잡화 / 일반 상품", label_en: "General Merchandise" },
       { id: "Q5_A11", label_ko: "기타", label_en: "Other" },
       { id: "Q5_A12", label_ko: "잘 모르겠습니다", label_en: "I do not know" }
     ]
@@ -175,12 +177,12 @@ export const QUESTIONS: QuestionConfig[] = [
     label_en: "Who are your primary target customer segments?",
     answers: [
       { id: "Q8_A1", label_ko: "10 대 / Gen Z", label_en: "Teens / Gen Z" },
-      { id: "Q8_A2", label_ko: "Young Adults", label_en: "Young Adults" },
-      { id: "Q8_A3", label_ko: "Adults / Families", label_en: "Adults / Families" },
-      { id: "Q8_A4", label_ko: "Mature Customers", label_en: "Mature Customers" },
-      { id: "Q8_A5", label_ko: "Professional Stylists", label_en: "Professional Stylists" },
-      { id: "Q8_A6", label_ko: "Beauty Enthusiasts", label_en: "Beauty Enthusiasts" },
-      { id: "Q8_A7", label_ko: "Value Shoppers", label_en: "Value Shoppers" },
+      { id: "Q8_A2", label_ko: "청년층 (Young Adults)", label_en: "Young Adults" },
+      { id: "Q8_A3", label_ko: "가족 / 성인층 (Adults & Families)", label_en: "Adults / Families" },
+      { id: "Q8_A4", label_ko: "중장년층 (Mature Customers)", label_en: "Mature Customers" },
+      { id: "Q8_A5", label_ko: "전문 스타일리스트", label_en: "Professional Stylists" },
+      { id: "Q8_A6", label_ko: "뷰티 고관여층 (Enthusiasts)", label_en: "Beauty Enthusiasts" },
+      { id: "Q8_A7", label_ko: "가성비 쇼퍼 (Value Shoppers)", label_en: "Value Shoppers" },
       { id: "Q8_A8", label_ko: "혼합 고객층", label_en: "Mixed Customer Base" },
       { id: "Q8_A9", label_ko: "잘 모르겠습니다", label_en: "I do not know" }
     ]
@@ -193,19 +195,20 @@ export const QUESTIONS: QuestionConfig[] = [
     is_optional: false,
     multi_select: true,
     max_select: 3,
+    is_ranking: true,
     label_ko: "고객들이 가장 많이 찾는 Beauty 카테고리는 무엇입니까?",
     label_en: "Which beauty categories do your customers seek the most?",
     answers: [
-      { id: "Q9_A1", label_ko: "Skincare", label_en: "Skincare" },
-      { id: "Q9_A2", label_ko: "Hair Care", label_en: "Hair Care" },
-      { id: "Q9_A3", label_ko: "Hair Styling", label_en: "Hair Styling" },
-      { id: "Q9_A4", label_ko: "Masks & Patches", label_en: "Masks & Patches" },
-      { id: "Q9_A5", label_ko: "Makeup", label_en: "Makeup" },
-      { id: "Q9_A6", label_ko: "Nail", label_en: "Nail" },
-      { id: "Q9_A7", label_ko: "Beauty Tools", label_en: "Beauty Tools" },
-      { id: "Q9_A8", label_ko: "Body / Personal Care", label_en: "Body / Personal Care" },
-      { id: "Q9_A9", label_ko: "Premium / Functional Products", label_en: "Premium / Functional Products" },
-      { id: "Q9_A10", label_ko: "New / Trending Products", label_en: "New & Trending Products" },
+      { id: "Q9_A1", label_ko: "스킨케어", label_en: "Skincare" },
+      { id: "Q9_A2", label_ko: "헤어케어", label_en: "Hair Care" },
+      { id: "Q9_A3", label_ko: "헤어 스타일링", label_en: "Hair Styling" },
+      { id: "Q9_A4", label_ko: "마스크 & 패치", label_en: "Masks & Patches" },
+      { id: "Q9_A5", label_ko: "메이크업 / 색조", label_en: "Makeup" },
+      { id: "Q9_A6", label_ko: "네일", label_en: "Nail" },
+      { id: "Q9_A7", label_ko: "뷰티 툴", label_en: "Beauty Tools" },
+      { id: "Q9_A8", label_ko: "바디 / 퍼스널 케어", label_en: "Body / Personal Care" },
+      { id: "Q9_A9", label_ko: "프리미엄 / 기능성 제품", label_en: "Premium / Functional Products" },
+      { id: "Q9_A10", label_ko: "신상품 / 트렌드 상품", label_en: "New & Trending Products" },
       { id: "Q9_A11", label_ko: "뚜렷한 카테고리가 없습니다", label_en: "No clear category" },
       { id: "Q9_A12", label_ko: "잘 모르겠습니다", label_en: "I do not know" }
     ]
@@ -284,7 +287,7 @@ export const QUESTIONS: QuestionConfig[] = [
       { id: "Q13_A1", label_ko: "가격이 매우 중요합니다", label_en: "Very price sensitive" },
       { id: "Q13_A2", label_ko: "가격과 품질의 균형을 봅니다", label_en: "Price & quality balanced" },
       { id: "Q13_A3", label_ko: "가격보다 품질과 효과가 더 중요합니다", label_en: "Efficacy & quality preferred" },
-      { id: "Q13_A4", label_ko: "프리미엄 가격도 받아들입니다", label_en: "Will accept premium price points" },
+      { id: "Q13_A4", label_ko: "프리미엄 가격도 받아들입니까", label_en: "Will accept premium price points" },
       { id: "Q13_A5", label_ko: "고객마다 다릅니다", label_en: "Depends on customer" },
       { id: "Q13_A6", label_ko: "잘 모르겠습니다", label_en: "I do not know" }
     ]
@@ -318,11 +321,11 @@ export const QUESTIONS: QuestionConfig[] = [
     label_ko: "고객들이 Beauty 제품을 구매하는 주요 이유는 무엇입니까?",
     label_en: "What is the main driver for purchasing beauty products?",
     answers: [
-      { id: "Q15_A1", label_ko: "반복 구매 / Replenishment", label_en: "Restocking / Replenishment" },
+      { id: "Q15_A1", label_ko: "반복 구매 / 생필품", label_en: "Restocking / Replenishment" },
       { id: "Q15_A2", label_ko: "특정 문제 해결", label_en: "Solving specific skin/hair problems" },
       { id: "Q15_A3", label_ko: "새로운 제품 발견", label_en: "Discovering new products" },
       { id: "Q15_A4", label_ko: "트렌드 / 소셜미디어", label_en: "Trends & Social Media hype" },
-      { id: "Q15_A5", label_ko: "충동구매 / Add-on", label_en: "Impulse / Add-on purchase" },
+      { id: "Q15_A5", label_ko: "충동 구매 / 추가 상품", label_en: "Impulse / Add-on purchase" },
       { id: "Q15_A6", label_ko: "신뢰하는 브랜드", label_en: "Brand loyalty & trust" },
       { id: "Q15_A7", label_ko: "매장 직원 추천", label_en: "Staff recommendation" },
       { id: "Q15_A8", label_ko: "선물 / 특별한 목적", label_en: "Gifts / Special events" },

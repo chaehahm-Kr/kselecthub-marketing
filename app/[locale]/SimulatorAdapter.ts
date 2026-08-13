@@ -92,9 +92,9 @@ export function simulateGrowth(answers: Record<string, any>): SimulationResult {
   const sensitivity = answers["Q13"] || "";
 
   // Primary AP mapping logic
-  if (topCats.includes("Skincare") || soughtCats.includes("Skincare")) {
+  if (topCats.includes("스킨케어") || soughtCats.includes("스킨케어")) {
     primaryAP = "SKIN";
-  } else if (topCats.includes("Hair Chemicals / Hair Care") || soughtCats.includes("Hair Care")) {
+  } else if (topCats.includes("헤어 케미컬 / 헤어케어") || soughtCats.includes("헤어케어")) {
     primaryAP = "HAIR";
   } else if (importantValue.includes("가격 / 가성비") || sensitivity.includes("가격이 매우 중요")) {
     primaryAP = "ESSENTIAL";
