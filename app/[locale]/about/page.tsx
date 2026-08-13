@@ -1,18 +1,85 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "../Header";
 import Footer from "../Footer";
 import PartnerModal from "../PartnerModal";
 
+// --- Intersection Observer Hook for Entrance Reveal (Runs exactly once) ---
+function useIntersectionReveal() {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, isVisible] as const;
+}
+
+// --- Count-Up Animation Component using requestAnimationFrame ---
+interface CountUpProps {
+  target: number;
+  duration?: number;
+  startTrigger: boolean;
+}
+
+function CountUp({ target, duration = 1200, startTrigger }: CountUpProps) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!startTrigger) return;
+
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [target, duration, startTrigger]);
+
+  return <>{count}</>;
+}
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function AboutPage({ params }: PageProps) {
-  const { locale } = await params;
-
+export default function AboutPage({ params }: PageProps) {
+  const resolvedParams = React.use(params);
+  const locale = resolvedParams.locale;
   const isKo = locale === "ko";
+
+  // Section Refs and Visibilities for Scroll Reveals
+  const [heroRef, heroVisible] = useIntersectionReveal();
+  const [letustoRef, letustoVisible] = useIntersectionReveal();
+  const [judgmentRef, judgmentVisible] = useIntersectionReveal();
+  const [partnerRef, partnerVisible] = useIntersectionReveal();
+  const [numbersRef, numbersVisible] = useIntersectionReveal();
+  const [networkRef, networkVisible] = useIntersectionReveal();
+  const [teamRef, teamVisible] = useIntersectionReveal();
+  const [recognizedRef, recognizedVisible] = useIntersectionReveal();
+  const [ctaRef, ctaVisible] = useIntersectionReveal();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0c0c0c] text-white font-sans overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
@@ -23,23 +90,46 @@ export default async function AboutPage({ params }: PageProps) {
       <main className="flex-1">
         
         {/* ================= 01. HERO / ABOUT US ================= */}
-        <section id="about-hero" className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-16 sm:py-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center text-left">
+        <section 
+          id="about-hero" 
+          ref={heroRef}
+          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-16 sm:py-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center text-left scroll-mt-24"
+        >
           {/* Left Column: Copywriting */}
           <div className="flex flex-col gap-5">
-            <span className="text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display">
+            <span 
+              className={`text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display transition-all duration-700 transform ${
+                heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
               ABOUT US
             </span>
-            <h1 className="font-display text-[32px] sm:text-[44px] lg:text-[48px] font-black leading-[1.18] text-white tracking-tight m-0 select-none">
+            <h1 
+              style={{ transitionDelay: "100ms" }}
+              className={`font-display text-[32px] sm:text-[44px] lg:text-[48px] font-black leading-[1.18] text-white tracking-tight m-0 select-none transition-all duration-700 transform ${
+                heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
               {isKo ? (
                 <>우리는 리테일을 조사만 한 것이 아니라,<br className="hidden sm:inline" /> 직접 운영해왔습니다.</>
               ) : (
                 <>We Don't Just Research Retail.<br className="hidden sm:inline" /> We Live It.</>
               )}
             </h1>
-            <p className="text-sm font-semibold text-[#ff2b75] italic tracking-wide uppercase font-display m-0">
+            <p 
+              style={{ transitionDelay: "200ms" }}
+              className={`text-sm font-semibold text-[#ff2b75] italic tracking-wide uppercase font-display m-0 transition-all duration-700 transform ${
+                heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
               We Know Retail Because We’ve Lived It.
             </p>
-            <div className="flex flex-col gap-4 text-[13.5px] sm:text-[14.5px] text-[#9ca3af] leading-relaxed font-medium mt-2">
+            <div 
+              style={{ transitionDelay: "300ms" }}
+              className={`flex flex-col gap-4 text-[13.5px] sm:text-[14.5px] text-[#9ca3af] leading-relaxed font-medium mt-2 transition-all duration-700 transform ${
+                heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
               <p className="m-0">
                 {isKo ? (
                   "K SELECT HUB는 실제 소매 매장과 글로벌 공급망을 온전히 직접 운영해온 현장의 경험에서 시작되었습니다. 2001년부터 이어온 실전 리테일 운영 노하우를 바탕으로, 단순한 시장 조사에 그치지 않고 브랜드 소싱, 규정 및 컴플라이언스(FDA/MoCRA), 미국 직수입 및 통관, 현지 물류(3PL) 창고 관리, 온라인 및 이커머스 세일즈(아마존 FBA 포함), 매장 머천다이징까지 공급망 전 과정을 직접 조율하고 실행해왔습니다."
@@ -58,12 +148,17 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
 
           {/* Right Column: Premium Generated Visual */}
-          <div className="relative aspect-[3/2] w-full rounded-[24px] overflow-hidden border border-white/10 shadow-2xl group">
+          <div 
+            style={{ transitionDelay: "200ms" }}
+            className={`relative aspect-[3/2] w-full rounded-[24px] overflow-hidden border border-white/10 shadow-2xl group transition-all duration-1000 transform ${
+              heroVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"
+            }`}
+          >
             <Image
               src="/images/about/kbeauty_hero_visual.jpg"
               alt="Premium K-Beauty retail section visual"
               fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
               sizes="(max-width: 1024px) 100vw, 45vw"
               priority
             />
@@ -73,7 +168,7 @@ export default async function AboutPage({ params }: PageProps) {
         </section>
 
         {/* ================= 02. ABOUT LETUSTO ================= */}
-        <section id="about-letusto" className="bg-[#121214] border-y border-[#222]">
+        <section id="about-letusto" ref={letustoRef} className="bg-[#121214] border-y border-[#222]">
           <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left">
             
             {/* Header Block */}
@@ -98,13 +193,13 @@ export default async function AboutPage({ params }: PageProps) {
             </div>
 
             {/* 6 Core Expertise Cards Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   id: "retail",
                   titleKo: "2001년부터의 리테일 경험",
                   titleEn: "Retail Experience Since 2001",
-                  descKo: "미국 시장 현지에서 단일 뷰티숍 운영부터 시작하여 최대 8개 이상의 다중 오프라인 스토어를 직접 소유하고 운영하며 소비자의 구매 흐름을 관리해왔습니다.",
+                  descKo: "미국 시장 현지에서 단일 소매점부터 시작하여 최대 8개 이상의 다중 오프라인 스토어를 직접 소유하고 운영하며 소비자의 구매 흐름을 관리해왔습니다.",
                   descEn: "Began with local storefronts in the U.S. and expanded to operating 8+ retail stores, gaining deep knowledge of retail foot traffic, consumer psychology, and checkout dynamics.",
                   icon: (
                     <svg className="w-5 h-5 text-[#ff2b75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -172,8 +267,14 @@ export default async function AboutPage({ params }: PageProps) {
                     </svg>
                   )
                 }
-              ].map((item) => (
-                <div key={item.id} className="bg-[#0c0c0c] border border-white/5 hover:border-[#ff2b75]/35 p-6 rounded-[20px] shadow-lg transition-all duration-300 hover:-translate-y-1">
+              ].map((item, index) => (
+                <div 
+                  key={item.id} 
+                  style={{ transitionDelay: `${index * 80}ms` }}
+                  className={`bg-[#0c0c0c] border border-white/5 hover:border-[#ff2b75]/35 p-6 rounded-[20px] shadow-lg transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(255,43,117,0.05)] transform ${
+                    letustoVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  }`}
+                >
                   <div className="w-10 h-10 rounded-[12px] bg-white/[0.03] border border-white/10 flex items-center justify-center mb-5">
                     {item.icon}
                   </div>
@@ -187,25 +288,57 @@ export default async function AboutPage({ params }: PageProps) {
               ))}
             </div>
 
-            {/* core statement banner section */}
-            <div className="border-t border-white/10 pt-10 flex flex-col sm:flex-row justify-between items-start gap-4 select-none">
-              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display border border-[#ff2b75]/35 bg-[#ff2b75]/5 px-3 py-1 rounded-[4px]">
-                PRODUCT JUDGMENT
-              </span>
-              <p className="font-display text-[16px] sm:text-[20px] font-black text-white m-0 max-w-3xl leading-snug tracking-tight text-left">
-                {isKo ? (
-                  <>우리는 단순히 <span className="text-[#ff2b75]">“좋은 상품인가?”</span>만 보지 않습니다.<br /> <span className="text-[#00f0ff] font-bold">“이 가격에, 이 매장에서, 이 고객에게 실제로 팔릴 것인가?”</span>를 분석하고 공급합니다.</>
-                ) : (
-                  <>We don’t just ask, <span className="text-[#ff2b75]">"Is this a good product?"</span><br /> We ask, <span className="text-[#00f0ff] font-bold">"Will it actually sell at this price point, in this specific store, to this specific customer?"</span></>
-                )}
-              </p>
-            </div>
-
           </div>
         </section>
 
-        {/* ================= 03. WHY PARTNER WITH US ================= */}
-        <section id="why-partner-with-us" className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left scroll-mt-24">
+        {/* ================= 03. PRODUCT JUDGMENT (Editorial Philosophy Layout) ================= */}
+        <section 
+          id="product-judgment" 
+          ref={judgmentRef} 
+          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-20 sm:py-28 text-center scroll-mt-24"
+        >
+          <div className="flex flex-col items-center max-w-4xl mx-auto gap-8">
+            <span 
+              className={`text-[11px] font-black text-[#ff2b75] tracking-[0.25em] uppercase font-display border border-[#ff2b75]/25 bg-[#ff2b75]/5 px-4 py-1.5 rounded-[4px] select-none transition-all duration-500 transform ${
+                judgmentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              PRODUCT JUDGMENT
+            </span>
+            
+            <div className="flex flex-col gap-6 text-left sm:text-center mt-4">
+              <h3 
+                style={{ transitionDelay: "150ms" }}
+                className={`font-display text-[24px] sm:text-[34px] lg:text-[38px] font-black leading-snug tracking-tight text-white m-0 transition-all duration-700 transform ${
+                  judgmentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                우리는 단순히 <span className="text-[#ff2b75] underline decoration-wavy decoration-[#ff2b75]/30 underline-offset-8">“좋은 상품인가?”</span>만 보지 않습니다.
+              </h3>
+              <h3 
+                style={{ transitionDelay: "300ms" }}
+                className={`font-display text-[26px] sm:text-[38px] lg:text-[44px] font-black leading-snug tracking-tight text-white m-0 transition-all duration-800 transform ${
+                  judgmentVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"
+                }`}
+              >
+                <span className="text-[#00f0ff] font-extrabold drop-shadow-[0_0_15px_rgba(0,240,255,0.18)]">“이 가격에, 이 매장에서, 이 고객에게 실제로 팔릴 것인가?”</span>
+                <br className="hidden sm:inline" />를 분석하고 공급합니다.
+              </h3>
+            </div>
+            
+            <p 
+              style={{ transitionDelay: "450ms" }}
+              className={`text-[13.5px] sm:text-[15px] text-[#9ca3af] leading-relaxed max-w-2xl font-semibold m-0 mt-2 transition-all duration-600 transform ${
+                judgmentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              성공은 매장에 물건을 채워 넣는 시점이 아니라, 소비자의 선택을 받아 재구매가 순환되는 시점에 증명됩니다. K SELECT HUB는 철저한 리테일 수율 관리를 핵심 가치로 삼습니다.
+            </p>
+          </div>
+        </section>
+
+        {/* ================= 04. WHY PARTNER WITH US ================= */}
+        <section id="why-partner-with-us" ref={partnerRef} className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left scroll-mt-24">
           
           <div className="max-w-[800px] flex flex-col gap-3 mb-14">
             <span className="text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display">
@@ -230,7 +363,7 @@ export default async function AboutPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* 6 Capabilities Cards Layout */}
+          {/* 6 Capabilities Cards Layout (Stagger with inside transition delays) */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -275,16 +408,37 @@ export default async function AboutPage({ params }: PageProps) {
                 descKo: "소매점의 판매 속도(Sell-Through)가 곧 당사의 성공 지표입니다. K SELECT HUB는 선반에 물건을 채워 넣는 것을 넘어, 리테일러의 실질 이익과 회전율 안착을 끝까지 돕습니다.",
                 descEn: "We align our revenue directly with your store performance. We win only when products move off your counter and generate cash, fostering long-term, mutually profitable partnerships."
               }
-            ].map((item) => (
-              <div key={item.num} className="flex gap-4.5 text-left items-start group">
-                <span className="font-display font-black text-[22px] text-[#ff2b75] leading-none pt-0.5 group-hover:scale-110 transition-transform">
+            ].map((item, index) => (
+              <div 
+                key={item.num} 
+                style={{ transitionDelay: `${index * 80}ms` }}
+                className={`flex gap-4.5 text-left items-start group transition-all duration-500 transform ${
+                  partnerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+              >
+                <span 
+                  style={{ transitionDelay: `${index * 80 + 100}ms` }}
+                  className={`font-display font-black text-[22px] text-[#ff2b75] leading-none pt-0.5 group-hover:scale-110 transition-all duration-300 transform ${
+                    partnerVisible ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   {item.num}
                 </span>
                 <div className="flex flex-col gap-2">
-                  <h4 className="text-[15.5px] font-black text-white leading-tight m-0">
+                  <h4 
+                    style={{ transitionDelay: `${index * 80 + 150}ms` }}
+                    className={`text-[15.5px] font-black text-white leading-tight m-0 transition-all duration-300 transform ${
+                      partnerVisible ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
                     {isKo ? item.titleKo : item.titleEn}
                   </h4>
-                  <p className="text-[12.5px] sm:text-[13px] text-[#9ca3af] leading-relaxed font-semibold m-0">
+                  <p 
+                    style={{ transitionDelay: `${index * 80 + 200}ms` }}
+                    className={`text-[12.5px] sm:text-[13px] text-[#9ca3af] leading-relaxed font-semibold m-0 transition-all duration-300 transform ${
+                      partnerVisible ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
                     {isKo ? item.descKo : item.descEn}
                   </p>
                 </div>
@@ -294,8 +448,8 @@ export default async function AboutPage({ params }: PageProps) {
 
         </section>
 
-        {/* ================= 04. BUILT TO EXECUTE ================= */}
-        <section id="built-to-execute" className="bg-[#121214] border-y border-[#222]">
+        {/* ================= 05. BY THE NUMBERS (Stats count-up) ================= */}
+        <section id="built-to-execute" ref={numbersRef} className="bg-[#121214] border-y border-[#222]">
           <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[80px] sm:py-[100px] text-center">
             
             <div className="max-w-[600px] mx-auto mb-12 flex flex-col items-center gap-2">
@@ -307,19 +461,26 @@ export default async function AboutPage({ params }: PageProps) {
               </h2>
             </div>
 
-            {/* 6 Grid Metrics */}
+            {/* 6 Grid Metrics with dynamic Count-Up */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-[1200px] mx-auto">
               {[
-                { val: "20+ Years", labelKo: "리테일 & 이커머스 운영", labelEn: "Retail & E-commerce" },
-                { val: "30+", labelKo: "런칭 완료 화장품 라인", labelEn: "Successful Launches" },
-                { val: "200+", labelKo: "활성 SKU 재고 품목수", labelEn: "Active SKUs Managed" },
-                { val: "3 Bases", labelKo: "미국 · 한국 · 중국 거점", labelEn: "Operating Bases" },
-                { val: "85%", labelKo: "초기 런칭 매장 안착률", labelEn: "Launch Success Rate" },
-                { val: "1 System", labelKo: "자체 물류/MD 분석 LENS", labelEn: "Proprietary LENS System" }
+                { target: 20, val: "20+ Years", suffix: "+ Years", labelKo: "리테일 & 이커머스 운영", labelEn: "Retail & E-commerce" },
+                { target: 30, val: "30+", suffix: "+", labelKo: "런칭 완료 화장품 라인", labelEn: "Successful Launches" },
+                { target: 200, val: "200+", suffix: "+", labelKo: "활성 SKU 재고 품목수", labelEn: "Active SKUs Managed" },
+                { target: 3, val: "3 Bases", suffix: " Bases", labelKo: "미국 · 한국 · 중국 거점", labelEn: "Operating Bases" },
+                { target: 85, val: "85%", suffix: "%", labelKo: "초기 런칭 매장 안착률", labelEn: "Launch Success Rate" },
+                { target: 1, val: "1 System", suffix: " System", labelKo: "자체 물류/MD 분석 LENS", labelEn: "Proprietary LENS System" }
               ].map((stat, idx) => (
-                <div key={idx} className="bg-[#0c0c0c] border border-white/5 rounded-[20px] p-6 flex flex-col justify-center items-center shadow-md">
+                <div 
+                  key={idx} 
+                  style={{ transitionDelay: `${idx * 80}ms` }}
+                  className={`bg-[#0c0c0c] border border-white/5 rounded-[20px] p-6 flex flex-col justify-center items-center shadow-md hover:border-[#00F0FF]/30 transition-all duration-300 transform ${
+                    numbersVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  }`}
+                >
                   <span className="font-display text-2xl sm:text-3xl font-black text-[#00F0FF] leading-none mb-2">
-                    {stat.val}
+                    <CountUp target={stat.target} startTrigger={numbersVisible} />
+                    {stat.suffix}
                   </span>
                   <span className="text-[11px] sm:text-[11.5px] text-[#9ca3af] font-bold text-center leading-tight">
                     {isKo ? stat.labelKo : stat.labelEn}
@@ -331,8 +492,8 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* ================= 05. OUR NETWORK ================= */}
-        <section id="our-network" className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left">
+        {/* ================= 06. OUR NETWORK (Country watermark backgrounds) ================= */}
+        <section id="our-network" ref={networkRef} className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left scroll-mt-24">
           
           <div className="max-w-[800px] flex flex-col gap-3 mb-16">
             <span className="text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display">
@@ -350,11 +511,12 @@ export default async function AboutPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* 3 Node Cards Grid */}
+          {/* 3 Node Cards Grid with watermark typography in background */}
           <div className="grid lg:grid-cols-3 gap-8">
             {[
               {
                 title: "UNITED STATES",
+                watermark: "USA",
                 subKo: "현지 창고 및 리테일 오퍼레이션",
                 subEn: "U.S. Logistics & Operations Hub",
                 descKo: "뉴저지 본사를 거점으로 로컬 뷰티 물류창고(3PL) 및 유통 허브를 직접 제어하며, 미국 동부·서부 지역 매장으로 큐레이션된 제품과 조명 집기를 직접 분배 배송합니다.",
@@ -363,6 +525,7 @@ export default async function AboutPage({ params }: PageProps) {
               },
               {
                 title: "SOUTH KOREA",
+                watermark: "KOR",
                 subKo: "브랜드 발굴 및 수출 컴플라이언스",
                 subEn: "Brand Sourcing & Compliance Hub",
                 descKo: "서울 오피스에서 성분 안전성 및 마진율이 검증된 에센셜 한국 브랜드 제품을 다이렉트 소싱하고, 화장품 규정(MoCRA/FDA) 서류화 프로세스를 체계적으로 수행합니다.",
@@ -371,15 +534,27 @@ export default async function AboutPage({ params }: PageProps) {
               },
               {
                 title: "CHINA",
-                subKo: "집기 원자재 조립 및 원가 최적화",
+                watermark: "CHN",
+                subKo: "집기 원가 최적화 및 조립",
                 subEn: "Modular Fixture & Components Supply",
                 descKo: "LED 모듈러 디스플레이 매대 프레임, 하드웨어 집기 부품의 정밀 제조를 총괄합니다. 금형 제작 및 원부자재 공정을 철저히 감독하여 공급 단가를 합리적으로 경감합니다.",
                 descEn: "Supervising raw material purchasing and precise production of our LED showcases. Direct oversight of hardware tooling enables cost optimization passed directly onto our partners.",
                 tags: ["Fixture Manufacturing", "Material Procurement", "Cost Efficiency"]
               }
             ].map((node, idx) => (
-              <div key={idx} className="bg-[#121214] border border-white/5 p-8 rounded-[24px] flex flex-col justify-between shadow-xl relative hover:border-white/10 transition-colors">
-                <div className="flex flex-col gap-4">
+              <div 
+                key={idx} 
+                style={{ transitionDelay: `${idx * 150}ms` }}
+                className={`bg-[#121214] border border-white/5 p-8 rounded-[24px] flex flex-col justify-between shadow-xl relative overflow-hidden transition-all duration-500 hover:border-[#ff2b75]/25 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(255,43,117,0.06)] transform ${
+                  networkVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+              >
+                {/* Subtle map watermark element (3-6% opacity) */}
+                <div className="absolute right-[-10px] top-[-10px] text-[84px] font-black text-white/[0.035] leading-none select-none font-display pointer-events-none">
+                  {node.watermark}
+                </div>
+
+                <div className="flex flex-col gap-4 z-10">
                   <div>
                     <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display block mb-1">OPERATING BASE</span>
                     <h3 className="text-[20px] font-black text-white tracking-tight leading-none m-0">
@@ -394,7 +569,12 @@ export default async function AboutPage({ params }: PageProps) {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 mt-8 border-t border-white/5 pt-4">
+                <div 
+                  style={{ transitionDelay: `${idx * 150 + 200}ms` }}
+                  className={`flex flex-wrap gap-1.5 mt-8 border-t border-white/5 pt-4 z-10 transition-opacity duration-500 ${
+                    networkVisible ? "opacity-100" : "opacity-0"
+                  }`}
+                >
                   {node.tags.map((tag, tagIdx) => (
                     <span key={tagIdx} className="text-[10px] text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/15 px-2.5 py-0.5 rounded-[4px] font-bold">
                       {tag}
@@ -407,8 +587,8 @@ export default async function AboutPage({ params }: PageProps) {
 
         </section>
 
-        {/* ================= 06. OUR TEAM ================= */}
-        <section id="our-team" className="bg-[#121214] border-y border-[#222]">
+        {/* ================= 07. OUR TEAM ================= */}
+        <section id="our-team" ref={teamRef} className="bg-[#121214] border-y border-[#222]">
           <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left">
             
             <div className="max-w-[800px] flex flex-col gap-3 mb-14">
@@ -420,58 +600,100 @@ export default async function AboutPage({ params }: PageProps) {
               </h2>
             </div>
 
-            {/* 4 Team Member Profiles */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* 5 Team Member Profiles */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {[
                 {
                   name: "Chae Hahm",
                   role: "Founder & CEO",
+                  isPartner: false,
                   img: "/images/about/chae_hahm.png",
-                  descKo: "미국 뷰티 서플라이 매장을 포함하여 20년 이상 리테일 스토어 직접 운영. 수입 규제 준수, 미국 국내 물류 및 Letusto 자금 조율 총괄.",
-                  descEn: "20+ years of U.S. storefront operations. Oversees global compliance, customs clearance, U.S. warehousing, and Letusto's strategic growth."
+                  descKo: "미국에서 20년 이상 Retail Store와 Online Store를 직접 운영해온 경험을 기반으로 Retail, E-commerce, Product, Logistics 및 Letusto의 전체 사업 전략을 총괄.",
+                  descEn: "20+ years of direct U.S. retail and e-commerce storefront operations. Oversees global logistics, product curation, and Letusto's strategic capital deployment."
                 },
                 {
                   name: "John Back",
                   role: "Marketing",
+                  isPartner: false,
                   img: "/images/about/john_back.png",
-                  descKo: "디지털 브랜드 마케팅, 소비자 행동 분석 및 브랜드 런칭 기획 담당.",
-                  descEn: "Digital brand marketing, consumer behavioral analytics, and retail customer acquisition strategies."
+                  descKo: "15년 이상의 Branding / Digital Marketing / E-commerce 경험을 바탕으로 브랜드 전략, 소비자 마케팅, 디지털 성장 및 시장 포지셔닝을 담당.",
+                  descEn: "15+ years of digital marketing, branding, and marketplace strategy. Directs consumer positioning, digital growth campaigns, and regional retail expansion."
                 },
                 {
                   name: "Sean Hahm",
                   role: "Korea Sourcing",
+                  isPartner: false,
                   img: "/images/about/sean_hahm.png",
-                  descKo: "한국 뷰티 브랜드 제휴 총괄. 화장품 제조 유통 기획 및 MoCRA(화장품 규제법) 등 한국 기업의 통관 준비 및 가이딩 책임.",
-                  descEn: "Managing South Korea brand partnerships, manufacturer relations, and MoCRA compliance sourcing."
+                  descKo: "한국 K-Beauty 브랜드 및 제조사 소싱, 제품 개발 coordination, 미국 시장 진출 및 compliance 준비를 담당.",
+                  descEn: "Manages K-Beauty brand relations and cosmetic manufacturer compliance (MoCRA/FDA registration) in South Korea, coordinating initial export supply setups."
                 },
                 {
                   name: "Chae Yim",
                   role: "Operations",
+                  isPartner: false,
                   img: "/images/about/chae_yim.png",
-                  descKo: "중국 디스플레이 프레임 원부자재 생산 감리 및 글로벌 통관 조율. U.S. 창고 재고 관리와 3PL 운영 총괄.",
-                  descEn: "Supervises modular fixture manufacturing in China and coordinates intercontinental freight flows. Manages U.S. local warehouse operations and 3PL dispatch."
+                  descKo: "Multi-Chain Store General Management 경험, 물류 / 통관 / 미국 내 창고 운영 / 재고관리 / 3PL 운영 총괄.",
+                  descEn: "Background in multi-chain store general management. Coordinates cross-border clearance, U.S. warehouse operations, inventory allocation, and local 3PL dispatch."
+                },
+                {
+                  name: "Claire Im",
+                  role: "CURATION DIRECTOR",
+                  subRole: "NHI PARTNER",
+                  isPartner: true,
+                  initials: "CI",
+                  descKo: "K-Beauty 제품 평가, 카테고리 검토, Assortment Curation 및 큐레이션 전략 총괄. (NHI Partner)",
+                  descEn: "Directs K-Beauty evaluation, assortment curation, and seasonal brand mapping. Operates as an external NHI consulting advisor."
                 }
               ].map((member, idx) => (
-                <div key={idx} className="bg-[#0c0c0c] border border-white/5 rounded-[20px] p-6 shadow-lg flex flex-col items-center text-center">
+                <div 
+                  key={idx} 
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                  className={`bg-[#0c0c0c] border border-white/5 rounded-[20px] p-5 shadow-lg flex flex-col items-center text-center transition-all duration-500 hover:border-[#ff2b75]/25 hover:-translate-y-1.5 transform ${
+                    teamVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  }`}
+                >
                   
-                  {/* Portrait photo frame */}
-                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border border-white/10 mb-5 bg-[#121214]">
-                    <Image
-                      src={member.img}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 112px, 128px"
-                    />
-                  </div>
+                  {/* Portrait photo frame / Initials placeholder */}
+                  {member.isPartner ? (
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-dashed border-white/20 mb-5 bg-[#121214] flex items-center justify-center select-none">
+                      <span className="font-display font-black text-2xl text-[#ff2b75]/80 tracking-widest">{member.initials}</span>
+                    </div>
+                  ) : (
+                    <div 
+                      style={{ transitionDelay: `${idx * 100 + 150}ms` }}
+                      className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border border-white/10 mb-5 bg-[#121214] transition-opacity duration-700 ${
+                        teamVisible ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <Image
+                        src={member.img || ""}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 96px, 112px"
+                      />
+                    </div>
+                  )}
 
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display block mb-1">
-                    {member.role}
-                  </span>
-                  <h4 className="text-[16px] font-black text-white leading-none m-0 mb-3 select-none">
+                  {member.isPartner ? (
+                    <div className="flex flex-col items-center gap-0.5 mb-1.5">
+                      <span className="text-[9px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
+                        {member.role}
+                      </span>
+                      <span className="text-[8.5px] text-[#00f0ff] font-extrabold tracking-wider font-display border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[3px]">
+                        {member.subRole}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-[9px] text-[#ff2b75] font-black tracking-widest uppercase font-display block mb-1">
+                      {member.role}
+                    </span>
+                  )}
+                  
+                  <h4 className="text-[15px] font-black text-white leading-none m-0 mb-3 select-none">
                     {member.name}
                   </h4>
-                  <p className="text-[12.5px] text-[#9ca3af] leading-relaxed font-semibold m-0">
+                  <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold m-0">
                     {isKo ? member.descKo : member.descEn}
                   </p>
 
@@ -482,14 +704,18 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* ================= 07. RECOGNIZED PARTNER ================= */}
-        <section id="recognized-partner" className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left">
+        {/* ================= 08. RECOGNIZED PARTNER ================= */}
+        <section id="recognized-partner" ref={recognizedRef} className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-[100px] sm:py-[120px] text-left scroll-mt-24">
           
           <div className="grid lg:grid-cols-[0.4fr_0.6fr] gap-12 lg:gap-16 items-center max-w-[1100px] mx-auto">
             
             {/* Left Column: Cert Badge */}
             <div className="flex justify-center relative">
-              <div className="relative w-[340px] max-w-full aspect-[487/320] rounded-[16px] overflow-hidden border border-white/15 shadow-2xl bg-[#121214] p-2 flex items-center justify-center animate-pulse">
+              <div 
+                className={`relative w-[340px] max-w-full aspect-[487/320] rounded-[16px] overflow-hidden border border-white/15 shadow-2xl bg-[#121214] p-2 flex items-center justify-center transition-all duration-700 transform ${
+                  recognizedVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+              >
                 <Image
                   src="/images/about/kosme_cert_2026.png"
                   alt="KOSME Global Business Partner 2026 Certificate"
@@ -502,13 +728,27 @@ export default async function AboutPage({ params }: PageProps) {
 
             {/* Right Column: Statement */}
             <div className="flex flex-col gap-4">
-              <span className="text-xs sm:text-[13px] font-black text-[#00f0ff] tracking-[0.2em] uppercase font-display">
+              <span 
+                className={`text-xs sm:text-[13px] font-black text-[#00f0ff] tracking-[0.2em] uppercase font-display transition-all duration-500 transform ${
+                  recognizedVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
                 RECOGNIZED PARTNER
               </span>
-              <h2 className="font-display text-[26px] sm:text-[34px] font-bold leading-tight text-white tracking-tight m-0 select-none">
+              <h2 
+                style={{ transitionDelay: "100ms" }}
+                className={`font-display text-[26px] sm:text-[34px] font-bold leading-tight text-white tracking-tight m-0 select-none transition-all duration-500 transform ${
+                  recognizedVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
                 {isKo ? "공식적으로 인정받은 글로벌 비즈니스 파트너" : "A Trusted Partner Recognized by KOSME."}
               </h2>
-              <div className="flex flex-col gap-3 text-[13.5px] sm:text-[14.5px] text-[#9ca3af] leading-relaxed font-medium">
+              <div 
+                style={{ transitionDelay: "200ms" }}
+                className={`flex flex-col gap-3 text-[13.5px] sm:text-[14.5px] text-[#9ca3af] leading-relaxed font-medium transition-all duration-500 transform ${
+                  recognizedVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
                 <p className="m-0">
                   {isKo ? (
                     "Letusto Inc.는 대한민국 중소벤처기업진흥공단(KOSME)이 공인한 '2026 Global Business Partner'입니다. 이는 한국 중소기업과의 무역 안전성, 미국 현지 수출 리스크 관리 능력, 엄격한 규정 준수 이행 역량 및 신뢰할 수 있는 물류 인프라 실행 역량을 공공기관으로부터 공식적으로 공인받았음을 증명합니다."
@@ -529,28 +769,49 @@ export default async function AboutPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* ================= 08. FINAL CTA ================= */}
-        <section id="about-cta" className="bg-[#121214] border-t border-[#222] py-20 text-center">
-          <div className="max-w-[800px] mx-auto px-6 sm:px-12 flex flex-col items-center gap-6">
+        {/* ================= 09. FINAL CTA (Word breaks resolved with keep-all) ================= */}
+        <section id="about-cta" ref={ctaRef} className="bg-[#121214] border-t border-[#222] py-24 text-center">
+          <div className="max-w-[900px] mx-auto px-6 sm:px-12 flex flex-col items-center gap-6">
             
-            <span className="text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display select-none">
+            <span 
+              className={`text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display select-none transition-all duration-500 transform ${
+                ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
               GET STARTED WITH K SELECT HUB
             </span>
             
-            <h2 className="font-display text-[26px] sm:text-[38px] font-black leading-tight text-white tracking-tight m-0 max-w-2xl select-none">
-              {isKo ? (
-                <>우리는 또 하나의 공급사가 되려는 것이 아닙니다.<br /> 당신의 <span className="text-[#ff2b75]">K-Beauty 성장 파트너</span>가 되려는 것입니다.</>
-              ) : (
-                <>We Don’t Want to Be Another Supplier.<br /> We Want to Be Your <span className="text-[#ff2b75]">K-Beauty Growth Partner</span>.</>
-              )}
-            </h2>
+            <div className="flex flex-col gap-4 w-full">
+              <h2 
+                style={{ transitionDelay: "150ms" }}
+                className={`font-display text-[25px] sm:text-[34px] lg:text-[36px] font-black leading-snug text-white tracking-tight m-0 select-none whitespace-normal keep-all transition-all duration-700 transform ${
+                  ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                {isKo ? (
+                  <>우리는 또 하나의 공급사가 되려는 것이 아닙니다.<br className="hidden md:inline" /> 당신의 <span className="text-[#ff2b75] font-extrabold">K-Beauty 성장 파트너</span>가 되려는 것입니다.</>
+                ) : (
+                  <>We Don’t Want to Be Another Supplier.<br className="hidden md:inline" /> We Want to Be Your <span className="text-[#ff2b75] font-extrabold">K-Beauty Growth Partner</span>.</>
+                )}
+              </h2>
+            </div>
             
-            <p className="text-[13px] sm:text-[13.5px] text-[#ff2b75] font-black tracking-widest uppercase m-0 leading-none select-none">
+            <p 
+              style={{ transitionDelay: "250ms" }}
+              className={`text-[12px] sm:text-[13px] text-[#ff2b75] font-black tracking-[0.18em] uppercase m-0 leading-normal select-none keep-all max-w-[650px] transition-all duration-600 transform ${
+                ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
               We Don’t Want to Be Another Supplier. We Want to Be Your K-Beauty Growth Partner.
             </p>
 
             {/* Supporting Bullet points */}
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-2 text-[12px] font-bold text-white/80 select-none">
+            <div 
+              style={{ transitionDelay: "350ms" }}
+              className={`flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-2 text-[12px] font-bold text-white/80 select-none transition-all duration-500 transform ${
+                ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
               {["Better Products", "Better Assortment", "Better Inventory Decisions", "Better Sell-Through"].map((point, idx) => (
                 <span key={idx} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
@@ -559,17 +820,22 @@ export default async function AboutPage({ params }: PageProps) {
               ))}
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+            {/* Action Buttons with high-fidelity click feedback */}
+            <div 
+              style={{ transitionDelay: "450ms" }}
+              className={`flex flex-wrap items-center justify-center gap-4 mt-8 transition-all duration-500 transform ${
+                ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
               <Link
                 href={`/${locale}#launch-readiness`}
-                className="h-14 px-9 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white font-extrabold text-[14.5px] tracking-wide inline-flex items-center justify-center transition-all duration-300 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] hover:-translate-y-0.5"
+                className="h-14 px-9 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] active:scale-[0.985] text-white font-extrabold text-[14.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#ff2b75] focus:ring-offset-2 focus:ring-offset-[#121214]"
               >
                 {isKo ? "파트너 상담 신청 →" : "Request Partner Consultation →"}
               </Link>
               <Link
                 href={`/${locale}#solution`}
-                className="h-14 px-9 rounded-[8px] border border-[#22d3ee]/35 text-[#22d3ee] hover:bg-[#22d3ee] hover:text-[#0c0c0c] font-bold text-[14.5px] tracking-wide inline-flex items-center justify-center transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:-translate-y-0.5"
+                className="h-14 px-9 rounded-[8px] border border-[#22d3ee]/35 text-[#22d3ee] hover:bg-[#22d3ee] hover:text-[#0c0c0c] active:scale-[0.985] font-bold text-[14.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200 hover:shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#121214]"
               >
                 {isKo ? "K-Beauty Growth Program 보기 →" : "View Growth Program →"}
               </Link>

@@ -101,7 +101,7 @@ export default function Header({ locale }: HeaderProps) {
 
             {/* 03. ABOUT */}
             <div className="relative group/nav py-6">
-              <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
+              <Link href={`/${locale}/about`} className="flex items-center gap-1 focus:outline-none cursor-pointer">
                 <div className="relative h-5 w-[55px] flex items-center justify-start select-none">
                   <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
                     ABOUT
@@ -115,7 +115,7 @@ export default function Header({ locale }: HeaderProps) {
                 <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </Link>
               
               <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
                 {[
