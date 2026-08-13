@@ -138,42 +138,19 @@ export default function Header({ locale }: HeaderProps) {
               </div>
             </div>
 
-            {/* 04. INSIGHTS */}
-            <div className="relative group/nav py-6">
-              <button className="flex items-center gap-1 focus:outline-none cursor-pointer">
-                <div className="relative h-5 w-[75px] flex items-center justify-start select-none">
-                  <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/nav:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
-                    INSIGHTS
+            {/* 04. INSIGHTS (Independent Main Menu) */}
+            <Link href="#" className="flex items-center cursor-pointer py-6" onClick={(e) => e.preventDefault()}>
+              <div className="relative h-5 w-[75px] flex items-center justify-start select-none group/insights">
+                <span className={`absolute left-0 text-[12.5px] tracking-wider font-extrabold text-white/80 ${locale === "ko" ? "group-hover/insights:opacity-0" : ""} transition-opacity duration-200 pointer-events-none whitespace-nowrap`}>
+                  INSIGHTS
+                </span>
+                {locale === "ko" && (
+                  <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/insights:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                    인사이트
                   </span>
-                  {locale === "ko" && (
-                    <span className="absolute left-0 text-[12.5px] tracking-wider font-extrabold text-[#ff2b75] opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      인사이트
-                    </span>
-                  )}
-                </div>
-                <svg className="w-3.5 h-3.5 text-white/30 group-hover/nav:text-[#ff2b75] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
-                {[
-                  { label: "Product Education", href: `/${locale}#launch-readiness` },
-                  { label: "FAQ", href: `/${locale}#launch-readiness` },
-                  { label: "Partner Login", href: "https://portal.kselecthub.com", isExternal: true }
-                ].map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target={item.isExternal ? "_blank" : undefined}
-                    rel={item.isExternal ? "noopener noreferrer" : undefined}
-                    className="flex px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left text-[12px] font-extrabold text-white hover:text-[#ff2b75]"
-                  >
-                    {item.label}
-                  </a>
-                ))}
+                )}
               </div>
-            </div>
+            </Link>
 
           </nav>
         </div>
