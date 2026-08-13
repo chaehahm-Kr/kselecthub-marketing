@@ -14,6 +14,7 @@ import CurationSection from "./CurationSection";
 import DisplaySection from "./DisplaySection";
 import PartnerModal from "./PartnerModal";
 import ReadinessSection from "./ReadinessSection";
+import FaqSection from "./FaqSection";
 import { assetConfig } from "../assets.config";
 
 interface PageProps {
@@ -836,40 +837,7 @@ export default async function Home({ params }: PageProps) {
         <ReadinessSection />
 
         {/* FAQ Section */}
-        <section id="faq" className="bg-[#0c0c0c] border-y border-[#2a2a2a] py-[120px] text-left">
-          <div className="max-w-[800px] mx-auto px-[32px] sm:px-[64px]">
-            <div className="flex flex-col gap-2 mb-10 text-center sm:text-left">
-              <span className="text-[11.5px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
-                FAQ
-              </span>
-              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-tight text-white tracking-tight">
-                자주 묻는 질문
-              </h2>
-              <p className="text-[13.5px] text-[#9ca3af] leading-relaxed font-medium">
-                K SELECT HUB 프로그램 도입 및 운영에 관한 주요 궁금증을 해결해 드립니다.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {[
-                { q: "K SELECT HUB 프로그램에 참여하려면 비용이 드나요?", a: "기본적인 LED 디스플레이 집기 렌탈은 100% 무상으로 제공되며, 초도 상품 구매 비용 외에 추가 가입비나 로열티 등은 전혀 없습니다." },
-                { q: "매장 크기에 맞는 디스플레이 규격은 어떻게 알 수 있나요?", a: "성장 시뮬레이터를 통해 매장 크기(sq.ft.)와 형태를 입력하시면 자동으로 4FT, 8FT, 12FT 규격 중 가장 최적화된 모듈을 매칭해 드립니다." },
-                { q: "90일 상품 교환 크레딧(Exchange Credit)은 어떻게 진행되나요?", a: "런칭 후 첫 90일간의 실제 소매 판매 데이터를 기준으로, 매장 고객 성향에 맞지 않는 부진 SKU(Sell-through 50% 미만)를 인기 상품군으로 상호 교환하여 마진을 최적화해 드립니다." },
-                { q: "파트너 신청을 완료하면 바로 계약이 진행되나요?", a: "아닙니다. 파트너 신청 완료 후, 매장 및 상권 정밀 분석(Store Review)과 매대 규격 매칭(Program Match) 단계를 거쳐 충분한 조율 끝에 본 계약이 진행됩니다." }
-              ].map((item, idx) => (
-                <div key={idx} className="border border-white/10 bg-white/[0.02] rounded-[12px] p-5 flex flex-col gap-2">
-                  <h4 className="text-[14.5px] font-black text-white flex items-start gap-2">
-                    <span className="text-[#ff2b75]">Q.</span>
-                    {item.q}
-                  </h4>
-                  <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium pl-5">
-                    {item.a}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FaqSection locale={locale} />
 
         {/* 12. 08 Partnership CTA section - Redesigned closing partnership philosophy */}
         <section className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] pb-[140px]">
