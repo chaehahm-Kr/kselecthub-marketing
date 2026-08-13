@@ -186,14 +186,14 @@ interface FaqSectionProps {
 export default function FaqSection({ locale }: FaqSectionProps) {
   const isKo = locale === "ko";
   const [activeCategory, setActiveCategory] = useState<string>("program-partnership");
-  const [openStates, setOpenStates] = useState<Record<string, boolean>>({ "0": true });
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [isFading, setIsFading] = useState<boolean>(false);
 
   // Reset accordion state to open the first item whenever category switches
   useEffect(() => {
     setIsFading(true);
     const timer = setTimeout(() => {
-      setOpenStates({ "0": true });
+      setOpenIndex(0);
       setIsFading(false);
     }, 150); // Matches transition duration
     return () => clearTimeout(timer);
@@ -202,10 +202,7 @@ export default function FaqSection({ locale }: FaqSectionProps) {
   const activeData = FAQ_DATA.find((c) => c.id === activeCategory) || FAQ_DATA[0];
 
   const toggleAccordion = (index: number) => {
-    setOpenStates((prev) => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    setOpenIndex((prev) => (prev === index ? null : index));
   };
 
   return (
@@ -259,7 +256,7 @@ export default function FaqSection({ locale }: FaqSectionProps) {
               {isKo ? activeData.titleKo : activeData.titleEn}
             </h3>
             {activeData.questions.map((item, idx) => {
-              const isOpen = !!openStates[idx];
+              const isOpen = openIndex === idx;
               return (
                 <div key={idx} className="border border-white/5 bg-[#121214] rounded-[12px] overflow-hidden transition-all duration-300">
                   <button
@@ -335,7 +332,7 @@ export default function FaqSection({ locale }: FaqSectionProps) {
 
             {/* Accordion List */}
             {activeData.questions.map((item, idx) => {
-              const isOpen = !!openStates[idx];
+              const isOpen = openIndex === idx;
               return (
                 <div 
                   key={idx} 
