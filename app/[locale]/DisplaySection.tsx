@@ -70,7 +70,7 @@ export default function DisplaySection() {
         {/* ================= HEADER SECTION ================= */}
         <div className="max-w-[760px] flex flex-col gap-3">
           <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
-            05 — K-BEAUTY CATEGORY DISPLAY
+            03B — K-BEAUTY CATEGORY DISPLAY
           </span>
           <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.2] text-white tracking-tight">
             매장 안에, 하나의 완성된 K-Beauty 카테고리를 만듭니다.<br />

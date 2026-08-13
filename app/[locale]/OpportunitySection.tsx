@@ -98,7 +98,7 @@ export default function OpportunitySection() {
           }`}
         >
           <span className="text-xs font-semibold text-accent tracking-[0.04em]">
-            01 — WHY NOW?
+            01 — WHY K-BEAUTY NOW
           </span>
           <h2 
             className={`font-display text-3xl sm:text-4xl lg:text-[42px] font-bold leading-[1.2] tracking-tight text-white mb-4 select-none transition-all duration-700 ease-out transform ${

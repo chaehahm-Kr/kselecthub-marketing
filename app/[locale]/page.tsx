@@ -205,7 +205,7 @@ export default async function Home({ params }: PageProps) {
             {/* Left Content Column */}
             <div>
               <span className="text-xs font-black text-accent tracking-[0.08em] uppercase">
-                06 — RISK REDUCTION
+                03C — RISK REDUCTION
               </span>
               <div className="flex flex-wrap items-center gap-3 mt-4 mb-5">
                 <h2 className="margin-0 font-display text-3xl sm:text-[38px] font-bold leading-tight text-white tracking-tight">
@@ -316,7 +316,7 @@ export default async function Home({ params }: PageProps) {
               <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-[#00F0FF]/30 bg-[#00F0FF]/5 mb-7 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
                 <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
                 <span className="text-[11.5px] tracking-[0.18em] font-black text-[#00F0FF] uppercase font-display select-none">
-                  LAUNCH PARTNER ONLY · Early Partner Exclusive
+                  04 — LAUNCH PARTNER ONLY · Early Partner Exclusive
                 </span>
               </div>
               <div className="font-display text-[26px] sm:text-[34px] md:text-[40px] lg:text-[46px] xl:text-[48px] font-black text-[#00F0FF] tracking-tight mb-3 uppercase italic leading-none select-none">
@@ -545,7 +545,7 @@ export default async function Home({ params }: PageProps) {
             {/* Left Narrative Column */}
             <div className="flex flex-col gap-2">
               <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
-                07 — GROWTH SIMULATOR
+                GROWTH SIMULATOR
               </span>
               <h2 className="font-display text-3xl sm:text-[36px] font-bold leading-[1.25] text-white my-2 tracking-tight">
                 {locale === "ko" ? (
@@ -565,7 +565,7 @@ export default async function Home({ params }: PageProps) {
               <div className="flex flex-col sm:flex-row gap-4 mt-6">
                 <Link
                   href={`/${locale}/simulator`}
-                  className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
+                  className="h-14 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#22d3ee]"
                 >
                   {locale === "ko" ? "성장 시뮬레이션 시작하기 →" : "Start Growth Simulation →"}
                 </Link>
@@ -637,7 +637,7 @@ export default async function Home({ params }: PageProps) {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
                 <span className="text-[10px] tracking-[0.12em] font-black text-white/70 uppercase font-display">
-                  HOW IT WORKS
+                  05 — HOW IT WORKS
                 </span>
               </div>
               <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.22] text-white text-center tracking-tight m-0">
@@ -835,13 +835,49 @@ export default async function Home({ params }: PageProps) {
         {/* Readiness Section Insertion */}
         <ReadinessSection />
 
+        {/* FAQ Section */}
+        <section id="faq" className="bg-[#0c0c0c] border-y border-[#2a2a2a] py-[120px] text-left">
+          <div className="max-w-[800px] mx-auto px-[32px] sm:px-[64px]">
+            <div className="flex flex-col gap-2 mb-10 text-center sm:text-left">
+              <span className="text-[11.5px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
+                FAQ
+              </span>
+              <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-tight text-white tracking-tight">
+                자주 묻는 질문
+              </h2>
+              <p className="text-[13.5px] text-[#9ca3af] leading-relaxed font-medium">
+                K SELECT HUB 프로그램 도입 및 운영에 관한 주요 궁금증을 해결해 드립니다.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {[
+                { q: "K SELECT HUB 프로그램에 참여하려면 비용이 드나요?", a: "기본적인 LED 디스플레이 집기 렌탈은 100% 무상으로 제공되며, 초도 상품 구매 비용 외에 추가 가입비나 로열티 등은 전혀 없습니다." },
+                { q: "매장 크기에 맞는 디스플레이 규격은 어떻게 알 수 있나요?", a: "성장 시뮬레이터를 통해 매장 크기(sq.ft.)와 형태를 입력하시면 자동으로 4FT, 8FT, 12FT 규격 중 가장 최적화된 모듈을 매칭해 드립니다." },
+                { q: "90일 상품 교환 크레딧(Exchange Credit)은 어떻게 진행되나요?", a: "런칭 후 첫 90일간의 실제 소매 판매 데이터를 기준으로, 매장 고객 성향에 맞지 않는 부진 SKU(Sell-through 50% 미만)를 인기 상품군으로 상호 교환하여 마진을 최적화해 드립니다." },
+                { q: "파트너 신청을 완료하면 바로 계약이 진행되나요?", a: "아닙니다. 파트너 신청 완료 후, 매장 및 상권 정밀 분석(Store Review)과 매대 규격 매칭(Program Match) 단계를 거쳐 충분한 조율 끝에 본 계약이 진행됩니다." }
+              ].map((item, idx) => (
+                <div key={idx} className="border border-white/10 bg-white/[0.02] rounded-[12px] p-5 flex flex-col gap-2">
+                  <h4 className="text-[14.5px] font-black text-white flex items-start gap-2">
+                    <span className="text-[#ff2b75]">Q.</span>
+                    {item.q}
+                  </h4>
+                  <p className="text-[13px] text-[#9ca3af] leading-relaxed font-medium pl-5">
+                    {item.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* 12. 08 Partnership CTA section - Redesigned closing partnership philosophy */}
         <section className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] pb-[140px]">
           <div className="bg-[#0c0c0c] border border-white/10 rounded-[28px] overflow-hidden grid lg:grid-cols-[1.15fr_0.85fr] items-stretch text-left shadow-2xl relative group/card transition-all duration-300">
             
             <div className="p-8 sm:p-14 lg:p-16 flex flex-col justify-center relative z-10">
               <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.15em] uppercase font-display block mb-5">
-                08 — PARTNERSHIP
+                PARTNERSHIP
               </span>
               <h2 className="font-display text-[28px] sm:text-[38px] lg:text-[42px] font-black leading-[1.18] text-white tracking-tight m-0 select-none">
                 리테일러의 성공이<br />

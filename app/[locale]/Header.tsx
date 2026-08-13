@@ -60,20 +60,21 @@ export default function Header({ locale }: HeaderProps) {
                 {[
                   { label: "01. Why K-Beauty Now", sub: "왜 지금 K-Beauty인가", href: `/${locale}#opportunity` },
                   { label: "02. Retailer Challenges", sub: "리테일러가 겪는 현실적인 문제", href: `/${locale}#problems-section` },
-                  { label: "03. K Select Solution", sub: "5가지 통합 성장 솔루션", href: `/${locale}#solution` },
-                  { label: "04. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: `/${locale}#products` },
-                  { label: "05. K-Beauty Category Display", sub: "4FT · 8FT · 12FT 전문 디스플레이", href: `/${locale}#display` },
-                  { label: "06. 90-Day Exchange Credit", sub: "초기 재고 리스크 완화", href: `/${locale}#exchange-credit` },
-                  { label: "07. Launch Partner Benefits", sub: "초기 런칭 파트너 전용 혜택", href: `/${locale}#benefits` },
-                  { label: "08. How It Works", sub: "신청부터 성장까지", href: `/${locale}#partnership-timeline` },
-                  { label: "09. Partnership", sub: "함께 성장하는 리테일 파트너십", href: `/${locale}#launch-readiness` }
+                  { label: "03. K Select Solution", sub: "통합 성장 솔루션", href: `/${locale}#solution` },
+                  { label: "03A. Product Curation", sub: "매장 맞춤 상품 큐레이션", href: `/${locale}#products`, isSub: true },
+                  { label: "03B. K-Beauty Category Display", sub: "4FT · 8FT · 12FT 전문 디스플레이", href: `/${locale}#display`, isSub: true },
+                  { label: "03C. 90-Day Exchange Credit", sub: "초기 재고 리스크 완화", href: `/${locale}#exchange-credit`, isSub: true },
+                  { label: "04. Launch Partner Only", sub: "초기 런칭 파트너 전용 혜택", href: `/${locale}#benefits` },
+                  { label: "05. How It Works", sub: "신청부터 성장까지", href: `/${locale}#partnership-timeline` },
+                  { label: "06. Launch Readiness / Self-Check", sub: "매장 자격 확인 및 파트너 신청", href: `/${locale}#launch-readiness` },
+                  { label: "FAQ", sub: "자주 묻는 질문", href: `/${locale}#faq` }
                 ].map((item) => (
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item"
+                    className={`flex flex-col px-3 py-2 rounded-[8px] hover:bg-white/5 transition-all text-left group/item ${item.isSub ? "ml-4 border-l border-white/10 pl-3.5" : ""}`}
                   >
-                    <span className="text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors">
+                    <span className={`text-[12px] font-extrabold text-white group-hover/item:text-[#ff2b75] transition-colors ${item.isSub ? "text-white/80 font-bold" : ""}`}>
                       {item.label}
                     </span>
                     <span className="text-[10px] text-[#7A7A7A] mt-0.5 font-semibold">
@@ -118,7 +119,6 @@ export default function Header({ locale }: HeaderProps) {
               
               <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
                 {[
-                  { label: "About K SELECT HUB", sub: "K SELECT HUB와 Retail Growth Network", href: `/${locale}#why-us` },
                   { label: "About Letusto", sub: "Letusto의 Retail & E-commerce Experience", href: `/${locale}#why-us` },
                   { label: "Why Partner With Us", sub: "경험, 인프라, 운영 역량", href: `/${locale}#why-us` }
                 ].map((item) => (

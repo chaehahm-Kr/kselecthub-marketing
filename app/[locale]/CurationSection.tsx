@@ -109,7 +109,7 @@ export default function CurationSection() {
             {/* Upper text block */}
             <div className="flex flex-col gap-2">
               <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase">
-                04 — PRODUCT CURATION
+                03A — PRODUCT CURATION
               </span>
               <h2 className="font-display text-3xl sm:text-[38px] font-bold leading-[1.25] text-white my-2 tracking-tight">
                 모든 제품을 공급하지 않습니다.<br />

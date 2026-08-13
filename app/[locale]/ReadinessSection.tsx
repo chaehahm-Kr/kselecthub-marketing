@@ -94,7 +94,7 @@ export default function ReadinessSection() {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-4 max-w-max select-none">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
               <span className="text-[10px] tracking-[0.12em] font-black text-white/70 uppercase font-display">
-                LAUNCH READINESS — SELF CHECK
+                06 — LAUNCH READINESS / SELF-CHECK
               </span>
             </div>
             
