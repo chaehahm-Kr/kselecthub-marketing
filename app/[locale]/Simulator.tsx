@@ -39,6 +39,17 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   const [emailFormSubmitted, setEmailFormSubmitted] = useState<boolean>(false);
   const [emailSuccessMessage, setEmailSuccessMessage] = useState<string | null>(null);
   
+  // Review In-Place Editing States
+  const [editingQuestionId, setEditingQuestionId] = useState<string | null>(null);
+  const [tempAnswer, setTempAnswer] = useState<any>(null);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    store_space: true,
+    customer_demand: true,
+    product_price: true,
+    inventory_reorder: true,
+    investment_growth: true
+  });
+  
   // Section transition insight popup state
   const [showSectionInsight, setShowSectionInsight] = useState<boolean>(false);
   const [lastFinishedSection, setLastFinishedSection] = useState<string>("");
@@ -103,6 +114,23 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
     }
     return { label: "기본 (Basic)", color: "text-white/50 border-white/10 bg-white/5" };
   }, [answers]);
+
+  const isNextDisabled = useMemo(() => {
+    if (!activeQuestion) return true;
+    if (activeQuestion.is_optional) return false;
+    
+    const ans = answers[activeQuestion.id];
+    if (activeQuestion.multi_select) {
+      if (!ans || !Array.isArray(ans) || ans.length === 0) return true;
+      if (activeQuestion.is_ranking) {
+        const requiredCount = activeQuestion.max_select || 3;
+        return ans.length < requiredCount;
+      }
+      return false;
+    } else {
+      return !ans;
+    }
+  }, [activeQuestion, answers]);
 
   // Handle single select selection
   const handleSelectAnswer = (questionId: string, answerLabel: string) => {
@@ -427,7 +455,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
           <div className="mb-10">
             {activeQuestion.multi_select && (
               <span className="text-[11.5px] text-[#ff2b75] font-black tracking-wide block mb-3">
-                * 중복 선택 가능 (최대 {activeQuestion.max_select || "제한 없음"}개)
+                {activeQuestion.is_ranking 
+                  ? `* 정확히 ${activeQuestion.max_select || 3}개를 선택해주세요 (순위 순서대로 선택)`
+                  : `* 중복 선택 가능 (최대 ${activeQuestion.max_select || "제한 없음"}개, 최소 1개 선택)`}
               </span>
             )}
             
@@ -544,12 +574,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               
               <button
                 onClick={handleNext}
-                disabled={
-                  !activeQuestion.is_optional && 
-                  (activeQuestion.multi_select 
-                    ? (!answers[activeQuestion.id] || answers[activeQuestion.id].length === 0)
-                    : !answers[activeQuestion.id])
-                }
+                disabled={isNextDisabled}
                 className="h-12 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-bold text-[13.5px] tracking-wide transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 다음 (Next) →
@@ -947,14 +972,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </div>
           </div>
 
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={() => setShowAlternative(!showAlternative)}
-              className="text-[12.5px] text-[#ff2b75] hover:underline font-bold tracking-tight transition-colors cursor-pointer flex items-center gap-1.5 bg-white/5 border border-white/10 hover:bg-white/10 px-4 py-2 rounded-[8px]"
-            >
-              {showAlternative ? "다른 시작 옵션 접기 ▲" : "다른 시작 옵션 비교하기 (Alternative Option) ▼"}
-            </button>
-          </div>
+
 
           {showAlternative && (
             <div className="bg-[#121214]/60 border border-white/10 rounded-[18px] p-6.5 sm:p-8 shadow-inner animate-slide-up flex flex-col gap-6 mt-4">
@@ -1021,64 +1039,54 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               onClick={() => setShowPartnerModal(true)}
               className="h-15 w-full inline-flex flex-col items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[10px] transition-all duration-300 hover:shadow-[0_0_24px_rgba(255,43,117,0.45)] cursor-pointer py-2.5"
             >
-              <span className="font-extrabold text-[15.5px] leading-tight">파트너 신청하기 →</span>
-              <span className="text-[10px] text-white/80 font-bold font-display uppercase tracking-widest">Apply for Partnership</span>
+              <span className="font-extrabold text-[15.5px] leading-tight">파트너십 상담 신청하기 →</span>
+              <span className="text-[10px] text-white/80 font-bold font-display uppercase tracking-widest">Partnership Consultation</span>
             </button>
 
-            {/* Secondary Actions Side-by-Side */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
-              <button
-                onClick={() => setShowConsultationModal(true)}
-                className="h-13 inline-flex flex-col items-center justify-center border border-white/20 hover:border-white/40 text-white rounded-[8px] transition-colors cursor-pointer py-1.5"
-              >
-                <span className="font-bold text-[13.5px] leading-tight">이 분석 결과로 상담 신청하기</span>
-                <span className="text-[9px] text-white/50 font-bold font-display uppercase tracking-wider">Book a Consultation</span>
-              </button>
+            {/* Secondary Action */}
+            <button
+              onClick={() => setShowEmailModal(true)}
+              className="h-13 w-full inline-flex flex-col items-center justify-center border border-[#22d3ee]/40 bg-[#22d3ee]/3 hover:bg-[#22d3ee]/8 hover:border-[#22d3ee] text-[#22d3ee] rounded-[8px] transition-all duration-300 cursor-pointer py-1.5 shadow-[0_0_12px_rgba(34,211,238,0.06)]"
+            >
+              <span className="font-bold text-[13.5px] leading-tight">분석 결과 이메일로 받기</span>
+              <span className="text-[9px] text-[#22d3ee]/70 font-bold font-display uppercase tracking-wider">Send Results via Email</span>
+            </button>
 
-              <button
-                onClick={() => setShowEmailModal(true)}
-                className="h-13 inline-flex flex-col items-center justify-center border border-white/20 hover:border-white/40 text-white rounded-[8px] transition-colors cursor-pointer py-1.5"
-              >
-                <span className="font-bold text-[13.5px] leading-tight">분석 결과 이메일로 받기</span>
-                <span className="text-[9px] text-white/50 font-bold font-display uppercase tracking-wider">Send Results via Email</span>
-              </button>
-            </div>
-
-            {/* Tertiary / Review Action */}
+            {/* Tertiary & Reset Actions */}
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-2 border-t border-white/5 pt-4">
               <button
                 onClick={handleReviewAnswers}
-                className="h-10 inline-flex items-center justify-center text-white/60 hover:text-white px-4 rounded-[6px] font-bold text-[12.5px] tracking-tight transition-colors cursor-pointer hover:underline"
+                className="text-white/60 hover:text-white font-bold text-[12.5px] tracking-tight transition-colors cursor-pointer hover:underline bg-transparent border-0"
               >
                 ✏️ 내 답변 검토하기 (Review Answers)
               </button>
 
               <button
                 onClick={handleRestart}
-                className="h-10 inline-flex items-center justify-center text-white/40 hover:text-white/60 px-4 rounded-[6px] font-bold text-[12px] tracking-tight transition-colors cursor-pointer"
+                className="text-white/30 hover:text-white/50 text-[11.5px] hover:underline cursor-pointer bg-transparent border-0 font-medium font-sans"
               >
                 처음부터 새로 시작하기 (Reset Simulator)
               </button>
             </div>
           </div>
 
-          {/* Consultation Modal */}
-          {showConsultationModal && (
+          {/* Partner Consultation Modal */}
+          {showPartnerModal && (
             <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
               <div className="bg-[#121214] border border-white/10 rounded-[24px] p-6 sm:p-10 max-w-[500px] w-full text-left relative animate-slide-up">
                 
                 <button
-                  onClick={() => setShowConsultationModal(false)}
+                  onClick={() => setShowPartnerModal(false)}
                   className="absolute top-5 right-5 text-white/40 hover:text-white cursor-pointer font-bold text-lg"
                 >
                   ✕
                 </button>
 
-                <div className="flex flex-col gap-1 mb-6">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">CONSULTATION REQUEST</span>
-                  <h3 className="font-display text-[21px] font-extrabold text-white">파트너십 상담 신청</h3>
+                <div className="flex flex-col gap-1.5 mb-6">
+                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">PARTNERSHIP CONSULTATION</span>
+                  <h3 className="font-display text-[21px] font-extrabold text-white leading-snug">이 분석 결과와 함께 파트너십 상담을 신청하시겠습니까?</h3>
                   <span className="text-[12.5px] text-white/50 font-semibold leading-relaxed">
-                    현재 분석 결과를 함께 전달하여 상담을 진행합니다.
+                    Simulator에서 확인한 추천 결과를 바탕으로 귀 매장에 적합한 K-Beauty 도입 방향과 다음 단계를 상담합니다.
                   </span>
                 </div>
 
@@ -1101,102 +1109,28 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                  <button
-                    onClick={() => {
-                      setShowConsultationModal(false);
-                      // Trigger apply flow click
-                      const link = document.createElement("a");
-                      link.href = "#apply";
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
-                    className="h-12 w-full inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
-                  >
-                    상담 신청하기
-                  </button>
-                  
-                  <button
-                    onClick={() => setShowConsultationModal(false)}
-                    className="h-12 w-full inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
-                  >
-                    돌아가기
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          )}
-
-          {/* Partner Application Modal */}
-          {showPartnerModal && (
-            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-              <div className="bg-[#121214] border border-white/10 rounded-[24px] p-6 sm:p-10 max-w-[500px] w-full text-left relative animate-slide-up">
-                
-                <button
-                  onClick={() => setShowPartnerModal(false)}
-                  className="absolute top-5 right-5 text-white/40 hover:text-white cursor-pointer font-bold text-lg"
-                >
-                  ✕
-                </button>
-
-                <div className="flex flex-col gap-1 mb-6">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">BECOME A PARTNER</span>
-                  <h3 className="font-display text-[21px] font-extrabold text-white">이 분석 결과와 함께 파트너 신청을 진행하시겠습니까?</h3>
-                  <span className="text-[12.5px] text-white/50 font-semibold leading-relaxed">
-                    Simulator에서 확인한 분석 결과가 파트너 신청 과정에 함께 활용됩니다.
-                  </span>
-                </div>
-
-                <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] text-[12.5px] text-white/80 flex flex-col gap-2 mb-6">
-                  <div className="flex justify-between">
-                    <span>추천 디스플레이 (Recommended Display):</span>
-                    <strong className="text-white font-bold">{mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT</strong>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>추천 상품 (Recommended SKU):</span>
-                    <strong className="text-white font-bold">{mainRecommendation.display.sku_count} SKU</strong>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>예상 초도 상품 구매액:</span>
-                    <strong className="text-white font-bold">~${mainRecommendation.display.investment.toLocaleString()}</strong>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>예상 Turnover (회전율):</span>
-                    <strong className="text-[#22D3EE] font-bold">~{mainRecommendation.financial.turnover}회 / 년</strong>
-                  </div>
+                <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/15 rounded-[8px] p-3 text-[11.5px] text-white/60 mb-6 leading-normal font-semibold">
+                  ⚠️ **안내**: 상담 신청 전, 매장의 기본 준비 상태를 확인하는 간단한 Self-Check가 진행됩니다.
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <button
                     onClick={() => {
                       setShowPartnerModal(false);
-                      // Trigger apply flow click
-                      const link = document.createElement("a");
-                      link.href = "#apply";
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
+                      const checkSection = document.getElementById("launch-readiness");
+                      if (checkSection) {
+                        checkSection.scrollIntoView({ behavior: "smooth" });
+                        window.location.hash = "#launch-readiness";
+                      }
                     }}
                     className="h-12 w-full inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
                   >
-                    파트너 신청서 작성하기
+                    파트너십 상담 신청하기
                   </button>
                   
-                  <button
-                    onClick={() => {
-                      setShowPartnerModal(false);
-                      setShowEmailModal(true);
-                    }}
-                    className="h-12 w-full inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
-                  >
-                    분석 결과 이메일로 받기
-                  </button>
-
                   <button
                     onClick={() => setShowPartnerModal(false)}
-                    className="h-10 w-full inline-flex items-center justify-center text-white/40 hover:text-white text-[12.5px] cursor-pointer"
+                    className="h-12 w-full inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
                   >
                     돌아가기
                   </button>
@@ -1223,7 +1157,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 </button>
 
                 <div className="flex flex-col gap-1 mb-6">
-                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">EMAIL REPORT</span>
+                  <span className="text-[10px] text-[#22d3ee] font-black tracking-widest uppercase">EMAIL REPORT</span>
                   <h3 className="font-display text-[21px] font-extrabold text-white">분석 결과 이메일로 받기</h3>
                   <span className="text-[12.5px] text-white/50 font-semibold leading-relaxed">
                     현재 분석 결과(Display 규격, 추천 상품 구성 및 예상 구매액)를 이메일로 전송합니다.
@@ -1240,7 +1174,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         setEmailFormSubmitted(false);
                         setEmailSuccessMessage(null);
                       }}
-                      className="h-11 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-6 rounded-[8px] font-bold text-[13px] cursor-pointer mt-4"
+                      className="h-11 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] px-6 rounded-[8px] font-bold text-[13px] cursor-pointer mt-4"
                     >
                       확인
                     </button>
@@ -1266,7 +1200,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           required
                           value={emailForm.name}
                           onChange={(e) => setEmailForm(p => ({ ...p, name: e.target.value }))}
-                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
@@ -1276,7 +1210,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           required
                           value={emailForm.storeName}
                           onChange={(e) => setEmailForm(p => ({ ...p, storeName: e.target.value }))}
-                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                         />
                       </div>
                     </div>
@@ -1288,7 +1222,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         required
                         value={emailForm.email}
                         onChange={(e) => setEmailForm(p => ({ ...p, email: e.target.value }))}
-                        className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                        className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                       />
                     </div>
 
@@ -1300,7 +1234,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           required
                           value={emailForm.city}
                           onChange={(e) => setEmailForm(p => ({ ...p, city: e.target.value }))}
-                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                         />
                       </div>
                       <div className="flex flex-col gap-1">
@@ -1310,7 +1244,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           required
                           value={emailForm.state}
                           onChange={(e) => setEmailForm(p => ({ ...p, state: e.target.value }))}
-                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                          className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                         />
                       </div>
                     </div>
@@ -1321,7 +1255,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         type="text"
                         value={emailForm.phone}
                         onChange={(e) => setEmailForm(p => ({ ...p, phone: e.target.value }))}
-                        className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#ff2b75]"
+                        className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                       />
                     </div>
 
@@ -1332,7 +1266,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         id="email-consent"
                         checked={emailFormConsent}
                         onChange={(e) => setEmailFormConsent(e.target.checked)}
-                        className="mt-1 accent-[#ff2b75] cursor-pointer"
+                        className="mt-1 accent-[#22d3ee] cursor-pointer"
                       />
                       <label htmlFor="email-consent" className="text-[12px] text-white/60 leading-normal cursor-pointer select-none">
                         분석 결과 전송 및 K SELECT 관련 안내를 이메일로 받는 데 동의합니다. (필수)
@@ -1342,9 +1276,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     <div className="flex gap-3 mt-4">
                       <button
                         type="submit"
-                        className="h-12 flex-1 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13px] cursor-pointer"
+                        className="h-12 flex-1 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] rounded-[8px] font-black text-[13.5px] cursor-pointer transition-colors shadow-[0_0_15px_rgba(34,211,238,0.25)]"
                       >
-                        내 분석 결과 이메일로 받기
+                        내 분석 결과 보내기
                       </button>
                       <button
                         type="button"
@@ -1376,6 +1310,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             <span className="text-[13px] text-white/50 font-semibold leading-relaxed">
               각 섹션별 선택값을 확인하고 필요한 부분만 수정할 수 있습니다.
             </span>
+            <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/10 text-[#ff2b75] text-[12.5px] font-bold p-3.5 rounded-[8px] leading-normal font-sans mt-2.5">
+              💡 변경하려는 질문 카드를 직접 선택해 수정할 수 있습니다. (Click any card to modify)
+            </div>
           </div>
 
           <div className="flex flex-col gap-4 max-h-[500px] overflow-y-auto pr-2">
@@ -1383,53 +1320,61 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               const labelInfo = sectionLabels[sectionKey];
               const sectionQuestions = visibleQuestions.filter(q => q.section === sectionKey);
               if (sectionQuestions.length === 0) return null;
+              const isExpanded = expandedSections[sectionKey];
 
               return (
                 <div key={sectionKey} className="bg-white/3 border border-white/5 rounded-[16px] p-5 flex flex-col gap-4">
-                  <div className="flex justify-between items-center border-b border-white/5 pb-2.5">
+                  <div 
+                    onClick={() => setExpandedSections(prev => ({ ...prev, [sectionKey]: !prev[sectionKey] }))}
+                    className="flex justify-between items-center border-b border-white/5 pb-2.5 cursor-pointer select-none"
+                  >
                     <h4 className="text-[14px] font-bold text-[#ff2b75] font-display flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]"></span>
                       {labelInfo.ko} ({labelInfo.en})
                     </h4>
-                    <button
-                      onClick={() => {
-                        const firstQ = sectionQuestions[0];
-                        const qIdx = visibleQuestions.findIndex(q => q.id === firstQ.id);
-                        if (qIdx !== -1) {
-                          setCurrentQuestionIndex(qIdx);
-                          setStep("assessment");
-                        }
-                      }}
-                      className="text-[11.5px] font-bold text-[#ff2b75] hover:text-[#ff2b75]/80 underline cursor-pointer"
-                    >
-                      수정하기 (Edit)
-                    </button>
+                    <span className="text-white/40 text-[11px] font-bold hover:text-white/60 transition-colors">
+                      {isExpanded ? "접기 ▲" : "펼치기 ▼"}
+                    </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {sectionQuestions.map(q => {
-                      const answer = answers[q.id];
-                      let displayValue = "선택되지 않음";
-                      if (answer) {
-                        if (Array.isArray(answer)) {
-                          displayValue = answer.join(", ");
-                        } else {
-                          displayValue = answer;
+                  {isExpanded && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in">
+                      {sectionQuestions.map(q => {
+                        const answer = answers[q.id];
+                        let displayValue = "선택되지 않음";
+                        if (answer) {
+                          if (Array.isArray(answer)) {
+                            displayValue = answer.join(", ");
+                          } else {
+                            displayValue = answer;
+                          }
                         }
-                      }
 
-                      return (
-                        <div key={q.id} className="flex flex-col gap-1 bg-white/2 p-3 rounded-[8px] border border-white/5">
-                          <span className="text-[11.5px] font-bold text-white/50 leading-tight">
-                            {q.label_ko}
-                          </span>
-                          <strong className="text-[13px] font-extrabold text-white leading-normal mt-0.5">
-                            {displayValue}
-                          </strong>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        return (
+                          <div 
+                            key={q.id} 
+                            onClick={() => {
+                              setEditingQuestionId(q.id);
+                              setTempAnswer(answers[q.id] || (q.multi_select ? [] : ""));
+                            }}
+                            className="flex flex-col gap-1.5 bg-[#171719]/40 hover:bg-[#ff2b75]/4 hover:border-[#ff2b75]/35 p-4 rounded-[10px] border border-white/5 cursor-pointer transition-all duration-200 group relative select-none"
+                          >
+                            <div className="flex justify-between items-start w-full">
+                              <span className="text-[11.5px] font-bold text-white/50 leading-tight group-hover:text-white/70">
+                                {q.id}. {q.label_ko}
+                              </span>
+                              <span className="text-[10px] text-[#ff2b75] font-black opacity-0 group-hover:opacity-100 transition-opacity">
+                                ✏️ 수정 (Edit)
+                              </span>
+                            </div>
+                            <strong className="text-[13px] font-extrabold text-[#ff2b75]/95 leading-normal mt-0.5 group-hover:text-[#ff2b75]">
+                              {displayValue}
+                            </strong>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -1450,6 +1395,121 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* In-Place Question Edit Modal */}
+      {editingQuestionId && (
+        (() => {
+          const editQuestion = QUESTIONS.find(q => q.id === editingQuestionId);
+          if (!editQuestion) return null;
+
+          // Check if Save is disabled based on validation rules
+          const isEditSaveDisabled = !editQuestion.is_optional && (
+            editQuestion.multi_select
+              ? (!tempAnswer || !Array.isArray(tempAnswer) || tempAnswer.length === 0 || (editQuestion.is_ranking && tempAnswer.length < (editQuestion.max_select || 3)))
+              : !tempAnswer
+          );
+
+          // Handle choice selection inside modal
+          const handleSelectChoice = (val: string) => {
+            if (editQuestion.multi_select) {
+              const current = tempAnswer || [];
+              let next: string[] = [];
+              if (current.includes(val)) {
+                next = current.filter((x: string) => x !== val);
+              } else {
+                const limit = editQuestion.max_select || 99;
+                if (current.length >= limit) {
+                  next = [...current.slice(1), val];
+                } else {
+                  next = [...current, val];
+                }
+              }
+              setTempAnswer(next);
+            } else {
+              setTempAnswer(val);
+            }
+          };
+
+          return (
+            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-[#121214] border border-white/10 rounded-[24px] p-6 sm:p-10 max-w-[580px] w-full text-left relative animate-slide-up max-h-[90vh] overflow-y-auto">
+                <button
+                  onClick={() => setEditingQuestionId(null)}
+                  className="absolute top-5 right-5 text-white/40 hover:text-white cursor-pointer font-bold text-lg"
+                >
+                  ✕
+                </button>
+
+                <div className="flex flex-col gap-1.5 mb-6">
+                  <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">EDIT QUESTION {editQuestion.id}</span>
+                  <h3 className="font-display text-[19px] font-extrabold text-white leading-snug">{editQuestion.label_ko}</h3>
+                  {editQuestion.label_ko !== editQuestion.label_en && (
+                    <span className="text-[13px] text-white/40 block font-medium">{editQuestion.label_en}</span>
+                  )}
+                  {editQuestion.multi_select && (
+                    <span className="text-[11px] text-[#ff2b75] font-black tracking-wide block mt-1.5">
+                      {editQuestion.is_ranking
+                        ? `* 정확히 ${editQuestion.max_select || 3}개를 선택해주세요 (순위 순서대로 선택)`
+                        : `* 중복 선택 가능 (최대 ${editQuestion.max_select || "제한 없음"}개, 최소 1개 선택)`}
+                    </span>
+                  )}
+                </div>
+
+                <div className="mb-8 max-h-[40vh] overflow-y-auto pr-1">
+                  <div className={editQuestion.type === "tag_chip" ? "grid grid-cols-2 gap-3" : "grid grid-cols-1 gap-3.5"}>
+                    {editQuestion.answers.map(ans => {
+                      const isSelected = editQuestion.multi_select
+                        ? (tempAnswer || []).includes(ans.label_ko)
+                        : tempAnswer === ans.label_ko;
+
+                      const selectIndex = editQuestion.is_ranking
+                        ? (tempAnswer || []).indexOf(ans.label_ko)
+                        : -1;
+
+                      return (
+                        <button
+                          key={ans.id}
+                          onClick={() => handleSelectChoice(ans.label_ko)}
+                          className={isSelected
+                            ? "px-4.5 py-3 rounded-[10px] border border-[#ff2b75] bg-[#ff2b75]/8 text-white font-extrabold text-left cursor-pointer flex justify-between items-center gap-2"
+                            : "px-4.5 py-3 rounded-[10px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/70 hover:text-white text-left cursor-pointer flex justify-between items-center gap-2"}
+                        >
+                          <span className="text-[13px] leading-tight tracking-tight font-bold">{ans.label_ko}</span>
+                          {isSelected && (
+                            <span className="w-5 h-5 rounded-full bg-[#ff2b75] text-white flex items-center justify-center text-[10px] font-black uppercase shrink-0 font-display">
+                              {selectIndex !== -1 ? `${selectIndex + 1}` : "✓"}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      setAnswers(prev => ({ ...prev, [editQuestion.id]: tempAnswer }));
+                      setEditingQuestionId(null);
+                    }}
+                    disabled={isEditSaveDisabled}
+                    className="h-12 flex-1 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    저장하기 (Save)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingQuestionId(null)}
+                    className="h-12 px-5 inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13px] cursor-pointer"
+                  >
+                    취소 (Cancel)
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })()
       )}
 
       {/* Extra styles for keyframes animations */}
