@@ -119,8 +119,8 @@ export default function Header({ locale }: HeaderProps) {
               
               <div className="absolute top-[100%] left-0 w-[280px] bg-[#0c0c0c] border border-white/10 rounded-[16px] p-3 flex flex-col gap-1 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:pointer-events-auto transition-all duration-300 z-50">
                 {[
-                  { label: "About Letusto", sub: "Letusto의 Retail & E-commerce Experience", href: `/${locale}#why-us` },
-                  { label: "Why Partner With Us", sub: "경험, 인프라, 운영 역량", href: `/${locale}#why-us` }
+                  { label: "About Letusto", sub: "Letusto의 Retail & E-commerce Experience", href: `/${locale}/about` },
+                  { label: "Why Partner With Us", sub: "경험, 인프라, 운영 역량", href: `/${locale}/about#why-partner-with-us` }
                 ].map((item) => (
                   <Link
                     key={item.label}

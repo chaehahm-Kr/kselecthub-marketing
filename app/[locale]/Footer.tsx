@@ -48,7 +48,7 @@ export default function Footer({ locale }: FooterProps) {
 
         <div className="flex flex-col gap-3 text-xs text-text-secondary">
           <span className="font-semibold text-white mb-1">회사</span>
-          <Link href={`/${locale}#why-us`}>소개</Link>
+          <Link href={`/${locale}/about`}>소개</Link>
           <Link href={`/${locale}#launch-readiness`}>문의하기</Link>
           <span className="cursor-pointer">이용약관 · 개인정보처리방침</span>
         </div>
