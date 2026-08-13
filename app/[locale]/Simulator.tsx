@@ -337,9 +337,17 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </div>
 
             <div className="relative z-10 flex flex-col gap-5 w-full">
-              <span className="text-[10px] font-black text-[#ff2b75] tracking-widest uppercase">
-                3 CORE ANALYTICAL OUTCOMES
-              </span>
+              <div className="flex flex-col gap-1 text-left select-none">
+                <span className="text-[14px] font-black text-white tracking-tight">
+                  3가지 핵심 분석 결과
+                </span>
+                <span className="text-[9px] font-extrabold text-[#ff2b75] tracking-wider uppercase font-display block -mt-0.5">
+                  3 Core Analytical Outcomes
+                </span>
+                <span className="text-[12px] text-white/50 font-semibold leading-relaxed mt-1">
+                  귀 매장에 맞는 3가지 핵심 결과를 제공합니다.
+                </span>
+              </div>
               
               <div className="flex flex-col gap-4">
                 {[
@@ -1117,11 +1125,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   <button
                     onClick={() => {
                       setShowPartnerModal(false);
-                      const checkSection = document.getElementById("launch-readiness");
-                      if (checkSection) {
-                        checkSection.scrollIntoView({ behavior: "smooth" });
-                        window.location.hash = "#launch-readiness";
-                      }
+                      window.location.href = `/${locale}#launch-readiness`;
                     }}
                     className="h-12 w-full inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
                   >
@@ -1165,9 +1169,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 </div>
 
                 {emailFormSubmitted && emailSuccessMessage ? (
-                  <div className="flex flex-col gap-4 text-center py-6">
+                  <div className="flex flex-col gap-4 text-center py-6 animate-fade-in select-none">
                     <span className="text-4xl">✅</span>
-                    <strong className="text-white text-[16px] font-bold">{emailSuccessMessage}</strong>
+                    <h4 className="text-white text-[17px] font-extrabold tracking-tight">분석 결과 전송 요청이 완료되었습니다.</h4>
+                    <p className="text-[13px] text-white/60 leading-relaxed font-semibold">
+                      입력하신 이메일로 분석 결과 안내가 전달됩니다.
+                    </p>
                     <button
                       onClick={() => {
                         setShowEmailModal(false);
@@ -1303,19 +1310,19 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
       )}
 
       {step === "review" && (
-        <div className="bg-[#1b1b1f] border border-white/10 rounded-[24px] p-6 sm:p-10 shadow-2xl max-w-4xl w-full mx-auto text-left animate-slide-up flex flex-col gap-6">
-          <div className="flex flex-col gap-1.5">
+        <div className="bg-[#1b1b1f] border border-white/10 rounded-[24px] p-5 sm:p-8 shadow-2xl max-w-4xl w-full mx-auto text-left animate-slide-up flex flex-col max-h-[82vh] h-full gap-4">
+          <div className="flex flex-col gap-1.5 select-none">
             <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">REVIEW AND EDIT ANSWERS</span>
-            <h3 className="font-display text-[24px] font-extrabold text-white">입력하신 답변 검토하기</h3>
+            <h3 className="font-display text-[22px] font-extrabold text-white">입력하신 답변 검토하기</h3>
             <span className="text-[13px] text-white/50 font-semibold leading-relaxed">
               각 섹션별 선택값을 확인하고 필요한 부분만 수정할 수 있습니다.
             </span>
-            <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/10 text-[#ff2b75] text-[12.5px] font-bold p-3.5 rounded-[8px] leading-normal font-sans mt-2.5">
+            <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/10 text-[#ff2b75] text-[12px] font-bold p-3 rounded-[8px] leading-normal font-sans mt-2">
               💡 변경하려는 질문 카드를 직접 선택해 수정할 수 있습니다. (Click any card to modify)
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 max-h-[500px] overflow-y-auto pr-2">
+          <div className="flex-1 overflow-y-auto pr-2 flex flex-col gap-3.5">
             {sectionKeys.map((sectionKey) => {
               const labelInfo = sectionLabels[sectionKey];
               const sectionQuestions = visibleQuestions.filter(q => q.section === sectionKey);
@@ -1323,22 +1330,22 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               const isExpanded = expandedSections[sectionKey];
 
               return (
-                <div key={sectionKey} className="bg-white/3 border border-white/5 rounded-[16px] p-5 flex flex-col gap-4">
+                <div key={sectionKey} className="bg-white/3 border border-white/5 rounded-[16px] p-4 flex flex-col gap-3">
                   <div 
                     onClick={() => setExpandedSections(prev => ({ ...prev, [sectionKey]: !prev[sectionKey] }))}
-                    className="flex justify-between items-center border-b border-white/5 pb-2.5 cursor-pointer select-none"
+                    className="flex justify-between items-center border-b border-white/5 pb-2 cursor-pointer select-none"
                   >
-                    <h4 className="text-[14px] font-bold text-[#ff2b75] font-display flex items-center gap-1.5">
+                    <h4 className="text-[13.5px] font-bold text-[#ff2b75] font-display flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]"></span>
                       {labelInfo.ko} ({labelInfo.en})
                     </h4>
-                    <span className="text-white/40 text-[11px] font-bold hover:text-white/60 transition-colors">
+                    <span className="text-white/40 text-[10.5px] font-bold hover:text-white/60 transition-colors">
                       {isExpanded ? "접기 ▲" : "펼치기 ▼"}
                     </span>
                   </div>
 
                   {isExpanded && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 animate-fade-in">
                       {sectionQuestions.map(q => {
                         const answer = answers[q.id];
                         let displayValue = "선택되지 않음";
@@ -1357,17 +1364,17 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                               setEditingQuestionId(q.id);
                               setTempAnswer(answers[q.id] || (q.multi_select ? [] : ""));
                             }}
-                            className="flex flex-col gap-1.5 bg-[#171719]/40 hover:bg-[#ff2b75]/4 hover:border-[#ff2b75]/35 p-4 rounded-[10px] border border-white/5 cursor-pointer transition-all duration-200 group relative select-none"
+                            className="flex flex-col gap-1 bg-[#171719]/40 hover:bg-[#ff2b75]/4 hover:border-[#ff2b75]/35 p-3 rounded-[10px] border border-white/5 cursor-pointer transition-all duration-200 group relative select-none"
                           >
                             <div className="flex justify-between items-start w-full">
-                              <span className="text-[11.5px] font-bold text-white/50 leading-tight group-hover:text-white/70">
+                              <span className="text-[11px] font-bold text-white/50 leading-tight group-hover:text-white/70">
                                 {q.id}. {q.label_ko}
                               </span>
-                              <span className="text-[10px] text-[#ff2b75] font-black opacity-0 group-hover:opacity-100 transition-opacity">
+                              <span className="text-[9.5px] text-[#ff2b75] font-black opacity-0 group-hover:opacity-100 transition-opacity">
                                 ✏️ 수정 (Edit)
                               </span>
                             </div>
-                            <strong className="text-[13px] font-extrabold text-[#ff2b75]/95 leading-normal mt-0.5 group-hover:text-[#ff2b75]">
+                            <strong className="text-[12.5px] font-extrabold text-[#ff2b75]/95 leading-normal mt-0.5 group-hover:text-[#ff2b75]">
                               {displayValue}
                             </strong>
                           </div>
@@ -1380,7 +1387,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             })}
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-white/5 pt-5 mt-2">
+          <div className="flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-white/5 pt-4 mt-auto bg-[#1b1b1f] z-10">
             <button
               onClick={() => setStep("results")}
               className="h-12 w-full sm:w-auto inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white px-6 rounded-[8px] font-bold text-[13px] cursor-pointer"
