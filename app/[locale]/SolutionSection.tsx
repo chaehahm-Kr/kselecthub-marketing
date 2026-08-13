@@ -43,7 +43,7 @@ const solutionDataList = [
       }
     ],
     outcomeTitle: "WHAT THIS MEANS FOR YOUR STORE",
-    outcomeDesc: "검증되지 않은 무분별한 SKU 도입을 억제하고 상권 내 실제 판매 확률이 가장 높은 핵심 아이템만 전략적으로 진열하여, 불필요한 초기 재고 낭비를 차단하고 소매점의 빠른 투자 회수 주기를 만듭니다.",
+    outcomeDesc: "검증되지 않은 무분별한 SKU 도입을 억제하고 상권 내 실제 판매 확률이 가장 높은 핵심 아이템만 전략적으로 진열하여, 불필요한 초기 재고 낭비를 차단하고 소매점의 빠른 초기 비용 회수 주기를 만듭니다.",
     outcomeTags: ["SAFE INGREDIENTS", "RELIABLE RETAIL MARGIN", "FAST INVENTORY TURNOVER"]
   },
   {

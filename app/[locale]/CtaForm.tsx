@@ -150,9 +150,9 @@ export default function CtaForm() {
             Your partnership application has been received.<br />
             Our K SELECT HUB team will review your information and contact you regarding the next step.
           </p>
-          {recommendedConfig && (
+           {recommendedConfig && (
             <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/20 px-4 py-2 rounded-[6px] text-xs font-semibold text-[#ff2b75] mt-2 select-none">
-              신청 모듈 구성: {recommendedConfig} (${Number(simulatedInvestment).toLocaleString()} 투자 규모)
+              신청 모듈 구성: {recommendedConfig} (약 ${Number(simulatedInvestment).toLocaleString()} 상품 구매 규모)
             </div>
           )}
         </div>
@@ -167,7 +167,7 @@ export default function CtaForm() {
               <div className="flex flex-col gap-0.5">
                 <span className="font-bold">🖥️ 시뮬레이터 연동 적용됨</span>
                 <span className="opacity-90 text-[#9ca3af]">
-                  추천 구성: <strong className="text-white font-bold">{recommendedConfig}</strong> (${Number(simulatedInvestment).toLocaleString()} 초기 예산 자동 바인딩)
+                  추천 구성: <strong className="text-white font-bold">{recommendedConfig}</strong> (초기 상품 구매액 약 ${Number(simulatedInvestment).toLocaleString()} 자동 바인딩)
                 </span>
               </div>
               <button

@@ -149,7 +149,7 @@ export const ko = {
     subtitle: "매장 크기와 초기 버짓을 선택하고, 마진 및 회전율에 따른 연간 예상 순이익과 일일 판매량 목표를 도출해 보세요.",
     inputs: {
       size: "매장 공간 선택 (Space)",
-      budget: "초기 상품 투자 예산 (Initial Product Budget)",
+      budget: "초기 상품 구매 예산 (Initial Product Budget)",
       averagePrice: "평균 소매 판매가 (Average Retail Price)",
       margin: "목표 리테일 마진율 (Target Retail Margin)",
       turn: "연간 재고 회전율 (Inventory Turn)"
@@ -160,19 +160,19 @@ export const ko = {
       cogs: "연간 매출 원가 (Annual Cost of Goods Sold)",
       annualUnits: "연간 판매 수량 (Annual Units Sold)",
       monthlyUnits: "월간 판매 수량 (Monthly Units Sold)",
-      dailyUnits: "일간 판매 수량 (Daily Units)",
+      dailyUnits: "일간 판매 수량 (Daily)",
       skuUnits: "SKU당 월평균 판매량 (Units per SKU/Month)",
-      gmroi: "초기 투자비용 대비 연간 마진 회수율 (GMROI)"
+      gmroi: "초기 상품구매비용 대비 연간 마진 회수율 (GMROI)"
     },
     howItIsCalculated: {
       title: "이 숫자는 어떻게 계산되나요? (How This Is Calculated)",
       steps: [
-        { label: "1. 연간 매출원가", formula: "초기 상품 투자액 × 연간 재고 회전율" },
+        { label: "1. 연간 매출원가", formula: "초기 상품 구매액 × 연간 재고 회전율" },
         { label: "2. 연간 총소매매출", formula: "연간 매출원가 ÷ (1 - 목표 마진율)" },
         { label: "3. 연간 예상 순이익", formula: "연간 총소매매출 - 연간 매출원가" },
         { label: "4. 일간/월간 판매수량", formula: "연간 판매수량을 365일 / 12개월로 균등 분할" }
       ],
-      infographic: "초기 재고 투자 ➔ 재고 회전수 ➔ 연간 원가 매입 ➔ 마진율 계산 ➔ 총 소매 매출 ➔ 최종 순이익 도출"
+      infographic: "초기 재고 구매 ➔ 재고 회전수 ➔ 연간 원가 매입 ➔ 마진율 계산 ➔ 총 소매 매출 ➔ 최종 순이익 도출"
     },
     cta: "이 구성으로 상세 상담받기",
     disclaimer: "※ 본 시뮬레이션 결과는 입력값에 기반한 산술적인 예시 예측치이며, 실제 매장의 매출과 마진 이익은 입지 조건, 소비자 성향, 계절성 및 소매점의 개별 운영 성과에 따라 차이가 있을 수 있어 실제 수익을 공식 보장하지 않습니다."

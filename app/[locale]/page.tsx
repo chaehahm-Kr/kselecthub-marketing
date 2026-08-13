@@ -554,11 +554,11 @@ export default async function Home({ params }: PageProps) {
                   <>Explore the K-Beauty<br />Growth Plan Tailored<br />to Your Store.</>
                 )}
               </h2>
-              <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-md my-2 font-medium">
+               <p className="text-[13.5px] text-[#9ca3af] leading-relaxed max-w-md my-2 font-medium">
                 {locale === "ko" ? (
-                  "매장 규모, 고객 특성, 상품 판매 방식과 투자 예산을 분석하여 귀 매장에 적합한 디스플레이 모듈, 브랜드 상품 구성 비율, 그리고 예상 매출 및 ROI 시뮬레이션을 제공합니다."
+                  "매장 규모, 고객 특성, 상품 판매 방식과 상품 구매 예산을 분석하여 귀 매장에 적합한 디스플레이 모듈, 브랜드 상품 구성 비율, 그리고 예상 매출 및 회수 시뮬레이션을 제공합니다."
                 ) : (
-                  "Analyze your store space, customer demand, inventory frequency, and initial investment budget to generate tailored display fixtures, brand assortment mixes, and multi-year financial ROI projections."
+                  "Analyze your store space, customer demand, inventory frequency, and initial purchase budget to generate tailored display fixtures, brand assortment mixes, and multi-year financial ROI projections."
                 )}
               </p>
               
@@ -606,7 +606,7 @@ export default async function Home({ params }: PageProps) {
                     {
                       num: "03",
                       title: locale === "ko" ? "재무/수익성 시뮬레이션" : "Financial ROI Projections",
-                      desc: locale === "ko" ? "예상 연간 마진, 연 매출, 초기 투자 대비 회수 기간" : "Annual margin, retail sales, cogs, payback periods"
+                      desc: locale === "ko" ? "예상 연간 마진, 연 매출, 초기 상품 구매비용 대비 회수 기간" : "Annual margin, retail sales, cogs, payback periods"
                     }
                   ].map((item) => (
                     <div key={item.num} className="flex gap-4 items-start">

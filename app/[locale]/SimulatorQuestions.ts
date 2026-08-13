@@ -507,7 +507,7 @@ export const QUESTIONS: QuestionConfig[] = [
     ]
   },
 
-  // ================= STEP 5: 투자와 성장 목표 =================
+  // ================= STEP 5: 상품 구매 및 성장 목표 =================
   {
     id: "Q22",
     section: "investment_growth",
@@ -515,17 +515,17 @@ export const QUESTIONS: QuestionConfig[] = [
     type: "range_card",
     is_optional: false,
     multi_select: false,
-    label_ko: "K-Beauty 를 시작하거나 확대할 때 편안하게 투자할 수 있는 초기 상품 예산은 어느 정도입니까?",
+    label_ko: "처음 K-Beauty 상품을 구성할 때 어느 정도의 상품 구매 예산이 편하십니까?",
     label_en: "What is your comfortable initial product budget to launch or expand K-Beauty?",
-    helper_ko: "추천 규모가 실제 투자 여력에 맞도록 조정하는 데 사용됩니다.",
-    helper_en: "Used to scale recommended solutions to match actual store investment capacities.",
+    helper_ko: "추천 규모가 실제 상품 구매 예산 범위에 맞도록 조정하는 데 사용됩니다.",
+    helper_en: "Used to scale recommended solutions to match actual store purchasing capacity.",
     answers: [
       { id: "Q22_A1", label_ko: "$2,000 미만", label_en: "Under $2,000" },
       { id: "Q22_A2", label_ko: "$2,000–$4,000", label_en: "$2,000–$4,000" },
       { id: "Q22_A3", label_ko: "$4,000–$6,000", label_en: "$4,000–$6,000" },
       { id: "Q22_A4", label_ko: "$6,000–$10,000", label_en: "$6,000–$10,000" },
-      { id: "Q22_A5", label_ko: "$10,000 이상도 가능합니다", label_en: "$10,000 or more is available" },
-      { id: "Q22_A6", label_ko: "먼저 추천안을 보고 싶습니다", label_en: "Show me the recommendation first" },
+      { id: "Q22_A5", label_ko: "$10,000 이상도 가능", label_en: "$10,000 or more is available" },
+      { id: "Q22_A6", label_ko: "먼저 추천안을 보고 결정하고 싶음", label_en: "Show me the recommendation first" },
       { id: "Q22_A7", label_ko: "답변하지 않겠습니다", label_en: "Prefer not to answer" }
     ]
   },
@@ -536,15 +536,15 @@ export const QUESTIONS: QuestionConfig[] = [
     type: "visual_card",
     is_optional: false,
     multi_select: false,
-    label_ko: "K-Beauty 를 시작할 때 어떤 방식이 가장 편하십니까?",
+    label_ko: "처음 K-Beauty 카테고리를 시작할 때 어떤 방식이 가장 편하십니까?",
     label_en: "Which initial setup methodology aligns best with your preference?",
     answers: [
-      { id: "Q23_A1", label_ko: "작게 테스트하고 싶습니다", label_en: "Launch small to test" },
-      { id: "Q23_A2", label_ko: "다양성은 확보하되 보수적으로 시작하고 싶습니다", label_en: "Broad variety, conservative inventory depth" },
-      { id: "Q23_A3", label_ko: "균형 있게 시작하고 싶습니다", label_en: "Balanced layout (Recommended)" },
-      { id: "Q23_A4", label_ko: "성장을 목표로 적극적으로 투자하고 싶습니다", label_en: "Aggressive investment for high-growth" },
-      { id: "Q23_A5", label_ko: "처음부터 강한 카테고리로 만들고 싶습니다", label_en: "Dominant category presence from day one" },
-      { id: "Q23_A6", label_ko: "K SELECT 가 추천해 주세요", label_en: "Let K SELECT make the recommendation" }
+      { id: "Q23_A1", label_ko: "작은 규모로 먼저 테스트하고 싶음", label_en: "Test with a smaller scale first" },
+      { id: "Q23_A2", label_ko: "여러 상품을 보수적으로 구성하고 싶음", label_en: "Broad variety, conservative inventory depth" },
+      { id: "Q23_A3", label_ko: "균형 있게 시작하고 싶음", label_en: "Start with a balanced layout" },
+      { id: "Q23_A4", label_ko: "성장 가능성이 있다면 적극적으로 시작하고 싶음", label_en: "Start aggressively if growth potential exists" },
+      { id: "Q23_A5", label_ko: "처음부터 강한 K-Beauty 카테고리로 운영하고 싶음", label_en: "Operate as a dominant category presence from day one" },
+      { id: "Q23_A6", label_ko: "K SELECT의 추천을 받고 싶음", label_en: "Get a recommendation from K SELECT" }
     ]
   },
   {
@@ -678,7 +678,7 @@ export const QUESTIONS: QuestionConfig[] = [
       { id: "Q34_A1", label_ko: "어떤 제품을 선택해야 할지 모르겠습니다", label_en: "Unsure how to select the right items" },
       { id: "Q34_A2", label_ko: "안 팔리는 재고가 걱정됩니다", label_en: "Fear of slow-moving inventory / dead stock" },
       { id: "Q34_A3", label_ko: "Display 공간이 부족합니다", label_en: "Insufficient display fixture space" },
-      { id: "Q34_A4", label_ko: "초기 투자금이 부담됩니다", label_en: "High initial product investment burden" },
+      { id: "Q34_A4", label_ko: "초기 상품 구매 비용이 부담됩니다", label_en: "High initial product purchase cost burden" },
       { id: "Q34_A5", label_ko: "고객의 가격 민감도가 높습니다", label_en: "High retail customer price sensitivity" },
       { id: "Q34_A6", label_ko: "믿을 만한 공급처가 필요합니다", label_en: "Need a trustworthy wholesale supplier" },
       { id: "Q34_A7", label_ko: "트렌드를 따라가기 어렵습니다", label_en: "Hard to keep pace with rapid trend shifts" },

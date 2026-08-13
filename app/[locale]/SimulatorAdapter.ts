@@ -79,7 +79,7 @@ export function simulateGrowth(answers: Record<string, any>): SimulationResult {
 
   // Reason based on investment preference
   if (answers["Q23"]) {
-    reasons.push(`초기 런칭 및 성장 투자 전략으로 선택하신 \'${answers["Q23"]}\' 방향성과 높은 시너지 배치가 가능합니다.`);
+    reasons.push(`초기 상품 구성 및 성장 목표로 선택하신 \'${answers["Q23"]}\' 방향성과 높은 시너지 배치가 가능합니다.`);
   }
 
   // 3. Recommended Product Strategy (Assortment Profile)
