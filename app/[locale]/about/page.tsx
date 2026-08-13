@@ -637,12 +637,12 @@ export default function AboutPage({ params }: PageProps) {
                 },
                 {
                   name: "Claire Im",
-                  role: "CURATION DIRECTOR",
-                  subRole: "NHI PARTNER",
+                  role: "CURATION PARTNER",
+                  subRole: "NHI CEO",
                   isPartner: true,
                   initials: "CI",
-                  descKo: "K-Beauty 제품 평가, 카테고리 검토, Assortment Curation 및 큐레이션 전략 총괄. (NHI Partner)",
-                  descEn: "Directs K-Beauty evaluation, assortment curation, and seasonal brand mapping. Operates as an external NHI consulting advisor."
+                  descKo: "K-Beauty 제품 평가, 카테고리 검토, Assortment Curation 및 큐레이션 전략 총괄. NHI 대표로서 카테고리 기획과 큐레이션 방향을 함께 리드합니다.",
+                  descEn: "Directs K-Beauty evaluation, assortment curation, and seasonal brand mapping. Serves as the CEO of NHI, leading overall category planning and curation strategies."
                 }
               ].map((member, idx) => (
                 <div 
