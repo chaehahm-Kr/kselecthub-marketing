@@ -695,13 +695,8 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               {locale === "ko" ? "분석 결과를 생성하는 중 문제가 발생했습니다." : "An error occurred while generating your analysis."}
             </h3>
             <p className="text-xs text-white/50 leading-relaxed font-semibold mt-1">
-              {locale === "ko" ? "잠시 후 다시 시도해 주세요." : "Please try again in a moment."}
+              {locale === "ko" ? "분석 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요." : "We couldn't generate your results. Please try again in a moment."}
             </p>
-            {apiError && (
-              <p className="text-[10px] text-white/30 font-mono mt-2 bg-black/30 p-2 rounded max-h-[80px] overflow-auto w-full text-left">
-                Error Detail: {apiError}
-              </p>
-            )}
           </div>
 
           <div className="flex flex-col gap-3 w-full max-w-[200px]">

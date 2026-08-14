@@ -1,0 +1,5 @@
+:root{
+  --dl-radius-none:0px; --dl-radius-sm:2px; --dl-radius-md-sm:4px; --dl-radius-md:8px; --dl-radius-lg:12px;
+  --dl-radius-xl:16px; --dl-radius-2xl:20px; --dl-radius-3xl:24px; --dl-radius-4xl:28px; --dl-radius-5xl:32px;
+  --dl-radius-full:9999px;
+}

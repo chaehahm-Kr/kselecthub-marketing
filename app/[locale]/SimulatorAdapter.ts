@@ -67,7 +67,7 @@ export async function fetchSimulation(
   answersPayload: Record<string, any>,
   email?: string
 ): Promise<SimulationResult> {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_SIMULATOR_API_BASE_URL || "http://localhost:3010";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_SIMULATOR_API_BASE_URL || "https://kselectnetwork-portal.vercel.app";
 
   const res = await fetch(`${apiBaseUrl}/api/simulator/calculate`, {
     method: "POST",
@@ -89,7 +89,7 @@ export async function registerEmailForSimulation(
   simulationId: string,
   email: string
 ): Promise<{ success: boolean; simulation_id: string }> {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_SIMULATOR_API_BASE_URL || "http://localhost:3010";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_SIMULATOR_API_BASE_URL || "https://kselectnetwork-portal.vercel.app";
 
   const res = await fetch(`${apiBaseUrl}/api/simulator/calculate`, {
     method: "POST",

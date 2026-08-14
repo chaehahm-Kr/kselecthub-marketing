@@ -1,0 +1,14 @@
+/* Dynamic Layer typography tokens. No custom typeface is defined in source (Flutter TextStyle omits fontFamily) — using system UI stack. Flagging for user review. */
+:root{
+  --dl-font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --dl-font-size-1:12px; --dl-line-height-1:16px; --dl-letter-spacing-1:0.04em;
+  --dl-font-size-2:14px; --dl-line-height-2:20px; --dl-letter-spacing-2:0em;
+  --dl-font-size-3:16px; --dl-line-height-3:24px; --dl-letter-spacing-3:0em;
+  --dl-font-size-4:18px; --dl-line-height-4:28px; --dl-letter-spacing-4:-0.04em;
+  --dl-font-size-5:20px; --dl-line-height-5:28px; --dl-letter-spacing-5:-0.08em;
+  --dl-font-size-6:24px; --dl-line-height-6:32px; --dl-letter-spacing-6:-0.1em;
+  --dl-font-size-7:28px; --dl-line-height-7:36px; --dl-letter-spacing-7:-0.12em;
+  --dl-font-size-8:32px; --dl-line-height-8:40px; --dl-letter-spacing-8:-0.16em;
+  --dl-font-size-9:40px; --dl-line-height-9:48px; --dl-letter-spacing-9:-0.4em;
+  --dl-weight-light:300; --dl-weight-regular:400; --dl-weight-medium:500; --dl-weight-semibold:600; --dl-weight-bold:700;
+}

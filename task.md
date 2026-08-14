@@ -1,0 +1,7 @@
+- `[x]` Create and configure task.md list for Display redesign
+- `[x]` Build DisplaySection.tsx with full-view authentic modular fixtures and QR guidance
+- `[x]` Integrate DisplaySection in page.tsx and clean up old markup
+- `[x]` Refactor homepage `#simulator-section` into a promotional teaser card linking to the simulator page.
+- `[x]` Run build check to verify TS compilation
+- `[x]` Verify layout responsiveness and push to production
+- `[x]` Create walkthrough.md summary report
