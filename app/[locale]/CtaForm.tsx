@@ -25,6 +25,7 @@ export default function CtaForm() {
   // Integration with Simulator Results
   const [recommendedConfig, setRecommendedConfig] = useState<string | null>(null);
   const [simulatedInvestment, setSimulatedInvestment] = useState<string | null>(null);
+  const [simulationId, setSimulationId] = useState<string | null>(null);
   
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -33,11 +34,15 @@ export default function CtaForm() {
   useEffect(() => {
     const savedConfig = localStorage.getItem("kselect_recommended_config");
     const savedInvestment = localStorage.getItem("kselect_simulator_investment");
+    const savedId = localStorage.getItem("kselect_simulator_id");
     if (savedConfig) {
       setRecommendedConfig(savedConfig);
     }
     if (savedInvestment) {
       setSimulatedInvestment(savedInvestment);
+    }
+    if (savedId) {
+      setSimulationId(savedId);
     }
 
     const handleRecommendEvent = (e: Event) => {
@@ -46,6 +51,9 @@ export default function CtaForm() {
         setRecommendedConfig(customEvent.detail.configName);
         setSimulatedInvestment(customEvent.detail.investment.toString());
         setDesiredSpace(customEvent.detail.space);
+        if (customEvent.detail.simulationId) {
+          setSimulationId(customEvent.detail.simulationId);
+        }
       }
     };
 
@@ -58,8 +66,10 @@ export default function CtaForm() {
   const handleClearRecommendation = () => {
     setRecommendedConfig(null);
     setSimulatedInvestment(null);
+    setSimulationId(null);
     localStorage.removeItem("kselect_recommended_config");
     localStorage.removeItem("kselect_simulator_investment");
+    localStorage.removeItem("kselect_simulator_id");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -122,6 +132,7 @@ export default function CtaForm() {
       comments,
       recommendedConfig: recommendedConfig || "None",
       simulatedInvestment: simulatedInvestment || "None",
+      simulationId: simulationId || undefined,
       agreedToStandards: agreed,
       submittedAt: new Date().toISOString(),
     };
@@ -132,6 +143,7 @@ export default function CtaForm() {
     // Clear local storage integration
     localStorage.removeItem("kselect_recommended_config");
     localStorage.removeItem("kselect_simulator_investment");
+    localStorage.removeItem("kselect_simulator_id");
   };
 
   return (

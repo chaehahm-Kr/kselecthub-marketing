@@ -99,9 +99,9 @@ export default function InsightsLandingPage({ params }: PageProps) {
     }
   ];
 
-  const filteredArticles = activeTopic === "all" 
-    ? articles 
-    : articles.filter(a => a.topic === activeTopic);
+  const gridArticles = activeTopic === "all" 
+    ? articles.filter(a => !a.isFeatured) 
+    : articles.filter(a => a.topic === activeTopic && !a.isFeatured);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0c0c0c] text-white font-sans overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
@@ -269,7 +269,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
           ref={cardsRef} 
           className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-20 text-left scroll-mt-24"
         >
-          {filteredArticles.length === 0 ? (
+          {gridArticles.length === 0 ? (
             <div className="text-center py-20 border border-white/5 rounded-[20px] bg-[#121214]/30">
               <p className="text-[14px] text-[#7A7A7A] font-semibold">
                 {isKo ? "해당 주제의 아티클이 준비 중입니다." : "Articles under this topic are coming soon."}
@@ -277,7 +277,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredArticles.map((article, idx) => (
+              {gridArticles.map((article, idx) => (
                 <div 
                   key={article.id}
                   style={{ transitionDelay: `${idx * 100}ms` }}

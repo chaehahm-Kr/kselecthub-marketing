@@ -133,19 +133,19 @@ export default function Article4FtStartPage({ params }: PageProps) {
         </section>
 
         {/* ================= MAIN ARTICLE BODY (Editorial Readability Column) ================= */}
-        <section className="max-w-[760px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15.5px] text-[#d1d5db] leading-relaxed font-medium pb-24">
+        <section className="max-w-[700px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15px] text-white/80 leading-relaxed font-normal pb-24">
           
           {/* INTRO */}
-          <div className="flex flex-col gap-5 mb-14 text-white font-semibold">
-            <p className="m-0 keep-all text-[16px] sm:text-[17.5px] leading-relaxed">
+          <div className="flex flex-col gap-5 mb-12 text-white/90">
+            <p className="m-0 keep-all text-[15.5px] sm:text-[17px] leading-relaxed font-medium">
               {isKo
-                ? "K-Beauty 시장이 커졌다고 해서, 모든 매장이 대규모 자본이나 과도한 벌크 상품을 채우며 동일한 방식으로 시작할 필요는 없습니다."
+                ? "K-Beauty 시장이 급격하게 확장되었다고 해서, 모든 소매 매장이 대규모 재고나 무분별한 벌크 상품을 채우며 동일하게 시작할 필요는 없습니다."
                 : "Just because the K-Beauty category is growing rapidly doesn't mean every store needs to rush into large-scale inventory buys or flood their counter space."
               }
             </p>
             <p className="m-0 keep-all">
               {isKo
-                ? "2025년 한국 화장품 수출은 사상 최고치에 도달했으며, 미국은 그 핵심 성장 동력입니다. 하지만 오프라인 매장 오너가 내려야 할 결정은 더 정밀해야 합니다. “그래서 우리 매장의 4피트 선반에 무엇을 얼마나 넣어야 매출로 이어질까?”라는 질문입니다."
+                ? "2025년 한국 화장품 수출액은 사상 최고치를 달성했으며, 미국 시장은 그 성장의 핵심 축으로 자리잡았습니다.<sup>[1]</sup> 하지만 뷰티 서플라이 오너가 마주한 실제 질문은 훨씬 구체적이어야 합니다. “그래서 우리 매장의 4피트 선반에 어떤 제품을 얼마나 진열해야 실질 매출로 연결될까?”라는 물음입니다."
                 : "Although U.S. consumer demand for K-Beauty is reaching record highs, local retailers need to address a specific query: How do I allocate my 4-foot of shelf space to maximize sales velocity?"
               }
             </p>
@@ -154,7 +154,7 @@ export default function Article4FtStartPage({ params }: PageProps) {
               <span className="block text-[11px] font-black text-[#ff2b75] tracking-widest uppercase font-display mb-1.5">CORE PRINCIPLE</span>
               <p className="m-0 text-[14px] text-white font-black leading-normal keep-all">
                 {isKo
-                  ? "처음 K-Beauty Section을 만들 때 중요한 것은 크게 시작하는 것이 아니라, 매대 효율을 보장하도록 제대로 시작하는 것입니다."
+                  ? "처음 K-Beauty 전용 구획을 신설할 때 핵심은 전시 면적의 크기가 아니라, 매대 면적당 회전율을 보장할 수 있는 구성입니다."
                   : "When setting up your initial K-Beauty section, the goal is not to maximize SKU counts, but to assure high space efficiency."
                 }
               </p>
@@ -162,13 +162,13 @@ export default function Article4FtStartPage({ params }: PageProps) {
           </div>
 
           {/* SECTION 01 */}
-          <div ref={sec1Ref} className={`mb-14 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              01. 먼저 공간을 정하고, 그 다음 상품을 정하세요.
+          <div ref={sec1Ref} className={`mb-12 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              01. 먼저 진열 공간을 정하고, 그 다음 상품을 설계하세요.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "새로운 카테고리를 개설할 때 보통 취급하고 싶은 상품 목록(SKU)부터 나열하곤 합니다. 하지만 소매 공간이 한정된 오프라인 스토어에서는 다음의 순서로 의사결정을 설계하는 것이 훨씬 입체적입니다."
+                ? "새로운 카테고리를 매장에 배치할 때 보통 들여오고 싶은 제품 브랜드나 인기 상품 목록부터 작성하기 쉽습니다. 그러나 소매 면적이 제한적인 매장에서는 다음과 같이 공간 중심의 의사결정 단계를 거쳐 계획을 좁혀나가는 것이 효과적입니다."
                 : "When introducing a new product line, it's tempting to draft a list of desired items first. However, for brick-and-mortar stores with fixed square footage, the reverse flow is far more effective:"
               }
             </p>
@@ -189,69 +189,69 @@ export default function Article4FtStartPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "예를 들어 4피트(4FT)라는 물리적 구획을 선결정하면 매장에 진열할 카테고리 구성 비율, 한 선반에 드러날 단품(SKU) 수량, 매대의 시인성을 이끌어 낼 핵심 주력 상품(Hero SKU), 그리고 보충 공급 주기와 초도 재고 예산이 과학적으로 수치화됩니다."
+                ? "예를 들어 4피트(4FT)라는 물리적 매대 구획을 미리 고정해 두면, 진열할 세부 카테고리 구성 비율, 한 선반에 올라갈 단품 수량(SKU), 시선을 이끌어 낼 주력 주연 상품(Hero SKU), 그리고 초도 재고 예산과 정기 리오더 주기(Reorder)를 과학적으로 수치화하여 관리할 수 있게 됩니다."
                 : "By locking down a 4FT physical footprint first, you instantly establish your category ratios, target item counts per shelf, hero placements, and replenishment cycles."
               }
             </p>
           </div>
 
           {/* SECTION 02 */}
-          <div ref={sec2Ref} className={`mb-14 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              02. 4FT 안에 모든 K-Beauty를 다 넣을 수는 없습니다.
+          <div ref={sec2Ref} className={`mb-12 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              02. 4FT 매대 안에 모든 카테고리를 다 담으려고 하지 마세요.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "스킨케어, 메이크업, 헤어/두피 케어, 마스크팩, 뷰티 소품까지 K-Beauty 브랜드와 성분은 무수합니다. 하지만 4FT의 제한적인 선반 공간에 모든 유형을 조각내어 진열하면, 고객에게 매력적인 '진열 연출(Shopping Story)'을 전달할 수 없고 전문성이 결여되어 보입니다."
+                ? "기초 화장품부터 색조 메이크업, 두피 케어, 마스크팩, 헤어 에센스까지 K-Beauty 제품군은 무수히 다양합니다. 하지만 4FT의 제한적인 선반에 모든 라인을 조금씩 조각내어 나열하면, 매장을 방문한 고객에게 명확한 진열 컨셉(Shopping Story)을 전달할 수 없으며 오히려 전문성이 떨어져 보입니다."
                 : "Skincare, cosmetics, scalp care, and sheet masks represent diverse paths. Trying to fit tiny portions of every category on a single 4FT shelf only creates clutter, confusing shoppers."
               }
             </p>
 
             {/* Key Takeaway Box */}
             <div className="bg-[#121214] border border-white/10 rounded-[20px] p-6 my-6 flex flex-col gap-4">
-              <h4 className="text-[14.5px] font-black text-white m-0 flex items-center gap-2 select-none">
+              <h4 className="text-[13.5px] font-black text-white/95 m-0 flex items-center gap-2 select-none">
                 <span className="w-2 h-2 rounded-full bg-[#00f0ff]" />
                 {isKo ? "매장 상권 맞춤형 큐레이션 가이드" : "Target Store Profiling"}
               </h4>
-              <div className="grid sm:grid-cols-2 gap-4 text-[13px]">
+              <div className="grid sm:grid-cols-2 gap-4 text-[12.5px] font-medium">
                 <div className="bg-[#0c0c0c] border border-white/5 p-4 rounded-[12px]">
-                  <span className="block text-[#ff2b75] font-black mb-1">Hair 고객 중심 매장</span>
-                  <p className="m-0 text-[#9ca3af] leading-relaxed font-semibold">헤어/두피 케어 세럼·토닉 + 트렌디 시트 마스크 및 기초 진정 라인 믹스</p>
+                  <span className="block text-[#ff2b75] font-black mb-1.5">Hair 제품 구매가 활발한 매장</span>
+                  <p className="m-0 text-[#9ca3af] leading-relaxed">두피 에센스 및 세럼류(HAIR & SCALP CARE) + 보습 마스크팩 믹스</p>
                 </div>
                 <div className="bg-[#0c0c0c] border border-white/5 p-4 rounded-[12px]">
-                  <span className="block text-[#00f0ff] font-black mb-1">기초 스킨케어 수요 매장</span>
-                  <p className="m-0 text-[#9ca3af] leading-relaxed font-semibold">클렌저 ➔ 앰플/세럼 ➔ 보습제 ➔ 시트 팩으로 이어지는 스킨케어 루틴 위주 진열</p>
+                  <span className="block text-[#00f0ff] font-black mb-1.5">스킨케어 수요가 강한 매장</span>
+                  <p className="m-0 text-[#9ca3af] leading-relaxed">클렌저 ➔ 앰플/세럼 ➔ 보습제 ➔ 시트 팩으로 이어지는 Routine 중심 진열</p>
                 </div>
               </div>
             </div>
 
             <p className="m-0 keep-all">
               {isKo
-                ? "많은 SKU를 병렬식으로 세워 두는 것보다 확실한 판매 가치를 주는 소수의 핵심 라인을 묶어 제안할 때, 매장을 방문한 소비자의 지갑이 열립니다."
+                ? "수십 개의 제품을 단순 병렬식으로 채우는 것보다 확실한 케어 가치를 제안하는 소수의 핵심 제품군을 묶어 제안할 때, 소비자의 첫 구매 허들이 낮아집니다."
                 : "Concentrating on a targeted selection that solves a specific customer concern builds trust and drives conversion."
               }
             </p>
           </div>
 
           {/* SECTION 03 */}
-          <div ref={sec3Ref} className={`mb-14 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              03. 가격대도 하나의 카테고리처럼 설계해야 합니다.
+          <div ref={sec3Ref} className={`mb-12 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              03. 가격대도 하나의 카테고리처럼 체계적으로 배분해야 합니다.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "진열할 가격 범위를 설계하는 것 역시 중요합니다. 저가 제품(Value)이나 고가 제품(Premium) 하나만 고집하는 매장은 구매 저항을 부릅니다. 소비자가 매대를 만났을 때 심리적 안정을 느끼고 단계적으로 장바구니에 담을 수 있는 3단계 가격 구조가 배치되어야 합니다."
+                ? "제품 가격의 포트폴리오를 설계하는 것도 매우 중요합니다. 너무 저렴한 제품(Value)만 놓거나 지나치게 비싼 고가 브랜드(Premium)만 배치하는 것은 구매 효율을 저해합니다. 매대를 만났을 때 심리적 안정감을 얻고 자연스럽게 구매로 연결될 수 있는 3단계 가격 배치가 필수적입니다."
                 : "Pricing is also a key layout factor. Aligning your products into Entry, Core, and Premium categories provides consumers with a clear value ladder:"
               }
             </p>
 
             {/* 3-Step Pricing Table/Cards */}
-            <div className="grid sm:grid-cols-3 gap-4 my-6 select-none">
+            <div className="grid sm:grid-cols-3 gap-4 my-6 select-none font-medium">
               {pricingTiers.map((tier, idx) => (
                 <div key={idx} className="bg-[#121214] border border-white/5 hover:border-[#ff2b75]/25 p-5 rounded-[16px] flex flex-col justify-between gap-4 transition-all">
                   <div>
-                    <span className="text-[9.5px] font-black text-[#ff2b75] tracking-widest font-display block mb-1">TIER 0{idx+1}</span>
-                    <h4 className="text-[16px] font-black text-white m-0 mb-2">{tier.label}</h4>
+                    <span className="text-[9px] font-black text-[#ff2b75] tracking-widest font-display block mb-1">TIER 0{idx+1}</span>
+                    <h4 className="text-[15px] font-black text-white m-0 mb-2">{tier.label}</h4>
                     <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold m-0">{isKo ? tier.descKo : tier.descEn}</p>
                   </div>
                   <span className="text-[10px] text-[#ff2b75]/95 font-bold border border-[#ff2b75]/20 bg-[#ff2b75]/5 px-2 py-0.5 rounded-[4px] self-start">
@@ -263,7 +263,7 @@ export default function Article4FtStartPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "이를 통해 신규 K-Beauty 유입 고객의 첫 트라이를 확보(Entry)하면서도, 단골 고객층의 재구매 매출 볼륨을 견인(Core)하고 고마진의 고단가 단위를 확보(Premium)할 수 있습니다."
+                ? "이를 통해 K-Beauty를 처음 시험 구매하는 입문 고객을 확보(Entry)하는 동시에, 주력 매출 규모를 확보하고(Core), 기능성 고단가 단위를 유도하여(Premium) 객단가 상승을 꾀할 수 있습니다."
                 : "This pricing mix ensures you capture new shoppers with low-risk entry items while scaling ticket size via high-margin core formulas."
               }
             </p>
@@ -271,22 +271,22 @@ export default function Article4FtStartPage({ params }: PageProps) {
 
           {/* Pull Quote */}
           <div className="border-l-4 border-[#ff2b75] pl-6 my-10 select-none">
-            <p className="text-[16px] sm:text-[18px] font-black text-white italic leading-relaxed m-0 keep-all">
+            <p className="text-[15.5px] sm:text-[17px] font-black text-white italic leading-relaxed m-0 keep-all">
               {isKo
-                ? "“도매(Wholesale) 거래에서 중요한 것은 단가 흥정이 아닙니다. 그 제품이 매대 면적당 얼마의 속도로 회전하여 순현금을 창출해 주는지가 본질입니다.”"
+                ? "“도매 납품 거래에서 핵심은 단순히 공급 단가를 깎는 흥정이 아닙니다. 그 제품이 매대 면적당 얼마의 속도로 회전하여 순현금을 창출해 주는지가 소매의 본질입니다.”"
                 : "“The key to retail inventory is not negotiating a slightly cheaper cost, but ensuring that capital moves off shelves at maximum speed.”"
               }
             </p>
           </div>
 
           {/* SECTION 04 */}
-          <div ref={sec4Ref} className={`mb-14 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              04. 첫 주문보다 중요한 것은 첫 재주문입니다.
+          <div ref={sec4Ref} className={`mb-12 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              04. 첫 주문(Initial Order)보다 중요한 것은 첫 재주문(Reorder)입니다.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "많은 유통업체들이 첫 납품 계약에만 집중하지만, 리테일러 입장에서 중요한 것은 '첫 리오더(Reorder)가 언제 일어나는가'입니다. 초기 4FT 런칭 이후 첫 90일 동안 다음의 재고 흐름을 주기적으로 진단해야 합니다."
+                ? "많은 유통 벤더들이 매장 입점과 첫 공급 물량에만 집중합니다. 그러나 리테일러 입장에서 중요한 핵심은 '첫 리오더(Reorder)가 얼마나 신속하고 순조롭게 발생하느냐'입니다. 매대 구축 이후 첫 90일 동안 다음의 판매 데이터를 주기적으로 추적하여 공급망을 진단해야 합니다.<sup>[2]</sup>"
                 : "Initial buys mean nothing without replenishment. True retail success is marked by when the first reorder takes place. Owners must track inventory flows across a structured timeline:"
               }
             </p>
@@ -294,14 +294,14 @@ export default function Article4FtStartPage({ params }: PageProps) {
             {/* Inventory Timeline Widget */}
             <div className="bg-[#121214] border border-white/5 rounded-[20px] p-6 my-6 select-none flex flex-col gap-5 text-left text-xs font-black">
               {[
-                { title: "DAY 30", descKo: "초기 판매 성과(Early Sell-Through) 식별 및 매장 고객 반응 확인", descEn: "First-month sell-through check & early customer response data" },
-                { title: "DAY 60", descKo: "주요 인기 상품의 품절 방지를 위한 리오더(Reorder) 추천 실행", descEn: "Trigger reorders on fast-rotating SKUs to avoid stock-outs" },
-                { title: "DAY 90", descKo: "부진 상품의 Exchange Credit 신청 및 매장 Assortment 정밀 최적화", descEn: "Exchange slow items for proven SKUs via 90-Day Exchange Credit" }
+                { title: "DAY 30 - Early Signal", descKo: "초기 30일 간의 완판 속도를 통한 고객 반응 조기 경보 파악", descEn: "First-month sell-through check & early customer response data" },
+                { title: "DAY 60 - Reorder Behavior", descKo: "60일 시점의 잔존 수량 분석으로 실질 보충(리오더) 발주 시기 확정", descEn: "Trigger reorders on fast-rotating SKUs to avoid stock-outs" },
+                { title: "DAY 90 - Optimize & Swap", descKo: "90일 시점에 도달한 부진 재고의 90-Day Exchange Credit 발동 여부 검토", descEn: "Exchange slow items for proven SKUs via 90-Day Exchange Credit" }
               ].map((item, idx) => (
                 <div key={idx} className="flex gap-4.5 items-start">
-                  <span className="text-[#00f0ff] font-display text-[14px] leading-none pt-0.5">{item.title}</span>
+                  <span className="text-[#00f0ff] font-display text-[13.5px] leading-none pt-0.5">{item.title}</span>
                   <div className="flex flex-col gap-1">
-                    <span className="text-white text-[13px]">{isKo ? item.descKo : item.descEn}</span>
+                    <span className="text-white text-[13px] font-bold">{isKo ? item.descKo : item.descEn}</span>
                   </div>
                 </div>
               ))}
@@ -309,32 +309,32 @@ export default function Article4FtStartPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "30일 내에 초기 데이터 반응을 확보하고, 60일 경과 시점에 주력 SKU의 공백을 막는 리오더를 배치하며, 90일 단계에서 판매율이 기준선(50%) 이하인 품목을 타 상품으로 교환하여 재고가 묶이는 리스크를 선제 통제해야 합니다."
+                ? "30일 내에 초기 데이터 반응을 식별하고, 60일이 경과하는 시점에 주력 SKU의 공백을 막는 보충 발주를 연동하며, 90일 단계에서 판매율(Sell-through)이 기준선(50% 미만) 이하인 품목을 타 인기 품목으로 교환하여 재고가 묶이는 리스크를 선제 제어해야 합니다."
                 : "By mapping metrics across 30, 60, and 90 days, you mitigate risk and keep the store's cash flow moving smoothly."
               }
             </p>
           </div>
 
           {/* SECTION 05 */}
-          <div ref={sec5Ref} className={`mb-14 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              05. 모든 매장에 같은 4FT가 들어가서는 안 됩니다.
+          <div ref={sec5Ref} className={`mb-12 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              05. 모든 매장에 동일한 4FT 매대 구성이 들어가서는 안 됩니다.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "상권과 방문 고객 유형에 따라 선반 구성은 완전히 달라져야 합니다. K SELECT HUB는 각 매장의 정밀 분석 결과와 성장 시뮬레이터를 기반으로 고유한 큐레이션 유형인 Assortment Profile(AP)을 정의합니다."
+                ? "매장 주변 상권과 방문 고객 유형에 따라 선반 구성(Assortment)은 완전히 다르게 설계되어야 합니다. K SELECT HUB는 각 매장의 정밀 분석 결과와 성장 시뮬레이터를 기반으로 고유한 큐레이션 유형인 어소트먼트 프로필(AP)을 정의합니다."
                 : "Demographics determine shelf layout. K SELECT HUB uses a proprietary Assortment Profile (AP) system to guide shelf configuration:"
               }
             </p>
 
             {/* AP Grid Items */}
-            <div className="grid sm:grid-cols-2 gap-3 my-6 select-none text-left">
+            <div className="grid sm:grid-cols-2 gap-3 my-6 select-none text-left font-bold">
               {apTypes.map((ap, idx) => (
                 <div key={idx} className="bg-[#121214] border border-white/5 p-4 rounded-[12px] flex items-center gap-4">
                   <span className="text-[10px] text-[#ff2b75] font-black tracking-widest font-display bg-[#ff2b75]/5 border border-[#ff2b75]/20 px-2 py-0.5 rounded-[4px]">
                     {ap.name}
                   </span>
-                  <span className="text-[12.5px] text-[#9ca3af] font-semibold leading-none">
+                  <span className="text-[12.5px] text-[#9ca3af] leading-none">
                     {isKo ? ap.descKo : ap.descEn}
                   </span>
                 </div>
@@ -343,7 +343,7 @@ export default function Article4FtStartPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "AP는 단순한 분류 명칭이 아닙니다. '우리 매장에는 어떤 K-Beauty 배치와 브랜드 포지셔닝이 매출에 적합한가?'에 답하는 현장의 기준입니다. 매장 환경에 맞는 올바른 큐레이션 비율이 적용될 때, 4FT 공간의 성과가 극대화됩니다."
+                ? "어소트먼트 프로필(AP)은 단순한 분류 명칭이 아닙니다. '우리 매장에는 어떤 K-Beauty 구성 방향과 진열 방식이 매출을 극대화하는가?'에 답하는 현장의 기준입니다. 매장 환경에 맞는 올바른 큐레이션 비율이 적용될 때, 4FT 공간의 성과가 배가됩니다."
                 : "These profiles are actionable store templates designed to align shelf layouts directly with local shopping behavior."
               }
             </p>
@@ -359,7 +359,7 @@ export default function Article4FtStartPage({ params }: PageProps) {
             <span className="text-[10px] text-[#ff2b75] font-black tracking-[0.2em] uppercase font-display block mb-2 select-none">
               RETAILER CHECKLIST
             </span>
-            <h3 className="text-[18px] sm:text-[21px] font-black text-white m-0 mb-6 keep-all">
+            <h3 className="text-[17.5px] sm:text-[20px] font-black text-white m-0 mb-6 keep-all">
               {isKo ? "처음 K-Beauty를 시작한다면 이 다섯 가지부터 확인하세요." : "Five questions before you launch K-Beauty:"}
             </h3>
             
@@ -379,7 +379,7 @@ export default function Article4FtStartPage({ params }: PageProps) {
             </div>
 
             <div className="border-t border-white/10 pt-6 mt-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="font-display font-black text-sm text-[#ff2b75] uppercase tracking-wider select-none">
+              <span className="font-display font-black text-xs sm:text-sm text-[#ff2b75] uppercase tracking-wider select-none">
                 Not Every Store Needs the Same 4FT.
               </span>
               <Link
@@ -391,15 +391,25 @@ export default function Article4FtStartPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* SOURCES SECTION */}
-          <div className="border-t border-white/10 pt-8 mt-16 text-[11px] text-[#7A7A7A] font-bold select-none">
-            <span className="block text-white/50 tracking-wider uppercase font-display mb-2">SOURCES & REFERENCES</span>
-            <ul className="list-disc pl-4 space-y-1.5 leading-normal">
-              <li>Korea Ministry of Food and Drug Safety (MFDS) Export Statistics 2024-2025</li>
-              <li>Circana Beauty Industry Market Research & Consumer Trends Report</li>
-              <li>U.S. Food and Drug Administration (FDA) MoCRA Compliance Guideline</li>
-              <li>Retail Management Association Inventory Turn Benchmarks</li>
-            </ul>
+          {/* SOURCES & REFERENCES SECTION */}
+          <div className="border-t border-white/10 pt-8 mt-16 text-[12px] text-[#7A7A7A] select-none font-medium">
+            <span className="block text-white/50 tracking-wider uppercase font-display text-[10px] font-black mb-3">SOURCES & REFERENCES</span>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">01</span>
+                <div>
+                  <span className="text-white/90 font-bold block">대한민국 식품의약품안전처 (MFDS)</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">2024-2025년 한국 화장품 수출액 통계 분석 및 국가별 무역 자료</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">02</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Retail Management Association</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">미국 화장품·소매점 카테고리 운영 및 평균 재고 회전(Inventory Turn) 벤치마크 지표 리포트 (2024)</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         </section>

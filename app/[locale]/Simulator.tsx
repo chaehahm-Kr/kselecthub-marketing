@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { QUESTIONS, QuestionConfig, AnswerChoice } from "./SimulatorQuestions";
-import { simulateGrowth, SimulationResult } from "./SimulatorAdapter";
+import { fetchSimulation, registerEmailForSimulation, convertLabelsToOptionIds, SimulationResult } from "./SimulatorAdapter";
 
 interface SimulatorProps {
   locale?: string;
@@ -11,11 +11,18 @@ interface SimulatorProps {
 
 export default function Simulator({ locale = "ko" }: SimulatorProps) {
   // Simulator State
-  const [step, setStep] = useState<"intro" | "assessment" | "transition" | "results" | "review">("intro");
+  const [step, setStep] = useState<"intro" | "assessment" | "transition" | "results" | "review" | "error">("intro");
   
   // Guided Assessment States
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
+  
+  // Asynchronous API simulation result states
+  const [mainRecommendation, setMainRecommendation] = useState<SimulationResult | null>(null);
+  const [alternativeRecommendation, setAlternativeRecommendation] = useState<SimulationResult | null>(null);
+  const [apiCompleted, setApiCompleted] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [emailSending, setEmailSending] = useState<boolean>(false);
   
   // Results UI States
   const [activeResultTab, setActiveResultTab] = useState<"display" | "product" | "financial">("display");
@@ -200,10 +207,45 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
     handleNext();
   };
 
-  // Handle analysis loader sequential simulation
+  // Handle analysis loader sequential simulation & API calculation fetch
   useEffect(() => {
     if (step !== "transition") return;
+    
     setTransitionStage(0);
+    setApiCompleted(false);
+    setApiError(null);
+
+    const visibleQuestionIds = visibleQuestions.map(q => q.id);
+    const cleanMainAnswers = convertLabelsToOptionIds(answers, visibleQuestionIds);
+
+    const cleanAltAnswers = { ...cleanMainAnswers };
+    cleanAltAnswers.Q2 = (cleanMainAnswers.Q2 === "Q2_A1") ? "Q2_A2" : "Q2_A1";
+    cleanAltAnswers.Q22 = "Q22_A1";
+
+    let apiSuccess = false;
+    let mainRes: SimulationResult | null = null;
+    let altRes: SimulationResult | null = null;
+
+    const fetchResults = async () => {
+      try {
+        const [main, alt] = await Promise.all([
+          fetchSimulation(cleanMainAnswers),
+          fetchSimulation(cleanAltAnswers)
+        ]);
+        mainRes = main;
+        altRes = alt;
+        apiSuccess = true;
+        setMainRecommendation(main);
+        setAlternativeRecommendation(alt);
+      } catch (err: any) {
+        console.error("API simulation error:", err);
+        setApiError(err.message || "Failed to run growth simulation.");
+      } finally {
+        setApiCompleted(true);
+      }
+    };
+
+    fetchResults();
 
     const interval = setInterval(() => {
       setTransitionStage(prev => {
@@ -211,34 +253,44 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
           return prev + 1;
         } else {
           clearInterval(interval);
-          setTimeout(() => {
-            setStep("results");
-          }, 600);
           return prev;
         }
       });
     }, 450);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [step]);
 
-  // Compute Recommendations using adapter
-  const mainRecommendation: SimulationResult = useMemo(() => {
-    return simulateGrowth(answers);
-  }, [answers]);
-
-  // Alternative suggestion result
-  const alternativeRecommendation: SimulationResult = useMemo(() => {
-    const mockAltAnswers = { ...answers, Q2: (answers.Q2 || "").includes("4FT") ? "약 8FT" : "약 4FT", Q22: "$2,000 미만" };
-    return simulateGrowth(mockAltAnswers);
-  }, [answers]);
+  // Transition to results or error state once both animation and API call finish
+  useEffect(() => {
+    if (step !== "transition") return;
+    
+    const isAtLastMessage = transitionStage === transitionMessages.length - 1;
+    if (isAtLastMessage && apiCompleted) {
+      setTimeout(() => {
+        if (apiError) {
+          setStep("error");
+        } else if (mainRecommendation && alternativeRecommendation) {
+          setStep("results");
+        }
+      }, 300);
+    }
+  }, [step, transitionStage, apiCompleted, apiError, mainRecommendation, alternativeRecommendation]);
 
   // Store recommended investment for CtaForm integration
   useEffect(() => {
     if (step === "results" && mainRecommendation) {
+      localStorage.setItem("kselect_recommended_config", mainRecommendation.display.program);
       localStorage.setItem("kselect_simulator_investment", mainRecommendation.display.investment.toString());
+      localStorage.setItem("kselect_simulator_id", mainRecommendation.simulation_id);
       window.dispatchEvent(new CustomEvent("kselect_simulator_recommend", {
-        detail: { investment: mainRecommendation.display.investment }
+        detail: { 
+          configName: mainRecommendation.display.program,
+          investment: mainRecommendation.display.investment,
+          simulationId: mainRecommendation.simulation_id
+        }
       }));
     }
   }, [step, mainRecommendation]);
@@ -256,13 +308,15 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   };
 
   const handleReviewAnswers = () => {
-    setPrevRecommendationConfig(mainRecommendation.display.program);
+    if (mainRecommendation) {
+      setPrevRecommendationConfig(mainRecommendation.display.program);
+    }
     setStep("review");
   };
 
   // Compare recommendation after reanalysis transition
   useEffect(() => {
-    if (step === "results" && prevRecommendationConfig) {
+    if (step === "results" && prevRecommendationConfig && mainRecommendation) {
       if (mainRecommendation.display.program === prevRecommendationConfig) {
         setReanalyzedNotice("변경된 조건을 반영해 다시 분석했으며, 현재 추천안이 여전히 Best Fit으로 평가되었습니다.");
       } else {
@@ -626,6 +680,49 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
         </div>
       )}
 
+      {step === "error" && (
+        <div className="w-full max-w-[500px] mx-auto bg-[#121214] border border-white/10 rounded-[24px] p-8 sm:p-12 shadow-2xl text-center flex flex-col items-center justify-center gap-6 min-h-[350px] animate-fade-in">
+          <div className="relative w-16 h-16 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border-4 border-white/5 border-t-[#ff2b75]" />
+            <span className="text-[28px] select-none">⚠️</span>
+          </div>
+          
+          <div className="flex flex-col gap-1.5 mt-2">
+            <span className="text-[10px] font-black text-[#ff2b75] tracking-[0.15em] uppercase font-display">
+              CALCULATOR ENGINE ERROR
+            </span>
+            <h3 className="text-[16px] font-extrabold text-white tracking-tight">
+              {locale === "ko" ? "분석 결과를 생성하는 중 문제가 발생했습니다." : "An error occurred while generating your analysis."}
+            </h3>
+            <p className="text-xs text-white/50 leading-relaxed font-semibold mt-1">
+              {locale === "ko" ? "잠시 후 다시 시도해 주세요." : "Please try again in a moment."}
+            </p>
+            {apiError && (
+              <p className="text-[10px] text-white/30 font-mono mt-2 bg-black/30 p-2 rounded max-h-[80px] overflow-auto w-full text-left">
+                Error Detail: {apiError}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-3 w-full max-w-[200px]">
+            <button
+              onClick={() => {
+                setStep("transition");
+              }}
+              className="h-11 w-full inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
+            >
+              {locale === "ko" ? "재시도 (Retry)" : "Retry"}
+            </button>
+            <button
+              onClick={handleRestart}
+              className="h-11 w-full inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
+            >
+              {locale === "ko" ? "처음으로 (Go Home)" : "Go Home"}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ============================================================== */}
       {/* 4. RESULTS VIEW DASHBOARD                                     */}
       {/* ============================================================== */}
@@ -982,7 +1079,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
 
 
-          {showAlternative && (
+          {showAlternative && alternativeRecommendation && (
             <div className="bg-[#121214]/60 border border-white/10 rounded-[18px] p-6.5 sm:p-8 shadow-inner animate-slide-up flex flex-col gap-6 mt-4">
               <div className="flex justify-between items-start gap-4">
                 <div className="flex flex-col gap-1 text-left">
@@ -1188,14 +1285,27 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   </div>
                 ) : (
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
                       if (!emailFormConsent) {
                         alert("이메일 수신 동의가 필요합니다.");
                         return;
                       }
-                      setEmailFormSubmitted(true);
-                      setEmailSuccessMessage("이메일 발송 대기열에 등록되었습니다. (시뮬레이션)");
+                      if (!mainRecommendation?.simulation_id) {
+                        alert("유효한 시물레이션 ID가 없습니다.");
+                        return;
+                      }
+                      try {
+                        setEmailSending(true);
+                        await registerEmailForSimulation(mainRecommendation.simulation_id, emailForm.email);
+                        setEmailSuccessMessage("이메일 발송 대기열에 등록되었습니다. (실제 데이터 연동 완료)");
+                        setEmailFormSubmitted(true);
+                      } catch (err: any) {
+                        console.error("Failed to register email:", err);
+                        alert(`이메일 등록 중 오류가 발생했습니다: ${err.message || err}`);
+                      } finally {
+                        setEmailSending(false);
+                      }
                     }}
                     className="flex flex-col gap-4"
                   >
@@ -1283,9 +1393,10 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     <div className="flex gap-3 mt-4">
                       <button
                         type="submit"
-                        className="h-12 flex-1 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] rounded-[8px] font-black text-[13.5px] cursor-pointer transition-colors shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                        disabled={emailSending}
+                        className="h-12 flex-1 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] rounded-[8px] font-black text-[13.5px] cursor-pointer transition-colors shadow-[0_0_15px_rgba(34,211,238,0.25)] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        내 분석 결과 보내기
+                        {emailSending ? "보내는 중..." : "내 분석 결과 보내기"}
                       </button>
                       <button
                         type="button"

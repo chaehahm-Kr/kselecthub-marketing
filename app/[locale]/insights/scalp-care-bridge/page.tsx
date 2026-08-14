@@ -49,10 +49,10 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
   const [actionRef, actionVisible] = useIntersectionReveal();
 
   const productGroups = [
-    { label: "CLEANSE", descKo: "Scalp Shampoo / Scalp Scaling", descEn: "Scalp Shampoo / Scalp Scaling formulas", badgeKo: "두피 스케일링", badgeEn: "Exfoliation" },
-    { label: "TREAT", descKo: "Scalp Serum / Tonic / Ampoule", descEn: "Scalp Serum / Tonic / Ampoule treatments", badgeKo: "영양 공급", badgeEn: "Nutrition" },
-    { label: "CARE", descKo: "Scalp Mask / Treatment", descEn: "Scalp Mask / Deep Treatment packs", badgeKo: "모발·모근 진정", badgeEn: "Soothing" },
-    { label: "TOOL", descKo: "Scalp Brush / Massager", descEn: "Scalp Brush / Massaging Tools", badgeKo: "순환 마사지", badgeEn: "Massage" }
+    { label: "CLEANSE", descKo: "두피 전용 샴푸 / 두피 딥클렌저", descEn: "Scalp Shampoo / Scalp Scaling formulas", badgeKo: "두피 스케일링", badgeEn: "Exfoliation" },
+    { label: "TREAT", descKo: "두피 세럼 / 토닉 / 앰플", descEn: "Scalp Serum / Tonic / Ampoule treatments", badgeKo: "영양 공급", badgeEn: "Nutrition" },
+    { label: "CARE", descKo: "두피 팩 / 헤어 트리트먼트", descEn: "Scalp Mask / Deep Treatment packs", badgeKo: "두피·모근 진정", badgeEn: "Soothing" },
+    { label: "TOOL", descKo: "두피 브러쉬 / 마사지 툴", descEn: "Scalp Brush / Massaging Tools", badgeKo: "순환 마사지", badgeEn: "Massage" }
   ];
 
   const routineSteps = [
@@ -83,7 +83,7 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
                 : "Scalp Care: Can We Bridge Hair Customers to K-Beauty Customers?"
               }
             </h1>
-            <p className="text-[14px] sm:text-[16px] text-[#9ca3af] leading-relaxed font-semibold m-0 mt-2 keep-all">
+            <p className="text-[14px] sm:text-[16px] text-white/60 leading-relaxed font-medium m-0 mt-2 keep-all">
               {isKo
                 ? "Beauty Supply가 이미 잘 알고 있는 Hair 고객. K-Beauty의 새로운 성장 기회는 그 고객에게서 시작될 수도 있습니다."
                 : "Connect with the hair shoppers already in your store. The next growth frontier in K-Beauty starts from existing hair routines."
@@ -114,19 +114,19 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
         </section>
 
         {/* ================= MAIN ARTICLE BODY ================= */}
-        <section className="max-w-[760px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15.5px] text-[#d1d5db] leading-relaxed font-medium pb-24">
+        <section className="max-w-[700px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15px] text-white/80 leading-relaxed font-normal pb-24">
           
           {/* INTRO */}
-          <div className="flex flex-col gap-5 mb-14 text-white font-semibold">
-            <p className="m-0 keep-all text-[16px] sm:text-[17.5px] leading-relaxed">
+          <div className="flex flex-col gap-5 mb-12 text-white/90">
+            <p className="m-0 keep-all text-[15.5px] sm:text-[17px] leading-relaxed font-medium">
               {isKo
-                ? "글로벌 헤어케어 시장에서 '두피 건강(Scalp Health)'과 '헤어 세그먼트 트리트먼트'에 대한 관심이 급상승하고 있습니다."
+                ? "글로벌 헤어케어 시장에서 '두피 건강'과 '헤어 세그먼트 트리트먼트'에 대한 관심이 급상승하고 있습니다."
                 : "Across the global haircare market, scalp health and targeted treatments are experiencing unprecedented sales growth."
               }
             </p>
             <p className="m-0 keep-all">
               {isKo
-                ? "뷰티 서플라이 스토어 오너들에게 이 트렌드가 반가운 이유는 완전히 새로운 가상의 소비자층을 모셔와야 하는 카테고리가 아니기 때문입니다. 이미 우리 매장에 매일 방문하여 모발, 가발, 샴푸를 구매해가는 단골 '헤어(Hair) 케어 고객'들이 이미 현장에 발을 들이고 있기 때문입니다."
+                ? "뷰티 서플라이 스토어 오너들에게 이 트렌드가 유난히 기회인 이유는 완전히 새로운 유형의 소비자를 매장에 끌어와야 하는 카테고리가 아니기 때문입니다. 이미 매장에 매일 방문하여 모발, 가발, 일반 샴푸를 구매해가는 단골 헤어(Hair) 고객들이 이미 현장에 존재하기 때문입니다."
                 : "For local store owners, this is highly promising: it doesn't require acquiring a new customer demographic. The hair shoppers already in your aisles are the target audience."
               }
             </p>
@@ -135,7 +135,7 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
               <span className="block text-[11px] font-black text-[#ff2b75] tracking-widest uppercase font-display mb-1.5">MARKET SIGNAL</span>
               <p className="m-0 text-[14px] text-white font-black leading-normal keep-all">
                 {isKo
-                  ? "이미 매장에 있는 검증된 헤어 소비층을 두피 건강 루틴인 K-Scalp Care와 연결할 때, 매대의 객단가는 빠르게 상승합니다."
+                  ? "이미 확보된 헤어 소비층을 두피 건강 루틴인 K-Scalp Care와 연결할 때, 매대의 객단가는 자연스럽게 상승합니다."
                   : "Bridging your existing hair clientele to K-Beauty scalp care unlocks high basket sizes without extra marketing acquisition costs."
                 }
               </p>
@@ -143,13 +143,14 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
           </div>
 
           {/* SECTION 01 */}
-          <div ref={sec1Ref} className={`mb-14 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              01. Hair와 Skincare 사이에 새로운 Bridge가 생기고 있습니다.
+          <div ref={sec1Ref} className={`mb-12 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              01. 헤어(Hair)와 스킨케어(Skincare)를 연결하는 새로운 카테고리가 만들어지고 있습니다.
+              <span className="block text-[11px] font-bold text-[#ff2b75] tracking-widest uppercase font-display mt-1">HAIR × SKINCARE BRIDGE</span>
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "현대 소비자들은 얼굴 피부에 클렌징(Cleanse), 치료/영양(Treat), 보습(Moisturize)으로 이어지는 스킨케어 루틴을 지극히 상식적으로 인지하고 있습니다. 이러한 인식이 헤어케어 영역으로 확장되면서 '두피(Scalp) 역시 씻고 영양을 주고 지속 관리(Maintain)해야 하는 스킨의 연장선'이라는 이른바 '헤어의 스킨화(Skinification of Hair)' 트렌드가 강력하게 자리 잡았습니다."
+                ? "현대 소비자들은 얼굴 피부에 클렌징, 영양 공급, 보습으로 이어지는 스킨케어 단계를 지극히 상식적으로 이해하고 있습니다. 이러한 관점이 헤어 영역으로 확장되면서 “두피도 피부처럼 관리한다”는 인식이 강력하게 자리잡았습니다.<sup>[1]</sup>"
                 : "Shoppers understand the facial skincare routine: Cleanse, Treat, and Moisturize. As hair-care undergoes skinification, the scalp is viewed as an extension of the skin itself:"
               }
             </p>
@@ -169,29 +170,29 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "이 연결고리는 리테일러에게 아주 매력적인 기회입니다. 기존 샴푸나 컨디셔너 단품 구매에 그치던 소비 행동에 '두피 건강'이라는 에드온 루틴을 얹어주기 때문입니다."
+                ? "이 연결고리는 소매점주에게 매우 매력적인 기회입니다. 기존 샴푸나 컨디셔너 단품 구매에 그치던 소비 행동에 '두피 케어'라는 에드온 루틴을 추가로 얹어주어 매출을 극대화하기 때문입니다."
                 : "This shift allows store owners to cross-sell supplemental items alongside standard shampoos and conditioners."
               }
             </p>
           </div>
 
           {/* SECTION 02 */}
-          <div ref={sec2Ref} className={`mb-14 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              02. Beauty Supply에서는 더 자연스럽게 시작할 수 있습니다.
+          <div ref={sec2Ref} className={`mb-12 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              02. 뷰티 서플라이 매장에서는 더 자연스러운 시작이 가능합니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "소비자에게 복잡한 전문 생화학 메커니즘을 긴 텍스트로 강요하는 대신, 기존에 하고 있던 일상적인 모발 관리 행위와 결부시켜 '설명 순서'를 제시하는 것만으로도 자연스럽게 수용됩니다."
+                ? "소비자에게 복잡한 전문 유기화학 기전을 설명하려 애쓰는 대신, 기존에 하고 있던 일상적인 모발 관리 행위와 연계하여 설명하는 것만으로도 충분히 설득력을 얻습니다."
                 : "Rather than forcing complex science on shoppers, connect K-Beauty scalp care to their existing hair habits:"
               }
             </p>
             
             {/* Quote block */}
-            <div className="border-l-4 border-[#00f0ff] pl-5 my-6 select-none font-semibold text-white/90">
-              <p className="m-0 leading-relaxed italic keep-all text-[13.5px] sm:text-[14.5px]">
+            <div className="border-l-4 border-[#00f0ff] pl-5 my-6 select-none font-semibold text-white/95">
+              <p className="m-0 leading-relaxed italic keep-all text-[13.5px] sm:text-[14px]">
                 {isKo
-                  ? "“매일 머리를 감기 전, 두피에 바르고 마사지하여 묵은 각질을 녹여내는 스케일러 제품입니다.”\n“머리를 감고 말리기 직전 두피에 뿌려 열감을 식혀주는 쿨링 토닉입니다.”"
+                  ? "“매주 머리를 감기 전, 두피에 바르고 마사지하여 쌓여 있는 노폐물과 굳은 각질을 녹여내는 두피 스케일러 제품입니다.”\n“머리를 감고 말리기 직전 두피에 뿌려 뜨거워진 열감을 즉각 식혀주는 두피 토닉입니다.”"
                   : "“Apply this scaler to dissolve buildup before you wash. Spray this cooling tonic onto damp scalp after you wash to reduce heat.”"
                 }
               </p>
@@ -199,24 +200,24 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
           </div>
 
           {/* SECTION 03 */}
-          <div ref={sec3Ref} className={`mb-14 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              03. 어떤 제품부터 테스트할까?
+          <div ref={sec3Ref} className={`mb-12 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              03. 어떤 제품군부터 시범 도입해야 할까요?
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "K-Scalp Care 카테고리를 시험 도입할 때는 다음 4가지 핵심 포지션 제품을 균형 있게 섞는 것이 안정적입니다."
+                ? "두피 관리 제품군을 점포에 처음 도입할 때는 다음 4가지 핵심 카테고리 역할을 균형 있게 믹스하는 것이 재고 관리 측면에서 가장 안전합니다."
                 : "When testing scalp care inside your store, structure the selection into four distinct operational blocks:"
               }
             </p>
 
             {/* 4 Product Groups Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 my-6 select-none">
+            <div className="grid sm:grid-cols-2 gap-4 my-6 select-none font-medium">
               {productGroups.map((g, idx) => (
                 <div key={idx} className="bg-[#121214] border border-white/5 p-5 rounded-[16px] flex flex-col justify-between gap-3">
                   <div>
                     <span className="text-[10px] font-black text-[#ff2b75] tracking-widest font-display block mb-1">{g.label}</span>
-                    <h4 className="text-[15px] font-black text-white m-0">{g.descKo}</h4>
+                    <h4 className="text-[14px] font-black text-white m-0">{g.descKo}</h4>
                   </div>
                   <span className="text-[10.5px] text-[#00f0ff] font-bold border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-2 py-0.5 rounded-[4px] self-start">
                     {isKo ? g.badgeKo : g.badgeEn}
@@ -231,7 +232,7 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-xs font-black text-white/95">
                 {routineSteps.map((step, idx) => (
                   <div key={idx} className="bg-[#0c0c0c] border border-white/10 rounded-[8px] p-3 flex flex-col gap-1.5">
-                    <span className="text-[#ff2b75] text-[9.5px] tracking-wider font-display">{step.title}</span>
+                    <span className="text-[#ff2b75] text-[9px] tracking-wider font-display">{step.title}</span>
                     <span className="text-[11px] leading-tight text-white/80">{isKo ? step.descKo : step.descEn}</span>
                   </div>
                 ))}
@@ -240,26 +241,26 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
           </div>
 
           {/* SECTION 04 */}
-          <div ref={sec4Ref} className={`mb-14 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              04. 어디에 진열할 것인가도 중요합니다.
+          <div ref={sec4Ref} className={`mb-12 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              04. 매대 내에서 어디에 진열할 것인가가 핵심입니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "두피 관리 라인을 일반 스킨케어 선반 구석에 방치하면 헤어 중심의 소비자들이 발견하기 힘듭니다. 반대로 일반 샴푸 매대 사이에 흩뿌려 두면 K-Beauty 고유의 고급감이나 솔루션의 성격이 묻혀 버립니다. 따라서 초기 설치 시 'HAIR CARE × K-BEAUTY'의 성격을 가지는 '브릿지(Bridge) 테마 섹션'으로 구획하여 별도 기획 진열을 세우는 것이 성공 가능성을 가장 높일 수 있습니다."
+                ? "두피 전용 상품을 일반 스킨케어 진열대 구석에 방치하면 주 고객층인 헤어 구매자가 발견하기 어렵습니다. 반대로 저가 일반 샴푸 매대 사이에 분산 배치하면 K-Beauty 고유의 고급감이나 솔루션의 성격이 묻혀 버립니다. 따라서 설치 시 'HAIR CARE × K-BEAUTY'의 성격을 가지는 '브릿지 테마 섹션'으로 구획하여 전용 진열 조닝을 확립해야 성공 가능성을 높일 수 있습니다."
                 : "Shelf layout dictates shopper discovery. Tucking scalp care away in standard skincare hides it from hair buyers. Separating it as a cross-over K-Beauty Bridge section yields the highest sales velocity."
               }
             </p>
           </div>
 
           {/* SECTION 05 */}
-          <div ref={sec5Ref} className={`mb-14 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              05. 설명할 수 없는 상품은 팔기 어렵습니다.
+          <div ref={sec5Ref} className={`mb-12 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              05. 용도를 명확히 설명할 수 있어야 구매로 이어집니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "K-Scalp Care는 신규 유입층이 많아 질문 저항이 큰 편입니다. 고객이 '언제 사용하나요?', '샴푸 전인가요 후인가요?', '매일 사용해도 안전한가요?'라고 물을 때, 점원이나 매대 장치(QR 가이드, 패키징 가이드)가 명확한 사용 가이드를 제공할 수 있어야만 리오더 매출이 고착화됩니다."
+                ? "K-Scalp Care는 새로 진입하는 단계이기 때문에 제품 사용 방식에 대한 고객 문의 장벽이 높은 편입니다. 고객이 '언제 사용하나요?', '샴푸 전에 쓰나요 후인가요?', '매일 사용해도 안전한가요?'라고 물을 때, 매장 점원이 명확한 대답을 해줄 수 있거나 매대 모바일 QR 안내 가이드가 비치되어 있어야만 리오더 매출이 고착화됩니다.<sup>[2]</sup>"
                 : "Scalp products trigger questions: When do I apply it? Daily? Is it safe for color-treated hair? Providing staff learning and mobile QR guides is crucial to ensure steady reorders."
               }
             </p>
@@ -267,14 +268,14 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
             {/* Q&A grid visual */}
             <div className="bg-[#121214] border border-white/10 rounded-[20px] p-6 my-6">
               <span className="block text-[10px] text-[#00f0ff] font-black tracking-widest uppercase font-display mb-4">RETAILER RUNBOOKS</span>
-              <div className="flex flex-wrap gap-2 text-[11px] font-extrabold text-[#9ca3af] select-none">
+              <div className="flex flex-wrap gap-2 text-[11px] font-extrabold text-[#9ca3af] select-none font-bold">
                 {["언제 사용하나요?", "Shampoo 전인가요, 후인가요?", "매일 써도 되나요?", "어떤 두피 타입에 맞나요?", "다른 Hair 제품과 혼용 가능한가요?"].map((q, idx) => (
                   <span key={idx} className="bg-[#0c0c0c] border border-white/5 px-3 py-1.5 rounded-[6px]">
                     {q}
                   </span>
                 ))}
               </div>
-              <div className="mt-5 border-t border-white/5 pt-4 text-[12.5px] text-[#ff2b75] font-black flex items-center justify-between gap-4">
+              <div className="mt-5 border-t border-white/5 pt-4 text-[12px] text-[#ff2b75] font-black flex items-center justify-between gap-4">
                 <span>QR PRODUCT GUIDE + LEARNING MODULES</span>
                 <span className="text-[#00f0ff]">READY TO DEPLOY</span>
               </div>
@@ -291,7 +292,7 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
             <span className="text-[10px] text-[#ff2b75] font-black tracking-[0.2em] uppercase font-display block mb-2 select-none">
               RETAILER CHECKLIST
             </span>
-            <h3 className="text-[18px] sm:text-[21px] font-black text-white m-0 mb-6 keep-all">
+            <h3 className="text-[17.5px] sm:text-[20px] font-black text-white m-0 mb-6 keep-all">
               {isKo ? "두피 케어를 통한 헤어 매출 확장을 위한 5단계 실행 플랜" : "5 Action Items for Scalp Care launch:"}
             </h3>
             
@@ -311,7 +312,7 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
             </div>
 
             <div className="border-t border-white/10 pt-6 mt-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="font-display font-black text-sm text-[#ff2b75] uppercase tracking-wider select-none">
+              <span className="font-display font-black text-xs sm:text-sm text-[#ff2b75] uppercase tracking-wider select-none">
                 The Opportunity May Already Be in Your Store.
               </span>
               <Link
@@ -323,14 +324,25 @@ export default function ArticleScalpCareBridgePage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* SOURCES SECTION */}
-          <div className="border-t border-white/10 pt-8 mt-16 text-[11px] text-[#7A7A7A] font-bold select-none">
-            <span className="block text-white/50 tracking-wider uppercase font-display mb-2">SOURCES & REFERENCES</span>
-            <ul className="list-disc pl-4 space-y-1.5 leading-normal">
-              <li>Circana Global Haircare and Scalp Segment Growth Statistics 2024</li>
-              <li>Korean Dermatological Association Active Ingredients and Scalp Health Review</li>
-              <li>Cosmetic Design USA Trending Hair-Skin Bridge Survey</li>
-            </ul>
+          {/* SOURCES & REFERENCES SECTION */}
+          <div className="border-t border-white/10 pt-8 mt-16 text-[12px] text-[#7A7A7A] select-none font-medium">
+            <span className="block text-white/50 tracking-wider uppercase font-display text-[10px] font-black mb-3">SOURCES & REFERENCES</span>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">01</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Circana (전 NPD 그룹)</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">미국 화장품 시장 및 글로벌 헤어/두피 케어 부문 성장률 통계 분석 리포트 (2024)</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">02</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Cosmetic Design USA</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">스킨화 트렌드와 헤어케어의 융합성(Hair-Skin Bridge) 소매 유통 분석 서베이</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         </section>

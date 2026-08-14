@@ -109,7 +109,7 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
                 : "What Matters More than Good Margins: Inventory Turnover Speed"
               }
             </h1>
-            <p className="text-[14px] sm:text-[16px] text-[#9ca3af] leading-relaxed font-semibold m-0 mt-2 keep-all">
+            <p className="text-[14px] sm:text-[16px] text-white/60 leading-relaxed font-medium m-0 mt-2 keep-all">
               {isKo
                 ? "마진이 높아도 팔리지 않으면 현금은 Shelf 위에 멈춰 있습니다. Retail의 중요한 질문은 “얼마를 남기나?”와 함께 “얼마나 빨리 다시 파나?”입니다."
                 : "Cash remains frozen on shelves if products sit slow. The vital retail diagnostic combines margin size with transaction velocity."
@@ -140,19 +140,19 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
         </section>
 
         {/* ================= MAIN ARTICLE BODY ================= */}
-        <section className="max-w-[760px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15.5px] text-[#d1d5db] leading-relaxed font-medium pb-24">
+        <section className="max-w-[700px] mx-auto px-6 sm:px-12 text-left text-[14.5px] sm:text-[15px] text-white/80 leading-relaxed font-normal pb-24">
           
           {/* INTRO */}
-          <div className="flex flex-col gap-5 mb-14 text-white font-semibold">
-            <p className="m-0 keep-all text-[16px] sm:text-[17.5px] leading-relaxed">
+          <div className="flex flex-col gap-5 mb-12 text-white/90">
+            <p className="m-0 keep-all text-[15.5px] sm:text-[17px] leading-relaxed font-medium">
               {isKo
-                ? "소매점 매대 위에 높고 화려하게 표시된 '마진 수치(Retail Margin)'는 점주들의 가슴을 뛰게 만듭니다."
+                ? "소매점 매대 위에 높게 표시된 마진 수치(Retail Margin)는 점주들의 흥미를 끌기에 충분합니다."
                 : "High markup percentages on wholesale invoices look extremely appealing to store owners."
               }
             </p>
             <p className="m-0 keep-all">
               {isKo
-                ? "하지만 여기에 재고(Inventory) 개념이 투입되는 순간, 소매 경영의 성패를 가르는 근본적인 척도가 추가로 요구됩니다. 바로 “이 마진율을 가진 상품이 실제로 1년에 몇 번이나 팔려 현금으로 회수되는가?” 즉, 재고회전율(Inventory Turnover)에 대한 질문입니다."
+                ? "하지만 여기에 재고(Inventory) 개념이 주입되는 순간 소매 경영의 핵심 척도가 요구됩니다. “이 마진율을 가진 상품이 실제로 1년에 몇 번이나 팔려 다시 현금으로 전환되는가?” 즉, 재고 회전 속도(Inventory Turn)에 대한 질문입니다.<sup>[1]</sup>"
                 : "However, the moment physical stock lands in your store, a second metric becomes vital: How many times does this margin investment turn into cold hard cash over a fiscal year?"
               }
             </p>
@@ -161,7 +161,7 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
               <span className="block text-[11px] font-black text-[#ff2b75] tracking-widest uppercase font-display mb-1.5">RETAIL RULE</span>
               <p className="m-0 text-[14px] text-white font-black leading-normal keep-all">
                 {isKo
-                  ? "재고가 멈춘 매대는 자금을 잠식합니다. 소매의 진정한 승부는 단품 마진 크기(Margin)와 판매 순환 주기(Turnover)의 곱으로 증명됩니다."
+                  ? "재고가 멈춘 매대는 자금을 잠식합니다. 소매의 진정한 승부는 단품 마진 크기(Margin)와 판매 순환 속도(Turnover)의 곱으로 결정됩니다."
                   : "Stagnant shelves tie up precious working capital. True retail performance is the product of Unit Margin multiplied by Turnover Velocity."
                 }
               </p>
@@ -169,40 +169,40 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
           </div>
 
           {/* SECTION 01 */}
-          <div ref={sec1Ref} className={`mb-14 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              01. 매출이 높은 상품과 좋은 재고는 같은 말이 아닙니다.
+          <div ref={sec1Ref} className={`mb-12 transition-all duration-700 transform ${sec1Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              01. 매출액이 높다고 해서 무조건 우수한 재고인 것은 아닙니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "소매 리테일러는 일반적으로 매출 볼륨, 소비자 단가, 상품 마진율을 먼저 들여다봅니다. 하지만 매대 위에 현금이 묶이지 않기 위해서는 '판매 속도와 보충 주기'의 결합이 우선되어야 합니다. 연간 재고회전율(Turnover Rate)은 일정 기간 매장의 평균 재고가 완판되어 신규 재고로 완전히 보충되는 횟수를 뜻합니다. 이 회전 속도가 곧 매장의 자금 건전성입니다."
+                ? "소매 리테일러는 일반적으로 총 매출이나 마진율을 먼저 검토합니다. 그러나 매대 위에 현금이 묶이지 않으려면 '판매 속도와 보충 주기'가 최적화되어야 합니다. 연간 재고회전율(Turnover Rate)은 평균 재고가 완판되어 신규 재고로 완전히 보충되는 횟수를 뜻합니다. 이 회전 속도가 곧 매장 자금 흐름의 건강함입니다."
                 : "Store owners naturally track top-line sales volume. Yet, avoiding cash locks requires understanding replenishment ratios. Inventory turnover is the number of times your average stock is completely sold out and refilled over a period."
               }
             </p>
           </div>
 
           {/* SECTION 02 */}
-          <div ref={sec2Ref} className={`mb-14 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+          <div ref={sec2Ref} className={`mb-12 transition-all duration-700 transform ${sec2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
               02. Margin × Turnover 매트릭스
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "단순히 마진이 크다는 것 하나만으로는 우수한 상품이라 볼 수 없습니다. 자금과 진열 면적이 얼마나 자주 가치 있는 매출로 변환되는지를 입체적으로 매트릭스 분석해야 합니다."
+                ? "단순히 마진이 크다는 사실만으로는 우수한 상품이라 판단할 수 없습니다. 자본과 진열 면적이 얼마나 빨리 새로운 매출로 변환되는지를 다차원적으로 분석해야 합니다."
                 : "Margin size alone is an incomplete diagnostic. True performance is plotted on a 2x2 grid combining Margin with Turnover:"
               }
             </p>
 
             {/* 2x2 Quadrant Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 my-6 select-none text-left">
+            <div className="grid sm:grid-cols-2 gap-4 my-6 select-none text-left font-medium">
               {quadrants.map((q, idx) => (
                 <div key={idx} className="bg-[#121214] border border-white/5 hover:border-[#ff2b75]/25 p-5 rounded-[16px] flex flex-col justify-between gap-3 transition-all">
                   <div>
                     <span className="text-[9px] font-black text-[#7A7A7A] tracking-wider font-display block mb-1">QUADRANT 0{idx+1}</span>
-                    <h4 className="text-[14.5px] font-black text-white m-0 leading-tight mb-2">{q.title}</h4>
+                    <h4 className="text-[14px] font-black text-white m-0 leading-tight mb-2">{q.title}</h4>
                     <span className="text-[12.5px] text-[#ff2b75] font-extrabold block mb-1">{isKo ? q.statusKo : q.statusEn}</span>
                   </div>
-                  <p className="text-[12.0px] text-[#9ca3af] leading-relaxed font-semibold m-0 border-t border-white/5 pt-2">
+                  <p className="text-[12px] text-[#9ca3af] leading-relaxed font-semibold m-0 border-t border-white/5 pt-2">
                     {isKo ? q.actionKo : q.actionEn}
                   </p>
                 </div>
@@ -211,20 +211,20 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "점포의 핵심 성장 동력은 'High Margin / High Turnover' 품목의 비중을 꾸준히 늘리고, 'Low Margin / Low Turnover' 품목을 적시 교환 및 필터링하여 매대 효율을 순환시키는 데 있습니다."
+                ? "점포 성장의 열쇠는 'High Margin / High Turnover' 품목의 비중을 높이고, 'Low Margin / Low Turnover' 품목은 퇴출하여 매대 가용 면적을 회전시키는 데 있습니다."
                 : "Managing a successful storefront means expanding your High-Margin/High-Turnover items while systematically swapping out slow products."
               }
             </p>
           </div>
 
           {/* SECTION 03 */}
-          <div ref={sec3Ref} className={`mb-14 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              03. Inventory Turn은 Cash Flow의 속도입니다.
+          <div ref={sec3Ref} className={`mb-12 transition-all duration-700 transform ${sec3Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              03. 재고 회전 주기는 현금 흐름의 속도입니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "재고 회전 주기는 곧 소매점 현금 흐름의 속도(Velocity)입니다. 재고가 선반 위에 정체되어 체화될수록, 최신 유행 상품 매입, 빠른 회전율 재오더 확보, 마케팅 프로모션, 인건비 지급에 즉시 사용되어야 할 가용 자금이 매대 위에 묶이게 됩니다."
+                ? "재고 회전 주기는 소매점 현금 흐름(Cash Flow)의 속도와 정확히 일치합니다. 재고가 선반 위에 멈춰 체화될수록, 신규 트렌드 상품 도입, 빠른 회전 품목의 리오더 확보, 프로모션 실행 등에 사용되어야 할 자금이 매대 위에 동결됩니다.<sup>[2]</sup>"
                 : "The turnover rate determines your cash flow velocity. Stock sitting dead on your shelves represents cold cash frozen in place, preventing reorders of trending fast-sellers."
               }
             </p>
@@ -245,20 +245,20 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "회전율 제어가 불균형하여 품절 상태(Stock-out)가 반복되는 것 역시 기회비용 매출의 영구적 손실을 불러오므로, 적정한 Reorder 안전 마진을 구축하는 의사결정이 중요합니다."
+                ? "반대로 회전율 예측 실패로 품절 상태(Stock-out)가 빈번히 일어나는 것 또한 리테일러에게는 영구적인 매출 손실을 초래하므로, 적정한 안전 재고 기준(Safety Stock)을 조율하는 의사결정이 핵심입니다."
                 : "Conversely, failing to reorder on time leads to stock-outs and permanent loss of revenue."
               }
             </p>
           </div>
 
           {/* SECTION 04 */}
-          <div ref={sec4Ref} className={`mb-14 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              04. 연간 Turnover만 기다리지 마세요.
+          <div ref={sec4Ref} className={`mb-12 transition-all duration-700 transform ${sec4Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              04. 연간 회전율 수치 집계만 바라봐서는 늦습니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "연단위 회전율 수치 집계만 넋 놓고 바라보는 것은 소 잃고 외양간 고치는 일입니다. 신규 투입된 단품(SKU)은 30일 / 60일 / 90일 단위의 누적 판매 속도(Sell-Through Rate)를 선제 확인해야 리스크를 예방할 수 있습니다."
+                ? "연간 정산 단계에서 재고 분석표를 확인하는 것은 사후약방문에 가깝습니다. 신규 투입된 상품군은 30일 / 60일 / 90일 단위의 누적 판매 속도(Sell-Through Rate)를 선제 관리하여야 재고 정체 리스크를 미연에 방지할 수 있습니다."
                 : "Waiting for annual spreadsheets is a reactive approach. Track your early metrics at 30, 60, and 90-day checkpoints instead:"
               }
             </p>
@@ -273,7 +273,7 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
                 <div key={idx} className="flex gap-4.5 items-start">
                   <span className="text-[#00f0ff] font-display text-[13.5px] leading-none pt-0.5">{item.title}</span>
                   <div className="flex flex-col gap-1">
-                    <span className="text-white text-[13px]">{isKo ? item.descKo : item.descEn}</span>
+                    <span className="text-white text-[13px] font-bold">{isKo ? item.descKo : item.descEn}</span>
                   </div>
                 </div>
               ))}
@@ -281,26 +281,26 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
           </div>
 
           {/* SECTION 05 */}
-          <div ref={sec5Ref} className={`mb-14 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              05. Slow Seller는 왜 느린지 원인을 해부해야 합니다.
+          <div ref={sec5Ref} className={`mb-12 transition-all duration-700 transform ${sec5Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              05. 부진 재고 상품은 왜 안 팔리는지 5대 요인을 해부해야 합니다.
             </h2>
             <p className="m-0 mb-5 keep-all">
               {isKo
-                ? "판매 속도가 부진한 재고가 있다면, 무작정 나쁜 제품으로 매도하여 헐값 처분하기 전에 5가지 운영 요인을 정밀 진단(Diagnostic)해야 합니다."
+                ? "판매 속도가 유난히 더딘 재고가 있을 때, 헐값으로 즉시 덤핑 처분하기 전에 5가지 매장 운영 원인을 정밀 진단(Diagnostic)하는 과정이 필요합니다."
                 : "When an item moves slow, do not just discount it immediately. Troubleshoot the root cause across 5 categories:"
               }
             </p>
 
             {/* 5-Factor Diagnostic list */}
-            <div className="flex flex-col gap-3 my-6 select-none text-left">
+            <div className="flex flex-col gap-3 my-6 select-none text-left font-bold">
               {diagnosticFactors.map((factor, idx) => (
                 <div key={idx} className="bg-[#121214] border border-white/5 p-4.5 rounded-[12px] flex items-start gap-4">
-                  <span className="text-[9.5px] text-[#ff2b75] font-black tracking-widest font-display bg-[#ff2b75]/5 border border-[#ff2b75]/25 px-2.5 py-1.5 rounded-[4px] flex-shrink-0 mt-0.5">
+                  <span className="text-[9px] text-[#ff2b75] font-black tracking-widest font-display bg-[#ff2b75]/5 border border-[#ff2b75]/25 px-2.5 py-1.5 rounded-[4px] flex-shrink-0 mt-0.5">
                     {factor.label}
                   </span>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[13px] text-white font-bold leading-tight">{isKo ? factor.descKo : factor.descEn}</span>
+                    <span className="text-[13px] text-white leading-tight">{isKo ? factor.descKo : factor.descEn}</span>
                   </div>
                 </div>
               ))}
@@ -308,20 +308,20 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
 
             <p className="m-0 keep-all">
               {isKo
-                ? "정확한 원인 진단이 선행되어야만 무작정 할인 판매를 할지, 진열 스티커 및 매대 재배치를 할지, 제품 교육 보강을 할지, 혹은 신규 AP 상품 교환(90-Day Exchange Credit)을 적용할지 올바르게 대응할 수 있습니다."
+                ? "요인이 제품 자체의 문제인지, 진열 위치(Placement)가 잘못되었는지, 매장 직원의 설명 부족인지에 따라 해결책은 전혀 달라집니다. 원인 분석이 끝나야 비로소 진열 재배치를 할지, 혹은 신규 AP 큐레이션 교환 크레딧(90-Day Exchange Credit)을 적용할지 올바른 점포 의사결정을 내릴 수 있습니다."
                 : "Identifying the bottleneck shows whether you need markdown sales, repositioning, staff training, or an inventory swap."
               }
             </p>
           </div>
 
           {/* SECTION 06 */}
-          <div ref={sec6Ref} className={`mb-14 transition-all duration-700 transform ${sec6Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-            <h2 className="text-[20px] sm:text-[23px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
-              06. Inventory Data는 Curation과 연동되어야 합니다.
+          <div ref={sec6Ref} className={`mb-12 transition-all duration-700 transform ${sec6Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            <h2 className="text-[19px] sm:text-[22px] font-black text-white tracking-tight leading-tight m-0 mb-4 keep-all">
+              06. 재고 데이터는 Curation 피드백과 결합되어야 합니다.
             </h2>
             <p className="m-0 keep-all">
               {isKo
-                ? "숫자 데이터를 수집하는 것 자체만으로는 소용이 없습니다. 확보된 재고 회전 판매 데이터가 다음 주기 상품의 구성 믹스를 더 정교하고 날카롭게 다듬는 '지속적 최적화(Curation Cycle)' 피드백 루프로 연계되어야 합니다."
+                ? "단순히 회전 데이터를 집계하는 것만으로는 점포 경쟁력이 늘지 않습니다. 판매 순환 데이터를 바탕으로 다음 번 상품 매입 구성(Assortment Curation)을 더 정교하고 날카롭게 보정하는 지속적 순환 피드백 루프가 정립되어야 비로소 K-Beauty 매대의 가치가 극대화됩니다."
                 : "Collecting inventory sheets is futile if the resulting numbers don't feed back into refining the next batch of product curations."
               }
             </p>
@@ -337,7 +337,7 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
             <span className="text-[10px] text-[#ff2b75] font-black tracking-[0.2em] uppercase font-display block mb-2 select-none">
               RETAILER CHECKLIST
             </span>
-            <h3 className="text-[18px] sm:text-[21px] font-black text-white m-0 mb-6 keep-all">
+            <h3 className="text-[17.5px] sm:text-[20px] font-black text-white m-0 mb-6 keep-all">
               {isKo ? "다음 5가지 소매 재고 핵심 질문에 바로 답할 수 있습니까?" : "Five diagnostic questions for store owners:"}
             </h3>
             
@@ -357,7 +357,7 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
             </div>
 
             <div className="border-t border-white/10 pt-6 mt-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="font-display font-black text-sm text-[#ff2b75] uppercase tracking-wider select-none">
+              <span className="font-display font-black text-xs sm:text-sm text-[#ff2b75] uppercase tracking-wider select-none">
                 Don’t Just Measure What You Sell. Measure How Fast Your Inventory Works.
               </span>
               <Link
@@ -369,14 +369,32 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* SOURCES SECTION */}
-          <div className="border-t border-white/10 pt-8 mt-16 text-[11px] text-[#7A7A7A] font-bold select-none">
-            <span className="block text-white/50 tracking-wider uppercase font-display mb-2">SOURCES & REFERENCES</span>
-            <ul className="list-disc pl-4 space-y-1.5 leading-normal">
-              <li>Harvard Business Review: The Power of Inventory Turn in Small Businesses</li>
-              <li>Retail Industry Association: Margin vs Turnover Benchmarks in Cosmetics</li>
-              <li>Letusto Internal Retail Operations Database 2001-2025</li>
-            </ul>
+          {/* SOURCES & REFERENCES SECTION */}
+          <div className="border-t border-white/10 pt-8 mt-16 text-[12px] text-[#7A7A7A] select-none font-medium">
+            <span className="block text-white/50 tracking-wider uppercase font-display text-[10px] font-black mb-3">SOURCES & REFERENCES</span>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">01</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Harvard Business Review</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">소규모 비즈니스 점포의 현금 가용성과 재고 회전율(Turnover Velocity) 연구 리포트</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">02</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Retail Management Association</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">화장품 카테고리 내 마진(Margin)과 회전 주기 시뮬레이션 연구 결과 보고서 (2024)</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-[#00f0ff] font-display text-[10px] font-black border border-[#00f0ff]/20 bg-[#00f0ff]/5 px-1.5 py-0.5 rounded-[4px]">03</span>
+                <div>
+                  <span className="text-white/90 font-bold block">Letusto Internal Operations Research</span>
+                  <span className="text-[#7A7A7A] block mt-0.5">미국 Independent Beauty Supply 200여 매장 재고 순환성 현장 실증 분석 데이터 (2001-2025)</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         </section>
