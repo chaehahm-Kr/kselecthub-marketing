@@ -314,6 +314,177 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
     setStep("review");
   };
 
+  const getLocalizedAnswer = (q: any, val: any) => {
+    if (val === undefined || val === null || val === "") {
+      return locale === "ko" ? "응답하지 않음" : "Not answered";
+    }
+    const mapValue = (item: string) => {
+      const choice = q.answers.find((a: any) => a.label_ko === item || a.label_en === item || a.id === item);
+      if (choice) {
+        return locale === "ko" ? choice.label_ko : choice.label_en;
+      }
+      return item;
+    };
+    if (Array.isArray(val)) {
+      if (val.length === 0) return locale === "ko" ? "응답하지 않음" : "Not answered";
+      return val.map(mapValue).join(", ");
+    }
+    return mapValue(val);
+  };
+
+  const handleDownloadPdf = () => {
+    const simId = mainRecommendation?.simulation_id || "";
+    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const timeStr = new Date().toLocaleString(locale === "ko" ? "ko-KR" : "en-US", { hour12: false });
+    const filename = simId ? `KSELECT_Growth_Simulator_Answers_${simId}` : `KSELECT_Growth_Simulator_Answers_${dateStr}`;
+
+    const isKo = locale === "ko";
+    const title = "K SELECT Growth Simulator — My Answers";
+
+    let html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <title>${title}</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            background-color: #fff;
+            font-size: 14px;
+          }
+          .header {
+            border-bottom: 2px solid #ff2b75;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+          }
+          .title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+            margin: 0 0 10px 0;
+          }
+          .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 12px;
+            color: #666;
+          }
+          .meta-item strong {
+            color: #333;
+          }
+          .section-block {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+          }
+          .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ff2b75;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin: 0 0 15px 0;
+          }
+          .question-card {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+          }
+          .question-text {
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+          }
+          .answer-text {
+            color: #ff2b75;
+            font-weight: 800;
+            margin-left: 20px;
+          }
+          @media print {
+            body {
+              padding: 0;
+            }
+            @page {
+              size: A4;
+              margin: 20mm;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1 class="title">${title}</h1>
+          <div class="meta-grid">
+            <div class="meta-item"><strong>Simulation ID:</strong> ${simId || "N/A"}</div>
+            <div class="meta-item"><strong>Date/Time:</strong> ${timeStr}</div>
+            <div class="meta-item"><strong>Language:</strong> ${isKo ? "한국어 (ko)" : "English (en)"}</div>
+          </div>
+        </div>
+    `;
+
+    sectionKeys.forEach(sectionKey => {
+      const labelInfo = sectionLabels[sectionKey];
+      const sectionQuestions = visibleQuestions.filter(q => q.section === sectionKey);
+      if (sectionQuestions.length === 0) return;
+
+      html += `
+        <div class="section-block">
+          <h2 class="section-title">${isKo ? labelInfo.ko : labelInfo.en}</h2>
+      `;
+
+      sectionQuestions.forEach(q => {
+        const rawAns = answers[q.id];
+        const localizedAns = getLocalizedAnswer(q, rawAns);
+        const questionText = isKo ? q.label_ko : q.label_en;
+
+        html += `
+          <div class="question-card">
+            <div class="question-text">${q.id}. ${questionText}</div>
+            <div class="answer-text">Answer: ${localizedAns}</div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+    });
+
+    html += `
+      </body>
+      </html>
+    `;
+
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow?.document || iframe.contentDocument;
+    if (doc) {
+      doc.open();
+      doc.write(html);
+      doc.close();
+
+      const originalTitle = document.title;
+      document.title = filename;
+
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+
+      setTimeout(() => {
+        document.title = originalTitle;
+        document.body.removeChild(iframe);
+      }, 1000);
+    }
+  };
+
   // Compare recommendation after reanalysis transition
   useEffect(() => {
     if (step === "results" && prevRecommendationConfig && mainRecommendation) {
@@ -1513,19 +1684,27 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             })}
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-white/5 pt-4 mt-auto bg-[#1b1b1f] z-10">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-white/5 pt-4 mt-auto bg-[#1b1b1f] z-10 w-full">
             <button
-              onClick={() => setStep("results")}
-              className="h-12 w-full sm:w-auto inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white px-6 rounded-[8px] font-bold text-[13px] cursor-pointer"
+              onClick={handleDownloadPdf}
+              className="h-12 w-full sm:w-auto inline-flex items-center justify-center border border-[#22d3ee]/40 bg-[#22d3ee]/3 hover:bg-[#22d3ee]/8 hover:border-[#22d3ee] text-[#22d3ee] px-6 rounded-[8px] font-bold text-[13px] cursor-pointer transition-colors shadow-[0_0_12px_rgba(34,211,238,0.06)]"
             >
-              결과 화면으로 돌아가기 (Back to Results)
+              {locale === "ko" ? "내 답변 PDF 다운로드" : "Download My Answers PDF"}
             </button>
-            <button
-              onClick={() => setStep("transition")}
-              className="h-12 w-full sm:w-auto inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-black text-[13.5px] cursor-pointer hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] transition-all"
-            >
-              수정한 답변으로 다시 분석하기 →
-            </button>
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <button
+                onClick={() => setStep("results")}
+                className="h-12 w-full sm:w-auto inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white px-6 rounded-[8px] font-bold text-[13px] cursor-pointer"
+              >
+                결과 화면으로 돌아가기 (Back to Results)
+              </button>
+              <button
+                onClick={() => setStep("transition")}
+                className="h-12 w-full sm:w-auto inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-black text-[13.5px] cursor-pointer hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] transition-all"
+              >
+                수정한 답변으로 다시 분석하기 →
+              </button>
+            </div>
           </div>
         </div>
       )}
