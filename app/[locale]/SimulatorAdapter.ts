@@ -2,6 +2,10 @@ import { QUESTIONS } from "./SimulatorQuestions";
 
 export interface SimulationResult {
   simulation_id: string;
+  simulation_code?: string;
+  base_simulation_id?: string;
+  revision_no?: number;
+  is_no_change?: boolean;
   display: {
     program: "START" | "GROW" | "EXPAND";
     width_ft: number;
@@ -65,7 +69,8 @@ export function convertLabelsToOptionIds(
 
 export async function fetchSimulation(
   answersPayload: Record<string, any>,
-  email?: string
+  email?: string,
+  base_simulation_id?: string
 ): Promise<SimulationResult> {
   const apiBaseUrl = process.env.NEXT_PUBLIC_SIMULATOR_API_BASE_URL || "https://kselectnetwork-portal.vercel.app";
 
@@ -74,7 +79,11 @@ export async function fetchSimulation(
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ answers: answersPayload, email })
+    body: JSON.stringify({ 
+      answers: answersPayload, 
+      email,
+      base_simulation_id
+    })
   });
 
   if (!res.ok) {

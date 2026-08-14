@@ -19,14 +19,21 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   
   // Asynchronous API simulation result states
   const [mainRecommendation, setMainRecommendation] = useState<SimulationResult | null>(null);
-  const [alternativeRecommendation, setAlternativeRecommendation] = useState<SimulationResult | null>(null);
   const [apiCompleted, setApiCompleted] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [emailSending, setEmailSending] = useState<boolean>(false);
   
+  // Revision and session history tracking states
+  const [sessionInfo, setSessionInfo] = useState<{
+    simulation_id: string;
+    simulation_code: string;
+    base_simulation_id: string;
+    revision_no: number;
+  } | null>(null);
+  const [submittedAnswers, setSubmittedAnswers] = useState<Record<string, any>>({});
+
   // Results UI States
   const [activeResultTab, setActiveResultTab] = useState<"display" | "product" | "financial">("display");
-  const [showAlternative, setShowAlternative] = useState<boolean>(false);
   const [showConsultationModal, setShowConsultationModal] = useState<boolean>(false);
   const [showEmailModal, setShowEmailModal] = useState<boolean>(false);
   const [showPartnerModal, setShowPartnerModal] = useState<boolean>(false);
@@ -218,25 +225,19 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
     const visibleQuestionIds = visibleQuestions.map(q => q.id);
     const cleanMainAnswers = convertLabelsToOptionIds(answers, visibleQuestionIds);
 
-    const cleanAltAnswers = { ...cleanMainAnswers };
-    cleanAltAnswers.Q2 = (cleanMainAnswers.Q2 === "Q2_A1") ? "Q2_A2" : "Q2_A1";
-    cleanAltAnswers.Q22 = "Q22_A1";
-
-    let apiSuccess = false;
-    let mainRes: SimulationResult | null = null;
-    let altRes: SimulationResult | null = null;
-
     const fetchResults = async () => {
       try {
-        const [main, alt] = await Promise.all([
-          fetchSimulation(cleanMainAnswers),
-          fetchSimulation(cleanAltAnswers)
-        ]);
-        mainRes = main;
-        altRes = alt;
-        apiSuccess = true;
+        const baseId = sessionInfo?.base_simulation_id || undefined;
+        const main = await fetchSimulation(cleanMainAnswers, undefined, baseId);
+
         setMainRecommendation(main);
-        setAlternativeRecommendation(alt);
+        setSessionInfo({
+          simulation_id: main.simulation_id,
+          simulation_code: main.simulation_code || main.simulation_id,
+          base_simulation_id: main.base_simulation_id || main.simulation_id,
+          revision_no: main.revision_no || 0
+        });
+        setSubmittedAnswers(answers);
       } catch (err: any) {
         console.error("API simulation error:", err);
         setApiError(err.message || "Failed to run growth simulation.");
@@ -272,12 +273,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
       setTimeout(() => {
         if (apiError) {
           setStep("error");
-        } else if (mainRecommendation && alternativeRecommendation) {
+        } else if (mainRecommendation) {
           setStep("results");
         }
       }, 300);
     }
-  }, [step, transitionStage, apiCompleted, apiError, mainRecommendation, alternativeRecommendation]);
+  }, [step, transitionStage, apiCompleted, apiError, mainRecommendation]);
 
   // Store recommended investment for CtaForm integration
   useEffect(() => {
@@ -298,13 +299,16 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   // Restart simulator
   const handleRestart = () => {
     setAnswers({});
+    setSubmittedAnswers({});
+    setSessionInfo(null);
     setCurrentQuestionIndex(0);
     setStep("intro");
-    setShowAlternative(false);
     setActiveResultTab("display");
     setReanalyzedNotice(null);
     setPrevRecommendationConfig(null);
     localStorage.removeItem("kselect_simulator_investment");
+    localStorage.removeItem("kselect_simulator_id");
+    localStorage.removeItem("kselect_recommended_config");
   };
 
   const handleReviewAnswers = () => {
@@ -334,9 +338,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
   const handleDownloadPdf = () => {
     const simId = mainRecommendation?.simulation_id || "";
+    const simCode = mainRecommendation?.simulation_code || "";
     const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
     const timeStr = new Date().toLocaleString(locale === "ko" ? "ko-KR" : "en-US", { hour12: false });
-    const filename = simId ? `KSELECT_Growth_Simulator_Answers_${simId}` : `KSELECT_Growth_Simulator_Answers_${dateStr}`;
+    const filename = simCode 
+      ? `KSELECT_Growth_Simulator_Answers_${simCode}` 
+      : (simId ? `KSELECT_Growth_Simulator_Answers_${simId}` : `KSELECT_Growth_Simulator_Answers_${dateStr}`);
 
     const isKo = locale === "ko";
     const title = "K SELECT Growth Simulator — My Answers";
@@ -419,6 +426,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
         <div class="header">
           <h1 class="title">${title}</h1>
           <div class="meta-grid">
+            ${simCode ? `<div class="meta-item"><strong>Simulation No:</strong> ${simCode}</div>` : ""}
             <div class="meta-item"><strong>Simulation ID:</strong> ${simId || "N/A"}</div>
             <div class="meta-item"><strong>Date/Time:</strong> ${timeStr}</div>
             <div class="meta-item"><strong>Language:</strong> ${isKo ? "한국어 (ko)" : "English (en)"}</div>
@@ -915,6 +923,11 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               <h2 className="font-display text-2xl sm:text-[30px] font-bold text-white tracking-tight leading-none">
                 귀 매장을 위한 K-Beauty Growth Plan
               </h2>
+              {mainRecommendation.simulation_code && (
+                <span className="text-[11px] font-bold text-[#ff2b75] tracking-wider font-display uppercase mt-1 select-all">
+                  Simulation No. {mainRecommendation.simulation_code}
+                </span>
+              )}
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-auto border-t lg:border-t-0 border-white/10 pt-5 lg:pt-0">
@@ -1263,43 +1276,6 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             </div>
           </div>
 
-
-
-          {showAlternative && alternativeRecommendation && (
-            <div className="bg-[#121214]/60 border border-white/10 rounded-[18px] p-6.5 sm:p-8 shadow-inner animate-slide-up flex flex-col gap-6 mt-4">
-              <div className="flex justify-between items-start gap-4">
-                <div className="flex flex-col gap-1 text-left">
-                  <span className="text-[10px] text-white/50 font-black tracking-widest uppercase">초기 구매 부담을 낮춘 선택 · LOWER-PURCHASE OPTION</span>
-                  <h3 className="font-display text-[18px] font-extrabold text-white/85">START · {alternativeRecommendation.display.width_ft}FT 컴팩트 시나리오</h3>
-                  <p className="text-[13px] text-white/60 font-medium leading-relaxed mt-1.5">
-                    초기 상품 구매 규모를 낮춰 먼저 시장 반응을 확인하고 싶다면 {alternativeRecommendation.display.program} · {alternativeRecommendation.display.width_ft}FT로 시작할 수 있습니다.
-                  </p>
-                </div>
-                <span className="text-[11px] font-bold text-white/40 border border-white/10 bg-white/5 px-2.5 py-0.5 rounded-[4px] shrink-0">
-                  대안 시뮬레이션
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 text-left border-t border-white/5 pt-4">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">초도 구매액 · INITIAL PURCHASE</span>
-                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.display.investment.toLocaleString()}</strong>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">추천 SKU · SKU COUNT</span>
-                  <strong className="text-white/80 text-[15px] font-black">{alternativeRecommendation.display.sku_count} SKU</strong>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">예상 연간 매출 · SALES</span>
-                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.financial.annual_sales.toLocaleString()}</strong>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] text-white/40 font-bold uppercase font-display">예상 연간 순익 · PROFIT</span>
-                  <strong className="text-white/80 text-[15px] font-black">~${alternativeRecommendation.financial.gross_profit.toLocaleString()}</strong>
-                </div>
-              </div>
-            </div>
-          )}
 
           <div className="bg-[#121214] border border-white/10 rounded-[20px] p-6 sm:p-8 shadow-xl text-left mt-8">
             <div className="flex flex-col gap-1 mb-8">
@@ -1699,7 +1675,13 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 결과 화면으로 돌아가기 (Back to Results)
               </button>
               <button
-                onClick={() => setStep("transition")}
+                onClick={() => {
+                  if (JSON.stringify(answers) === JSON.stringify(submittedAnswers)) {
+                    setStep("results");
+                  } else {
+                    setStep("transition");
+                  }
+                }}
                 className="h-12 w-full sm:w-auto inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-black text-[13.5px] cursor-pointer hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] transition-all"
               >
                 수정한 답변으로 다시 분석하기 →
