@@ -1026,7 +1026,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   <div className="flex flex-col gap-3 border-t border-white/10 pt-6">
                     <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display mb-1">부가 운영 지표 (Secondary Metrics)</h4>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
                         <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">초도 공급 수량 (Initial Pack Qty)</span>
                         <strong className="text-white text-[16px] font-black">{mainRecommendation.display.initial_units} Pcs</strong>
@@ -1034,7 +1034,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       </div>
 
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">보장 소매 마진율 (Gross Margin)</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 소매 마진율 (Gross Margin)</span>
                         <strong className="text-white text-[16px] font-black">{mainRecommendation.financial.gross_margin * 100}%</strong>
                         <span className="text-[10px] text-white/40 font-medium">타사 카테고리 대비 우수한 마진 효율</span>
                       </div>
@@ -1043,6 +1043,22 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 초기 구매비용 회수 기간 (Est. Payback)</span>
                         <strong className="text-white text-[16px] font-black">약 {mainRecommendation.financial.payback_months}개월</strong>
                         <span className="text-[10px] text-white/40 font-medium">마진 총액 기준 보수적 계산</span>
+                      </div>
+
+                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 초도 투자 이익률 (Projected Gross Profit ROI)</span>
+                        <strong className="text-[#ff2b75] text-[16px] font-black">
+                          {Math.round((mainRecommendation.financial.gross_profit / mainRecommendation.financial.initial_product_investment) * 100)}%
+                        </strong>
+                        <span className="text-[10px] text-white/40 font-medium">초도 상품 구매액 대비 연간 마진 비율 (매장 운영비 미포함)</span>
+                      </div>
+
+                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5 sm:col-span-2 lg:col-span-1">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">분석 신뢰도 및 예측 정확도 (Confidence & Accuracy)</span>
+                        <strong className="text-white text-[16px] font-black">
+                          {mainRecommendation.confidence.level} ({mainRecommendation.confidence.accuracy_percentage}%)
+                        </strong>
+                        <span className="text-[10px] text-white/40 font-medium">매장 상권 및 답변 프로필 매칭 정확도 등급</span>
                       </div>
                     </div>
                   </div>
@@ -1062,14 +1078,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         <span>수식: [초기 상품 구매액 × 연간 재고 회전수] ÷ (1 - 목표 리테일 마진율 50%)을 적용하여 산출했습니다.</span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <strong className="text-white font-bold">3. 보장 소매 마진 (Estimated Gross Profit)</strong>
+                        <strong className="text-white font-bold">3. 예상 소매 마진 (Estimated Gross Profit)</strong>
                         <span>수식: [연간 총 소매 매출액 - 연간 매출원가]를 통해 연간 ${mainRecommendation.financial.gross_profit.toLocaleString()}의 마진 수익을 예상 시뮬레이션하였습니다.</span>
                       </div>
                     </div>
                   </details>
 
                   <div className="p-3.5 bg-white/3 border border-white/10 rounded-[10px] text-[11.5px] text-white/50 leading-relaxed">
-                    ⚠️ **시뮬레이션 Disclaimer**: 본 결과는 입력된 매장 정보와 현재 적용된 가정값을 기준으로 한 시뮬레이션이며 실제 판매 결과를 보장하지 않습니다. 상권 입지 조건, 소비자 성향 및 매장 운영에 따라 실제 성과는 달라질 수 있습니다.
+                    ⚠️ **시뮬레이션 및 ROI 면책고지 (Disclaimer)**: 본 결과는 입력된 매장 정보와 시뮬레이션 가정값을 기준으로 한 예측치(Projection)이며 실제 판매 성과나 수익률을 보장하지 않습니다. 초도 투자 이익률(ROI)은 상품 매입 비용만을 기준으로 산출되었으며 매장 임차료, 인건비 등 기타 운영 경비(Operating Expenses)는 포함되지 않았습니다. 실제 매장의 영업 성과는 입지 조건, 로컬 경쟁 상황 및 점포 운영 역량에 따라 다를 수 있습니다.
                   </div>
                 </div>
               )}
