@@ -1054,11 +1054,15 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       </div>
 
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5 sm:col-span-2 lg:col-span-1">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">분석 신뢰도 및 예측 정확도 (Confidence & Accuracy)</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">분석 신뢰도 (Analysis Confidence)</span>
                         <strong className="text-white text-[16px] font-black">
-                          {mainRecommendation.confidence.level} ({mainRecommendation.confidence.accuracy_percentage}%)
+                          {mainRecommendation.confidence.level}
                         </strong>
-                        <span className="text-[10px] text-white/40 font-medium">매장 상권 및 답변 프로필 매칭 정확도 등급</span>
+                        <span className="text-[10px] text-white/40 font-medium">
+                          {locale === "ko"
+                            ? "입력된 매장 정보와 추천 조건을 기반으로 한 분석 신뢰 수준입니다."
+                            : "Confidence level based on the store information and recommendation inputs provided."}
+                        </span>
                       </div>
                     </div>
                   </div>
