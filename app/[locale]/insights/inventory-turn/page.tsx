@@ -362,11 +362,45 @@ export default function ArticleInventoryTurnPage({ params }: PageProps) {
               </span>
               <Link
                 href={`/${locale}/simulator`}
-                className="h-12 px-6 rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white font-black text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
+                className="h-12 px-4 sm:px-6 w-full sm:w-auto rounded-[8px] bg-[#ff2b75] hover:bg-[#e01a5e] text-white font-black text-[11px] sm:text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200 shrink-0 whitespace-nowrap"
               >
                 {isKo ? "내 매장의 성장 가능 지표 확인하기 →" : "Simulate Growth Potential →"}
               </Link>
             </div>
+          </div>
+
+          {/* Previous / Next Insight Navigation */}
+          <div className="grid sm:grid-cols-2 gap-6 my-12 border-t border-white/10 pt-12 select-none">
+            <Link 
+              href={`/${locale}/insights/scalp-care-bridge`}
+              className="group bg-[#121214] border border-white/5 hover:border-[#ff2b75]/35 p-6 rounded-[20px] flex flex-col items-start text-left transition-all duration-300"
+            >
+              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-2 flex items-center gap-1 transition-transform group-hover:-translate-x-1">
+                ← PREVIOUS INSIGHT
+              </span>
+              <span className="text-[#7A7A7A] text-[9.5px] font-black tracking-widest uppercase font-display block mb-1">
+                PRODUCT & CATEGORY
+              </span>
+              <span className="text-white group-hover:text-[#ff2b75] font-display text-[15px] font-black leading-snug transition-colors keep-all">
+                {isKo ? "Scalp Care: Hair 고객을 K-Beauty 고객으로 연결할 수 있을까?" : "Scalp Care: Can We Bridge Hair Customers to K-Beauty Customers?"}
+              </span>
+            </Link>
+            <div className="hidden sm:block" />
+          </div>
+
+          {/* Desktop Sticky Navigation */}
+          <div className="hidden lg:flex fixed bottom-8 right-8 z-40 bg-[#121214]/90 backdrop-blur border border-white/10 rounded-full px-5 py-3 items-center gap-4.5 shadow-2xl text-[11px] font-black tracking-widest font-display text-white select-none">
+            <Link 
+              href={`/${locale}/insights/scalp-care-bridge`} 
+              className="text-white/60 hover:text-[#ff2b75] transition-colors"
+              title={isKo ? "Scalp Care Bridge" : "Scalp Care Bridge"}
+            >
+              ← PREV
+            </Link>
+            <span className="text-white/30">|</span>
+            <span className="text-[#00f0ff]">06 / 06</span>
+            <span className="text-white/30">|</span>
+            <span className="text-white/20 cursor-not-allowed">NEXT →</span>
           </div>
 
           {/* SOURCES & REFERENCES SECTION */}

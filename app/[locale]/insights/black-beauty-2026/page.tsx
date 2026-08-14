@@ -423,11 +423,45 @@ export default function ArticleBlackBeauty2026Page({ params }: PageProps) {
               </span>
               <Link
                 href={`/${locale}/insights/beauty-value-2026`}
-                className="h-12 px-6 rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-black text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
+                className="h-12 px-4 sm:px-6 w-full sm:w-auto rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-black text-[11px] sm:text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200 shrink-0 whitespace-nowrap"
               >
                 {isKo ? "다음 인사이트: Value의 기준 읽기 →" : "Next Insight: Define Value →"}
               </Link>
             </div>
+          </div>
+
+          {/* Previous / Next Insight Navigation */}
+          <div className="grid sm:grid-cols-2 gap-6 my-12 border-t border-white/10 pt-12 select-none">
+            <div className="hidden sm:block" />
+            <Link 
+              href={`/${locale}/insights/beauty-value-2026`}
+              className="group bg-[#121214] border border-white/5 hover:border-[#ff2b75]/35 p-6 rounded-[20px] flex flex-col items-end text-right transition-all duration-300"
+            >
+              <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display mb-2 flex items-center gap-1 transition-transform group-hover:translate-x-1">
+                NEXT INSIGHT →
+              </span>
+              <span className="text-[#7A7A7A] text-[9.5px] font-black tracking-widest uppercase font-display block mb-1">
+                RETAIL PLAYBOOK
+              </span>
+              <span className="text-white group-hover:text-[#ff2b75] font-display text-[15px] font-black leading-snug transition-colors keep-all">
+                {isKo ? "가격을 낮추는 게 답은 아닙니다: 2026 Beauty 고객이 말하는 ‘Value’의 기준" : "Lowering Prices Is Not the Answer: How Beauty Shoppers Define Value"}
+              </span>
+            </Link>
+          </div>
+
+          {/* Desktop Sticky Navigation */}
+          <div className="hidden lg:flex fixed bottom-8 right-8 z-40 bg-[#121214]/90 backdrop-blur border border-white/10 rounded-full px-5 py-3 items-center gap-4.5 shadow-2xl text-[11px] font-black tracking-widest font-display text-white select-none">
+            <span className="text-white/20 cursor-not-allowed">← PREV</span>
+            <span className="text-white/30">|</span>
+            <span className="text-[#00f0ff]">01 / 06</span>
+            <span className="text-white/30">|</span>
+            <Link 
+              href={`/${locale}/insights/beauty-value-2026`} 
+              className="text-white/60 hover:text-[#ff2b75] transition-colors"
+              title={isKo ? "가격을 낮추는 게 답은 아닙니다" : "Lowering Prices Is Not the Answer"}
+            >
+              NEXT →
+            </Link>
           </div>
 
           {/* SOURCES & REFERENCES SECTION */}
