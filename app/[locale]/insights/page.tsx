@@ -46,18 +46,58 @@ export default function InsightsLandingPage({ params }: PageProps) {
   const [featuredRef, featuredVisible] = useIntersectionReveal();
   const [cardsRef, cardsVisible] = useIntersectionReveal();
   const [topicsRef, topicsVisible] = useIntersectionReveal();
+  const [latestRef, latestVisible] = useIntersectionReveal();
 
   const topics = [
     { id: "all", labelKo: "전체보기", labelEn: "All Insights", isComing: false },
-    { id: "market", labelKo: "K-Beauty 시장 & 트렌드", labelEn: "K-Beauty Market", isComing: true },
-    { id: "category", labelKo: "상품 & 카테고리 인사이트", labelEn: "Product & Category", isComing: false },
-    { id: "playbook", labelKo: "매장 운영 & 판매 전략", labelEn: "Retail Playbook", isComing: false },
-    { id: "spotlight", labelKo: "선정 상품 분석", labelEn: "Product Spotlight", isComing: true },
-    { id: "signal", labelKo: "Retail Data & Signals", labelEn: "K Select Signal", isComing: true }
+    { id: "market", labelKo: "Beauty 시장 & 소비자 트렌드", labelEn: "BEAUTY MARKET", isComing: false },
+    { id: "category", labelKo: "상품 & 카테고리 인사이트", labelEn: "PRODUCT & CATEGORY", isComing: false },
+    { id: "playbook", labelKo: "매장 운영 & 판매 전략", labelEn: "RETAIL PLAYBOOK", isComing: false },
+    { id: "spotlight", labelKo: "선정 상품 분석", labelEn: "PRODUCT SPOTLIGHT", isComing: true },
+    { id: "signal", labelKo: "Retail Data & Signals", labelEn: "K SELECT SIGNAL", isComing: true }
   ];
 
-  // Articles configurations
+  // Articles configurations (Article 4 is Featured, Article 5 & 6 are in Card Grid, 1 & 2 & 3 are in Latest section)
   const articles = [
+    {
+      id: "black-beauty-2026",
+      topic: "market",
+      category: "BEAUTY MARKET",
+      titleKo: "Black Beauty 2026: 온라인이 커져도, 매장이 더 중요해지는 이유",
+      titleEn: "Black Beauty 2026: Why Stores Matter More as Online Grows",
+      subtitleKo: "고객은 온라인에서 제품을 발견하지만, 모든 구매 결정이 온라인에서 끝나는 것은 아닙니다. Beauty Supply Store가 다시 생각해야 할 것은 ‘상품 수’보다 ‘매장의 역할’입니다.",
+      subtitleEn: "Shoppers discover products online, but they don't always finish decisions there. Retailers must rethink the role of the physical store rather than sheer SKU quantity.",
+      metaKo: "5 MIN READ · CONSUMER & RETAIL",
+      metaEn: "5 MIN READ · CONSUMER & RETAIL",
+      img: "/images/insights/black_beauty_2026.jpg",
+      isFeatured: true
+    },
+    {
+      id: "k-beauty-2026-signals",
+      topic: "market",
+      category: "BEAUTY MARKET",
+      titleKo: "K-Beauty 2026: 지금 봐야 할 3가지 신호, 따라가지 않아도 될 3가지 유행",
+      titleEn: "K-Beauty 2026: 3 Signals to Track, 3 Trends to Ignore",
+      subtitleKo: "K-Beauty가 빠르게 성장하고 있다는 것과, 모든 K-Beauty 제품이 내 매장에 필요하다는 것은 전혀 다른 이야기입니다.",
+      subtitleEn: "K-Beauty's macro growth and your local counter needs are completely separate queries. Focus on what translates locally.",
+      metaKo: "6 MIN READ · K-BEAUTY MARKET",
+      metaEn: "6 MIN READ · K-BEAUTY MARKET",
+      img: "/images/insights/kbeauty_2026_signals.jpg",
+      isFeatured: false
+    },
+    {
+      id: "beauty-value-2026",
+      topic: "playbook",
+      category: "RETAIL PLAYBOOK",
+      titleKo: "가격을 낮추는 게 답은 아닙니다: 2026 Beauty 고객이 말하는 ‘Value’의 기준",
+      titleEn: "Lowering Prices Is Not the Answer: How Beauty Shoppers Define Value",
+      subtitleKo: "Value는 가장 싼 가격이 아닙니다. 고객이 “이 가격이면 살 이유가 있다”고 느끼는 순간에 만들어집니다.",
+      subtitleEn: "Value is not the lowest price index. It is created the instant a customer recognizes a clear justification to buy.",
+      metaKo: "5 MIN READ · PRICING & MERCHANDISING",
+      metaEn: "5 MIN READ · PRICING & MERCHANDISING",
+      img: "/images/insights/beauty_value_2026.jpg",
+      isFeatured: false
+    },
     {
       id: "k-beauty-4ft-start",
       topic: "playbook",
@@ -69,7 +109,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
       metaKo: "5 MIN READ · RETAIL PLAYBOOK",
       metaEn: "5 MIN READ · RETAIL PLAYBOOK",
       img: "/images/insights/kbeauty_4ft_start.jpg",
-      isFeatured: true
+      isFeatured: false
     },
     {
       id: "scalp-care-bridge",
@@ -99,9 +139,18 @@ export default function InsightsLandingPage({ params }: PageProps) {
     }
   ];
 
-  const gridArticles = activeTopic === "all" 
-    ? articles.filter(a => !a.isFeatured) 
-    : articles.filter(a => a.topic === activeTopic && !a.isFeatured);
+  // Filtering configurations
+  const filteredArticles = activeTopic === "all"
+    ? articles
+    : articles.filter(a => a.topic === activeTopic);
+
+  // Main Card Grid: shows Articles 5 & 6 when "all", or matching non-featured articles when filtered
+  const gridArticles = activeTopic === "all"
+    ? articles.filter(a => a.id === "k-beauty-2026-signals" || a.id === "beauty-value-2026")
+    : filteredArticles.filter(a => !a.isFeatured);
+
+  // Latest / Previous section: Articles 1, 2, 3 shown at the bottom
+  const latestArticles = articles.filter(a => a.id === "k-beauty-4ft-start" || a.id === "scalp-care-bridge" || a.id === "inventory-turn");
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0c0c0c] text-white font-sans overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
@@ -154,9 +203,9 @@ export default function InsightsLandingPage({ params }: PageProps) {
               }`}
             >
               {isKo ? (
-                "K-Beauty 시장, 상품, 소비자 변화와 Retail 운영 데이터를 Independent Beauty Supply Owner가 실제 매장에서 활용할 수 있도록 분석하고 명확한 가이드라인으로 정리해 드립니다."
+                "Beauty 시장, 상품, 소비자 변화와 Retail 운영 데이터를 Independent Beauty Supply Owner가 실제 매장에서 활용할 수 있도록 분석하고 명확한 가이드라인으로 정리해 드립니다."
               ) : (
-                "We translate K-Beauty trends, manufacturer specs, and customer demographics into clear operational guidance that independent store owners can execute immediately."
+                "We translate beauty market trends, manufacturer specs, and customer demographics into clear operational guidance that independent store owners can execute immediately."
               )}
             </p>
           </div>
@@ -330,6 +379,76 @@ export default function InsightsLandingPage({ params }: PageProps) {
             </div>
           )}
         </section>
+
+        {/* ================= 05. LATEST INSIGHTS (Archived/Previous Articles) ================= */}
+        {activeTopic === "all" && (
+          <section 
+            ref={latestRef}
+            className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] pb-24 text-left border-t border-white/5 pt-16"
+          >
+            <div className="flex flex-col gap-3 mb-10 select-none">
+              <span className="text-[11px] font-black text-[#7A7A7A] tracking-[0.25em] uppercase font-display">
+                LATEST INSIGHTS
+              </span>
+              <h2 className="font-display text-[22px] sm:text-[26px] font-black text-white tracking-tight m-0 keep-all">
+                {isKo ? "이전 리테일 플레이북 및 아티클" : "Previous Retail Playbooks & Guides"}
+              </h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {latestArticles.map((article, idx) => (
+                <div 
+                  key={article.id}
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                  className={`bg-[#121214] border border-white/5 hover:border-white/10 rounded-[24px] overflow-hidden flex flex-col justify-between shadow-xl group transition-all duration-700 transform ${
+                    latestVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
+                >
+                  
+                  {/* Card Cover image */}
+                  <div className="relative aspect-[3/2] w-full overflow-hidden border-b border-white/5">
+                    <Image
+                      src={article.img}
+                      alt={article.titleKo}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/40 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Card descriptions */}
+                  <div className="p-6.5 flex flex-col justify-between items-start gap-6 flex-1">
+                    <div className="flex flex-col gap-3">
+                      <span className="text-[9.5px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
+                        {article.category}
+                      </span>
+                      <h3 className="font-display text-[17.5px] font-black leading-snug text-white tracking-tight m-0 group-hover:text-[#ff2b75] transition-colors keep-all">
+                        {isKo ? article.titleKo : article.titleEn}
+                      </h3>
+                      <p className="text-[12.5px] text-[#9ca3af] leading-relaxed font-semibold m-0 mt-1 keep-all">
+                        {isKo ? article.subtitleKo : article.subtitleEn}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-4 w-full mt-2">
+                      <span className="text-[9.5px] text-[#7A7A7A] font-black tracking-wider uppercase font-display block">
+                        {isKo ? article.metaKo : article.metaEn}
+                      </span>
+                      <Link
+                        href={`/${locale}/insights/${article.id}`}
+                        className="h-12 px-6 w-full rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-extrabold text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
+                      >
+                        {isKo ? "인사이트 읽기 →" : "Read Insight →"}
+                      </Link>
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Apply Partner Form popup modal */}
         <PartnerModal />
