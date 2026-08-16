@@ -294,9 +294,9 @@ export default function SolutionSection({ locale }: { locale?: string }) {
   };
 
   const getBuildImage = () => {
-    if (buildSize === "4ft") return "/images/solutions/build.jpg";
-    if (buildSize === "8ft") return "/images/solutions/build_8ft.jpg";
-    return "/images/solutions/build_12ft.jpg";
+    if (buildSize === "4ft") return "/images/solutions/4F_A.jpg";
+    if (buildSize === "8ft") return "/images/solutions/8F_AA.jpg";
+    return "/images/solutions/12F_AAA.jpg";
   };
 
   const activeData = solutionDataList[activeTab];
@@ -338,8 +338,8 @@ export default function SolutionSection({ locale }: { locale?: string }) {
               </p>
             </div>
 
-            {/* Mobile/Tablet Horizontal Selector Slider */}
-            <div className="lg:hidden w-full overflow-x-auto pb-4 mb-2 flex gap-2 scrollbar-none select-none">
+            {/* Mobile/Tablet Selector Grid/Wrap */}
+            <div className="lg:hidden w-full flex flex-wrap gap-2.5 mb-6 select-none">
               {[
                 { key: "CURATE", num: "01" },
                 { key: "DIFFERENTIATE", num: "02" },
@@ -350,7 +350,7 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <button
                   key={item.key}
                   onClick={() => handleTabClick(index)}
-                  className={`px-4.5 py-3 rounded-[12px] text-[11px] font-black tracking-wider uppercase whitespace-nowrap transition-all focus:outline-none ${
+                  className={`px-4.5 py-3 rounded-[12px] text-[11.5px] font-black tracking-wider uppercase whitespace-nowrap transition-all focus:outline-none cursor-pointer ${
                     activeTab === index
                       ? "bg-[#ff2b75] text-white border border-[#ff2b75] shadow-[0_0_12px_rgba(255,43,117,0.4)]"
                       : "bg-[#111] border border-white/10 text-[#9A9A9A] hover:border-white/20"
@@ -363,12 +363,12 @@ export default function SolutionSection({ locale }: { locale?: string }) {
 
             {/* Desktop Orbit Wheel (Hidden on Mobile/Tablet) */}
             <div className="hidden lg:block relative w-[440px] h-[440px] mx-auto -my-4 select-none">
-              {/* Dashed lines representing connections */}
-              <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-90deg)", transformOrigin: "0 0" }} />
-              <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-18deg)", transformOrigin: "0 0" }} />
-              <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(54deg)", transformOrigin: "0 0" }} />
-              <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(126deg)", transformOrigin: "0 0" }} />
-              <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(198deg)", transformOrigin: "0 0" }} />
+              {/* Dashed lines representing connections (shortened to 30px width for 96px nodes) */}
+              <div style={{ position: "absolute", left: "220px", top: "220px", width: "30px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-90deg)", transformOrigin: "0 0" }} />
+              <div style={{ position: "absolute", left: "220px", top: "220px", width: "30px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-18deg)", transformOrigin: "0 0" }} />
+              <div style={{ position: "absolute", left: "220px", top: "220px", width: "30px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(54deg)", transformOrigin: "0 0" }} />
+              <div style={{ position: "absolute", left: "220px", top: "220px", width: "30px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(126deg)", transformOrigin: "0 0" }} />
+              <div style={{ position: "absolute", left: "220px", top: "220px", width: "30px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(198deg)", transformOrigin: "0 0" }} />
 
               {/* Central Hub Core */}
               <div style={{ position: "absolute", left: "128px", top: "128px", width: "184px", height: "184px", borderRadius: "50%", border: "1.5px solid #ff2b75", background: "#0c0c0c", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "10px" }}>
@@ -381,11 +381,11 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <div style={{ color: "#8A8A8A", fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em" }}>SOLUTION</div>
               </div>
 
-              {/* Node 01 - CURATE */}
+              {/* Node 01 - CURATE (centered at cx=220, cy=50, 96x96px sizing) */}
               <button
                 onClick={() => handleTabClick(0)}
                 className={`ks-node ${activeTab === 0 ? "active" : ""}`}
-                style={{ position: "absolute", left: "178px", top: "8px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "172px", top: "2px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="7" />
@@ -394,11 +394,11 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <span className="label">01 CURATE</span>
               </button>
 
-              {/* Node 02 - DIFFERENTIATE */}
+              {/* Node 02 - DIFFERENTIATE (centered at cx=396, cy=176, 96x96px sizing) */}
               <button
                 onClick={() => handleTabClick(1)}
                 className={`ks-node ${activeTab === 1 ? "active" : ""}`}
-                style={{ position: "absolute", left: "354px", top: "134px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "348px", top: "128px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -406,11 +406,11 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <span className="label">02 DIFFERENTIATE</span>
               </button>
 
-              {/* Node 03 - BUILD */}
+              {/* Node 03 - BUILD (centered at cx=330, cy=380, 96x96px sizing) */}
               <button
                 onClick={() => handleTabClick(2)}
                 className={`ks-node ${activeTab === 2 ? "active" : ""}`}
-                style={{ position: "absolute", left: "288px", top: "338px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "282px", top: "332px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -418,11 +418,11 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <span className="label">03 BUILD</span>
               </button>
 
-              {/* Node 04 - SUPPORT */}
+              {/* Node 04 - SUPPORT (centered at cx=112, cy=380, 96x96px sizing) */}
               <button
                 onClick={() => handleTabClick(3)}
                 className={`ks-node ${activeTab === 3 ? "active" : ""}`}
-                style={{ position: "absolute", left: "70px", top: "338px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "64px", top: "332px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -432,11 +432,11 @@ export default function SolutionSection({ locale }: { locale?: string }) {
                 <span className="label">04 SUPPORT</span>
               </button>
 
-              {/* Node 05 - OPTIMIZE */}
+              {/* Node 05 - OPTIMIZE (centered at cx=46, cy=176, 96x96px sizing) */}
               <button
                 onClick={() => handleTabClick(4)}
                 className={`ks-node ${activeTab === 4 ? "active" : ""}`}
-                style={{ position: "absolute", left: "4px", top: "134px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "-2px", top: "128px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="20" x2="18" y2="10" />
@@ -477,10 +477,9 @@ export default function SolutionSection({ locale }: { locale?: string }) {
             style={{
               border: "1px solid rgba(255, 255, 255, 0.1)",
               borderRadius: "20px", 
-              padding: "44px 48px", 
               background: "#0c0c0c", 
             }}
-            className="w-full h-full min-h-[770px] relative self-stretch overflow-hidden flex flex-col justify-between gap-6"
+            className="w-full h-full min-h-[580px] md:min-h-[770px] relative self-stretch overflow-hidden flex flex-col justify-between gap-6 p-5 sm:p-10 lg:p-12"
           >
             {/* Keyframe animation injected via style block */}
             <style>{`

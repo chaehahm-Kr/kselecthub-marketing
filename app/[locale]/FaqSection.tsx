@@ -289,23 +289,32 @@ export default function FaqSection({ locale }: FaqSectionProps) {
 
         {/* --- MOBILE LAYOUT: Upper horizontal tabs, lower accordion --- */}
         <div className="block lg:hidden">
-          {/* Horizontal Scroll Tabs */}
-          <div className="flex gap-2.5 overflow-x-auto pb-4 mb-6 scrollbar-none select-none scroll-smooth">
+          {/* Mobile Grid Layout for Categories */}
+          <div className="grid grid-cols-2 gap-2 mb-6 select-none">
             {FAQ_DATA.map((cat) => {
               const isActive = cat.id === activeCategory;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`h-11 px-5 rounded-[8px] border text-xs font-black tracking-wide whitespace-nowrap transition-all duration-300 focus:outline-none cursor-pointer ${
+                  className={`py-3 px-3 rounded-[8px] border text-[10.5px] sm:text-xs font-black tracking-tight leading-tight text-center transition-all duration-300 focus:outline-none cursor-pointer flex flex-col justify-center items-center gap-1 min-h-[52px] ${
                     isActive
                       ? "bg-[#ff2b75]/8 border-[#ff2b75] text-[#ff2b75]"
                       : "bg-[#121214] border-white/5 text-[#7A7A7A] hover:border-white/10 hover:text-white"
                   }`}
                 >
-                  {isKo ? cat.titleKo : cat.titleEn}
-                  <span className={`ml-2 text-[10px] font-extrabold ${isActive ? "text-[#ff2b75]" : "text-[#7A7A7A]/70"}`}>
-                    5
+                  <span className="text-[9.5px] opacity-80 font-semibold">
+                    {cat.id === "program-partnership" && "01"}
+                    {cat.id === "display-storefit" && "02"}
+                    {cat.id === "product-curation" && "03"}
+                    {cat.id === "pricing-benefits" && "04"}
+                    {cat.id === "inventory-exchange" && "05"}
+                    {cat.id === "operations-growth" && "06"}
+                  </span>
+                  <span>
+                    {isKo 
+                      ? cat.titleKo.replace(/^\d+\s+/, "") 
+                      : cat.titleEn.replace(/^\d+\s+/, "")}
                   </span>
                 </button>
               );
