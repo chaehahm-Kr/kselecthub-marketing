@@ -183,7 +183,7 @@ export default function ReadinessSection({ locale }: { locale?: string }) {
             <div className="mt-8 flex flex-col items-start gap-2.5">
               {isCompleted ? (
                 <a
-                  href="#launch-readiness"
+                  href="#apply"
                   className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                   aria-label="Confirm eligibility and apply for partnership"
                 >

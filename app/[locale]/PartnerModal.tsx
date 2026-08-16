@@ -14,11 +14,14 @@ export default function PartnerModal({ locale }: PartnerModalProps) {
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const triggerLink = target.closest('a[href="#apply"]');
+      const anchor = target.closest("a");
       
-      if (triggerLink) {
-        e.preventDefault();
-        setIsOpen(true);
+      if (anchor) {
+        const href = anchor.getAttribute("href");
+        if (href && href.endsWith("#apply")) {
+          e.preventDefault();
+          setIsOpen(true);
+        }
       }
     };
 

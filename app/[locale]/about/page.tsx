@@ -313,7 +313,11 @@ export default function AboutPage({ params }: PageProps) {
                   judgmentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 }`}
               >
-                우리는 단순히 <span className="text-[#ff2b75] underline decoration-wavy decoration-[#ff2b75]/30 underline-offset-8">“좋은 상품인가?”</span>만 보지 않습니다.
+                {isKo ? (
+                  <>우리는 단순히 <span className="text-[#ff2b75] underline decoration-wavy decoration-[#ff2b75]/30 underline-offset-8">“좋은 상품인가?”</span>만 보지 않습니다.</>
+                ) : (
+                  <>We don't just ask, <span className="text-[#ff2b75] underline decoration-wavy decoration-[#ff2b75]/30 underline-offset-8">"Is this a good product?"</span></>
+                )}
               </h3>
               <h3 
                 style={{ transitionDelay: "300ms" }}
@@ -321,8 +325,16 @@ export default function AboutPage({ params }: PageProps) {
                   judgmentVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.98]"
                 }`}
               >
-                <span className="text-[#00f0ff] font-extrabold drop-shadow-[0_0_15px_rgba(0,240,255,0.18)]">“이 가격에, 이 매장에서, 이 고객에게 실제로 팔릴 것인가?”</span>
-                <br className="hidden sm:inline" />를 분석하고 공급합니다.
+                {isKo ? (
+                  <>
+                    <span className="text-[#00f0ff] font-extrabold drop-shadow-[0_0_15px_rgba(0,240,255,0.18)]">“이 가격에, 이 매장에서, 이 고객에게 실제로 팔릴 것인가?”</span>
+                    <br className="hidden sm:inline" />를 분석하고 공급합니다.
+                  </>
+                ) : (
+                  <>
+                    We analyze and curate for: <span className="text-[#00f0ff] font-extrabold drop-shadow-[0_0_15px_rgba(0,240,255,0.18)]">"Will it actually sell at this price, in this store, to this customer?"</span>
+                  </>
+                )}
               </h3>
             </div>
             
@@ -332,7 +344,11 @@ export default function AboutPage({ params }: PageProps) {
                 judgmentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              성공은 매장에 물건을 채워 넣는 시점이 아니라, 소비자의 선택을 받아 재구매가 순환되는 시점에 증명됩니다. K SELECT HUB는 철저한 리테일 수율 관리를 핵심 가치로 삼습니다.
+              {isKo ? (
+                "성공은 매장에 물건을 채워 넣는 시점이 아니라, 소비자의 선택을 받아 재구매가 순환되는 시점에 증명됩니다. K SELECT HUB는 철저한 리테일 수율 관리를 핵심 가치로 삼습니다."
+              ) : (
+                "Success is not measured when inventory is loaded onto shelves, but when consumers choose it and return to buy again. K SELECT HUB is built on optimizing retail shelf velocity."
+              )}
             </p>
           </div>
         </section>

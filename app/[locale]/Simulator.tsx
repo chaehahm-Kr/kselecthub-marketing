@@ -68,15 +68,65 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   const [showSectionInsight, setShowSectionInsight] = useState<boolean>(false);
   const [lastFinishedSection, setLastFinishedSection] = useState<string>("");
 
+  const getLocalizedAssortmentDescription = (key: string, isPrimary: boolean) => {
+    if (locale === "ko") {
+      return isPrimary
+        ? (mainRecommendation?.assortment.primary_description_ko || "균형 잡힌 믹스")
+        : (mainRecommendation?.assortment.secondary_description_ko || "스킨케어 보강");
+    }
+
+    const map: Record<string, string> = {
+      BALANCE: "Balanced Portfolio",
+      SKIN: "Targeted Skin Care",
+      HAIR: "Hair Care Essentials",
+      ESSENTIAL: "Best-Selling Basics",
+      TREND: "Trending K-Beauty",
+      PREMIUM: "Premium Cosmetics"
+    };
+
+    const targetKey = isPrimary ? mainRecommendation?.assortment.primary : mainRecommendation?.assortment.secondary;
+    return map[targetKey || ""] || (isPrimary ? "Balanced Assortment" : "Category Add-ons");
+  };
+
+  const getLocalizedReasons = (program: string, width: number, reasons: string[]) => {
+    if (locale === "ko") return reasons;
+    if (program === "START") {
+      return [
+        "A compact " + width + "FT modular display, perfectly matching store space and layout limitations.",
+        "Designed as a low-risk category test with a highly curated selection of fast-moving products.",
+        "Optimized for small-to-mid size beauty supply stores starting their K-Beauty category launch."
+      ];
+    } else if (program === "GROW") {
+      return [
+        "An 8FT dual-bay backlit modular showcase, designed to be a prominent sub-category in mid-sized stores.",
+        "Balances high-margin skincare bestsellers with fast-rotating trend items.",
+        "Requires moderate initial investment while maximizing shelf space yield and visibility."
+      ];
+    } else {
+      return [
+        "A premium 12FT multi-bay backlit modular showcase, establishing K-Beauty as your store's signature category.",
+        "Maximized SKU diversity covering skin, hair, makeup, patches, and beauty tools for maximum cross-selling.",
+        "Optimized for high-volume stores looking to capture heavy local consumer demand and drive maximum category ROI."
+      ];
+    } 
+  };
+
   // Transition state loaders
   const [transitionStage, setTransitionStage] = useState<number>(0);
-  const transitionMessages = [
+  const transitionMessages = locale === "ko" ? [
     "매장 특성 분석 중...",
     "고객 수요 분석 중...",
     "상품 구성 Matching 중...",
     "판매 및 재주문 패턴 분석 중...",
     "Financial Projection 계산 중...",
     "분석이 완료되었습니다!"
+  ] : [
+    "Analyzing store dynamics...",
+    "Evaluating shopper demand...",
+    "Matching product assortment...",
+    "Projecting sales & reorder patterns...",
+    "Calculating financial projections...",
+    "Analysis complete!"
   ];
 
   // Dynamic filter for active questions based on conditional visibility rules
@@ -518,26 +568,30 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               07 — GROWTH SIMULATOR
             </span>
             <h2 className="font-display text-3xl sm:text-[40px] font-bold leading-[1.2] text-white my-2 tracking-tight">
-              내 매장에 맞는<br />
-              K-Beauty 성장 플랜을<br />
-              확인해보세요
+              {locale === "ko" ? (
+                <>내 매장에 맞는<br />K-Beauty 성장 플랜을<br />확인해보세요</>
+              ) : (
+                <>Discover the Right<br />K-Beauty Growth Plan<br />for Your Store</>
+              )}
             </h2>
             <p className="text-[14.5px] text-[#b4b4b4] leading-relaxed max-w-lg my-2 font-medium">
-              매장 규모, 고객 특성, 상품 판매 방식과 재주문 패턴을 분석하여 귀 매장에 적합한 디스플레이 모듈 크기, 최적의 상품 믹스, 예상 초기 상품 구매 규모와 매출·수익 가능성 분석 결과를 제안해 드립니다.
+              {locale === "ko"
+                ? "매장 규모, 고객 특성, 상품 판매 방식과 재주문 패턴을 분석하여 귀 매장에 적합한 디스플레이 모듈 크기, 최적의 상품 믹스, 예상 초기 상품 구매 규모와 매출·수익 가능성 분석 결과를 제안해 드립니다."
+                : "Analyze your store size, shopper demographics, sales approach, and reorder frequency to determine your ideal modular display size, curated product mix, and projected annual sales and margins."}
             </p>
             
             <div className="flex flex-col gap-2.5 my-3 text-[12.5px] text-white/50 font-medium">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                <span>약 5–7분 소요 (상황에 맞는 유동적 문항 노출)</span>
+                <span>{locale === "ko" ? "약 5–7분 소요 (상황에 맞는 유동적 문항 노출)" : "Takes ~5-7 minutes (adaptive questions based on answers)"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                <span>모르는 질문이나 민감한 항목은 건너뛰기 가능</span>
+                <span>{locale === "ko" ? "모르는 질문이나 민감한 항목은 건너뛰기 가능" : "Optional answers and question skipping available"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                <span>더 많은 정보를 입력할수록 예상 수치 정확도가 높아집니다.</span>
+                <span>{locale === "ko" ? "더 많은 정보를 입력할수록 예상 수치 정확도가 높아집니다." : "Detailed inputs improve diagnostic score accuracy"}</span>
               </div>
             </div>
 
@@ -547,12 +601,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   onClick={() => setStep("assessment")}
                   className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-bold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff2b75]"
                 >
-                  내 매장 분석 시작하기 →
+                  {locale === "ko" ? "내 매장 분석 시작하기 →" : "Start My Store Analysis →"}
                 </button>
               </div>
               <span className="text-[12.5px] text-white/60 font-semibold inline-flex items-center gap-1.5 mt-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" />
-                가장 큰 프로그램이 아닌, 귀 매장에 가장 맞는 시작점을 추천합니다.
+                {locale === "ko" ? "가장 큰 프로그램이 아닌, 귀 매장에 가장 맞는 시작점을 추천합니다." : "Recommends the right starting size for your store, not just the biggest setup."}
               </span>
             </div>
           </div>
@@ -572,30 +626,36 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             <div className="relative z-10 flex flex-col gap-5 w-full">
               <div className="flex flex-col gap-1 text-left select-none">
                 <span className="text-[14px] font-black text-white tracking-tight">
-                  3가지 핵심 분석 결과
+                  {locale === "ko" ? "3가지 핵심 분석 결과" : "3 Core Deliverables"}
                 </span>
                 <span className="text-[9px] font-extrabold text-[#ff2b75] tracking-wider uppercase font-display block -mt-0.5">
                   3 Core Analytical Outcomes
                 </span>
                 <span className="text-[12px] text-white/50 font-semibold leading-relaxed mt-1">
-                  귀 매장에 맞는 3가지 핵심 결과를 제공합니다.
+                  {locale === "ko" ? "귀 매장에 맞는 3가지 핵심 결과를 제공합니다." : "You will receive three custom outcomes for your storefront:"}
                 </span>
               </div>
               
               <div className="flex flex-col gap-4">
                 {[
-                  { num: "01", title_ko: "추천 디스플레이", title_en: "DISPLAY PLAN", desc: "4FT · 8FT · 12FT 등 매장 크기와 적합도를 매칭한 피처 집기" },
-                  { num: "02", title_ko: "상품 구성 전략", title_en: "PRODUCT STRATEGY", desc: "고객 구매 성향에 최적화된 Assortment 믹스 및 맞춤 카테고리 비율" },
-                  { num: "03", title_ko: "예상 사업성 분석", title_en: "BUSINESS OUTLOOK", desc: "초도 매입 비용, 예상 회전율, 연간 매출 및 이익 등 종합 ROI" }
+                  { num: "01", title_ko: "추천 디스플레이", title_en: "DISPLAY PLAN", descKo: "4FT · 8FT · 12FT 등 매장 크기와 적합도를 매칭한 피처 집기", descEn: "LED backlit fixture size (4ft, 8ft, 12ft) matching store footprint and layout." },
+                  { num: "02", title_ko: "상품 구성 전략", title_en: "PRODUCT STRATEGY", descKo: "고객 구매 성향에 최적화된 Assortment 믹스 및 맞춤 카테고리 비율", descEn: "Curated brand and category mix ratios matching local shopper demographics." },
+                  { num: "03", title_ko: "예상 사업성 분석", title_en: "BUSINESS OUTLOOK", descKo: "초도 매입 비용, 예상 회전율, 연간 매출 및 이익 등 종합 ROI", descEn: "Comprehensive financial projections including initial buy, turnover speed, and annual ROI." }
                 ].map((item) => (
                   <div key={item.num} className="flex gap-4 items-start p-4 bg-[#1b1b1f] border border-white/10 rounded-[12px] hover:border-[#ff2b75]/35 transition-all duration-300 group/card shadow-lg hover:shadow-xl">
                     <span className="text-[#ff2b75] font-black text-[15px] font-display mt-0.5 group-hover/card:scale-110 transition-transform duration-200">{item.num}</span>
                     <div className="flex flex-col gap-0.5">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-white text-[13.5px] font-extrabold tracking-tight">{item.title_ko}</span>
-                        <span className="text-white/40 text-[9px] font-bold tracking-wider font-display">{item.title_en}</span>
+                        <span className="text-white text-[13.5px] font-extrabold tracking-tight">
+                          {locale === "ko" ? item.title_ko : item.title_en}
+                        </span>
+                        {locale === "ko" && (
+                          <span className="text-white/40 text-[9px] font-bold tracking-wider font-display">{item.title_en}</span>
+                        )}
                       </div>
-                      <span className="text-white/75 text-[11.5px] leading-normal font-medium mt-1">{item.desc}</span>
+                      <span className="text-white/75 text-[11.5px] leading-normal font-medium mt-1">
+                        {locale === "ko" ? item.descKo : item.descEn}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -617,12 +677,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 {currentSection ? `STEP ${currentStepNumber} / 5` : "DIAGNOSTIC"}
               </span>
               <h3 className="text-[15.5px] font-extrabold text-white tracking-tight leading-none mt-1">
-                {sectionLabels[currentSection]?.ko || "진단 진행 중"}
+                {locale === "ko" ? (sectionLabels[currentSection]?.ko || "진단 진행 중") : (sectionLabels[currentSection]?.en || "Diagnostic in progress")}
               </h3>
             </div>
             
             <div className="flex items-center gap-2">
-              <span className="text-[11px] text-white/40 font-semibold">분석 정밀도:</span>
+              <span className="text-[11px] text-white/40 font-semibold">{locale === "ko" ? "분석 정밀도:" : "Diagnostic Accuracy:"}</span>
               <span className={"text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-[6px] border " + accuracyInfo.color}>
                 {accuracyInfo.label}
               </span>
@@ -636,19 +696,29 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   SECTION INSIGHT REPORT
                 </span>
                 <h4 className="text-[20px] font-bold text-white leading-snug tracking-tight">
-                  {lastFinishedSection === "store_space" && "스페이스 정보가 성공적으로 수집되었습니다."}
-                  {lastFinishedSection === "customer_demand" && "매장의 고객층과 수요 특성이 종합되었습니다."}
-                  {lastFinishedSection === "product_price" && "구매 선호 가격대 분석이 완료되었습니다."}
-                  {lastFinishedSection === "inventory_reorder" && "재고 리오더 순환 빈도 추정이 반영되었습니다."}
+                  {lastFinishedSection === "store_space" && (locale === "ko" ? "스페이스 정보가 성공적으로 수집되었습니다." : "Store footprint data successfully collected.")}
+                  {lastFinishedSection === "customer_demand" && (locale === "ko" ? "매장의 고객층과 수요 특성이 종합되었습니다." : "Shopper demographics and demand profile synthesized.")}
+                  {lastFinishedSection === "product_price" && (locale === "ko" ? "구매 선호 가격대 분석이 완료되었습니다." : "Price point sensitivity analysis complete.")}
+                  {lastFinishedSection === "inventory_reorder" && (locale === "ko" ? "재고 리오더 순환 빈도 추정이 반영되었습니다." : "Reorder velocity indicators mapped.")}
                 </h4>
                 <p className="text-[13.5px] text-white/70 leading-relaxed font-medium">
-                  {lastFinishedSection === "store_space" && "입력하신 사용 면적 정보는 매대에 진열할 적격 브랜드 SKU 한계를 계산하는 가중치 지표로 활용됩니다."}
-                  {lastFinishedSection === "customer_demand" && "특정 연령대 및 브랜드 인지도 성향 지표는 큐레이션 추천 매칭 로직의 AP 가중치 계산에 즉각 반영됩니다."}
-                  {lastFinishedSection === "product_price" && "가격대 민감도는 디스플레이 내 가성비 핵심 라인업과 볼륨 있는 프리미엄 SKU 비율 조합의 근거가 됩니다."}
-                  {lastFinishedSection === "inventory_reorder" && "안정적인 회전율 확보를 위해, 60일 내 2차 구매 비율 등 매입 가중치 분석 단계로 진입합니다."}
+                  {lastFinishedSection === "store_space" && (locale === "ko" 
+                    ? "입력하신 사용 면적 정보는 매대에 진열할 적격 브랜드 SKU 한계를 계산하는 가중치 지표로 활용됩니다."
+                    : "Store footprint size acts as a key multiplier constraining initial SKU counts and fixture dimensions.")}
+                  {lastFinishedSection === "customer_demand" && (locale === "ko" 
+                    ? "특정 연령대 및 브랜드 인지도 성향 지표는 큐레이션 추천 매칭 로직의 AP 가중치 계산에 즉각 반영됩니다."
+                    : "Shopper age groups and brand affinity indices guide category match weighting algorithms.")}
+                  {lastFinishedSection === "product_price" && (locale === "ko" 
+                    ? "가격대 민감도는 디스플레이 내 가성비 핵심 라인업과 볼륨 있는 프리미엄 SKU 비율 조합의 근거가 됩니다."
+                    : "Price sensitivity curves determine the ratio of high-velocity value brands to premium cosmetics.")}
+                  {lastFinishedSection === "inventory_reorder" && (locale === "ko" 
+                    ? "안정적인 회전율 확보를 위해, 60일 내 2차 구매 비율 등 매입 가중치 분석 단계로 진입합니다."
+                    : "Reorder cycles shape estimated payback period math, entering capital allocation diagnostic steps.")}
                 </p>
                 <div className="p-3 bg-white/5 border border-white/5 rounded-[12px] text-white/50 text-[11.5px] leading-relaxed">
-                  💡 다음으로 계속 진행하여 최종 예상 초기 상품 구매 규모와 매출·수익 가능성 분석 결과를 열어보세요.
+                  {locale === "ko" 
+                    ? "💡 다음으로 계속 진행하여 최종 예상 초기 상품 구매 규모와 매출·수익 가능성 분석 결과를 열어보세요." 
+                    : "💡 Proceed to reveal your custom display sizes, SKU count, and projected annual sales and margins."}
                 </div>
               </div>
               <div className="flex justify-end gap-3 mt-6 border-t border-white/10 pt-5">
@@ -659,7 +729,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   }}
                   className="h-12 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-7 rounded-[8px] font-bold text-[13.5px]"
                 >
-                  다음 단계 진입하기 →
+                  {locale === "ko" ? "다음 단계 진입하기 →" : "Proceed to Next Section →"}
                 </button>
               </div>
             </div>
@@ -670,24 +740,31 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               QUESTION {activeQuestion.id}
             </span>
             <h2 className="text-[18px] sm:text-[21px] font-extrabold text-white leading-snug tracking-tight">
-              {activeQuestion.label_ko}
+              {locale === "ko" ? activeQuestion.label_ko : activeQuestion.label_en}
             </h2>
-            {activeQuestion.label_ko !== activeQuestion.label_en && (
+            {locale === "ko" && activeQuestion.label_ko !== activeQuestion.label_en && (
               <span className="text-[13px] text-white/40 block -mt-1.5 font-medium">
                 {activeQuestion.label_en}
               </span>
             )}
             
-            {(activeQuestion.helper_ko || activeQuestion.id === "Q6" || activeQuestion.id === "Q22" || activeQuestion.id === "Q35") && (
+            {(locale === "ko" ? activeQuestion.helper_ko : activeQuestion.helper_en || activeQuestion.id === "Q6" || activeQuestion.id === "Q22" || activeQuestion.id === "Q35") && (
               <div className="flex items-start gap-2 bg-[#ff2b75]/5 border border-[#ff2b75]/10 rounded-[8px] p-3 text-[12.5px] text-white/60 mt-1 leading-normal font-medium">
                 <svg className="w-4 h-4 text-[#ff2b75] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>
-                  {activeQuestion.helper_ko || 
-                   (activeQuestion.id === "Q6" && "매장 규모를 파악하고 지나치게 큰 Display를 추천하지 않기 위해 사용됩니다.") ||
-                   (activeQuestion.id === "Q22" && "추천 규모가 실제 상품 구매 예산 범위에 맞도록 조정하는 데 사용됩니다.") ||
-                   (activeQuestion.id === "Q35" && "예상 Inventory Turnover와 Annual Sales를 계산하는 데 사용됩니다.")}
+                  {locale === "ko" ? (
+                    activeQuestion.helper_ko || 
+                    (activeQuestion.id === "Q6" && "매장 규모를 파악하고 지나치게 큰 Display를 추천하지 않기 위해 사용됩니다.") ||
+                    (activeQuestion.id === "Q22" && "추천 규모가 실제 상품 구매 예산 범위에 맞도록 조정하는 데 사용됩니다.") ||
+                    (activeQuestion.id === "Q35" && "예상 Inventory Turnover와 Annual Sales를 계산하는 데 사용됩니다.")
+                  ) : (
+                    activeQuestion.helper_en ||
+                    (activeQuestion.id === "Q6" && "Used to assess store size and avoid recommending excessively large displays.") ||
+                    (activeQuestion.id === "Q22" && "Used to align recommended scale with your actual product purchase budget.") ||
+                    (activeQuestion.id === "Q35" && "Used to calculate projected inventory turnover and annual sales.")
+                  )}
                 </span>
               </div>
             )}
@@ -722,7 +799,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         : "px-4.5 py-3 rounded-[10px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/70 hover:text-white text-left cursor-pointer flex flex-col justify-center gap-0.5"}
                     >
                       <div className="flex justify-between items-center gap-2 w-full">
-                        <span className="text-[13px] leading-tight tracking-tight font-bold">{ans.label_ko}</span>
+                        <span className="text-[13px] leading-tight tracking-tight font-bold">
+                          {locale === "ko" ? ans.label_ko : ans.label_en}
+                        </span>
                         {isSelected && (
                           activeQuestion.is_ranking && selectIndex !== -1 ? (
                             <div className="w-[18px] h-[18px] rounded-full bg-[#ff2b75] text-[10px] text-white flex items-center justify-center font-black font-display shrink-0">
@@ -735,7 +814,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           )
                         )}
                       </div>
-                      {ans.label_ko !== ans.label_en && (
+                      {locale === "ko" && ans.label_ko !== ans.label_en && (
                         <span className="text-[10px] text-white/40 block leading-tight font-semibold mt-0.5">
                           {ans.label_en}
                         </span>
@@ -753,12 +832,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       : "p-4 rounded-[12px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/80 hover:text-white text-left cursor-pointer flex flex-col justify-center gap-1"}
                   >
                     <div className="flex justify-between items-center w-full">
-                      <span className="text-[14px] font-bold tracking-tight">{ans.label_ko}</span>
+                      <span className="text-[14px] font-bold tracking-tight">
+                        {locale === "ko" ? ans.label_ko : ans.label_en}
+                      </span>
                       <div className={"w-4 h-4 rounded-full border flex items-center justify-center shrink-0 " + (isSelected ? "border-[#ff2b75] bg-[#ff2b75]" : "border-white/20")}>
                         {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                       </div>
                     </div>
-                    {ans.label_ko !== ans.label_en && (
+                    {locale === "ko" && ans.label_ko !== ans.label_en && (
                       <span className="text-[11.5px] text-white/40 block leading-normal mt-0.5 font-medium">
                         {ans.label_en}
                       </span>
@@ -771,7 +852,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             {activeQuestion.is_ranking && (answers[activeQuestion.id] || []).length > 0 && (
               <div className="mt-6 p-4 bg-[#ff2b75]/4 border border-[#ff2b75]/15 rounded-[12px] animate-fade-in text-left">
                 <h4 className="text-[10px] font-black text-[#ff2b75] tracking-widest uppercase mb-2 font-display">
-                  선택된 순위 (Ranked Selection)
+                  {locale === "ko" ? "선택된 순위 (Ranked Selection)" : "Selected Priority Order"}
                 </h4>
                 <div className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
                   {(answers[activeQuestion.id] || []).map((selectedLabel: string, idx: number) => {
@@ -781,8 +862,8 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         <span className="text-[#ff2b75] font-black font-display text-[10.5px] w-5 h-5 rounded-full bg-[#ff2b75]/10 border border-[#ff2b75]/25 flex items-center justify-center shrink-0">
                           {idx + 1}
                         </span>
-                        <span>{selectedLabel}</span>
-                        {correspondingAnswer && correspondingAnswer.label_ko !== correspondingAnswer.label_en && (
+                        <span>{locale === "ko" ? selectedLabel : (correspondingAnswer?.label_en || selectedLabel)}</span>
+                        {locale === "ko" && correspondingAnswer && correspondingAnswer.label_ko !== correspondingAnswer.label_en && (
                           <span className="text-[11px] text-white/35 font-medium leading-none">
                             ({correspondingAnswer.label_en})
                           </span>
@@ -800,7 +881,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               onClick={handleBack}
               className="h-12 inline-flex items-center justify-center border border-white/15 hover:border-white/30 text-white px-6 rounded-[8px] font-bold text-[13.5px] tracking-wide transition-colors cursor-pointer"
             >
-              이전 (Back)
+              {locale === "ko" ? "이전 (Back)" : "← Back"}
             </button>
             
             <div className="flex gap-3">
@@ -809,7 +890,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   onClick={handleSkip}
                   className="h-12 inline-flex items-center justify-center text-white/50 hover:text-white px-5 rounded-[8px] font-bold text-[13.5px] transition-colors cursor-pointer"
                 >
-                  건너뛰기 (Skip)
+                  {locale === "ko" ? "건너뛰기 (Skip)" : "Skip Question"}
                 </button>
               )}
               
@@ -818,7 +899,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 disabled={isNextDisabled}
                 className="h-12 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-bold text-[13.5px] tracking-wide transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
               >
-                다음 (Next) →
+                {locale === "ko" ? "다음 (Next) →" : "Next Question →"}
               </button>
             </div>
           </div>
@@ -842,7 +923,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               RECOMMENDATION SYSTEM ENGINE
             </span>
             <h3 className="text-[16px] font-extrabold text-white tracking-tight">
-              매장 조건 매칭 분석 중
+              {locale === "ko" ? "매장 조건 매칭 분석 중" : "Analyzing Store Alignment..."}
             </h3>
           </div>
 
@@ -921,7 +1002,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 </span>
               </div>
               <h2 className="font-display text-2xl sm:text-[30px] font-bold text-white tracking-tight leading-none">
-                귀 매장을 위한 K-Beauty Growth Plan
+                {locale === "ko" ? "귀 매장을 위한 K-Beauty Growth Plan" : "K-Beauty Growth Plan for Your Store"}
               </h2>
               {mainRecommendation.simulation_code && (
                 <span className="text-[11px] font-bold text-[#ff2b75] tracking-wider font-display uppercase mt-1 select-all">
@@ -932,27 +1013,35 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
             
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-auto border-t lg:border-t-0 border-white/10 pt-5 lg:pt-0">
               <div className="flex flex-col gap-0.5 text-left">
-                <span className="text-[9px] text-[#ff2b75] font-black tracking-wider uppercase font-display">권장 매대 크기 · DISPLAY</span>
+                <span className="text-[9px] text-[#ff2b75] font-black tracking-wider uppercase font-display">
+                  {locale === "ko" ? "권장 매대 크기 · DISPLAY" : "RECOMMENDED FIXTURE SIZE"}
+                </span>
                 <span className="text-[16px] font-black text-[#ff2b75]">
                   {mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT
                 </span>
               </div>
               <div className="flex flex-col gap-0.5 text-left">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">권장 상품 수 · RECOMMENDED SKU</span>
+                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">
+                  {locale === "ko" ? "권장 상품 수 · RECOMMENDED SKU" : "RECOMMENDED SKU COUNT"}
+                </span>
                 <span className="text-[16px] font-black text-white">
                   {mainRecommendation.display.sku_count} SKU
                 </span>
               </div>
               <div className="flex flex-col gap-0.5 text-left">
-                <span className="text-[9px] text-[#22D3EE] font-black tracking-wider uppercase font-display">예상 연간 회전율 · TURNOVER</span>
+                <span className="text-[9px] text-[#22D3EE] font-black tracking-wider uppercase font-display">
+                  {locale === "ko" ? "예상 연간 회전율 · TURNOVER" : "PROJECTED ANNUAL TURNOVER"}
+                </span>
                 <span className="text-[16px] font-black text-[#22D3EE]">
-                  약 {mainRecommendation.financial.turnover}회
+                  {locale === "ko" ? "약 " + mainRecommendation.financial.turnover + "회" : "~" + mainRecommendation.financial.turnover + "x / yr"}
                 </span>
               </div>
               <div className="flex flex-col gap-0.5 text-left">
-                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">예상 연간 매출 · ESTIMATED SALES</span>
+                <span className="text-[9px] text-white/40 font-black tracking-wider uppercase font-display">
+                  {locale === "ko" ? "예상 연간 매출 · ESTIMATED SALES" : "ESTIMATED ANNUAL SALES"}
+                </span>
                 <span className="text-[16px] font-black text-white">
-                  약 ${mainRecommendation.financial.annual_sales.toLocaleString()}
+                  {locale === "ko" ? "약 $" + mainRecommendation.financial.annual_sales.toLocaleString() : "~$" + mainRecommendation.financial.annual_sales.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -1004,20 +1093,20 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       
                       <div className="flex flex-col gap-3 font-medium text-[13.5px] text-white/70">
                         <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span>추천 모듈 크기 (Fixture Width):</span>
+                          <span>{locale === "ko" ? "추천 모듈 크기 (Fixture Width):" : "Recommended Fixture Width:"}</span>
                           <strong className="text-white">{mainRecommendation.display.width_ft} FT Module</strong>
                         </div>
                         <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span>권장 SKU 크기 (Recommended SKU Count):</span>
+                          <span>{locale === "ko" ? "권장 SKU 크기 (Recommended SKU Count):" : "Recommended SKU Count:"}</span>
                           <strong className="text-white">{mainRecommendation.display.sku_count} SKU</strong>
                         </div>
                         <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span>초도 공급 수량 (Initial Pack Qty):</span>
+                          <span>{locale === "ko" ? "초도 공급 수량 (Initial Pack Qty):" : "Initial Pack Qty (Est. Units):"}</span>
                           <strong className="text-white">{mainRecommendation.display.initial_units} Units</strong>
                         </div>
                         <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span>예상 초도 상품 구매액 (Estimated Initial Product Purchase):</span>
-                          <strong className="text-white">${mainRecommendation.display.investment.toLocaleString()}</strong>
+                          <span>{locale === "ko" ? "예상 초도 상품 구매액 (Estimated Initial Product Purchase):" : "Est. Initial Product Buy:"}</span>
+                          <strong className="text-white">{locale === "ko" ? "" : "$"}{mainRecommendation.display.investment.toLocaleString()}</strong>
                         </div>
                       </div>
                     </div>
@@ -1046,11 +1135,11 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   </div>
 
                   <div className="border-t border-white/10 pt-6 mt-2">
-                    <h4 className="text-[14.5px] font-bold text-white mb-3">왜 이 Display 모듈이 추천되었나요? (Why This Result)</h4>
+                    <h4 className="text-[14.5px] font-bold text-white mb-3">{locale === "ko" ? "왜 이 Display 모듈이 추천되었나요? (Why This Result)" : "Why was this display module recommended?"}</h4>
                     
                     {/* Decision Factor Chips */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {["공간 적합도", "고객 수요", "현재 판매 규모", "성장 의지"].map((chip) => (
+                      {(locale === "ko" ? ["공간 적합도", "고객 수요", "현재 판매 규모", "성장 의지"] : ["Space Fit", "Shopper Demand", "Current Volume", "Growth Ambition"]).map((chip) => (
                         <span key={chip} className="text-[11px] font-extrabold text-[#ff2b75] bg-[#ff2b75]/8 border border-[#ff2b75]/15 px-2.5 py-1 rounded-full">
                           {chip}
                         </span>
@@ -1058,7 +1147,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     </div>
 
                     <div className="flex flex-col gap-3">
-                      {mainRecommendation.display.reasons.map((r, i) => (
+                      {getLocalizedReasons(mainRecommendation.display.program, mainRecommendation.display.width_ft, mainRecommendation.display.reasons).map((r, i) => (
                         <div key={i} className="flex gap-3 items-start p-3 bg-white/5 border border-white/5 rounded-[10px] text-white/80 text-[13px] leading-relaxed">
                           <span className="text-[#ff2b75] font-black font-display shrink-0 mt-0.5">✓</span>
                           <span>{r}</span>
@@ -1076,34 +1165,55 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   <div className="flex flex-col gap-2.5 text-left">
                     <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">RECOMMENDED ASSORTMENT PROFILE</span>
                     <h3 className="font-display text-[22px] font-extrabold text-white leading-tight tracking-tight">
-                      {(() => {
-                        const p = mainRecommendation.assortment.primary_description_ko.replace(" 구성", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
-                        const s = mainRecommendation.assortment.secondary_description_ko.replace(" 구성", "").replace(" 매칭", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
-                        return `“${p} 중심 + ${s} 보강 구성”`;
-                      })()}
+                      {locale === "ko" ? (
+                        (() => {
+                          const p = mainRecommendation.assortment.primary_description_ko.replace(" 구성", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
+                          const s = mainRecommendation.assortment.secondary_description_ko.replace(" 구성", "").replace(" 매칭", "").replace(" 솔루션", "").replace(" 특화", "").replace(" 집중", "");
+                          return "“" + p + " 중심 + " + s + " 보강 구성”";
+                        })()
+                      ) : (
+                        "\"" + getLocalizedAssortmentDescription(mainRecommendation.assortment.primary, true) + " Focus + " + getLocalizedAssortmentDescription(mainRecommendation.assortment.secondary, false) + " Add-on\""
+                      )}
                     </h3>
                     <span className="text-[13.5px] text-[#b4b4b4] font-semibold leading-relaxed max-w-xl">
-                      고객 및 가격 성향 데이터를 분석하여 맞춤 설계된 상품 포트폴리오 전략입니다.
+                      {locale === "ko" ? "고객 및 가격 성향 데이터를 분석하여 맞춤 설계된 상품 포트폴리오 전략입니다." : "Custom-tailored assortment strategy matching store and consumer demographics."}
                     </span>
 
                     <div className="flex flex-col gap-2.5 text-white/70 text-[13px] leading-relaxed max-w-xl bg-white/3 border border-white/5 p-4 rounded-[12px] mt-2">
                       <div className="flex gap-2">
                         <span className="text-[#ff2b75] font-black shrink-0">·</span>
-                        <span><strong>타깃 고객 맞춤</strong>: 매장을 이용하는 주 고객층의 특성을 고려하여, {mainRecommendation.assortment.primary_description_ko}으로 핵심 구매 전환을 유도합니다.</span>
+                        <span>
+                          <strong>{locale === "ko" ? "타깃 고객 맞춤" : "Target Shoppers"}</strong>:{" "}
+                          {locale === "ko" 
+                            ? "매장을 이용하는 주 고객층의 특성을 고려하여, " + mainRecommendation.assortment.primary_description_ko + "으로 핵심 구매 전환을 유도합니다."
+                            : "Tailored to your primary shopper base, driving core conversions via " + getLocalizedAssortmentDescription(mainRecommendation.assortment.primary, true).toLowerCase() + " options."}
+                        </span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-[#ff2b75] font-black shrink-0">·</span>
-                        <span><strong>시너지 상품 보강</strong>: 매장 방문 빈도와 추가 구매(Add-on)를 극대화하기 위해 {mainRecommendation.assortment.secondary_description_ko}을 결합하여 매대 효율을 높입니다.</span>
+                        <span>
+                          <strong>{locale === "ko" ? "시너지 상품 보강" : "Add-on Synergy"}</strong>:{" "}
+                          {locale === "ko" 
+                            ? "매장 방문 빈도와 추가 구매(Add-on)를 극대화하기 위해 " + mainRecommendation.assortment.secondary_description_ko + "을 결합하여 매대 효율을 높입니다."
+                            : "Maximizes visit frequency and add-on transactions by pairing it with a supportive " + getLocalizedAssortmentDescription(mainRecommendation.assortment.secondary, false).toLowerCase() + " collection."}
+                        </span>
                       </div>
                       <div className="flex gap-2">
                         <span className="text-[#ff2b75] font-black shrink-0">·</span>
-                        <span><strong>상권 매칭</strong>: 입력해주신 상권 및 고객 데이터를 기준으로 K SELECT가 엄선한 베스트셀링 카테고리 비율입니다.</span>
+                        <span>
+                          <strong>{locale === "ko" ? "상권 매칭" : "Demographic Match"}</strong>:{" "}
+                          {locale === "ko" 
+                            ? "입력해주신 상권 및 고객 데이터를 기준으로 K SELECT가 엄선한 베스트셀링 카테고리 비율입니다."
+                            : "Recommended category mix ratio curated by K SELECT based on your store's regional market data."}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-3.5 mt-2">
-                    <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display">카테고리 믹스 밸런스 비율</h4>
+                    <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display">
+                      {locale === "ko" ? "카테고리 믹스 밸런스 비율" : "Assortment Category Mix Balance"}
+                    </h4>
                     
                     <div className="w-full h-4 rounded-full overflow-hidden flex">
                       {mainRecommendation.assortment.category_mix.map((cat) => (
@@ -1132,26 +1242,30 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                   <div className="border-t border-white/10 pt-6 mt-2">
                     <div className="flex justify-between items-center mb-3.5">
-                      <h4 className="text-[14.5px] font-bold text-white">추천 상품 구성 예시 (Sample Product Mix)</h4>
+                      <h4 className="text-[14.5px] font-bold text-white">
+                        {locale === "ko" ? "추천 상품 구성 예시 (Sample Product Mix)" : "Recommended Sample Product Mix"}
+                      </h4>
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
                       {[
-                        { title: "Premium Ampoule", cat: "Skincare", desc: "고함량 스페셜 앰플" },
-                        { title: "Hydrating Moisturizer", cat: "Skincare", desc: "24시간 수분 장벽 크림" },
-                        { title: "Daily SPF50+ Sunscreen", cat: "Skincare", desc: "백탁 없는 데일리 유기 자차" },
-                        { title: "Gentle Foam Cleanser", cat: "Skincare", desc: "약산성 순한 거품 클렌저" },
-                        { title: "Trouble Acne Patch", cat: "Skincare", desc: "초슬림 하이드로콜로이드 패치" },
-                        { title: "Calming Sheet Mask", cat: "Skincare", desc: "진정 수분 병풀 마스크팩" },
-                        { title: "Scalp Revitalizing Shampoo", cat: "Hair Care", desc: "두피 케어 탈모 방지 샴푸" },
-                        { title: "Matte Cushion Foundation", cat: "Makeup", desc: "밀착 롱래스팅 매트 쿠션" }
+                        { title: "Premium Ampoule", cat: "Skincare", descKo: "고함량 스페셜 앰플", descEn: "High-potency specialized ampoule" },
+                        { title: "Hydrating Moisturizer", cat: "Skincare", descKo: "24시간 수분 장벽 크림", descEn: "24-hour hydration barrier cream" },
+                        { title: "Daily SPF50+ Sunscreen", cat: "Skincare", descKo: "백탁 없는 데일리 유기 자차", descEn: "Daily chemical sunscreen, no white cast" },
+                        { title: "Gentle Foam Cleanser", cat: "Skincare", descKo: "약산성 순한 거품 클렌저", descEn: "Mild, low-pH foaming cleanser" },
+                        { title: "Trouble Acne Patch", cat: "Skincare", descKo: "초슬림 하이드로콜로이드 패치", descEn: "Ultra-thin hydrocolloid patch" },
+                        { title: "Calming Sheet Mask", cat: "Skincare", descKo: "진정 수분 병풀 마스크팩", descEn: "Soothe & hydrate Cica sheet mask" },
+                        { title: "Scalp Revitalizing Shampoo", cat: "Hair Care", descKo: "두피 케어 탈모 방지 샴푸", descEn: "Scalp care, hair-loss prevention shampoo" },
+                        { title: "Matte Cushion Foundation", cat: "Makeup", descKo: "밀착 롱래스팅 매트 쿠션", descEn: "Seamless long-lasting matte cushion foundation" }
                       ].map((prod) => (
                         <div key={prod.title} className="p-3.5 rounded-[12px] border border-white/5 bg-[#171719]/40 hover:border-white/15 transition-colors flex flex-col justify-between min-h-[90px] text-left">
                           <div className="flex flex-col gap-0.5">
                             <span className="text-[8px] text-[#ff2b75] font-black tracking-wider uppercase font-display">{prod.cat}</span>
                             <span className="text-[12.5px] font-bold text-white tracking-tight leading-tight">{prod.title}</span>
                           </div>
-                          <span className="text-[11px] text-white/50 block font-semibold mt-2">{prod.desc}</span>
+                          <span className="text-[11px] text-white/50 block font-semibold mt-2">
+                            {locale === "ko" ? prod.descKo : prod.descEn}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -1166,74 +1280,116 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   {/* Primary KPIs Block */}
                   <div className="flex flex-col gap-3">
                     <div className="flex justify-between items-baseline mb-1">
-                      <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display">핵심 예상 사업성 (Primary Financial Outlook)</h4>
+                      <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display">
+                        {locale === "ko" ? "핵심 예상 사업성 (Primary Financial Outlook)" : "Primary Financial Projections"}
+                      </h4>
                       <span className="text-[11px] text-white/50 font-semibold bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-[4px]">
-                        현재 입력 조건 기준 예상치
+                        {locale === "ko" ? "현재 입력 조건 기준 예상치" : "Projections based on current inputs"}
                       </span>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
                       <div className="p-5 bg-white/5 border border-white/10 rounded-[14px] flex flex-col gap-1.5 shadow-md">
-                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">① 예상 초도 상품 구매액 (Estimated Initial Product Purchase)</span>
-                        <strong className="text-white text-[24px] font-black">~${mainRecommendation.financial.initial_product_investment.toLocaleString()}</strong>
-                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">디스플레이 무상 임대 및 초기 맞춤 상품 세팅비 포함</span>
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">
+                          {locale === "ko" ? "① 예상 초도 상품 구매액 (Estimated Initial Product Purchase)" : "① Estimated Initial Product Purchase"}
+                        </span>
+                        <strong className="text-white text-[24px] font-black">~{locale === "ko" ? "" : "$"}{mainRecommendation.financial.initial_product_investment.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">
+                          {locale === "ko" ? "디스플레이 무상 임대 및 초기 맞춤 상품 세팅비 포함" : "Includes complimentary backlit display fixture & initial curated inventory setup."}
+                        </span>
                       </div>
 
                       <div className="p-5 bg-white/5 border border-[#22D3EE]/30 rounded-[14px] flex flex-col gap-1.5 shadow-md">
-                        <span className="text-[10px] text-[#22D3EE] font-black tracking-wider uppercase font-display">② 예상 연간 재고 회전율 (Estimated Turnover)</span>
-                        <strong className="text-white text-[24px] font-black">~{mainRecommendation.financial.turnover}회 / 년</strong>
+                        <span className="text-[10px] text-[#22D3EE] font-black tracking-wider uppercase font-display">
+                          {locale === "ko" ? "② 예상 연간 재고 회전율 (Estimated Turnover)" : "② Estimated Annual Inventory Turnover"}
+                        </span>
+                        <strong className="text-white text-[24px] font-black">
+                          ~{mainRecommendation.financial.turnover}{locale === "ko" ? "회 / 년" : "x / year"}
+                        </strong>
                         <span className="text-[11px] text-white/60 font-medium leading-normal mt-0.5">
-                          💡 판매와 재주문이 반복되는 운영 과정에서 평균 재고가 연간 약 {mainRecommendation.financial.turnover}회 회전하는 수준을 의미합니다.
+                          {locale === "ko" 
+                            ? "💡 판매와 재주문이 반복되는 운영 과정에서 평균 재고가 연간 약 " + mainRecommendation.financial.turnover + "회 회전하는 수준을 의미합니다."
+                            : "💡 Represents a conservative turnover speed of " + mainRecommendation.financial.turnover + " times per year under regular reordering cycles."}
                         </span>
                       </div>
 
                       <div className="p-5 bg-white/5 border border-white/10 rounded-[14px] flex flex-col gap-1.5 shadow-md">
-                        <span className="text-[10px] text-white/50 font-black tracking-wider uppercase font-display">③ 예상 연간 소매 매출 (Projected Retail Sales)</span>
-                        <strong className="text-white text-[24px] font-black">~${mainRecommendation.financial.annual_sales.toLocaleString()}</strong>
-                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">연간 예상 총소매매출액 (소비자가 합산)</span>
+                        <span className="text-[10px] text-white/50 font-black tracking-wider uppercase font-display">
+                          {locale === "ko" ? "③ 예상 연간 소매 매출 (Projected Retail Sales)" : "③ Projected Annual Retail Sales"}
+                        </span>
+                        <strong className="text-white text-[24px] font-black">~{locale === "ko" ? "" : "$"}{mainRecommendation.financial.annual_sales.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/45 font-semibold leading-relaxed">
+                          {locale === "ko" ? "연간 예상 총소매매출액 (소비자가 합산)" : "Projected total annual sales value at retail price."}
+                        </span>
                       </div>
 
                       <div className="p-5 bg-[#ff2b75]/5 border border-[#ff2b75]/35 rounded-[14px] flex flex-col gap-1.5 shadow-lg">
-                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">④ 예상 연간 소매 수익 (Estimated Gross Profit)</span>
-                        <strong className="text-[#ff2b75] text-[24px] font-black">~${mainRecommendation.financial.gross_profit.toLocaleString()}</strong>
-                        <span className="text-[11px] text-white/60 font-semibold leading-relaxed">초도 상품 구매액 대비 우수한 수익성 예측치</span>
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-wider uppercase font-display">
+                          {locale === "ko" ? "④ 예상 연간 소매 수익 (Estimated Gross Profit)" : "④ Projected Annual Gross Profit"}
+                        </span>
+                        <strong className="text-[#ff2b75] text-[24px] font-black">~{locale === "ko" ? "" : "$"}{mainRecommendation.financial.gross_profit.toLocaleString()}</strong>
+                        <span className="text-[11px] text-white/60 font-semibold leading-relaxed">
+                          {locale === "ko" ? "초도 상품 구매액 대비 우수한 수익성 예측치" : "Projected annual margin yield compared against initial product buy cost."}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   {/* Secondary KPIs Block */}
                   <div className="flex flex-col gap-3 border-t border-white/10 pt-6">
-                    <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display mb-1">부가 운영 지표 (Secondary Metrics)</h4>
+                    <h4 className="text-[13px] font-bold text-white tracking-wider uppercase font-display mb-1">
+                      {locale === "ko" ? "부가 운영 지표 (Secondary Metrics)" : "Secondary Operations Metrics"}
+                    </h4>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">초도 공급 수량 (Initial Pack Qty)</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">
+                          {locale === "ko" ? "초도 공급 수량 (Initial Pack Qty)" : "Initial Pack Qty"}
+                        </span>
                         <strong className="text-white text-[16px] font-black">{mainRecommendation.display.initial_units} Pcs</strong>
-                        <span className="text-[10px] text-white/40 font-medium">평균 소매가 $23-$24 기준 산출</span>
+                        <span className="text-[10px] text-white/40 font-medium">
+                          {locale === "ko" ? "평균 소매가 $23-$24 기준 산출" : "Calculated using average retail price of $23-$24."}
+                        </span>
                       </div>
 
-                      <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 소매 마진율 (Gross Margin)</span>
+                      <div className="p-4 bg-white/3 border border-[#ff2b75]/10 rounded-[10px] flex flex-col gap-0.5">
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">
+                          {locale === "ko" ? "예상 소매 마진율 (Gross Margin)" : "Projected Gross Margin"}
+                        </span>
                         <strong className="text-white text-[16px] font-black">{mainRecommendation.financial.gross_margin * 100}%</strong>
-                        <span className="text-[10px] text-white/40 font-medium">타사 카테고리 대비 우수한 마진 효율</span>
+                        <span className="text-[10px] text-white/40 font-medium">
+                          {locale === "ko" ? "타사 카테고리 대비 우수한 마진 효율" : "Industry-leading category margins."}
+                        </span>
                       </div>
 
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 초기 구매비용 회수 기간 (Est. Payback)</span>
-                        <strong className="text-white text-[16px] font-black">약 {mainRecommendation.financial.payback_months}개월</strong>
-                        <span className="text-[10px] text-white/40 font-medium">마진 총액 기준 보수적 계산</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">
+                          {locale === "ko" ? "예상 초기 구매비용 회수 기간 (Est. Payback)" : "Projected Initial Payback Period"}
+                        </span>
+                        <strong className="text-white text-[16px] font-black">
+                          {locale === "ko" ? "약 " + mainRecommendation.financial.payback_months + "개월" : "~" + mainRecommendation.financial.payback_months + " Months"}
+                        </strong>
+                        <span className="text-[10px] text-white/40 font-medium">
+                          {locale === "ko" ? "마진 총액 기준 보수적 계산" : "Conservative calculation based on gross margin flow."}
+                        </span>
                       </div>
 
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">예상 초도 투자 이익률 (Projected Gross Profit ROI)</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">
+                          {locale === "ko" ? "예상 초도 투자 이익률 (Projected Gross Profit ROI)" : "Projected Gross Profit ROI on Initial Buy"}
+                        </span>
                         <strong className="text-[#ff2b75] text-[16px] font-black">
                           {Math.round((mainRecommendation.financial.gross_profit / mainRecommendation.financial.initial_product_investment) * 100)}%
                         </strong>
-                        <span className="text-[10px] text-white/40 font-medium">초도 상품 구매액 대비 연간 마진 비율 (매장 운영비 미포함)</span>
+                        <span className="text-[10px] text-white/40 font-medium">
+                          {locale === "ko" ? "초도 상품 구매액 대비 연간 마진 비율 (매장 운영비 미포함)" : "Ratio of annual gross profit compared to initial product purchase (excludes store overhead)."}
+                        </span>
                       </div>
 
                       <div className="p-4 bg-white/3 border border-white/5 rounded-[10px] flex flex-col gap-0.5 sm:col-span-2 lg:col-span-1">
-                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">분석 신뢰도 (Analysis Confidence)</span>
+                        <span className="text-[9px] text-white/50 font-bold uppercase tracking-wider font-display">
+                          {locale === "ko" ? "분석 신뢰도 (Analysis Confidence)" : "Analysis Confidence Level"}
+                        </span>
                         <strong className="text-white text-[16px] font-black">
                           {mainRecommendation.confidence.level}
                         </strong>
@@ -1248,21 +1404,33 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                   <details className="group border border-white/10 rounded-[12px] bg-white/3 overflow-hidden transition-all duration-300">
                     <summary className="p-4 flex justify-between items-center cursor-pointer font-bold text-[13.5px] text-white focus:outline-none select-none">
-                      <span>이 결과는 어떻게 계산했나요? (How We Calculated This)</span>
+                      <span>{locale === "ko" ? "이 결과는 어떻게 계산했나요? (How We Calculated This)" : "How We Calculated This"}</span>
                       <span className="transition-transform duration-200 group-open:rotate-180 text-white/60">▼</span>
                     </summary>
                     <div className="p-4 border-t border-white/5 flex flex-col gap-3.5 text-[12.5px] text-white/70 leading-relaxed font-medium">
                       <div className="flex flex-col gap-1">
-                        <strong className="text-white font-bold">1. 예상 재고 회전율 (Turnover Speed)</strong>
-                        <span>귀하가 입력한 신규 SKU 도입 예산 수치, 잘 팔리는 SKU의 월 판매량 범위, 품절 예방 리오더 빈도를 가중 합산하여 보수적인 연간 순환 지표({mainRecommendation.financial.turnover}회)를 산정했습니다.</span>
+                        <strong className="text-white font-bold">{locale === "ko" ? "1. 예상 재고 회전율 (Turnover Speed)" : "1. Projected Inventory Turnover Speed"}</strong>
+                        <span>
+                          {locale === "ko"
+                            ? "귀하가 입력한 신규 SKU 도입 예산 수치, 잘 팔리는 SKU의 월 판매량 범위, 품절 예방 리오더 빈도를 가중 합산하여 보수적인 연간 순환 지표(" + mainRecommendation.financial.turnover + "회)를 산정했습니다."
+                            : "Calculated conservatively at " + mainRecommendation.financial.turnover + " turns per year, factoring in your store space, target SKU count, and monthly sales estimate."}
+                        </span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <strong className="text-white font-bold">2. 연간 총 소매 매출액 (Annual Retail Sales)</strong>
-                        <span>수식: [초기 상품 구매액 × 연간 재고 회전수] ÷ (1 - 목표 리테일 마진율 50%)을 적용하여 산출했습니다.</span>
+                        <strong className="text-white font-bold">{locale === "ko" ? "2. 연간 총 소매 매출액 (Annual Retail Sales)" : "2. Projected Annual Retail Sales"}</strong>
+                        <span>
+                          {locale === "ko"
+                            ? "수식: [초기 상품 구매액 × 연간 재고 회전수] ÷ (1 - 목표 리테일 마진율 50%)을 적용하여 산출했습니다."
+                            : "Formula: [Initial Product Purchase × Annual Turnover Turns] ÷ (1 - Target Retail Margin 50%)."}
+                        </span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <strong className="text-white font-bold">3. 예상 소매 마진 (Estimated Gross Profit)</strong>
-                        <span>수식: [연간 총 소매 매출액 - 연간 매출원가]를 통해 연간 ${mainRecommendation.financial.gross_profit.toLocaleString()}의 마진 수익을 예상 시뮬레이션하였습니다.</span>
+                        <strong className="text-white font-bold">{locale === "ko" ? "3. 예상 소매 마진 (Estimated Gross Profit)" : "3. Estimated Annual Gross Profit"}</strong>
+                        <span>
+                          {locale === "ko"
+                            ? "수식: [연간 총 소매 매출액 - 연간 매출원가]를 통해 연간 $" + mainRecommendation.financial.gross_profit.toLocaleString() + "의 마진 수익을 예상 시뮬레이션하였습니다."
+                            : "Formula: [Projected Annual Retail Sales - Cost of Goods Sold], resulting in an estimated annual gross profit of $" + mainRecommendation.financial.gross_profit.toLocaleString() + "."}
+                        </span>
                       </div>
                     </div>
                   </details>
@@ -1280,21 +1448,53 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
           <div className="bg-[#121214] border border-white/10 rounded-[20px] p-6 sm:p-8 shadow-xl text-left mt-8">
             <div className="flex flex-col gap-1 mb-8">
               <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">90-DAY ACTION ROADMAP</span>
-              <h3 className="font-display text-[22px] font-extrabold text-white">첫 90일 K-Beauty 카테고리 런칭 로드맵</h3>
-              <span className="text-[13px] text-white/50 font-semibold">성공적인 매장 안착을 위해 K SELECT와 함께하는 파트너 성장 여정입니다.</span>
+              <h3 className="font-display text-[22px] font-extrabold text-white">
+                {locale === "ko" ? "첫 90일 K-Beauty 카테고리 런칭 로드맵" : "First 90-Day K-Beauty Launch Roadmap"}
+              </h3>
+              <span className="text-[13px] text-white/50 font-semibold">
+                {locale === "ko" ? "성공적인 매장 안착을 위해 K SELECT와 함께하는 파트너 성장 여정입니다." : "Our step-by-step launch roadmap to guarantee smooth retail integration and inventory turns."}
+              </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
               {[
-                { step: "LAUNCH", title: "Display 설치 및 런칭", desc: "데이터 기반으로 엄선된 초도 큐레이션 라인업 설치 및 LED 백라이트 매대 데모 실행" },
-                { step: "30 DAYS", title: "초기 Sell-through 확인", desc: "런칭 첫 달 실구매 소비자 매출 흐름 분석 및 상권 특성별 베스트 품목(Fast Seller) 파악" },
-                { step: "60 DAYS", title: "Reorder 패턴 최적화", desc: "품절 방지를 위한 신속 리오더 오토 루프 연결 및 마진 수율 품목 최적화 수행" },
-                { step: "90 DAYS", title: "재고 교환 크레딧 수행", desc: "회전율이 부진한 비적격 SKU를 100% 가치의 Exchange Credit으로 회수하여 즉각 인기 상품군으로 교환" }
+                { 
+                  step: "LAUNCH", 
+                  titleKo: "Display 설치 및 런칭", 
+                  titleEn: "Display Setup & Launch",
+                  descKo: "데이터 기반으로 엄선된 초도 큐레이션 라인업 설치 및 LED 백라이트 매대 데모 실행",
+                  descEn: "Delivery and setup of your curated initial inventory line, paired with custom LED backlit modular fixtures."
+                },
+                { 
+                  step: "30 DAYS", 
+                  titleKo: "초기 Sell-through 확인", 
+                  titleEn: "Initial Sell-Through Review",
+                  descKo: "런칭 첫 달 실구매 소비자 매출 흐름 분석 및 상권 특성별 베스트 품목(Fast Seller) 파악",
+                  descEn: "Analyze first-month sales data to identify top-performing SKU velocities and regional buyer preferences."
+                },
+                { 
+                  step: "60 DAYS", 
+                  titleKo: "Reorder 패턴 최적화", 
+                  titleEn: "Reorder Optimization",
+                  descKo: "품절 방지를 위한 신속 리오더 오토 루프 연결 및 마진 수율 품목 최적화 수행",
+                  descEn: "Establish automatic reorder triggers to prevent out-of-stocks and adjust margins based on initial performance."
+                },
+                { 
+                  step: "90 DAYS", 
+                  titleKo: "재고 교환 크레딧 수행", 
+                  titleEn: "Exchange Credit Protection",
+                  descKo: "회전율이 부진한 비적격 SKU를 100% 가치의 Exchange Credit으로 회수하여 즉각 인기 상품군으로 교환",
+                  descEn: "Use our 100% value Exchange Credit to return slower-moving products and swap them for fast-selling items."
+                }
               ].map((step, idx) => (
                 <div key={step.step} className="flex flex-col gap-2 p-4.5 bg-white/3 border border-white/5 rounded-[12px] relative z-10">
                   <span className="text-[10px] font-black text-[#ff2b75] tracking-widest font-display">{step.step}</span>
-                  <h4 className="text-[14px] font-bold text-white tracking-tight leading-snug">{step.title}</h4>
-                  <p className="text-[12px] text-white/60 leading-relaxed font-medium mt-1">{step.desc}</p>
+                  <h4 className="text-[14px] font-bold text-white tracking-tight leading-snug">
+                    {locale === "ko" ? step.titleKo : step.titleEn}
+                  </h4>
+                  <p className="text-[12px] text-white/60 leading-relaxed font-medium mt-1">
+                    {locale === "ko" ? step.descKo : step.descEn}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1306,16 +1506,20 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
               onClick={() => setShowPartnerModal(true)}
               className="h-15 w-full inline-flex flex-col items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[10px] transition-all duration-300 hover:shadow-[0_0_24px_rgba(255,43,117,0.45)] cursor-pointer py-2.5"
             >
-              <span className="font-extrabold text-[15.5px] leading-tight">파트너십 상담 신청하기 →</span>
+              <span className="font-extrabold text-[15.5px] leading-tight">
+                {locale === "ko" ? "파트너십 상담 신청하기 →" : "Request Partner Consultation →"}
+              </span>
               <span className="text-[10px] text-white/80 font-bold font-display uppercase tracking-widest">Partnership Consultation</span>
             </button>
 
             {/* Secondary Action */}
             <button
               onClick={() => setShowEmailModal(true)}
-              className="h-13 w-full inline-flex flex-col items-center justify-center border border-[#22d3ee]/40 bg-[#22d3ee]/3 hover:bg-[#22d3ee]/8 hover:border-[#22d3ee] text-[#22d3ee] rounded-[8px] transition-all duration-300 cursor-pointer py-1.5 shadow-[0_0_12px_rgba(34,211,238,0.06)]"
+              className="h-13 w-full inline-flex flex-col items-center justify-center border border-[#22d3ee]/40 bg-[#22d3ee]/3 hover:bg-[#22d3ee]/8 hover:border-[#22d3ee] text-[#22d3ee] rounded-[8px] transition-all duration-300 cursor-pointer py-1.5 shadow-[0_0_12px_rgba(34,211,238,0.06)] font-semibold"
             >
-              <span className="font-bold text-[13.5px] leading-tight">분석 결과 이메일로 받기</span>
+              <span className="font-bold text-[13.5px] leading-tight">
+                {locale === "ko" ? "분석 결과 이메일로 받기" : "Send Analysis via Email"}
+              </span>
               <span className="text-[9px] text-[#22d3ee]/70 font-bold font-display uppercase tracking-wider">Send Results via Email</span>
             </button>
 
@@ -1325,14 +1529,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 onClick={handleReviewAnswers}
                 className="text-white/60 hover:text-white font-bold text-[12.5px] tracking-tight transition-colors cursor-pointer hover:underline bg-transparent border-0"
               >
-                ✏️ 내 답변 검토하기 (Review Answers)
+                {locale === "ko" ? "✏️ 내 답변 검토하기 (Review Answers)" : "✏️ Review My Answers"}
               </button>
 
               <button
                 onClick={handleRestart}
                 className="text-white/30 hover:text-white/50 text-[11.5px] hover:underline cursor-pointer bg-transparent border-0 font-medium font-sans"
               >
-                처음부터 새로 시작하기 (Reset Simulator)
+                {locale === "ko" ? "처음부터 새로 시작하기 (Reset Simulator)" : "Restart Simulator (Reset)"}
               </button>
             </div>
           </div>
@@ -1351,51 +1555,57 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                 <div className="flex flex-col gap-1.5 mb-6">
                   <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">PARTNERSHIP CONSULTATION</span>
-                  <h3 className="font-display text-[21px] font-extrabold text-white leading-snug">이 분석 결과와 함께 파트너십 상담을 신청하시겠습니까?</h3>
+                  <h3 className="font-display text-[21px] font-extrabold text-white leading-snug">
+                    {locale === "ko" ? "이 분석 결과와 함께 파트너십 상담을 신청하시겠습니까?" : "Apply for a partnership consultation with these results?"}
+                  </h3>
                   <span className="text-[12.5px] text-white/50 font-semibold leading-relaxed">
-                    Simulator에서 확인한 추천 결과를 바탕으로 귀 매장에 적합한 K-Beauty 도입 방향과 다음 단계를 상담합니다.
+                    {locale === "ko" 
+                      ? "Simulator에서 확인한 추천 결과를 바탕으로 귀 매장에 적합한 K-Beauty 도입 방향과 다음 단계를 상담합니다." 
+                      : "Based on your diagnostic profile, we will review the best setup size, custom brand selections, and commercial launch steps."}
                   </span>
                 </div>
 
                 <div className="p-4 bg-white/5 border border-white/5 rounded-[12px] text-[12.5px] text-white/80 flex flex-col gap-2 mb-6">
                   <div className="flex justify-between">
-                    <span>추천 디스플레이 (Recommended Display):</span>
+                    <span>{locale === "ko" ? "추천 디스플레이 (Recommended Display):" : "Recommended Display:"}</span>
                     <strong className="text-white font-bold">{mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span>추천 상품 (Recommended SKU):</span>
+                    <span>{locale === "ko" ? "추천 상품 (Recommended SKU):" : "Recommended SKU Count:"}</span>
                     <strong className="text-white font-bold">{mainRecommendation.display.sku_count} SKU</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span>예상 초도 상품 구매액:</span>
-                    <strong className="text-white font-bold">~${mainRecommendation.display.investment.toLocaleString()}</strong>
+                    <span>{locale === "ko" ? "예상 초도 상품 구매액:" : "Est. Initial Purchase:"}</span>
+                    <strong className="text-white font-bold">~{locale === "ko" ? "" : "$"}{mainRecommendation.display.investment.toLocaleString()}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span>예상 재고 회전율 (Turnover):</span>
-                    <strong className="text-[#22D3EE] font-bold">~{mainRecommendation.financial.turnover}회 / 년</strong>
+                    <span>{locale === "ko" ? "예상 재고 회전율 (Turnover):" : "Projected Annual Turnover:"}</span>
+                    <strong className="text-[#22D3EE] font-bold">~{mainRecommendation.financial.turnover}{locale === "ko" ? "회 / 년" : "x / year"}</strong>
                   </div>
                 </div>
 
                 <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/15 rounded-[8px] p-3 text-[11.5px] text-white/60 mb-6 leading-normal font-semibold">
-                  ⚠️ **안내**: 상담 신청 전, 매장의 기본 준비 상태를 확인하는 간단한 Self-Check가 진행됩니다.
+                  {locale === "ko" 
+                    ? "⚠️ 안내: 상담 신청 전, 매장의 기본 준비 상태를 확인하는 간단한 Self-Check가 진행됩니다."
+                    : "⚠️ Note: Before scheduling, a brief self-check is required to verify your store's readiness."}
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <button
                     onClick={() => {
                       setShowPartnerModal(false);
-                      window.location.href = `/${locale}#launch-readiness`;
+                      window.location.href = locale === "ko" ? "/ko#launch-readiness" : "/#launch-readiness";
                     }}
                     className="h-12 w-full inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
                   >
-                    파트너십 상담 신청하기
+                    {locale === "ko" ? "파트너십 상담 신청하기" : "Proceed to Self-Check"}
                   </button>
                   
                   <button
                     onClick={() => setShowPartnerModal(false)}
                     className="h-12 w-full inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer"
                   >
-                    돌아가기
+                    {locale === "ko" ? "돌아가기" : "Back"}
                   </button>
                 </div>
 
@@ -1421,18 +1631,24 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                 <div className="flex flex-col gap-1 mb-6">
                   <span className="text-[10px] text-[#22d3ee] font-black tracking-widest uppercase">EMAIL REPORT</span>
-                  <h3 className="font-display text-[21px] font-extrabold text-white">분석 결과 이메일로 받기</h3>
+                  <h3 className="font-display text-[21px] font-extrabold text-white">
+                    {locale === "ko" ? "분석 결과 이메일로 받기" : "Send Analysis via Email"}
+                  </h3>
                   <span className="text-[12.5px] text-white/50 font-semibold leading-relaxed">
-                    현재 분석 결과(Display 규격, 추천 상품 구성 및 예상 구매액)를 이메일로 전송합니다.
+                    {locale === "ko" 
+                      ? "현재 분석 결과(Display 규격, 추천 상품 구성 및 예상 구매액)를 이메일로 전송합니다." 
+                      : "Send your customized display sizes, SKU count, and initial purchase projection to your inbox."}
                   </span>
                 </div>
 
                 {emailFormSubmitted && emailSuccessMessage ? (
                   <div className="flex flex-col gap-4 text-center py-6 animate-fade-in select-none">
                     <span className="text-4xl">✅</span>
-                    <h4 className="text-white text-[17px] font-extrabold tracking-tight">분석 결과 전송 요청이 완료되었습니다.</h4>
+                    <h4 className="text-white text-[17px] font-extrabold tracking-tight">
+                      {locale === "ko" ? "분석 결과 전송 요청이 완료되었습니다." : "Report Request Sent Successfully"}
+                    </h4>
                     <p className="text-[13px] text-white/60 leading-relaxed font-semibold">
-                      입력하신 이메일로 분석 결과 안내가 전달됩니다.
+                      {locale === "ko" ? "입력하신 이메일로 분석 결과 안내가 전달됩니다." : "An email containing your diagnostic report will be sent to you shortly."}
                     </p>
                     <button
                       onClick={() => {
@@ -1442,7 +1658,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       }}
                       className="h-11 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] px-6 rounded-[8px] font-bold text-[13px] cursor-pointer mt-4"
                     >
-                      확인
+                      {locale === "ko" ? "확인" : "OK"}
                     </button>
                   </div>
                 ) : (
@@ -1450,21 +1666,21 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     onSubmit={async (e) => {
                       e.preventDefault();
                       if (!emailFormConsent) {
-                        alert("이메일 수신 동의가 필요합니다.");
+                        alert(locale === "ko" ? "이메일 수신 동의가 필요합니다." : "Please agree to receive the email.");
                         return;
                       }
                       if (!mainRecommendation?.simulation_id) {
-                        alert("유효한 시물레이션 ID가 없습니다.");
+                        alert(locale === "ko" ? "유효한 시물레이션 ID가 없습니다." : "Invalid simulation ID.");
                         return;
                       }
                       try {
                         setEmailSending(true);
                         await registerEmailForSimulation(mainRecommendation.simulation_id, emailForm.email);
-                        setEmailSuccessMessage("이메일 발송 대기열에 등록되었습니다. (실제 데이터 연동 완료)");
+                        setEmailSuccessMessage(locale === "ko" ? "이메일 발송 대기열에 등록되었습니다." : "Email queued successfully.");
                         setEmailFormSubmitted(true);
                       } catch (err: any) {
                         console.error("Failed to register email:", err);
-                        alert(`이메일 등록 중 오류가 발생했습니다: ${err.message || err}`);
+                        alert(locale === "ko" ? "이메일 등록 중 오류가 발생했습니다: " + (err.message || err) : "An error occurred during email registration: " + (err.message || err));
                       } finally {
                         setEmailSending(false);
                       }
@@ -1473,7 +1689,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   >
                     <div className="grid grid-cols-2 gap-3.5">
                       <div className="flex flex-col gap-1">
-                        <label className="text-[11px] text-white/50 font-bold">이름 (Name) *</label>
+                        <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "이름 (Name) *" : "Full Name *"}</label>
                         <input
                           type="text"
                           required
@@ -1483,7 +1699,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <label className="text-[11px] text-white/50 font-bold">매장명 (Store Name) *</label>
+                        <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "매장명 (Store Name) *" : "Store Name *"}</label>
                         <input
                           type="text"
                           required
@@ -1495,7 +1711,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-white/50 font-bold">이메일 (Email) *</label>
+                      <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "이메일 (Email) *" : "Email Address *"}</label>
                       <input
                         type="email"
                         required
@@ -1529,7 +1745,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-[11px] text-white/50 font-bold">전화번호 (Phone, 선택)</label>
+                      <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "전화번호 (Phone, 선택)" : "Phone Number (Optional)"}</label>
                       <input
                         type="text"
                         value={emailForm.phone}
@@ -1548,7 +1764,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         className="mt-1 accent-[#22d3ee] cursor-pointer"
                       />
                       <label htmlFor="email-consent" className="text-[12px] text-white/60 leading-normal cursor-pointer select-none">
-                        분석 결과 전송 및 K SELECT 관련 안내를 이메일로 받는 데 동의합니다. (필수)
+                        {locale === "ko" 
+                          ? "분석 결과 전송 및 K SELECT 관련 안내를 이메일로 받는 데 동의합니다. (필수)"
+                          : "I consent to receive my diagnostic report and updates from K SELECT. (Required)"}
                       </label>
                     </div>
 
@@ -1558,7 +1776,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         disabled={emailSending}
                         className="h-12 flex-1 inline-flex items-center justify-center bg-[#22d3ee] hover:bg-[#06b6d4] text-[#121214] rounded-[8px] font-black text-[13.5px] cursor-pointer transition-colors shadow-[0_0_15px_rgba(34,211,238,0.25)] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {emailSending ? "보내는 중..." : "내 분석 결과 보내기"}
+                        {emailSending 
+                          ? (locale === "ko" ? "보내는 중..." : "Sending...") 
+                          : (locale === "ko" ? "내 분석 결과 보내기" : "Send My Analysis")}
                       </button>
                       <button
                         type="button"
@@ -1569,7 +1789,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         }}
                         className="h-12 px-5 inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13px] cursor-pointer"
                       >
-                        취소
+                        {locale === "ko" ? "취소" : "Cancel"}
                       </button>
                     </div>
                   </form>
@@ -1586,12 +1806,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
         <div className="bg-[#1b1b1f] border border-white/10 rounded-[24px] p-5 sm:p-8 shadow-2xl max-w-4xl w-full mx-auto text-left animate-slide-up flex flex-col max-h-[82vh] h-full gap-4">
           <div className="flex flex-col gap-1.5 select-none">
             <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">REVIEW AND EDIT ANSWERS</span>
-            <h3 className="font-display text-[22px] font-extrabold text-white">입력하신 답변 검토하기</h3>
+            <h3 className="font-display text-[22px] font-extrabold text-white">
+              {locale === "ko" ? "입력하신 답변 검토하기" : "Review Your Answers"}
+            </h3>
             <span className="text-[13px] text-white/50 font-semibold leading-relaxed">
-              각 섹션별 선택값을 확인하고 필요한 부분만 수정할 수 있습니다.
+              {locale === "ko" ? "각 섹션별 선택값을 확인하고 필요한 부분만 수정할 수 있습니다." : "You can review and modify your answers for each section below."}
             </span>
             <div className="bg-[#ff2b75]/5 border border-[#ff2b75]/10 text-[#ff2b75] text-[12px] font-bold p-3 rounded-[8px] leading-normal font-sans mt-2">
-              💡 변경하려는 질문 카드를 직접 선택해 수정할 수 있습니다. (Click any card to modify)
+              {locale === "ko" ? "💡 변경하려는 질문 카드를 직접 선택해 수정할 수 있습니다." : "💡 Click any question card below to edit that specific answer."}
             </div>
           </div>
 
@@ -1613,7 +1835,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       {labelInfo.ko} ({labelInfo.en})
                     </h4>
                     <span className="text-white/40 text-[10.5px] font-bold hover:text-white/60 transition-colors">
-                      {isExpanded ? "접기 ▲" : "펼치기 ▼"}
+                      {isExpanded ? (locale === "ko" ? "접기 ▲" : "Collapse ▲") : (locale === "ko" ? "펼치기 ▼" : "Expand ▼")}
                     </span>
                   </div>
 
@@ -1621,13 +1843,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 animate-fade-in">
                       {sectionQuestions.map(q => {
                         const answer = answers[q.id];
-                        let displayValue = "선택되지 않음";
+                        let displayValue = locale === "ko" ? "선택되지 않음" : "Not Selected";
                         if (answer) {
-                          if (Array.isArray(answer)) {
-                            displayValue = answer.join(", ");
-                          } else {
-                            displayValue = answer;
-                          }
+                          const answersList = Array.isArray(answer) ? answer : [answer];
+                          const englishLabels = answersList.map(selectedLabel => {
+                            const choice = q.answers.find(a => a.label_ko === selectedLabel);
+                            return choice ? (locale === "ko" ? choice.label_ko : choice.label_en) : selectedLabel;
+                          });
+                          displayValue = englishLabels.join(", ");
                         }
 
                         return (
@@ -1641,10 +1864,10 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                           >
                             <div className="flex justify-between items-start w-full">
                               <span className="text-[11px] font-bold text-white/50 leading-tight group-hover:text-white/70">
-                                {q.id}. {q.label_ko}
+                                {q.id}. {locale === "ko" ? q.label_ko : q.label_en}
                               </span>
                               <span className="text-[9.5px] text-[#ff2b75] font-black opacity-0 group-hover:opacity-100 transition-opacity">
-                                ✏️ 수정 (Edit)
+                                {locale === "ko" ? "✏️ 수정 (Edit)" : "✏️ Edit"}
                               </span>
                             </div>
                             <strong className="text-[12.5px] font-extrabold text-[#ff2b75]/95 leading-normal mt-0.5 group-hover:text-[#ff2b75]">
@@ -1672,7 +1895,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 onClick={() => setStep("results")}
                 className="h-12 w-full sm:w-auto inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white px-6 rounded-[8px] font-bold text-[13px] cursor-pointer"
               >
-                결과 화면으로 돌아가기 (Back to Results)
+                {locale === "ko" ? "결과 화면으로 돌아가기 (Back to Results)" : "Back to Results Screen"}
               </button>
               <button
                 onClick={() => {
@@ -1684,7 +1907,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 }}
                 className="h-12 w-full sm:w-auto inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-8 rounded-[8px] font-black text-[13.5px] cursor-pointer hover:shadow-[0_0_20px_rgba(255,43,117,0.4)] transition-all"
               >
-                수정한 답변으로 다시 분석하기 →
+                {locale === "ko" ? "수정한 답변으로 다시 분석하기 →" : "Re-Calculate with Updated Answers →"}
               </button>
             </div>
           </div>
@@ -1737,15 +1960,21 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
 
                 <div className="flex flex-col gap-1.5 mb-6">
                   <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">EDIT QUESTION {editQuestion.id}</span>
-                  <h3 className="font-display text-[19px] font-extrabold text-white leading-snug">{editQuestion.label_ko}</h3>
-                  {editQuestion.label_ko !== editQuestion.label_en && (
+                  <h3 className="font-display text-[19px] font-extrabold text-white leading-snug">
+                    {locale === "ko" ? editQuestion.label_ko : editQuestion.label_en}
+                  </h3>
+                  {locale === "ko" && editQuestion.label_ko !== editQuestion.label_en && (
                     <span className="text-[13px] text-white/40 block font-medium">{editQuestion.label_en}</span>
                   )}
                   {editQuestion.multi_select && (
                     <span className="text-[11px] text-[#ff2b75] font-black tracking-wide block mt-1.5">
                       {editQuestion.is_ranking
-                        ? `* 정확히 ${editQuestion.max_select || 3}개를 선택해주세요 (순위 순서대로 선택)`
-                        : `* 중복 선택 가능 (최대 ${editQuestion.max_select || "제한 없음"}개, 최소 1개 선택)`}
+                        ? (locale === "ko" 
+                          ? "* 정확히 " + (editQuestion.max_select || 3) + "개를 선택해주세요 (순위 순서대로 선택)" 
+                          : "* Please select exactly " + (editQuestion.max_select || 3) + " options (in order of priority)")
+                        : (locale === "ko" 
+                          ? "* 중복 선택 가능 (최대 " + (editQuestion.max_select || "제한 없음") + "개, 최소 1개 선택)" 
+                          : "* Multiple choice (max " + (editQuestion.max_select || "unlimited") + " options, min 1)")}
                     </span>
                   )}
                 </div>
@@ -1769,7 +1998,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                             ? "px-4.5 py-3 rounded-[10px] border border-[#ff2b75] bg-[#ff2b75]/8 text-white font-extrabold text-left cursor-pointer flex justify-between items-center gap-2"
                             : "px-4.5 py-3 rounded-[10px] border border-white/5 bg-[#171719]/40 hover:border-white/15 text-white/70 hover:text-white text-left cursor-pointer flex justify-between items-center gap-2"}
                         >
-                          <span className="text-[13px] leading-tight tracking-tight font-bold">{ans.label_ko}</span>
+                          <span className="text-[13px] leading-tight tracking-tight font-bold">
+                            {locale === "ko" ? ans.label_ko : ans.label_en}
+                          </span>
                           {isSelected && (
                             <span className="w-5 h-5 rounded-full bg-[#ff2b75] text-white flex items-center justify-center text-[10px] font-black uppercase shrink-0 font-display">
                               {selectIndex !== -1 ? `${selectIndex + 1}` : "✓"}
@@ -1790,14 +2021,14 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     disabled={isEditSaveDisabled}
                     className="h-12 flex-1 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white rounded-[8px] font-bold text-[13.5px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                   >
-                    저장하기 (Save)
+                    {locale === "ko" ? "저장하기 (Save)" : "Save"}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditingQuestionId(null)}
                     className="h-12 px-5 inline-flex items-center justify-center border border-white/10 hover:bg-white/5 text-white rounded-[8px] font-bold text-[13px] cursor-pointer"
                   >
-                    취소 (Cancel)
+                    {locale === "ko" ? "취소 (Cancel)" : "Cancel"}
                   </button>
                 </div>
               </div>
