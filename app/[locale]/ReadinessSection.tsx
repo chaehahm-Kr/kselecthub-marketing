@@ -5,40 +5,51 @@ import React, { useState, useEffect } from "react";
 interface Question {
   id: string;
   num: string;
-  title: string;
-  desc: string;
+  titleKo: string;
+  titleEn: string;
+  descKo: string;
+  descEn: string;
 }
 
 const QUESTIONS: Question[] = [
   {
     id: "section-operation",
     num: "01",
-    title: "K-Beauty 전용 섹션 운영",
-    desc: "K SELECT HUB의 전용 Display Section을 구성하고, 해당 공간을 큐레이션된 K-Beauty 상품 중심으로 운영할 의향이 있습니다."
+    titleKo: "K-Beauty 전용 섹션 운영",
+    titleEn: "Dedicated K-Beauty Space",
+    descKo: "K SELECT HUB의 전용 Display Section을 구성하고, 해당 공간을 큐레이션된 K-Beauty 상품 중심으로 운영할 의향이 있습니다.",
+    descEn: "Are you willing to allocate and operate a dedicated shelf/zone space for K SELECT HUB fixtures and curated inventory?"
   },
   {
     id: "product-learning",
     num: "02",
-    title: "Product Learning 참여",
-    desc: "오너 또는 담당 직원이 온라인 Product Learning을 통해 주요 상품의 특징과 사용법을 학습하고, 간단한 Knowledge Check에 참여할 의향이 있습니다."
+    titleKo: "Product Learning 참여",
+    titleEn: "Staff Product Education",
+    descKo: "오너 또는 담당 직원이 온라인 Product Learning을 통해 주요 상품의 특징과 사용법을 학습하고, 간단한 Knowledge Check에 참여할 의향이 있습니다.",
+    descEn: "Are you or your staff willing to participate in brief product training guides to understand basic skin concern matches?"
   },
   {
     id: "weekly-update",
     num: "03",
-    title: "주 1회 재고 업데이트",
-    desc: "정확한 Reorder, Slow Seller 분석, 상품 교환 및 매장별 상품 최적화를 위해 최소 주 1회 플랫폼에서 재고를 업데이트할 수 있습니다."
+    titleKo: "주 1회 재고 업데이트",
+    titleEn: "Weekly Inventory Sync",
+    descKo: "정확한 Reorder, Slow Seller 분석, 상품 교환 및 매장별 상품 최적화를 위해 최소 주 1회 플랫폼에서 재고를 업데이트할 수 있습니다.",
+    descEn: "Can you update or scan your stock levels weekly on our web platform to ensure accurate reorder recommendations and slow-seller swaps?"
   },
   {
     id: "category-growth",
     num: "04",
-    title: "K-Beauty 카테고리 성장 의향",
-    desc: "K-Beauty를 단순한 테스트 상품이 아니라, 향후 매장의 주요 Beauty Category 중 하나로 함께 성장시켜 나갈 의향이 있습니다."
+    titleKo: "K-Beauty 카테고리 성장 의향",
+    titleEn: "Category Partnership Mindset",
+    descKo: "K-Beauty를 단순한 테스트 상품이 아니라, 향후 매장의 주요 Beauty Category 중 하나로 함께 성장시켜 나갈 의향이 있습니다.",
+    descEn: "Do you view K-Beauty as a strategic, multi-year core category for your store, rather than just a one-off temporary experiment?"
   }
 ];
 
-export default function ReadinessSection() {
+export default function ReadinessSection({ locale }: { locale?: string }) {
   const [answers, setAnswers] = useState<{ [key: number]: "available" | "discuss" }>({});
   const [highlightFirst, setHighlightFirst] = useState<boolean>(false);
+  const isKo = locale === "ko";
 
   // Monitor hash change for focus trigger
   useEffect(() => {
@@ -56,7 +67,7 @@ export default function ReadinessSection() {
     return () => window.removeEventListener("hashchange", checkHash);
   }, []);
 
-  // Toggle selection on double-click/second click
+  // Toggle selection
   const handleSelect = (idx: number, type: "available" | "discuss") => {
     setAnswers((prev) => {
       if (prev[idx] === type) {
@@ -83,12 +94,12 @@ export default function ReadinessSection() {
   const progressPercent = (answeredCount / 4) * 100;
 
   return (
-    <section id="launch-readiness" className="bg-[#0c0c0c] border-y border-[#2a2a2a] overflow-hidden scroll-mt-24">
+    <section id="launch-readiness" className="bg-[#0c0c0c] border-y border-[#2a2a2a] overflow-hidden scroll-mt-24 font-medium">
       <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left">
         
         <div className="grid lg:grid-cols-[0.45fr_0.55fr] gap-12 lg:gap-16 items-start">
           
-          {/* ================= LEFT SIDE: Sticky Header, Progress & CTA Funnel ================= */}
+          {/* ================= LEFT SIDE ================= */}
           <div className="flex flex-col gap-2 lg:sticky lg:top-28">
             
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff2b75]/20 bg-[#ff2b75]/5 mb-4 max-w-max select-none">
@@ -98,23 +109,36 @@ export default function ReadinessSection() {
               </span>
             </div>
             
-            <h2 className="font-display text-2xl sm:text-[34px] font-bold leading-[1.25] text-white tracking-tight m-0">
-              성공적인 K-Beauty 런칭을 위한<br />
-              준비 사항을 확인해 주세요.
+            <h2 className="font-display text-2xl sm:text-[34px] font-bold leading-[1.25] text-white tracking-tight m-0 keep-all">
+              {isKo ? (
+                <>성공적인 K-Beauty 런칭을 위한<br />준비 사항을 확인해 주세요.</>
+              ) : (
+                <>Launch Readiness Self-Check</>
+              )}
             </h2>
             
             <p className="text-[13.5px] text-[#9ca3af] leading-relaxed mt-5 max-w-md font-medium">
-              K SELECT HUB는 단순히 제품을 공급하는 프로그램이 아닙니다. 매장과 함께 K-Beauty 카테고리를 만들고, 실제 판매 데이터를 기반으로 매출을 함께 최적화하는 동반 프로그램입니다.
+              {isKo 
+                ? "K SELECT HUB는 단순히 제품을 공급하는 프로그램이 아닙니다. 매장과 함께 K-Beauty 카테고리를 만들고, 실제 판매 데이터를 기반으로 매출을 함께 최적화하는 동반 프로그램입니다."
+                : "K SELECT HUB is not just a wholesale vendor—we are a category growth platform. We partner with store owners to build, manage, and optimize their K-Beauty business based on actual weekly sales data."
+              }
             </p>
             <p className="text-[13.5px] text-[#7A7A7A] leading-relaxed max-w-md mt-2 font-semibold">
-              아래 항목들은 매장의 지속적인 안착과 성장을 약속하기 위한 기본 파트너 협업 원칙입니다. 현재 준비가 완벽하지 않더라도, 파트너 신청 완료 후 함께 대안을 찾을 수 있습니다.
+              {isKo 
+                ? "아래 항목들은 매장의 지속적인 안착과 성장을 약속하기 위한 기본 파트너 협업 원칙입니다. 현재 준비가 완벽하지 않더라도, 파트너 신청 완료 후 함께 대안을 찾을 수 있습니다."
+                : "The checklist below represents our core collaboration principles for sustainable sales. Even if you cannot check all boxes today, our onboarding team will help you find solutions during setup."
+              }
             </p>
 
             {/* Realtime Progress Indicator Panel */}
             <div className="mt-8 bg-white/[0.02] border border-white/5 rounded-[16px] p-5 max-w-md flex flex-col gap-3.5 select-none shadow-md">
               <div className="flex justify-between items-center">
                 <span className="text-[14.5px] font-black text-white font-display">
-                  {isCompleted ? "4 / 4 준비 사항 확인 완료" : `${answeredCount} / 4 확인 진행 중`}
+                  {isKo ? (
+                    isCompleted ? "4 / 4 준비 사항 확인 완료" : `${answeredCount} / 4 확인 진행 중`
+                  ) : (
+                    isCompleted ? "4 / 4 Complete" : `${answeredCount} / 4 Questions Checked`
+                  )}
                 </span>
                 <span className="text-xs font-black text-[#ff2b75]">
                   {Math.round(progressPercent)}%
@@ -134,20 +158,22 @@ export default function ReadinessSection() {
                 <div className="flex gap-4 text-white/50">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]" /> 
-                    진행 가능 <strong className="text-[#ff2b75] font-extrabold">{availableCount}</strong>
+                    {isKo ? "진행 가능" : "Ready"}{" "}
+                    <strong className="text-[#ff2b75] font-extrabold">{availableCount}</strong>
                   </span>
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" /> 
-                    협의 필요 <strong className="text-[#00F0FF] font-extrabold">{discussCount}</strong>
+                    {isKo ? "협의 필요" : "Need Discussion"}{" "}
+                    <strong className="text-[#00F0FF] font-extrabold">{discussCount}</strong>
                   </span>
                 </div>
                 {answeredCount > 0 && (
                   <button
                     onClick={handleReset}
                     className="text-[11px] text-white/40 hover:text-[#ff2b75] transition-colors flex items-center gap-1 underline underline-offset-2 cursor-pointer font-bold focus:outline-none"
-                    title="초기화"
+                    title={isKo ? "초기화" : "Reset"}
                   >
-                    초기화 ↺
+                    {isKo ? "초기화" : "Reset"} ↺
                   </button>
                 )}
               </div>
@@ -157,11 +183,11 @@ export default function ReadinessSection() {
             <div className="mt-8 flex flex-col items-start gap-2.5">
               {isCompleted ? (
                 <a
-                  href="#apply"
+                  href="#launch-readiness"
                   className="h-14 inline-flex items-center justify-center bg-[#ff2b75] hover:bg-[#e01a5e] text-white px-9 rounded-[8px] font-extrabold text-[14.5px] tracking-wide transition-all duration-300 hover:shadow-[0_4px_25px_rgba(255,43,117,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                   aria-label="Confirm eligibility and apply for partnership"
                 >
-                  파트너십 신청하기 →
+                  {isKo ? "파트너십 신청하기 →" : "Apply for Partnership →"}
                 </a>
               ) : (
                 <button
@@ -169,11 +195,14 @@ export default function ReadinessSection() {
                   className="h-14 inline-flex items-center justify-center bg-white/5 border border-white/5 text-white/20 px-9 rounded-[8px] font-extrabold text-[14.5px] tracking-wide cursor-not-allowed select-none transition-all"
                   aria-label="Application locked until check completed"
                 >
-                  질문에 모두 답하면 활성화됩니다
+                  {isKo ? "질문에 모두 답하면 활성화됩니다" : "Complete the checklist to unlock"}
                 </button>
               )}
               <span className="text-[10px] text-[#7A7A7A] font-semibold tracking-wide pl-2">
-                * 협의 필요 항목이 있어도 파트너 신청이 가능합니다.
+                {isKo 
+                  ? "* 협의 필요 항목이 있어도 파트너 신청이 가능합니다."
+                  : "* You can apply even if some checkmarks require discussion."
+                }
               </span>
             </div>
 
@@ -210,10 +239,10 @@ export default function ReadinessSection() {
                     </span>
                     <div className="flex-1 flex flex-col gap-1.5">
                       <h4 className="text-[15.5px] font-extrabold text-white leading-snug">
-                        {q.title}
+                        {isKo ? q.titleKo : q.titleEn}
                       </h4>
                       <p className="text-[12.5px] text-[#9ca3af] leading-relaxed font-medium">
-                        {q.desc}
+                        {isKo ? q.descKo : q.descEn}
                       </p>
                     </div>
                   </div>
@@ -228,7 +257,7 @@ export default function ReadinessSection() {
                           : "border border-white/10 text-white/50 bg-[#0c0c0c] hover:border-white/20 hover:text-white"
                       }`}
                     >
-                      진행 가능
+                      {isKo ? "진행 가능" : "Ready"}
                     </button>
                     
                     <button
@@ -239,14 +268,14 @@ export default function ReadinessSection() {
                           : "border border-white/10 text-white/50 bg-[#0c0c0c] hover:border-white/20 hover:text-white"
                       }`}
                     >
-                      협의 필요
+                      {isKo ? "협의 필요" : "Discuss"}
                     </button>
                   </div>
                 </div>
               );
             })}
           </div>
-
+ 
         </div>
 
       </div>

@@ -62,12 +62,12 @@ function CountUp({ target, duration = 1200, startTrigger }: CountUpProps) {
 }
 
 interface PageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale?: string }>;
 }
 
 export default function AboutPage({ params }: PageProps) {
   const resolvedParams = React.use(params);
-  const locale = resolvedParams.locale;
+  const locale = resolvedParams.locale === "ko" ? "ko" : "en";
   const isKo = locale === "ko";
 
   // Section Refs and Visibilities for Scroll Reveals

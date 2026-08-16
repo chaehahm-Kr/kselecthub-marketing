@@ -57,9 +57,10 @@ const OpportunityCountUp = ({
   );
 };
 
-export default function OpportunitySection() {
+export default function OpportunitySection({ locale }: { locale?: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const isKo = locale === "ko";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -87,7 +88,7 @@ export default function OpportunitySection() {
     <section
       id="opportunity"
       ref={sectionRef}
-      className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative"
+      className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative font-medium"
     >
       <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-[56px] items-center mb-14">
         
@@ -101,15 +102,26 @@ export default function OpportunitySection() {
             01 — WHY K-BEAUTY NOW
           </span>
           <h2 
-            className={`font-display text-3xl sm:text-4xl lg:text-[42px] font-bold leading-[1.2] tracking-tight text-white mb-4 select-none transition-all duration-700 ease-out transform ${
+            className={`font-display text-3xl sm:text-4xl lg:text-[40px] xl:text-[42px] font-black leading-[1.2] tracking-tight text-white mb-4 select-none transition-all duration-700 ease-out transform ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             style={{ transitionDelay: isVisible ? "150ms" : "0ms" }}
           >
-            미국 K-Beauty 시장은<br />
-            성장하고 있습니다.<br />
-            하지만 진짜 기회는<br />
-            <span className="text-accent">‘무엇을 어떻게 파느냐’</span>에 있습니다.
+            {isKo ? (
+              <>
+                미국 K-Beauty 시장은<br />
+                성장하고 있습니다.<br />
+                하지만 진짜 기회는<br />
+                <span className="text-accent">‘무엇을 어떻게 파느냐’</span>에 있습니다.
+              </>
+            ) : (
+              <>
+                The U.S. K-Beauty Market<br />
+                is Booming. But the Real<br />
+                Opportunity Lies in<br />
+                <span className="text-accent">How &amp; What You Sell</span>.
+              </>
+            )}
           </h2>
           <p 
             className={`text-sm text-text-secondary leading-relaxed max-w-xl transition-all duration-700 ease-out transform ${
@@ -117,9 +129,17 @@ export default function OpportunitySection() {
             }`}
             style={{ transitionDelay: isVisible ? "300ms" : "0ms" }}
           >
-            K-Beauty는 이제 일시적인 트렌드가 아닙니다.<br />
-            소비자 수요, 리테일 채널, 시장 규모 모두 빠르게 확대되고 있습니다.<br />
-            성장의 흐름을 매출로 전환하는 전략이 지금 필요한 이유입니다.
+            {isKo ? (
+              <>
+                K-Beauty는 이제 일시적인 트렌드가 아닙니다.<br />
+                소비자 수요, 리테일 채널, 시장 규모 모두 빠르게 확대되고 있습니다.<br />
+                성장의 흐름을 매출로 전환하는 전략이 지금 필요한 이유입니다.
+              </>
+            ) : (
+              <>
+                K-Beauty is no longer a passing trend. Consumer demand, retail channels, and total market size are expanding at record speeds. Now is the time to translate this growth into your own store revenue.
+              </>
+            )}
           </p>
         </div>
 
@@ -199,7 +219,7 @@ export default function OpportunitySection() {
 
       </div>
 
-      {/* Sub 4 Opportunity Tiles grid (Reproduction from target layout with sequential reveal) */}
+      {/* Sub 4 Opportunity Tiles grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         
         {/* TILE 01 */}
@@ -213,7 +233,6 @@ export default function OpportunitySection() {
             <span className="text-[9px] text-text-secondary tracking-widest uppercase font-bold">
               TILE 01 · SALES MOMENTUM
             </span>
-            {/* Line Trend SVG Icon */}
             <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
@@ -226,7 +245,9 @@ export default function OpportunitySection() {
           </div>
           <div>
             <h4 className="text-sm font-bold text-white mb-1.5">K-Beauty Sales Are Surging</h4>
-            <p className="text-xs text-text-secondary leading-relaxed">미국 K-Beauty 판매가 빠르게 확대되고 있습니다.</p>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              {isKo ? "미국 K-Beauty 판매가 빠르게 확대되고 있습니다." : "U.S. consumer demand for K-Beauty continues to scale rapidly."}
+            </p>
           </div>
         </div>
 
@@ -241,7 +262,6 @@ export default function OpportunitySection() {
             <span className="text-[9px] text-text-secondary tracking-widest uppercase font-bold">
               TILE 02 · MARKET LEADERSHIP
             </span>
-            {/* Globe SVG Icon */}
             <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
             </svg>
@@ -252,7 +272,6 @@ export default function OpportunitySection() {
           </div>
           <div>
             <h4 className="text-sm font-bold text-white mb-2 leading-snug">Korea Is America’s No.1 Cosmetics Import Source</h4>
-            
             <div className="flex items-baseline gap-1 border-t border-[#2a2a2a] pt-3.5 mt-2.5">
               <span className="text-base font-black text-accent leading-none">
                 <OpportunityCountUp value={24.8} decimals={1} suffix="%" isVisible={isVisible} />
@@ -260,7 +279,10 @@ export default function OpportunitySection() {
               <span className="text-[9px] text-text-secondary font-semibold">U.S. Import Share (2025)</span>
             </div>
             <p className="text-[11px] text-text-secondary leading-relaxed mt-2">
-              2025년, 한국은 프랑스를 제치고 미국 화장품 수입 시장 1위를 기록했습니다.
+              {isKo 
+                ? "2025년, 한국은 프랑스를 제치고 미국 화장품 수입 시장 1위를 기록했습니다."
+                : "In 2025, Korea overtook France as the leading cosmetics exporter to the United States."
+              }
             </p>
           </div>
         </div>
@@ -276,7 +298,6 @@ export default function OpportunitySection() {
             <span className="text-[9px] text-text-secondary tracking-widest uppercase font-bold">
               TILE 03 · RETAIL OPPORTUNITY
             </span>
-            {/* Shopping Cart SVG Icon */}
             <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
@@ -285,19 +306,22 @@ export default function OpportunitySection() {
             <span className="text-[32px] font-black text-accent leading-none">
               <OpportunityCountUp value={76} decimals={0} suffix="%" isVisible={isVisible} />
             </span>
-            <span className="text-[9px] font-bold text-white bg-[#ff2b75] px-2 py-0.5 rounded-full uppercase tracking-wider select-none">
+            <span className="text-[9px] font-bold text-white bg-[#ff2b75] px-2 py-0.5 rounded-full uppercase tracking-wider select-none font-display">
               North America
             </span>
           </div>
           <div>
             <h4 className="text-sm font-bold text-white mb-2 leading-snug">From Digital Demand to Physical Shelf</h4>
             <p className="text-xs text-text-secondary leading-relaxed">
-              북미 K-Beauty 판매의 76%가 온라인에서 발생하고 있습니다. 이미 형성된 강한 디지털 수요를 오프라인 리테일 매장으로 연결할 기회가 있습니다.
+              {isKo
+                ? "북미 K-Beauty 판매의 76%가 온라인에서 발생하고 있습니다. 이미 형성된 강한 디지털 수요를 오프라인 리테일 매장으로 연결할 기회가 있습니다."
+                : "76% of K-Beauty sales in North America occur online. Retailers have a massive opportunity to capture this pre-existing digital demand on physical shelves."
+              }
             </p>
           </div>
         </div>
 
-        {/* TILE 04 (Highlighted with Fading-in border accentuation) */}
+        {/* TILE 04 */}
         <div 
           className={`bg-[#0c0c0c] rounded-[16px] p-8 flex flex-col gap-4 text-left transition-all duration-[1000ms] ease-out transform ${
             isVisible 
@@ -313,7 +337,6 @@ export default function OpportunitySection() {
             <span className="text-[9px] text-accent tracking-widest uppercase font-bold">
               TILE 04 · EXECUTION GAP
             </span>
-            {/* Bullseye SVG Icon */}
             <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 22a10 10 0 110-20 10 10 0 010 20z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a6 6 0 100-12 6 6 0 000 12z" />
@@ -327,10 +350,10 @@ export default function OpportunitySection() {
           </div>
           <div>
             <p className="text-xs text-white leading-normal font-semibold mb-3.5">
-              시장이 커져도 저절로 팔리지는 않습니다.
+              {isKo ? "시장이 커져도 저절로 팔리지는 않습니다." : "Macro growth does not guarantee store sales."}
             </p>
             {/* Check list */}
-            <div className="flex flex-col gap-1.5 text-xs text-text-secondary font-medium">
+            <div className="flex flex-col gap-1.5 text-xs text-text-secondary font-semibold">
               <span className="flex items-center gap-2">
                 <svg className="w-3.5 h-3.5 text-[#ff2b75] fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />

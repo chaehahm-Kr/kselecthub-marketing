@@ -5,11 +5,12 @@ import Header from "../Header";
 import Footer from "../Footer";
 
 interface PageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale?: string }>;
 }
 
 export default async function SimulatorPage({ params }: PageProps) {
-  const { locale } = await params;
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale === "ko" ? "ko" : "en";
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-[#141414] text-white overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
@@ -25,7 +26,7 @@ export default async function SimulatorPage({ params }: PageProps) {
         </section>
 
         {/* Apply Form Popup Modal */}
-        <PartnerModal />
+        <PartnerModal locale={locale} />
       </main>
 
       {/* 13. Footer */}

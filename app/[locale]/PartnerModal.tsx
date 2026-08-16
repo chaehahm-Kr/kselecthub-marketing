@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from "react";
 import CtaForm from "./CtaForm";
 
-export default function PartnerModal() {
+interface PartnerModalProps {
+  locale?: string;
+}
+
+export default function PartnerModal({ locale }: PartnerModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // Global event delegation for trigger clicks mapping to #apply links
@@ -76,7 +80,7 @@ export default function PartnerModal() {
 
         {/* Embedded Application Form Container */}
         <div className="w-full">
-          <CtaForm />
+          <CtaForm locale={locale} />
         </div>
 
       </div>

@@ -10,8 +10,10 @@ const solutionDataList = [
     title: "CURATE",
     koSub: "검증된 제품 선별",
     enSub: "Curated Product Mix",
-    headline: "모든 K-뷰티 제품이\nK SELECT에 포함되지는 않습니다.",
-    desc: "엄격한 기준을 통해 성분 안전성, 안정적 마진, 그리고 미국 시장 적합성을 종합적으로 검증하여 가장 경쟁력 있는 에센셜 라인업을 큐레이션합니다.",
+    headlineKo: "모든 K-뷰티 제품이\nK SELECT에 포함되지는 않습니다.",
+    headlineEn: "We Don't List Everything.\nWe Select What Sells.",
+    descKo: "엄격한 기준을 통해 성분 안전성, 안정적 마진, 그리고 미국 시장 적합성을 종합적으로 검증하여 가장 경쟁력 있는 에센셜 라인업을 큐레이션합니다.",
+    descEn: "We audit ingredient safety, gross margins, and local U.S. demand to curate only the most competitive beauty essentials for your shelves.",
     image: "/images/solutions/solution_curate_v2.jpg",
     benefits: [
       {
@@ -21,7 +23,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "QUALITY",
-        desc: "엄격한 품질 및 성분 검증"
+        descKo: "엄격한 품질 및 성분 검증",
+        descEn: "Strict ingredient safety audit"
       },
       {
         icon: (
@@ -30,7 +33,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "MARGIN",
-        desc: "지속 가능한 높은 리테일 마진"
+        descKo: "지속 가능한 높은 리테일 마진",
+        descEn: "High, protected retail margins"
       },
       {
         icon: (
@@ -39,11 +43,13 @@ const solutionDataList = [
           </svg>
         ),
         title: "U.S. MARKET FIT",
-        desc: "미국 로컬 트렌드 적합성 검토"
+        descKo: "미국 로컬 트렌드 적합성 검토",
+        descEn: "Vetted local consumer demand"
       }
     ],
     outcomeTitle: "WHAT THIS MEANS FOR YOUR STORE",
-    outcomeDesc: "검증되지 않은 무분별한 SKU 도입을 억제하고 상권 내 실제 판매 확률이 가장 높은 핵심 아이템만 전략적으로 진열하여, 불필요한 초기 재고 낭비를 차단하고 소매점의 빠른 초기 비용 회수 주기를 만듭니다.",
+    outcomeDescKo: "검증되지 않은 무분별한 SKU 도입을 억제하고 상권 내 실제 판매 확률이 가장 높은 핵심 아이템만 전략적으로 진열하여, 불필요한 초기 재고 낭비를 차단하고 소매점의 빠른 초기 비용 회수 주기를 만듭니다.",
+    outcomeDescEn: "By blocking unverified SKUs and displaying only high-velocity items, you avoid wasting upfront capital on dead stock, securing a much faster payback period.",
     outcomeTags: ["SAFE INGREDIENTS", "RELIABLE RETAIL MARGIN", "FAST INVENTORY TURNOVER"]
   },
   {
@@ -51,8 +57,10 @@ const solutionDataList = [
     title: "DIFFERENTIATE",
     koSub: "차별화된 상품 구성",
     enSub: "Differentiated Assortment",
-    headline: "단순히 인기 제품의 나열만으로는\n상권 독점을 만들 수 없습니다.",
-    desc: "매장별 상권 특성, 고객 구매 데이터 및 마진율의 최적 균형을 설계하여 주변 Mass 매장들과 완전히 차별화되는 고유의 K-Beauty 코너를 확보해 드립니다.",
+    headlineKo: "단순히 인기 제품의 나열만으로는\n상권 독점을 만들 수 없습니다.",
+    headlineEn: "Sheer SKU Quantity\nCannot Protect Your Traffic.",
+    descKo: "매장별 상권 특성, 고객 구매 데이터 및 마진율의 최적 균형을 설계하여 주변 Mass 매장들과 완전히 차별화되는 고유의 K-Beauty 코너를 확보해 드립니다.",
+    descEn: "We analyze your local shopper profile and design a custom product mix that differentiates your store from mass chains and online discounters.",
     image: "/images/solutions/solution_differentiate_v2.jpg",
     benefits: [
       {
@@ -64,7 +72,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "DIFFERENTIATION",
-        desc: "인근 매장과의 가격 경쟁 차단"
+        descKo: "인근 매장과의 가격 경쟁 차단",
+        descEn: "Exclusive store allocations"
       },
       {
         icon: (
@@ -74,7 +83,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "PRICE POINT",
-        desc: "가격대와 판매율의 최적 밸런스"
+        descKo: "가격대와 판매율의 최적 밸런스",
+        descEn: "Optimal retail price tiers ($10-$50)"
       },
       {
         icon: (
@@ -84,11 +94,13 @@ const solutionDataList = [
           </svg>
         ),
         title: "STORE FIT",
-        desc: "매장 단골 고객 맞춤형 믹스"
+        descKo: "매장 단골 고객 맞춤형 믹스",
+        descEn: "Tailored to your shopper demographic"
       }
     ],
     outcomeTitle: "WHAT THIS MEANS FOR YOUR STORE",
-    outcomeDesc: "고객 특성, 가격대와 마진을 고려한 차별화된 Product Mix로 불필요한 온라인 최저가 및 대형 체인과의 제로섬 가격 경쟁을 차단하고, 오직 소매점 매장만이 독점 소싱할 수 있는 지역 경쟁력을 만듭니다.",
+    outcomeDescKo: "고객 특성, 가격대와 마진을 고려한 차별화된 Product Mix로 불필요한 온라인 최저가 및 대형 체인과의 제로섬 가격 경쟁을 차단하고, 오직 소매점 매장만이 독점 소싱할 수 있는 지역 경쟁력을 만듭니다.",
+    outcomeDescEn: "Our tailored product mix protects your traffic from zero-sum price wars, building a highly differentiated category that shoppers can only buy at your store.",
     outcomeTags: ["LESS PRICE COMPETITION", "BETTER MARGIN BALANCE", "STRONGER STORE IDENTITY"]
   },
   {
@@ -96,8 +108,10 @@ const solutionDataList = [
     title: "BUILD",
     koSub: "숍인숍 카테고리 구축",
     enSub: "Store-in-a-Store",
-    headline: "4FT / 8FT / 12FT 모듈러 시스템으로\n매장에 완성형 뷰티 섹션을 구축합니다.",
-    desc: "단순 선반 진열을 탈피하여, K SELECT HUB 특유의 조명 인프라 프레임과 LED 전용 디바이스가 장착된 완성도 높은 카테고리 존을 매장 내에 직접 구축해 드립니다.",
+    headlineKo: "4FT / 8FT / 12FT 모듈러 시스템으로\n매장에 완성형 뷰티 섹션을 구축합니다.",
+    headlineEn: "Turnkey Modular System\nBuilt Directly in Your Store.",
+    descKo: "단순 선반 진열을 탈피하여, K SELECT HUB 특유의 조명 인프라 프레임과 LED 전용 디바이스가 장착된 완성도 높은 카테고리 존을 매장 내에 직접 구축해 드립니다.",
+    descEn: "Move beyond generic shelves. K SELECT HUB installs premium backlit LED fixtures, tester layouts, and brand signage to build a high-converting beauty zone.",
     image: "dynamic",
     benefits: [
       {
@@ -108,7 +122,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "VISIBILITY",
-        desc: "LED 시그니처 조명 시선 유도"
+        descKo: "LED 시그니처 조명 시선 유도",
+        descEn: "LED backlit displays that draw eyes"
       },
       {
         icon: (
@@ -119,7 +134,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "MODULAR FORMAT",
-        desc: "매장 면적별 유연한 모듈 증설"
+        descKo: "매장 면적별 유연한 모듈 증설",
+        descEn: "Scalable 4FT, 8FT, or 12FT setups"
       },
       {
         icon: (
@@ -128,11 +144,13 @@ const solutionDataList = [
           </svg>
         ),
         title: "INSTALLATION",
-        desc: "현장 맞춤형 프레임 셋업 완료"
+        descKo: "현장 맞춤형 프레임 셋업 완료",
+        descEn: "Complete custom planogram installation"
       }
     ],
     outcomeTitle: "WHAT THIS MEANS FOR YOUR STORE",
-    outcomeDesc: "낙후된 일반 단일 매대를 고급 숍인숍(Shop-in-Shop) 프리미엄 K-뷰티 체험존 형태로 탈바꿈시켜, 매장 내 체류 시간을 늘리고 매장 전체의 고급스러운 시각적 이미지와 평당 매출 효율성을 비약적으로 높입니다.",
+    outcomeDescKo: "낙후된 일반 단일 매대를 고급 숍인숍(Shop-in-Shop) 프리미엄 K-뷰티 체험존 형태로 탈바꿈시켜, 매장 내 체류 시간을 늘리고 매장 전체의 고급스러운 시각적 이미지와 평당 매출 효율성을 비약적으로 높입니다.",
+    outcomeDescEn: "Upgrade generic retail space into a luxury store-in-a-store K-Beauty zone. This increases shopper dwell time, elevates your brand image, and boosts sales per square foot.",
     outcomeTags: ["LED ATTRACT POWER", "SCALABLE MODULAR FIT", "FAST PROFITABLE SETUP"]
   },
   {
@@ -140,8 +158,10 @@ const solutionDataList = [
     title: "SUPPORT",
     koSub: "판매 준비 지원",
     enSub: "Retail-Ready Support",
-    headline: "제품을 납품하는 것만으로는\n실제 판매가 일어나지 않습니다.",
-    desc: "매장 스태프 가이드 교육, 고객용 모바일 제품 QR 정보 매핑, 그리고 현장 Merchandising VMD 진열 지원 등 실질적인 매출 발생을 위해 K SELECT의 마케팅 파워를 매장에 지원합니다.",
+    headlineKo: "제품을 납품하는 것만으로는\n실제 판매가 일어나지 않습니다.",
+    headlineEn: "Shipping Products is Easy.\nGenerating Sales Requires a System.",
+    descKo: "매장 스태프 가이드 교육, 고객용 모바일 제품 QR 정보 매핑, 그리고 현장 Merchandising VMD 진열 지원 등 실질적인 매출 발생을 위해 K SELECT의 마케팅 파워를 매장에 지원합니다.",
+    descEn: "We equip your store with staff education guides, mobile product QR codes for customer self-discovery, and detailed planograms to drive immediate sell-through.",
     image: "/images/solutions/solution_support_v2.jpg",
     benefits: [
       {
@@ -154,7 +174,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "QR GUIDE",
-        desc: "QR 스캔을 통한 성분 상세 정보 제공"
+        descKo: "QR 스캔을 통한 성분 상세 정보 제공",
+        descEn: "Scan to view localized product benefits"
       },
       {
         icon: (
@@ -164,7 +185,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "TRAINING",
-        desc: "스태프용 K-뷰티 판매 핵심 교육"
+        descKo: "스태프용 K-뷰티 판매 핵심 교육",
+        descEn: "Bilingual staff training playbooks"
       },
       {
         icon: (
@@ -174,11 +196,13 @@ const solutionDataList = [
           </svg>
         ),
         title: "DISPLAY FIT",
-        desc: "초기 상품 진열 및 테스터 배치 지원"
+        descKo: "초기 상품 진열 및 테스터 배치 지원",
+        descEn: "Turnkey visual merchandising setup"
       }
     ],
     outcomeTitle: "READY TO SELL, NOT JUST READY TO DISPLAY",
-    outcomeDesc: "QR Product Guide, Staff Training, Display Support를 통해 상품이 단순히 매대 위 먼지만 쌓이는 일반 진열에 그치지 않고, 매장 스태프와 소비자의 실시간 정보 소통을 통해 실질적인 단골 매출(Sell-Through)로 연결되도록 지원합니다.",
+    outcomeDescKo: "QR Product Guide, Staff Training, Display Support를 통해 상품이 단순히 매대 위 먼지만 쌓이는 일반 진열에 그치지 않고, 매장 스태프와 소비자의 실시간 정보 소통을 통해 실질적인 단골 매출(Sell-Through)로 연결되도록 지원합니다.",
+    outcomeDescEn: "With QR guides, training tools, and setup support, we ensure your products don't just sit on shelves collecting dust. We empower your staff to consult shoppers and drive sell-through.",
     outcomeTags: ["BETTER PRODUCT KNOWLEDGE", "EASIER CUSTOMER GUIDANCE", "STRONGER SELL-THROUGH"]
   },
   {
@@ -186,8 +210,10 @@ const solutionDataList = [
     title: "OPTIMIZE",
     koSub: "판매 데이터 기반 최적화",
     enSub: "Inventory & Growth Optimization",
-    headline: "판매 이후에도 재고 흐름을\n밀착 모니터링합니다.",
-    desc: "실제 매장에서 수집된 주간 Sell-through 회전율 데이터를 바탕으로, 누적 판매 성과 분석과 자동화된 재주문(Reorder) 제안을 통해 악성 재고 없는 건전한 매출 순환을 책임집니다.",
+    headlineKo: "판매 이후에도 재고 흐름을\n밀착 모니터링합니다.",
+    headlineEn: "Continuous Optimization\nBased on Real Store Sales.",
+    descKo: "실제 매장에서 수집된 주간 Sell-through 회전율 데이터를 바탕으로, 누적 판매 성과 분석과 자동화된 재주문(Reorder) 제안을 통해 악성 재고 없는 건전한 매출 순환을 책임집니다.",
+    descEn: "We track weekly sell-through rates at your store, identifying fast sellers to generate automated reorder suggestions and swapping slow sellers to protect your cash flow.",
     image: "optimize_visual",
     benefits: [
       {
@@ -199,7 +225,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "TURNOVER SPEED",
-        desc: "데이터 분석을 통한 회전율 가속"
+        descKo: "데이터 분석을 통한 회전율 가속",
+        descEn: "Data-driven inventory turns"
       },
       {
         icon: (
@@ -209,7 +236,8 @@ const solutionDataList = [
           </svg>
         ),
         title: "AUTO REORDER",
-        desc: "품절 방지 자동 재오더 주문 루프"
+        descKo: "품절 방지 자동 재오더 주문 루프",
+        descEn: "Stockout prevention auto-reorder loop"
       },
       {
         icon: (
@@ -218,20 +246,23 @@ const solutionDataList = [
           </svg>
         ),
         title: "DEADSTOCK CONTROL",
-        desc: "비정체 SKU 조기 식별 및 제어"
+        descKo: "비정체 SKU 조기 식별 및 제어",
+        descEn: "Early slow-seller identification"
       }
     ],
     outcomeTitle: "WHAT THIS MEANS FOR YOUR STORE",
-    outcomeDesc: "실시간 주간 판매 실적을 토대로 안 팔리는 제품(Slow Seller)을 적기에 감지하여 베스트셀러 SKU로 조기 대환하며, 매대 면적당 회전 속도를 극대화하여 악성 재고 리스크가 없는 이상적인 현금 유동성을 보장합니다.",
+    outcomeDescKo: "실시간 주간 판매 실적을 토대로 안 팔리는 제품(Slow Seller)을 적기에 감지하여 베스트셀러 SKU로 조기 대환하며, 매대 면적당 회전 속도를 극대화하여 악성 재고 리스크가 없는 이상적인 현금 유동성을 보장합니다.",
+    outcomeDescEn: "By monitoring real-time store sales, we swap slow-moving SKUs for proven bestsellers, maximizing turnover speed and keeping your capital liquid and risk-free.",
     outcomeTags: ["ZERO DEAD STOCK RISK", "INTELLIGENT AUTO REORDER", "MAXIMIZED CASH FLOW"]
   }
 ];
 
-export default function SolutionSection() {
+export default function SolutionSection({ locale }: { locale?: string }) {
   const [activeTab, setActiveTab] = useState(0); // 0 to 4 (CURATE to OPTIMIZE)
   const [buildSize, setBuildSize] = useState<"4ft" | "8ft" | "12ft">("8ft"); // Default is 8FT
   const [isHovered, setIsHovered] = useState(false);
   const autoPlayTimer = useRef<NodeJS.Timeout | null>(null);
+  const isKo = locale === "ko";
 
   // 4.5s Auto-rolling sequence
   useEffect(() => {
@@ -262,17 +293,10 @@ export default function SolutionSection() {
     setActiveTab((prev) => (prev + 1) % 5);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      action();
-    }
-  };
-
   const getBuildImage = () => {
-    if (buildSize === "4ft") return "/images/solutions/4F_A.jpg";
-    if (buildSize === "12ft") return "/images/solutions/12F_AAA.jpg";
-    return "/images/solutions/8F_AA.jpg";
+    if (buildSize === "4ft") return "/images/solutions/build.jpg";
+    if (buildSize === "8ft") return "/images/solutions/build_8ft.jpg";
+    return "/images/solutions/build_12ft.jpg";
   };
 
   const activeData = solutionDataList[activeTab];
@@ -280,33 +304,42 @@ export default function SolutionSection() {
   return (
     <section
       id="solution"
-      className="w-full bg-[#141414] select-none text-left font-sans border-y border-[#2a2a2a]"
-      style={{ fontFamily: "'Pretendard', -apple-system, sans-serif" }}
+      className="bg-[#141414] border-b border-[#2a2a2a] relative overflow-hidden font-medium"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Outer container aligning exactly with outer margin rhythms (01, 02, 04 section matching) */}
-      <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px]">
+      {/* Background radial soft light decor */}
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#ff2b75]/2 filter blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#22d3ee]/2 filter blur-[120px] pointer-events-none z-0" />
 
-        {/* Main Grid: Left Column (38%), Right Column (62%) on Desktop, height matching with items-stretch */}
-        <div className="grid lg:grid-cols-[minmax(320px,38%)_1fr] gap-[56px] items-stretch">
-
-          {/* ================= LEFT COLUMN: Intro + Diagram ================= */}
-          <div className="flex flex-col justify-between gap-6">
-            <div className="flex flex-col gap-2">
-              <span className="text-[11px] font-black text-[#ff2b75] tracking-[0.08em] uppercase block mb-3">
-                03 — K SELECT SOLUTION
+      <div className="max-w-[1400px] mx-auto px-[32px] sm:px-[64px] py-[120px] text-left relative z-10">
+        <div className="grid lg:grid-cols-[0.4fr_0.6fr] gap-12 lg:gap-14 items-stretch">
+          
+          {/* ================= LEFT SIDE PANEL — ORBIT CONTROL & MENU ================= */}
+          <div className="flex flex-col justify-between items-start self-stretch">
+            
+            {/* Header copy */}
+            <div className="mb-8">
+              <span className="text-xs font-semibold text-accent tracking-[0.04em]">
+                03 — K SELECT INTEGRATED SOLUTION
               </span>
-              <h2 className="font-display text-3xl sm:text-[35px] font-bold leading-[1.28] tracking-tight text-white m-0">
-                우리가 가진 5가지 솔루션으로<br />리테일러의 문제를 해결합니다.
+              <h2 className="font-display text-3xl sm:text-[35px] font-bold leading-[1.28] tracking-tight text-white m-0 mt-4 keep-all select-none">
+                {isKo ? (
+                  <>우리가 가진 5가지 솔루션으로<br />리테일러의 문제를 해결합니다.</>
+                ) : (
+                  <>Solving Retailer Challenges<br />with 5 Core Solutions</>
+                )}
               </h2>
               <p className="text-[14.5px] text-[#ADADAD] leading-relaxed max-w-[460px] mt-4 mb-2 font-medium">
-                K Select는 제품 선정부터 디스플레이 · 운영 · 재고 최적화까지 하나로 연결된 시스템으로 리테일 성장을 지원합니다.
+                {isKo 
+                  ? "K Select는 제품 선정부터 디스플레이 · 운영 · 재고 최적화까지 하나로 연결된 시스템으로 리테일 성장을 지원합니다."
+                  : "K SELECT HUB delivers category growth through a unified system covering curation, merchandising, store operations, and inventory optimization."
+                }
               </p>
             </div>
 
             {/* Mobile/Tablet Horizontal Selector Slider */}
-            <div className="lg:hidden w-full overflow-x-auto pb-4 mb-2 flex gap-2 scrollbar-none">
+            <div className="lg:hidden w-full overflow-x-auto pb-4 mb-2 flex gap-2 scrollbar-none select-none">
               {[
                 { key: "CURATE", num: "01" },
                 { key: "DIFFERENTIATE", num: "02" },
@@ -329,7 +362,7 @@ export default function SolutionSection() {
             </div>
 
             {/* Desktop Orbit Wheel (Hidden on Mobile/Tablet) */}
-            <div className="hidden lg:block relative w-[440px] h-[440px] mx-auto -my-4">
+            <div className="hidden lg:block relative w-[440px] h-[440px] mx-auto -my-4 select-none">
               {/* Dashed lines representing connections */}
               <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-90deg)", transformOrigin: "0 0" }} />
               <div style={{ position: "absolute", left: "220px", top: "220px", width: "36px", height: 0, borderTop: "1.5px dotted rgba(255,255,255,0.3)", transform: "rotate(-18deg)", transformOrigin: "0 0" }} />
@@ -358,105 +391,91 @@ export default function SolutionSection() {
                   <circle cx="11" cy="11" r="7" />
                   <line x1="21" y1="21" x2="16.2" y2="16.2" />
                 </svg>
-                <div className="num">01</div>
-                <div className="lbl">CURATE</div>
+                <span className="label">01 CURATE</span>
               </button>
 
               {/* Node 02 - DIFFERENTIATE */}
               <button
                 onClick={() => handleTabClick(1)}
                 className={`ks-node ${activeTab === 1 ? "active" : ""}`}
-                style={{ position: "absolute", left: "339.7px", top: "125.5px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "354px", top: "134px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="3 17 9 11 13 15 21 7" />
-                  <polyline points="15 7 21 7 21 13" />
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <div className="num">02</div>
-                <div className="lbl">DIFFERENTIATE</div>
+                <span className="label">02 DIFFERENTIATE</span>
               </button>
 
               {/* Node 03 - BUILD */}
               <button
                 onClick={() => handleTabClick(2)}
                 className={`ks-node ${activeTab === 2 ? "active" : ""}`}
-                style={{ position: "absolute", left: "278px", top: "315.5px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "288px", top: "338px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 9L4 4H20L21 9" />
-                  <path d="M4 9V20H20V9" />
-                  <line x1="9" y1="20" x2="9" y2="13" />
-                  <line x1="15" y1="20" x2="15" y2="13" />
+                  <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <div className="num">03</div>
-                <div className="lbl">BUILD</div>
+                <span className="label">03 BUILD</span>
               </button>
 
               {/* Node 04 - SUPPORT */}
               <button
                 onClick={() => handleTabClick(3)}
                 className={`ks-node ${activeTab === 3 ? "active" : ""}`}
-                style={{ position: "absolute", left: "78px", top: "315.5px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "70px", top: "338px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M17 11a4 4 0 100-8" />
-                  <path d="M1 21v-2a4 4 0 014-4h8a4 4 0 014 4v2" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M12 8v4" />
+                  <path d="M12 16h.01" />
                 </svg>
-                <div className="num">04</div>
-                <div className="lbl">SUPPORT</div>
+                <span className="label">04 SUPPORT</span>
               </button>
 
               {/* Node 05 - OPTIMIZE */}
               <button
                 onClick={() => handleTabClick(4)}
                 className={`ks-node ${activeTab === 4 ? "active" : ""}`}
-                style={{ position: "absolute", left: "16.3px", top: "125.5px", border: "none", outline: "none", padding: 0 }}
+                style={{ position: "absolute", left: "4px", top: "134px", border: "none", outline: "none", padding: 0 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="6" y="4" width="12" height="17" rx="2" />
-                  <rect x="9" y="2" width="6" height="4" rx="1" />
-                  <line x1="9" y1="10" x2="15" y2="10" />
-                  <line x1="9" y1="14" x2="15" y2="14" />
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
                 </svg>
-                <div className="num">05</div>
-                <div className="lbl">OPTIMIZE</div>
+                <span className="label">05 OPTIMIZE</span>
               </button>
             </div>
 
-            {/* Wheel Bottom Navigator (Desktop lg:flex) */}
-            <div className="hidden lg:flex items-center justify-center gap-[10px] text-[#7A7A7A] text-[13px] mt-[8px]">
-              <span 
-                id="ks-prev" 
+            {/* Micro Navigation Arrows */}
+            <div className="flex items-center gap-3.5 mt-8 select-none">
+              <button
                 onClick={handlePrevTab}
-                onKeyDown={(e) => handleKeyDown(e, handlePrevTab)}
-                className="cursor-pointer hover:text-white px-1.5 focus:outline-none"
-                tabIndex={0}
-                role="button"
-                aria-label="Previous Solution"
+                className="w-11 h-11 rounded-full border border-white/10 hover:border-white/20 bg-[#0c0c0c] hover:bg-white/5 flex items-center justify-center text-white/60 hover:text-white transition-all focus:outline-none"
               >
-                ←
+                <svg className="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <span className="text-[12.5px] font-black text-white/50 tracking-wider font-display">
+                0{activeTab + 1} <span className="text-white/20">/</span> 05
               </span>
-              <span>노드를 클릭하여 솔루션을 확인하세요.</span>
-              <span 
-                id="ks-next" 
+              <button
                 onClick={handleNextTab}
-                onKeyDown={(e) => handleKeyDown(e, handleNextTab)}
-                className="cursor-pointer hover:text-white px-1.5 focus:outline-none"
-                tabIndex={0}
-                role="button"
-                aria-label="Next Solution"
+                className="w-11 h-11 rounded-full border border-white/10 hover:border-white/20 bg-[#0c0c0c] hover:bg-white/5 flex items-center justify-center text-white/60 hover:text-white transition-all focus:outline-none"
               >
-                →
-              </span>
+                <svg className="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
+
           </div>
 
-          {/* ================= RIGHT COLUMN: Fixed Height Premium Solution Panel Card ================= */}
+          {/* ================= RIGHT SIDE PANEL — DYNAMIC 3-ZONE SKELETON ================= */}
           <div 
-            style={{ 
-              border: "1.5px solid #ff2b75", 
+            style={{
+              border: "1px solid rgba(255, 255, 255, 0.1)",
               borderRadius: "20px", 
               padding: "44px 48px", 
               background: "#0c0c0c", 
@@ -489,21 +508,19 @@ export default function SolutionSection() {
                     {activeData.title}
                   </h3>
                   <div className="text-[13.5px] text-white/90 font-semibold mb-4.5 flex items-center gap-2">
-                    <span className="text-[#ff2b75]">{activeData.koSub}</span>
-                    <span className="text-white/20">|</span>
-                    <span className="text-white/50 font-bold">{activeData.enSub}</span>
+                    <span className="text-[#ff2b75]">{isKo ? activeData.koSub : activeData.enSub}</span>
                   </div>
                   <div className="w-12 h-0.5 bg-[#ff2b75] mb-4.5" />
                   <h4 className="text-[19px] sm:text-[21px] font-black text-white leading-snug tracking-tight mb-3.5 whitespace-pre-line">
-                    {activeData.headline}
+                    {isKo ? activeData.headlineKo : activeData.headlineEn}
                   </h4>
                   <p className="text-[13.5px] text-[#ADADAD] leading-relaxed font-semibold">
-                    {activeData.desc}
+                    {isKo ? activeData.descKo : activeData.descEn}
                   </p>
 
                   {/* Modular build size buttons (shown only on BUILD tab 02) */}
                   {activeTab === 2 && (
-                    <div className="grid grid-cols-3 gap-[10px] mt-4.5 max-w-[340px]">
+                    <div className="grid grid-cols-3 gap-[10px] mt-4.5 max-w-[340px] select-none">
                       {(["4ft", "8ft", "12ft"] as const).map((size) => (
                         <button
                           key={size}
@@ -525,7 +542,7 @@ export default function SolutionSection() {
                 <div className="w-full flex items-center justify-center">
                   {activeData.image === "optimize_visual" ? (
                     <div className="w-full h-[260px] md:h-[300px] bg-[#111]/70 border border-white/10 rounded-[14px] p-5 flex flex-col justify-between shadow-lg select-none">
-                      {/* SELL-THROUGH Chart widget */}
+                      {/* WEEKLY SELL-THROUGH Chart widget */}
                       <div className="bg-[#080808]/90 border border-white/5 rounded-[8px] p-3">
                         <div className="text-[#ff2b75] text-[9.5px] font-black tracking-wider uppercase font-display mb-2">WEEKLY SELL-THROUGH</div>
                         <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "42px" }}>
@@ -537,7 +554,7 @@ export default function SolutionSection() {
                         </div>
                       </div>
 
-                      {/* REORDER RECOMMENDATION widget */}
+                      {/* REORDER SUGGESTION widget */}
                       <div className="flex items-center justify-between bg-[#080808]/90 border border-white/5 rounded-[8px] p-3">
                         <div>
                           <div className="text-[#ff2b75] text-[9.5px] font-black tracking-wider uppercase font-display mb-0.5">REORDER SUGGESTION</div>
@@ -593,7 +610,7 @@ export default function SolutionSection() {
                         </span>
                       </div>
                       <span className="text-[#A0A0A0] text-[12.5px] font-bold">
-                        {b.desc}
+                        {isKo ? b.descKo : b.descEn}
                       </span>
                     </div>
                   ))}
@@ -607,7 +624,7 @@ export default function SolutionSection() {
                     {activeData.outcomeTitle}
                   </span>
                   <p className="text-[13.5px] text-[#E0E0E0] leading-relaxed font-bold">
-                    {activeData.outcomeDesc}
+                    {isKo ? activeData.outcomeDescKo : activeData.outcomeDescEn}
                   </p>
                 </div>
                 {/* Horizontal outcome tags */}

@@ -33,12 +33,12 @@ function useIntersectionReveal() {
 }
 
 interface PageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale?: string }>;
 }
 
 export default function ArticleInventoryTurnPage({ params }: PageProps) {
   const resolvedParams = React.use(params);
-  const locale = resolvedParams.locale;
+  const locale = resolvedParams.locale === 'ko' ? 'ko' : 'en';
   const isKo = locale === "ko";
 
   const [sec1Ref, sec1Visible] = useIntersectionReveal();
