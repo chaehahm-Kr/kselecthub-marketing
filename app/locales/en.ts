@@ -191,7 +191,7 @@ export const en = {
     ],
     official: {
       title: "Official Partner Certified by the Republic of Korea (KOSME)",
-      desc: "Letusto Inc. (the parent company of K SELECT HUB) is certified as a Grade-A Overseas 민간네트워크 partner by the Korean Ministry of SMEs and Startups. We guarantee full import compliance, FDA approvals, and reliable customs clearance."
+      desc: "Letusto Inc. (the parent company of K SELECT HUB) is certified as a Grade-A Overseas Private Business Development Network partner by the Korean Ministry of SMEs and Startups. We guarantee full import compliance, FDA approvals, and reliable customs clearance."
     }
   },
   insights: {

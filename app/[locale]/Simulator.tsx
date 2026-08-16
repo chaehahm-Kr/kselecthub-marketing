@@ -172,12 +172,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
     });
 
     if (answeredPrecisionCount >= 4) {
-      return { label: "높음 (High)", color: "text-[#22D3EE] border-[#22D3EE]/30 bg-[#22D3EE]/5" };
+      return { label: locale === "ko" ? "높음 (High)" : "HIGH", color: "text-[#22D3EE] border-[#22D3EE]/30 bg-[#22D3EE]/5" };
     } else if (answeredPrecisionCount >= 2) {
-      return { label: "좋음 (Good)", color: "text-[#ff2b75] border-[#ff2b75]/30 bg-[#ff2b75]/5" };
+      return { label: locale === "ko" ? "좋음 (Good)" : "GOOD", color: "text-[#ff2b75] border-[#ff2b75]/30 bg-[#ff2b75]/5" };
     }
-    return { label: "기본 (Basic)", color: "text-white/50 border-white/10 bg-white/5" };
-  }, [answers]);
+    return { label: locale === "ko" ? "기본 (Basic)" : "BASIC", color: "text-white/50 border-white/10 bg-white/5" };
+  }, [answers, locale]);
 
   const isNextDisabled = useMemo(() => {
     if (!activeQuestion) return true;
@@ -347,6 +347,26 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   }, [step, mainRecommendation]);
 
   // Restart simulator
+  const getLocalizedCategoryName = (category: string) => {
+    if (locale === "ko") return category;
+    const match = category.match(/\(([^)]+)\)/);
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+    const map: Record<string, string> = {
+      "스킨케어": "Skincare",
+      "헤어 케어": "Hair Care",
+      "헤어케어": "Hair Care",
+      "메이크업": "Makeup",
+      "바디 케어": "Body Care",
+      "바디케어": "Body Care",
+      "뷰티 툴": "Beauty Tools",
+      "퍼스널 케어": "Personal Care",
+      "퍼스널케어": "Personal Care"
+    };
+    return map[category] || category;
+  };
+
   const handleRestart = () => {
     setAnswers({});
     setSubmittedAnswers({});
@@ -369,7 +389,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   };
 
   const getLocalizedAnswer = (q: any, val: any) => {
-    if (val === undefined || val === null || val === "") {
+    if (val === undefined || val === null || val === "" || val === "답변하지 않음 (Skipped)") {
       return locale === "ko" ? "응답하지 않음" : "Not answered";
     }
     const mapValue = (item: string) => {
@@ -547,13 +567,17 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
   useEffect(() => {
     if (step === "results" && prevRecommendationConfig && mainRecommendation) {
       if (mainRecommendation.display.program === prevRecommendationConfig) {
-        setReanalyzedNotice("변경된 조건을 반영해 다시 분석했으며, 현재 추천안이 여전히 Best Fit으로 평가되었습니다.");
+        setReanalyzedNotice(locale === "ko" 
+          ? "변경된 조건을 반영해 다시 분석했으며, 현재 추천안이 여전히 Best Fit으로 평가되었습니다."
+          : "We re-analyzed your updated answers, and the current recommendation remains the Best Fit.");
       } else {
-        setReanalyzedNotice("변경된 조건을 반영해 다시 분석을 완료했습니다. 새 조건에 따라 추천안이 업데이트되었습니다.");
+        setReanalyzedNotice(locale === "ko" 
+          ? "변경된 조건을 반영해 다시 분석을 완료했습니다. 새 조건에 따라 추천안이 업데이트되었습니다."
+          : "Re-analysis complete. The recommendation has been updated based on your new answers.");
       }
       setPrevRecommendationConfig(null);
     }
-  }, [step, mainRecommendation, prevRecommendationConfig]);
+  }, [step, mainRecommendation, prevRecommendationConfig, locale]);
 
   return (
     <div className="w-full text-left max-w-[1250px] mx-auto min-h-[480px]">
@@ -773,9 +797,17 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
           <div className="mb-10">
             {activeQuestion.multi_select && (
               <span className="text-[11.5px] text-[#ff2b75] font-black tracking-wide block mb-3">
-                {activeQuestion.is_ranking 
-                  ? `* 정확히 ${activeQuestion.max_select || 3}개를 선택해주세요 (순위 순서대로 선택)`
-                  : `* 중복 선택 가능 (최대 ${activeQuestion.max_select || "제한 없음"}개, 최소 1개 선택)`}
+                {locale === "ko" ? (
+                  activeQuestion.is_ranking 
+                    ? `* 정확히 ${activeQuestion.max_select || 3}개를 선택해주세요 (순위 순서대로 선택)`
+                    : `* 중복 선택 가능 (최대 ${activeQuestion.max_select || "제한 없음"}개, 최소 1개 선택)`
+                ) : (
+                  activeQuestion.is_ranking
+                    ? `Select exactly ${activeQuestion.max_select || 3} options in order of priority.`
+                    : (activeQuestion.max_select
+                      ? `Select up to ${activeQuestion.max_select} options. At least 1 is required.`
+                      : `Select one or more options.`)
+                )}
               </span>
             )}
             
@@ -1064,8 +1096,18 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                 >
                   <span className="text-lg">{tab.icon}</span>
                   <div className="flex flex-col text-left leading-tight">
-                    <span className="text-[12.5px] font-extrabold">{tab.label_ko}</span>
-                    <span className={`text-[9.5px] font-bold ${activeResultTab === tab.key ? "text-white/80" : "text-white/40"}`}>{tab.label_en}</span>
+                    {locale === "ko" ? (
+                      <>
+                        <span className="text-[12.5px] font-extrabold">{tab.label_ko}</span>
+                        <span className={`text-[9.5px] font-bold ${activeResultTab === tab.key ? "text-white/80" : "text-white/40"}`}>{tab.label_en}</span>
+                      </>
+                    ) : (
+                      <span className="text-[13.5px] font-extrabold">
+                        {tab.key === "display" && "01. Recommended Display"}
+                        {tab.key === "product" && "02. Product Strategy"}
+                        {tab.key === "financial" && "03. Financial Outlook"}
+                      </span>
+                    )}
                   </div>
                 </button>
               ))}
@@ -1080,13 +1122,15 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                     
                     <div className="flex flex-col gap-5 text-left">
                       <div className="flex flex-col gap-1.5">
-                        <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">권장 집기 규격 · RECOMMENDED FIXTURE SIZE</span>
+                        <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase">
+                          {locale === "ko" ? "권장 집기 규격 · RECOMMENDED FIXTURE SIZE" : "RECOMMENDED FIXTURE SIZE"}
+                        </span>
                         <div className="flex items-center gap-2.5 flex-wrap">
                           <h3 className="font-display text-[26px] font-extrabold text-white leading-none tracking-tight">
                             {mainRecommendation.display.program} · {mainRecommendation.display.width_ft}FT Module
                           </h3>
                           <span className="text-[10px] text-[#ff2b75] font-black tracking-wide border border-[#ff2b75]/30 bg-[#ff2b75]/5 px-2.5 py-0.5 rounded-[4px] uppercase font-display">
-                            추천안 · BEST FIT
+                            {locale === "ko" ? "추천안 · BEST FIT" : "RECOMMENDED · BEST FIT"}
                           </span>
                         </div>
                       </div>
@@ -1233,7 +1277,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         <div key={cat.category} className="flex items-center gap-2">
                           <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color }} />
                           <span className="text-[12px] text-white/70 font-semibold tracking-tight">
-                            {cat.category} <strong className="text-white font-black">{cat.percentage}%</strong>
+                            {getLocalizedCategoryName(cat.category)} <strong className="text-white font-black">{cat.percentage}%</strong>
                           </span>
                         </div>
                       ))}
@@ -1436,7 +1480,11 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   </details>
 
                   <div className="p-3.5 bg-white/3 border border-white/10 rounded-[10px] text-[11.5px] text-white/50 leading-relaxed">
-                    ⚠️ **시뮬레이션 및 ROI 면책고지 (Disclaimer)**: 본 결과는 입력된 매장 정보와 시뮬레이션 가정값을 기준으로 한 예측치(Projection)이며 실제 판매 성과나 수익률을 보장하지 않습니다. 초도 투자 이익률(ROI)은 상품 매입 비용만을 기준으로 산출되었으며 매장 임차료, 인건비 등 기타 운영 경비(Operating Expenses)는 포함되지 않았습니다. 실제 매장의 영업 성과는 입지 조건, 로컬 경쟁 상황 및 점포 운영 역량에 따라 다를 수 있습니다.
+                    {locale === "ko" ? (
+                      <>⚠️ <strong>시뮬레이션 및 ROI 면책고지 (Disclaimer)</strong>: 본 결과는 입력된 매장 정보와 시뮬레이션 가정값을 기준으로 한 예측치(Projection)이며 실제 판매 성과나 수익률을 보장하지 않습니다. 초도 투자 이익률(ROI)은 상품 매입 비용만을 기준으로 산출되었으며 매장 임차료, 인건비 등 기타 운영 경비(Operating Expenses)는 포함되지 않았습니다. 실제 매장의 영업 성과는 입지 조건, 로컬 경쟁 상황 및 점포 운영 역량에 따라 다를 수 있습니다.</>
+                    ) : (
+                      <>⚠️ <strong>Disclaimer</strong>: Projections are for illustrative purposes only and do not guarantee future performance. Initial ROI is calculated based solely on product inventory cost and does not factor in other store operating expenses such as rent, utilities, or labor. Actual results will vary based on store location, local competition, and management capability.</>
+                    )}
                   </div>
                 </div>
               )}
@@ -1832,7 +1880,7 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                   >
                     <h4 className="text-[13.5px] font-bold text-[#ff2b75] font-display flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#ff2b75]"></span>
-                      {labelInfo.ko} ({labelInfo.en})
+                      {locale === "ko" ? labelInfo.ko : labelInfo.en}
                     </h4>
                     <span className="text-white/40 text-[10.5px] font-bold hover:text-white/60 transition-colors">
                       {isExpanded ? (locale === "ko" ? "접기 ▲" : "Collapse ▲") : (locale === "ko" ? "펼치기 ▼" : "Expand ▼")}
@@ -1847,6 +1895,9 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         if (answer) {
                           const answersList = Array.isArray(answer) ? answer : [answer];
                           const englishLabels = answersList.map(selectedLabel => {
+                            if (selectedLabel === "답변하지 않음 (Skipped)") {
+                              return locale === "ko" ? "답변하지 않음" : "Skipped";
+                            }
                             const choice = q.answers.find(a => a.label_ko === selectedLabel);
                             return choice ? (locale === "ko" ? choice.label_ko : choice.label_en) : selectedLabel;
                           });
@@ -1971,10 +2022,12 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                       {editQuestion.is_ranking
                         ? (locale === "ko" 
                           ? "* 정확히 " + (editQuestion.max_select || 3) + "개를 선택해주세요 (순위 순서대로 선택)" 
-                          : "* Please select exactly " + (editQuestion.max_select || 3) + " options (in order of priority)")
+                          : "Select exactly " + (editQuestion.max_select || 3) + " options in order of priority.")
                         : (locale === "ko" 
                           ? "* 중복 선택 가능 (최대 " + (editQuestion.max_select || "제한 없음") + "개, 최소 1개 선택)" 
-                          : "* Multiple choice (max " + (editQuestion.max_select || "unlimited") + " options, min 1)")}
+                          : (editQuestion.max_select 
+                            ? "Select up to " + editQuestion.max_select + " options. At least 1 is required." 
+                            : "Select one or more options."))}
                     </span>
                   )}
                 </div>
