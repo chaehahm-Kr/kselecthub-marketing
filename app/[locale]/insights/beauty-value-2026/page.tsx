@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import PartnerModal from "../../PartnerModal";
+import ReaderFeedback from "../ReaderFeedback";
 
 function useIntersectionReveal() {
   const [isVisible, setIsVisible] = useState(false);
@@ -341,6 +342,9 @@ export default function ArticleBeautyValue2026Page({ params }: PageProps) {
               </Link>
             </div>
           </div>
+
+          {/* Reader Feedback UI */}
+          <ReaderFeedback articleId="beauty-value-2026" locale={locale} channel="HUB" />
 
           {/* Previous / Next Insight Navigation */}
           <div className="grid sm:grid-cols-2 gap-6 my-12 border-t border-white/10 pt-12 select-none">

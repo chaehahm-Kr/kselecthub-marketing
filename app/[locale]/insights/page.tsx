@@ -48,6 +48,41 @@ export default function InsightsLandingPage({ params }: PageProps) {
   const [topicsRef, topicsVisible] = useIntersectionReveal();
   const [latestRef, latestVisible] = useIntersectionReveal();
 
+  const [apiArticles, setApiArticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchHubPublishedInsights() {
+      try {
+        const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "http://localhost:3010";
+        const res = await fetch(`${portalUrl}/api/insights?channel=HUB`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.articles && Array.isArray(data.articles)) {
+            const mapped = data.articles.map((art: any) => ({
+              id: art.slug || art.id,
+              topic: "market",
+              category: art.category || "BEAUTY MARKET",
+              titleKo: art.title_ko || art.title,
+              titleEn: art.title_en || art.title,
+              subtitleKo: art.summary_ko || art.excerpt || art.subtitle,
+              subtitleEn: art.summary_en || art.subtitle || art.excerpt,
+              metaKo: "LIVE PUBLISHED INSIGHT · K SELECT HUB",
+              metaEn: "LIVE PUBLISHED INSIGHT · K SELECT HUB",
+              img: art.hero_image || "/images/insights/kbeauty_2026_signals.jpg",
+              isFeatured: false,
+              isApiArticle: true,
+              apiUrl: `${portalUrl}/api/insights?slug=${art.slug}`
+            }));
+            setApiArticles(mapped);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch Hub insights from Portal API:", err);
+      }
+    }
+    fetchHubPublishedInsights();
+  }, []);
+
   const topics = [
     { id: "all", labelKo: "전체보기", labelEn: "All Insights", isComing: false },
     { id: "market", labelKo: "Beauty 시장 & 소비자 트렌드", labelEn: "BEAUTY MARKET", isComing: false },
@@ -57,8 +92,8 @@ export default function InsightsLandingPage({ params }: PageProps) {
     { id: "signal", labelKo: "Retail Data & Signals", labelEn: "K SELECT SIGNAL", isComing: true }
   ];
 
-  // Articles configurations (Article 4 is Featured, Article 5 & 6 are in Card Grid, 1 & 2 & 3 are in Latest section)
-  const articles = [
+  // Combined articles list (API dynamic published + local static)
+  const staticArticles = [
     {
       id: "black-beauty-2026",
       topic: "market",
@@ -97,65 +132,24 @@ export default function InsightsLandingPage({ params }: PageProps) {
       metaEn: "5 MIN READ · PRICING & MERCHANDISING",
       img: "/images/insights/beauty_value_2026.jpg",
       isFeatured: false
-    },
-    {
-      id: "k-beauty-4ft-start",
-      topic: "playbook",
-      category: "RETAIL PLAYBOOK",
-      titleKo: "Beauty Supply Store에서 K-Beauty 4FT를 어떻게 시작할까?",
-      titleEn: "How to Launch a 4FT K-Beauty Section in a Beauty Supply Store",
-      subtitleKo: "처음부터 많은 제품을 넣는 것이 정답은 아닙니다. 중요한 것은 매장에 맞는 카테고리, 가격대, SKU와 재고를 설계하는 것입니다.",
-      subtitleEn: "Start smart, not oversized. Design the target categories, pricing tiers, SKUs, and inventory flows matched to your store's demographics.",
-      metaKo: "5 MIN READ · RETAIL PLAYBOOK",
-      metaEn: "5 MIN READ · RETAIL PLAYBOOK",
-      img: "/images/insights/kbeauty_4ft_start.jpg",
-      isFeatured: false
-    },
-    {
-      id: "scalp-care-bridge",
-      topic: "category",
-      category: "PRODUCT & CATEGORY",
-      titleKo: "Scalp Care: Hair 고객을 K-Beauty 고객으로 연결할 수 있을까?",
-      titleEn: "Scalp Care: Can We Bridge Hair Customers to K-Beauty Customers?",
-      subtitleKo: "Beauty Supply가 이미 잘 알고 있는 Hair 고객. K-Beauty의 새로운 성장 기회는 그 고객에게서 시작될 수도 있습니다.",
-      subtitleEn: "Connect with the hair shoppers already in your store. The next growth frontier in K-Beauty starts from existing hair routines.",
-      metaKo: "4 MIN READ · CATEGORY INSIGHT",
-      metaEn: "4 MIN READ · CATEGORY INSIGHT",
-      img: "/images/insights/scalp_care_bridge.jpg",
-      isFeatured: false
-    },
-    {
-      id: "inventory-turn",
-      topic: "playbook",
-      category: "RETAIL PLAYBOOK",
-      titleKo: "좋은 상품보다 중요한 것: Inventory Turn",
-      titleEn: "What Matters More than Good Margins: Inventory Turnover Speed",
-      subtitleKo: "마진이 높아도 팔리지 않으면 현금은 Shelf 위에 멈춰 있습니다. Retail의 중요한 질문은 “얼마를 남기나?”와 함께 “얼마나 빨리 다시 파나?”입니다.",
-      subtitleEn: "Cash remains frozen on shelves if products sit slow. The vital retail diagnostic combines margin size with transaction velocity.",
-      metaKo: "5 MIN READ · RETAIL MANAGEMENT",
-      metaEn: "5 MIN READ · RETAIL MANAGEMENT",
-      img: "/images/insights/inventory_turn.jpg",
-      isFeatured: false
     }
   ];
+
+  const articles = [...apiArticles, ...staticArticles];
 
   // Filtering configurations
   const filteredArticles = activeTopic === "all"
     ? articles
     : articles.filter(a => a.topic === activeTopic);
 
-  // Main Card Grid: shows Articles 5 & 6 when "all", or matching non-featured articles when filtered
   const gridArticles = activeTopic === "all"
-    ? articles.filter(a => a.id === "k-beauty-2026-signals" || a.id === "beauty-value-2026")
+    ? articles.filter(a => a.isApiArticle || a.id === "k-beauty-2026-signals" || a.id === "beauty-value-2026")
     : filteredArticles.filter(a => !a.isFeatured);
 
-  // Latest / Previous section: Articles 1, 2, 3 shown at the bottom
-  const latestArticles = articles.filter(a => a.id === "k-beauty-4ft-start" || a.id === "scalp-care-bridge" || a.id === "inventory-turn");
+  const latestArticles = articles.filter(a => !a.isApiArticle && (a.id === "k-beauty-4ft-start" || a.id === "scalp-care-bridge" || a.id === "inventory-turn"));
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0c0c0c] text-white font-sans overflow-x-hidden selection:bg-[#ff2b75] selection:text-white">
-      
-      {/* Header Navigation */}
       <Header locale={locale} />
 
       <main className="flex-1">
@@ -224,8 +218,6 @@ export default function InsightsLandingPage({ params }: PageProps) {
                   featuredVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
               >
-                
-                {/* Left side detail info */}
                 <div className="p-8 sm:p-14 flex flex-col justify-between items-start gap-8 z-10">
                   <div className="flex flex-col gap-4">
                     <span className="text-[10px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
@@ -252,7 +244,6 @@ export default function InsightsLandingPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                {/* Right side Cover Graphic */}
                 <div className="relative aspect-[3/2] lg:aspect-auto w-full overflow-hidden border-t lg:border-t-0 lg:border-l border-white/5">
                   <Image
                     src={article.img}
@@ -262,10 +253,8 @@ export default function InsightsLandingPage({ params }: PageProps) {
                     sizes="(max-width: 1024px) 100vw, 40vw"
                     priority
                   />
-                  {/* Subtle dark gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/40 via-transparent to-transparent pointer-events-none" />
                 </div>
-
               </div>
             ))}
           </section>
@@ -282,7 +271,6 @@ export default function InsightsLandingPage({ params }: PageProps) {
                 EXPLORE BY TOPIC
               </span>
               
-              {/* Category Horizontal Scroll tab row */}
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none select-none scroll-smooth">
                 {topics.map((t) => {
                   const isActive = activeTopic === t.id;
@@ -334,20 +322,25 @@ export default function InsightsLandingPage({ params }: PageProps) {
                     cardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                 >
-                  
-                  {/* Card Cover image */}
                   <div className="relative aspect-[3/2] w-full overflow-hidden border-b border-white/5">
-                    <Image
-                      src={article.img}
-                      alt={article.titleKo}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
-                    />
+                    {article.img.startsWith("http") || article.img.startsWith("/images") ? (
+                      <img
+                        src={article.img}
+                        alt={article.titleKo}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                      />
+                    ) : (
+                      <Image
+                        src={article.img}
+                        alt={article.titleKo}
+                        fill
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/40 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  {/* Card descriptions */}
                   <div className="p-6.5 flex flex-col justify-between items-start gap-6 flex-1">
                     <div className="flex flex-col gap-3">
                       <span className="text-[9.5px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
@@ -362,102 +355,38 @@ export default function InsightsLandingPage({ params }: PageProps) {
                     </div>
 
                     <div className="flex flex-col gap-4 w-full mt-2">
-                      <span className="text-[9.5px] text-[#7A7A7A] font-black tracking-wider uppercase font-display block">
+                      <span className="text-[9.5px] text-[#00f0ff] font-black tracking-wider uppercase font-display block">
                         {isKo ? article.metaKo : article.metaEn}
                       </span>
-                      <Link
-                        href={`/${locale}/insights/${article.id}`}
-                        className="h-12 px-6 w-full rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-extrabold text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
-                      >
-                        {isKo ? "인사이트 읽기 →" : "Read Insight →"}
-                      </Link>
+                      {article.isApiArticle ? (
+                        <a
+                          href={article.apiUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="h-12 px-6 w-full rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-extrabold text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
+                        >
+                          {isKo ? "인사이트 읽기 →" : "Read Insight →"}
+                        </a>
+                      ) : (
+                        <Link
+                          href={`/${locale}/insights/${article.id}`}
+                          className="h-12 px-6 w-full rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-extrabold text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
+                        >
+                          {isKo ? "인사이트 읽기 →" : "Read Insight →"}
+                        </Link>
+                      )}
                     </div>
                   </div>
-
                 </div>
               ))}
             </div>
           )}
         </section>
 
-        {/* ================= 05. LATEST INSIGHTS (Archived/Previous Articles) ================= */}
-        {activeTopic === "all" && (
-          <section 
-            ref={latestRef}
-            className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] pb-24 text-left border-t border-white/5 pt-16"
-          >
-            <div className="flex flex-col gap-3 mb-10 select-none">
-              <span className="text-[11px] font-black text-[#7A7A7A] tracking-[0.25em] uppercase font-display">
-                LATEST INSIGHTS
-              </span>
-              <h2 className="font-display text-[22px] sm:text-[26px] font-black text-white tracking-tight m-0 keep-all">
-                {isKo ? "이전 리테일 플레이북 및 아티클" : "Previous Retail Playbooks & Guides"}
-              </h2>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {latestArticles.map((article, idx) => (
-                <div 
-                  key={article.id}
-                  style={{ transitionDelay: `${idx * 100}ms` }}
-                  className={`bg-[#121214] border border-white/5 hover:border-white/10 rounded-[24px] overflow-hidden flex flex-col justify-between shadow-xl group transition-all duration-700 transform ${
-                    latestVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                  }`}
-                >
-                  
-                  {/* Card Cover image */}
-                  <div className="relative aspect-[3/2] w-full overflow-hidden border-b border-white/5">
-                    <Image
-                      src={article.img}
-                      alt={article.titleKo}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/40 via-transparent to-transparent pointer-events-none" />
-                  </div>
-
-                  {/* Card descriptions */}
-                  <div className="p-6.5 flex flex-col justify-between items-start gap-6 flex-1">
-                    <div className="flex flex-col gap-3">
-                      <span className="text-[9.5px] text-[#ff2b75] font-black tracking-widest uppercase font-display">
-                        {article.category}
-                      </span>
-                      <h3 className="font-display text-[17.5px] font-black leading-snug text-white tracking-tight m-0 group-hover:text-[#ff2b75] transition-colors keep-all">
-                        {isKo ? article.titleKo : article.titleEn}
-                      </h3>
-                      <p className="text-[12.5px] text-[#9ca3af] leading-relaxed font-semibold m-0 mt-1 keep-all">
-                        {isKo ? article.subtitleKo : article.subtitleEn}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col gap-4 w-full mt-2">
-                      <span className="text-[9.5px] text-[#7A7A7A] font-black tracking-wider uppercase font-display block">
-                        {isKo ? article.metaKo : article.metaEn}
-                      </span>
-                      <Link
-                        href={`/${locale}/insights/${article.id}`}
-                        className="h-12 px-6 w-full rounded-[8px] border border-[#ff2b75]/35 hover:bg-[#ff2b75] text-[#ff2b75] hover:text-white font-extrabold text-[12.5px] tracking-wide inline-flex items-center justify-center transition-all duration-200"
-                      >
-                        {isKo ? "인사이트 읽기 →" : "Read Insight →"}
-                      </Link>
-                    </div>
-                  </div>
-
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Apply Partner Form popup modal */}
         <PartnerModal />
-
       </main>
 
-      {/* Footer */}
       <Footer locale={locale} />
-
     </div>
   );
 }
