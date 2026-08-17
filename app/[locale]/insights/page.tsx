@@ -158,9 +158,9 @@ export default function InsightsLandingPage({ params }: PageProps) {
         {/* ================= 01. HERO / MARKET SIGNALS ================= */}
         <section 
           ref={heroRef}
-          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-16 sm:py-24 text-left scroll-mt-24"
+          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] pt-10 sm:pt-14 pb-8 sm:pb-12 text-left scroll-mt-24"
         >
-          <div className="max-w-[800px] flex flex-col gap-5">
+          <div className="max-w-[800px] flex flex-col gap-4">
             <span 
               className={`text-xs sm:text-[13px] font-black text-[#ff2b75] tracking-[0.2em] uppercase font-display transition-all duration-500 transform ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -171,7 +171,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
             
             <h1 
               style={{ transitionDelay: "150ms" }}
-              className={`font-display text-[30px] sm:text-[44px] lg:text-[46px] font-black leading-[1.18] text-white tracking-tight m-0 keep-all transition-all duration-700 transform ${
+              className={`font-display text-[28px] sm:text-[40px] lg:text-[44px] font-black leading-[1.18] text-white tracking-tight m-0 keep-all transition-all duration-700 transform ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -184,7 +184,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
             
             <p 
               style={{ transitionDelay: "300ms" }}
-              className={`text-sm font-semibold text-[#ff2b75] italic tracking-wider uppercase font-display m-0 transition-all duration-500 transform ${
+              className={`text-xs sm:text-sm font-semibold text-[#ff2b75] italic tracking-wider uppercase font-display m-0 transition-all duration-500 transform ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -193,7 +193,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
             
             <p 
               style={{ transitionDelay: "450ms" }}
-              className={`text-[13.5px] sm:text-[14.5px] text-[#9ca3af] leading-relaxed font-semibold max-w-2xl m-0 mt-1 transition-all duration-600 transform ${
+              className={`text-[13px] sm:text-[14px] text-[#9ca3af] leading-relaxed font-semibold max-w-2xl m-0 mt-1 transition-all duration-600 transform ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -210,7 +210,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
         {activeTopic === "all" && featuredArticle && (
           <section 
             ref={featuredRef}
-            className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] pb-16 sm:pb-24 text-left scroll-mt-24"
+            className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] pb-10 sm:pb-14 text-left scroll-mt-24"
           >
             <div 
               key={featuredArticle.id}
@@ -264,8 +264,8 @@ export default function InsightsLandingPage({ params }: PageProps) {
           ref={topicsRef} 
           className="bg-[#121214] border-y border-[#222]"
         >
-          <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-10">
-            <div className="flex flex-col gap-5">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-6 sm:py-8">
+            <div className="flex flex-col gap-4">
               <span className="text-[11px] font-black text-[#00f0ff] tracking-[0.25em] uppercase font-display select-none">
                 EXPLORE BY TOPIC
               </span>
@@ -278,7 +278,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
                       key={t.id}
                       disabled={t.isComing}
                       onClick={() => setActiveTopic(t.id)}
-                      className={`h-12 px-6 rounded-[8px] border text-xs font-black tracking-wide whitespace-nowrap transition-all duration-200 inline-flex items-center gap-2.5 ${
+                      className={`h-11 px-5 rounded-[8px] border text-xs font-black tracking-wide whitespace-nowrap transition-all duration-200 inline-flex items-center gap-2.5 ${
                         t.isComing 
                           ? "bg-[#0c0c0c]/30 border-white/5 text-[#444] cursor-not-allowed" 
                           : isActive
@@ -303,7 +303,7 @@ export default function InsightsLandingPage({ params }: PageProps) {
         {/* ================= 04. TRENDING ARTICLES GRID ================= */}
         <section 
           ref={cardsRef} 
-          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-20 text-left scroll-mt-24"
+          className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-[64px] py-12 sm:py-16 text-left scroll-mt-24"
         >
           {gridArticles.length === 0 ? (
             <div className="text-center py-20 border border-white/5 rounded-[20px] bg-[#121214]/30">
