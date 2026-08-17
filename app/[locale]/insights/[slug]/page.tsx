@@ -154,7 +154,24 @@ const LEGACY_STATIC_ARTICLES: Record<string, any> = {
   }
 };
 
+const ARTICLE_THUMBNAIL_MAP: Record<string, string> = {
+  "black-beauty-2026": "/images/insights/black_beauty_2026.jpg",
+  "k-beauty-4ft-start": "/images/insights/kbeauty_4ft_start.jpg",
+  "fda-mocra-customs-enforcement-alert-essential-compliance-checklist-for-korean-export-brands-u-s-store-buyers-2700":
+    "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop",
+  "independent-retailer-margins-reallocating-store-shelf-space-from-hair-extensions-to-high-velocity-korean-scalp-barrier-care-3107":
+    "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1200&auto=format&fit=crop",
+  "scalp-care-us-market-trend-deep-dive": "/images/insights/scalp_care_bridge.jpg",
+  "why-good-products-fail-us-market-entry": "/images/insights/beauty_value_2026.jpg",
+  "what-to-verify-with-300-unit-test-launch": "/images/insights/inventory_turn.jpg",
+  "scalp-care-k-beauty-hair-opportunity":
+    "https://images.unsplash.com/photo-1522337360788-8b13edd793be?q=80&w=1200&auto=format&fit=crop"
+};
+
 function getSafeHeroImage(rawImage: string | null | undefined, slug: string): string {
+  if (ARTICLE_THUMBNAIL_MAP[slug]) {
+    return ARTICLE_THUMBNAIL_MAP[slug];
+  }
   if (rawImage && (rawImage.startsWith("http") || rawImage.startsWith("/images/"))) {
     return rawImage;
   }
