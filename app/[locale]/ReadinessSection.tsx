@@ -70,20 +70,36 @@ export default function ReadinessSection({ locale }: { locale?: string }) {
   // Toggle selection
   const handleSelect = (idx: number, type: "available" | "discuss") => {
     setAnswers((prev) => {
+      let next: { [key: number]: "available" | "discuss" };
       if (prev[idx] === type) {
-        const next = { ...prev };
+        next = { ...prev };
         delete next[idx];
-        return next;
+      } else {
+        next = {
+          ...prev,
+          [idx]: type,
+        };
       }
-      return {
-        ...prev,
-        [idx]: type
-      };
+      try {
+        const formatted = QUESTIONS.map((q, qIdx) => ({
+          key: q.id,
+          title: q.titleEn,
+          titleKo: q.titleKo,
+          response: next[qIdx] === "available" ? "ready" : next[qIdx] === "discuss" ? "discuss" : "ready",
+        }));
+        localStorage.setItem("kselect_readiness_answers", JSON.stringify(formatted));
+        window.dispatchEvent(new CustomEvent("kselect_readiness_update", { detail: formatted }));
+      } catch (err) {}
+      return next;
     });
   };
 
   const handleReset = () => {
     setAnswers({});
+    try {
+      localStorage.removeItem("kselect_readiness_answers");
+      window.dispatchEvent(new CustomEvent("kselect_readiness_update", { detail: [] }));
+    } catch (err) {}
   };
 
   const answeredCount = Object.keys(answers).length;

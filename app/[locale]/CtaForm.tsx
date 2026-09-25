@@ -9,27 +9,26 @@ export default function CtaForm({ locale }: { locale?: string }) {
   const isKo = activeLocale === "ko";
 
   // Form Field States
-  const [storeName, setStoreName] = useState("");
-  const [ownerName, setOwnerName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contactName, setContactName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
   const [city, setCity] = useState("");
   const [stateVal, setStateVal] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [comments, setComments] = useState("");
   const [agreed, setAgreed] = useState(false);
 
-  // Hidden/Default inputs for legacy API compatibility
-  const storeType = "independent";
-  const [desiredSpace, setDesiredSpace] = useState("8ft");
-
   // Integration with Simulator Results
   const [recommendedConfig, setRecommendedConfig] = useState<string | null>(null);
   const [simulatedInvestment, setSimulatedInvestment] = useState<string | null>(null);
   const [simulationId, setSimulationId] = useState<string | null>(null);
-  
+
+  // Submission State
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [confirmedAppNumber, setConfirmedAppNumber] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Check storage and custom event listeners for simulator connection
@@ -52,7 +51,6 @@ export default function CtaForm({ locale }: { locale?: string }) {
       if (customEvent.detail) {
         setRecommendedConfig(customEvent.detail.configName);
         setSimulatedInvestment(customEvent.detail.investment.toString());
-        setDesiredSpace(customEvent.detail.space);
         if (customEvent.detail.simulationId) {
           setSimulationId(customEvent.detail.simulationId);
         }
@@ -74,16 +72,16 @@ export default function CtaForm({ locale }: { locale?: string }) {
     localStorage.removeItem("kselect_simulator_id");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
 
     // Form validations
-    if (!storeName.trim()) {
+    if (!companyName.trim()) {
       setErrorMsg(t.validation.storeRequired);
       return;
     }
-    if (!ownerName.trim()) {
+    if (!contactName.trim()) {
       setErrorMsg(t.validation.ownerRequired);
       return;
     }
@@ -95,7 +93,7 @@ export default function CtaForm({ locale }: { locale?: string }) {
       setErrorMsg(t.validation.phoneRequired);
       return;
     }
-    if (!address.trim()) {
+    if (!streetAddress.trim()) {
       setErrorMsg(t.validation.addressRequired);
       return;
     }
@@ -116,36 +114,80 @@ export default function CtaForm({ locale }: { locale?: string }) {
       return;
     }
 
-    // Combine granular addresses for backward-compatible unified string
-    const fullAddress = `${address.trim()}, ${city.trim()}, ${stateVal.trim()} ${zipCode.trim()}`;
+    // Retrieve saved readiness checklist answers from localStorage
+    let savedReadiness: any[] = [];
+    try {
+      const rawReadiness = localStorage.getItem("kselect_readiness_answers");
+      if (rawReadiness) {
+        savedReadiness = JSON.parse(rawReadiness);
+      }
+    } catch (readinessErr) {
+      console.warn("Error reading readiness answers:", readinessErr);
+    }
 
-    // Submit payload structure simulation
     const payload = {
-      storeName,
-      ownerName,
-      email,
-      phone,
-      address: fullAddress,
+      companyName: companyName.trim(),
+      contactName: contactName.trim(),
+      email: email.trim().toLowerCase(),
+      phone: phone.trim(),
+      streetAddress: streetAddress.trim(),
       city: city.trim(),
       state: stateVal.trim(),
       zipCode: zipCode.trim(),
-      storeType,
-      desiredSpace,
-      comments,
+      comments: comments.trim(),
       recommendedConfig: recommendedConfig || "None",
       simulatedInvestment: simulatedInvestment || "None",
       simulationId: simulationId || undefined,
-      agreedToStandards: agreed,
-      submittedAt: new Date().toISOString(),
+      readinessAnswers: savedReadiness,
     };
 
-    console.log("Submitting Retailer Partnership Application:", payload);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const apiBase =
+        process.env.NEXT_PUBLIC_KSELECT_API_URL ||
+        process.env.NEXT_PUBLIC_PORTAL_API_URL ||
+        "https://admin.kselectnetwork.com";
 
-    // Clear local storage integration
-    localStorage.removeItem("kselect_recommended_config");
-    localStorage.removeItem("kselect_simulator_investment");
-    localStorage.removeItem("kselect_simulator_id");
+      const response = await fetch(`${apiBase}/api/retailer-applications`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const resData = await response.json();
+
+      if (response.ok && (resData.success || resData.ok)) {
+        setConfirmedAppNumber(resData.applicationNumber || null);
+        setSubmitted(true);
+
+        // Clear local storage integrations upon confirmed success
+        localStorage.removeItem("kselect_recommended_config");
+        localStorage.removeItem("kselect_simulator_investment");
+        localStorage.removeItem("kselect_simulator_id");
+        localStorage.removeItem("kselect_readiness_answers");
+      } else {
+        setSubmitted(false);
+        setErrorMsg(
+          resData.error ||
+            (isKo
+              ? "신청서 제출에 실패했습니다. 다시 시도해 주세요."
+              : "We couldn't submit your application. Please try again.")
+        );
+      }
+    } catch (networkErr) {
+      console.error("Retailer application submission network error:", networkErr);
+      setSubmitted(false);
+      setErrorMsg(
+        isKo
+          ? "서버 연결에 실패했습니다. 인터넷 연결을 확인 후 다시 시도해 주세요."
+          : "We couldn't submit your application. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -157,19 +199,22 @@ export default function CtaForm({ locale }: { locale?: string }) {
             {isKo ? "파트너십 신청이 완료되었습니다." : "Partnership Application Received!"}
           </h3>
           <p className="text-[13px] text-[#9ca3af] leading-relaxed">
-            {isKo 
-              ? "제출해주신 정보를 검토한 후 K SELECT HUB 팀이 연락드리겠습니다."
-              : "Our K SELECT HUB onboarding team will review your company profile and contact you soon."
-            }
+            {isKo
+              ? "제출해주신 회사 정보를 검토한 후 K SELECT HUB 온보딩 팀이 연락드리겠습니다."
+              : "Our K SELECT HUB onboarding team will review your application and contact you soon."}
           </p>
+          {confirmedAppNumber && (
+            <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/30 px-4 py-2 rounded-[8px] text-xs font-mono font-bold text-[#ff2b75] mt-1 select-all">
+              {isKo ? `신청 번호: ${confirmedAppNumber}` : `Application No: ${confirmedAppNumber}`}
+            </div>
+          )}
           {recommendedConfig && (
             <>
               <div className="w-full h-px bg-white/5 my-2" />
               <div className="bg-[#ff2b75]/10 border border-[#ff2b75]/20 px-4 py-2 rounded-[6px] text-xs font-semibold text-[#ff2b75] mt-2 select-none">
-                {isKo 
+                {isKo
                   ? `신청 모듈 구성: ${recommendedConfig} (약 $${Number(simulatedInvestment).toLocaleString()} 상품 구매 규모)`
-                  : `Bound Configuration: ${recommendedConfig} (Approx. $${Number(simulatedInvestment).toLocaleString()} opening order)`
-                }
+                  : `Bound Configuration: ${recommendedConfig} (Approx. $${Number(simulatedInvestment).toLocaleString()} opening order)`}
               </div>
             </>
           )}
@@ -187,10 +232,9 @@ export default function CtaForm({ locale }: { locale?: string }) {
                   {isKo ? "🖥️ 시뮬레이터 연동 적용됨" : "🖥️ Simulator Results Connected"}
                 </span>
                 <span className="opacity-90 text-[#9ca3af]">
-                  {isKo 
+                  {isKo
                     ? `추천 구성: ${recommendedConfig} (초기 상품 구매액 약 $${Number(simulatedInvestment).toLocaleString()} 자동 바인딩)`
-                    : `Recommended Config: ${recommendedConfig} (Initial Inventory Order: $${Number(simulatedInvestment).toLocaleString()} auto-bound)`
-                  }
+                    : `Recommended Config: ${recommendedConfig} (Initial Inventory Order: $${Number(simulatedInvestment).toLocaleString()} auto-bound)`}
                 </span>
               </div>
               <button
@@ -226,14 +270,14 @@ export default function CtaForm({ locale }: { locale?: string }) {
               <input
                 id="company-name"
                 type="text"
-                value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
                 placeholder={isKo ? "예: 뷰티월드 (Beauty World LLC)" : "e.g. Beauty World LLC"}
                 className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors font-semibold"
               />
             </div>
 
-            {/* Owner Name */}
+            {/* Owner / Contact Name */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="owner-name" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.ownerName}
@@ -241,9 +285,9 @@ export default function CtaForm({ locale }: { locale?: string }) {
               <input
                 id="owner-name"
                 type="text"
-                value={ownerName}
-                onChange={(e) => setOwnerName(e.target.value)}
-                placeholder={isKo ? "예: John Doe" : "e.g. John Doe"}
+                value={contactName}
+                onChange={(e) => setContactName(e.target.value)}
+                placeholder={isKo ? "예: 홍길동 (John Doe)" : "e.g. John Doe"}
                 className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors font-semibold"
               />
             </div>
@@ -279,7 +323,7 @@ export default function CtaForm({ locale }: { locale?: string }) {
             </div>
           </div>
 
-          {/* Store Address Block */}
+          {/* Business / Street Address Block */}
           <div className="flex flex-col gap-3.5">
             {/* Street Address */}
             <div className="flex flex-col gap-1.5">
@@ -289,8 +333,8 @@ export default function CtaForm({ locale }: { locale?: string }) {
               <input
                 id="address"
                 type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={streetAddress}
+                onChange={(e) => setStreetAddress(e.target.value)}
                 placeholder={isKo ? "예: 123 Main St" : "e.g. 123 Main St"}
                 className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors font-semibold"
               />
@@ -354,7 +398,11 @@ export default function CtaForm({ locale }: { locale?: string }) {
               id="comments"
               value={comments}
               onChange={(e) => setComments(e.target.value)}
-              placeholder={isKo ? "궁금한 점이나 미리 알려주실 내용이 있다면 남겨주세요." : "Let us know if you have any questions or custom requests."}
+              placeholder={
+                isKo
+                  ? "궁금한 점이나 미리 알려주실 내용이 있다면 남겨주세요."
+                  : "Let us know if you have any questions or custom requests."
+              }
               rows={3}
               className="p-3.5 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] resize-none transition-colors font-semibold"
             />
@@ -374,10 +422,9 @@ export default function CtaForm({ locale }: { locale?: string }) {
               className="text-[11.5px] text-[#9ca3af] leading-relaxed cursor-pointer select-none flex flex-col gap-0.5"
             >
               <span className="font-bold text-white/90">
-                {isKo 
+                {isKo
                   ? "파트너십 신청 검토와 후속 상담을 위해 제출한 회사 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. *"
-                  : "I agree that K SELECT HUB may collect and use the submitted company and contact details for partnership review and follow-up communication. *"
-                }
+                  : "I agree that K SELECT HUB may collect and use the submitted company and contact details for partnership review and follow-up communication. *"}
               </span>
             </label>
           </div>
@@ -392,14 +439,18 @@ export default function CtaForm({ locale }: { locale?: string }) {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={!agreed}
+            disabled={!agreed || isSubmitting}
             className={`w-full h-14 font-extrabold rounded-[8px] text-[14.5px] tracking-wide transition-all ${
-              agreed
+              agreed && !isSubmitting
                 ? "bg-[#ff2b75] hover:bg-[#e01a5e] text-white hover:shadow-[0_4px_20px_rgba(255,43,117,0.35)] cursor-pointer"
                 : "bg-white/5 border border-white/5 text-white/20 cursor-not-allowed"
             }`}
           >
-            {t.button}
+            {isSubmitting
+              ? isKo
+                ? "신청서 제출 중..."
+                : "Submitting Application..."
+              : t.button}
           </button>
         </form>
       )}
