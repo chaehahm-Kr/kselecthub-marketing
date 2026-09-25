@@ -1747,12 +1747,13 @@ export default function Simulator({ locale = "ko" }: SimulatorProps) {
                         />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "매장명 (Store Name) *" : "Store Name *"}</label>
+                        <label className="text-[11px] text-white/50 font-bold">{locale === "ko" ? "회사명 (Company Name) *" : "Company Name *"}</label>
                         <input
                           type="text"
                           required
                           value={emailForm.storeName}
                           onChange={(e) => setEmailForm(p => ({ ...p, storeName: e.target.value }))}
+                          placeholder={locale === "ko" ? "예: 뷰티월드 (Beauty World LLC)" : "e.g. Beauty World LLC"}
                           className="h-10 bg-white/5 border border-white/10 rounded-[6px] px-3 text-white text-[13px] focus:outline-none focus:border-[#22d3ee]"
                         />
                       </div>

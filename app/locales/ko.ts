@@ -229,13 +229,13 @@ export const ko = {
         "정기 Inventory Update: 원활한 품절 예방 및 베스트셀러 자동 제안을 위해 매주 1회 이상 매대 재고 상태를 업데이트해야 합니다."
       ]
     },
-    agreeLabel: "파트너십 신청 검토와 후속 상담을 위해 제출한 매장 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. * (필수)",
+    agreeLabel: "파트너십 신청 검토와 후속 상담을 위해 제출한 회사 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. * (필수)",
   },
   ctaForm: {
     title: "K-Beauty Retail Growth Partnership 신청",
-    subtitle: "간단한 매장 정보를 남겨주시면 검토 후 K SELECT HUB 팀이 연락드리겠습니다.",
+    subtitle: "간단한 회사 및 사업자 정보를 남겨주시면 검토 후 K SELECT HUB 팀이 연락드리겠습니다.",
     fields: {
-      storeName: "매장명 (Store Name) *",
+      storeName: "회사명 (Company Name) *",
       ownerName: "대표자 / 담당자명 (Owner / Contact Name) *",
       email: "이메일 주소 (Email) *",
       phone: "전화번호 (Phone) *",
@@ -246,7 +246,7 @@ export const ko = {
       comments: "추가 문의 또는 메모 (Comments / Optional)"
     },
     validation: {
-      storeRequired: "매장명을 입력해 주세요.",
+      storeRequired: "회사명을 입력해 주세요.",
       ownerRequired: "대표자 / 담당자명을 입력해 주세요.",
       emailRequired: "올바른 이메일 주소를 입력해 주세요.",
       phoneRequired: "전화번호를 입력해 주세요.",

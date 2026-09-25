@@ -159,7 +159,7 @@ export default function CtaForm({ locale }: { locale?: string }) {
           <p className="text-[13px] text-[#9ca3af] leading-relaxed">
             {isKo 
               ? "제출해주신 정보를 검토한 후 K SELECT HUB 팀이 연락드리겠습니다."
-              : "Our K SELECT HUB onboarding team will review your store profile and contact you soon."
+              : "Our K SELECT HUB onboarding team will review your company profile and contact you soon."
             }
           </p>
           {recommendedConfig && (
@@ -218,17 +218,17 @@ export default function CtaForm({ locale }: { locale?: string }) {
 
           {/* Core Fields Grid */}
           <div className="grid sm:grid-cols-2 gap-4">
-            {/* Store Name */}
+            {/* Company Name */}
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="store-name" className="text-xs font-bold text-[#9ca3af]">
+              <label htmlFor="company-name" className="text-xs font-bold text-[#9ca3af]">
                 {t.fields.storeName}
               </label>
               <input
-                id="store-name"
+                id="company-name"
                 type="text"
                 value={storeName}
                 onChange={(e) => setStoreName(e.target.value)}
-                placeholder={isKo ? "예: K-Beauty Mart NJ" : "e.g. K-Beauty Mart NJ"}
+                placeholder={isKo ? "예: 뷰티월드 (Beauty World LLC)" : "e.g. Beauty World LLC"}
                 className="h-11 px-4 bg-[#070708] border border-white/10 text-white rounded-[8px] text-sm focus:outline-none focus:border-[#ff2b75] transition-colors font-semibold"
               />
             </div>
@@ -375,8 +375,8 @@ export default function CtaForm({ locale }: { locale?: string }) {
             >
               <span className="font-bold text-white/90">
                 {isKo 
-                  ? "파트너십 신청 검토와 후속 상담을 위해 제출한 매장 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. *"
-                  : "I agree that K SELECT HUB may collect and use the submitted store and contact details for partnership review and follow-up communication. *"
+                  ? "파트너십 신청 검토와 후속 상담을 위해 제출한 회사 정보 및 연락처를 K SELECT HUB가 수집·이용하고 연락하는 것에 동의합니다. *"
+                  : "I agree that K SELECT HUB may collect and use the submitted company and contact details for partnership review and follow-up communication. *"
                 }
               </span>
             </label>

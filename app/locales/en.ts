@@ -229,13 +229,13 @@ export const en = {
         "Inventory Updates: Update stock levels once a week to prevent out-of-stocks."
       ]
     },
-    agreeLabel: "I agree to let K SELECT HUB collect and process my store details for this partnership application. * (Required)"
+    agreeLabel: "I agree to let K SELECT HUB collect and process my company details for this partnership application. * (Required)"
   },
   ctaForm: {
     title: "Apply for K-Beauty Growth Partnership",
-    subtitle: "Submit your store details. Our category management team will contact you within 24 hours.",
+    subtitle: "Submit your company details. Our category management team will contact you within 24 hours.",
     fields: {
-      storeName: "Store Name *",
+      storeName: "Company Name *",
       ownerName: "Owner / Contact Name *",
       email: "Email *",
       phone: "Phone *",
@@ -246,7 +246,7 @@ export const en = {
       comments: "Comments / Additional Notes (Optional)"
     },
     validation: {
-      storeRequired: "Please enter your store name.",
+      storeRequired: "Please enter your company name.",
       ownerRequired: "Please enter your contact name.",
       emailRequired: "Please enter a valid email address.",
       phoneRequired: "Please enter your phone number.",
